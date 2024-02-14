@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware', #Para gestionar la sesion de la pagina personal
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.locale.LocaleMiddleware', # Para gestionar el idioma
 ]
 
 ROOT_URLCONF = 'marpaga.urls'
@@ -126,7 +127,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
+# USE_I18N = True
+# LANGUAGES = [
+#     ('es', ('Spanish')),
+# ]
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE='Europe/Madrid'
@@ -152,6 +157,6 @@ LOGIN_REDIRECT_URL = 'personal'
 LOGOUT_REDIRECT_URL = 'inicio'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#LOGIN_URL='personal'
+LOGIN_URL='personal'
 #SESSION_COOKIE_AGE = 10 #1800 #Establece el tiempo de sesion por inactividad
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True #Establece que la sesion se cierre al cerrar el navegador

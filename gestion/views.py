@@ -19,7 +19,7 @@ from django.contrib.auth.forms import UserCreationForm
 def inicio(request):
     return render(request, 'gestion/index.html')
 def html(request):
-    return render(request, 'gestion/pruebaDePlantilla.html')
+    return render(request, 'gestion/pruebaBard.html')
 
 
 def registro(request):

@@ -38,3 +38,16 @@ Estructura del html principal a cambiar:
 Script de importacón de una nueva maquinas vulnerable
 -----24-11-2023---------
 Añadido el parametro LOGGIN para el registro de peticiones
+-----14-02-2024---------
+Para las traducciones del ingles al español:
+-> Añadir al setting.py: USE_I18N = True
+-> instalar: # sudo apt-get install gettext
+-> crear una carpeta "locale" dentro de la aplicación
+-> Ejecutar: # python manage.py makemessages -l es
+	Esto creará archivos .po en el directorio locale/es/LC_MESSAGES/. Abre el archivo correspondiente (django.po)
+->Editar el fichero poniendo: 	msgid "The two password fields didn't match."
+				msgstr "Las dos contraseñas no coinciden."
+-> Guardar con: # python manage.py compilemessages
+==> No funciona mirar errores
+
+

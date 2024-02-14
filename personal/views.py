@@ -125,9 +125,14 @@ def desactivar_maquina(request, nombre_maquina):
                 messages.success(request, 'La máquina es de tipo MaquinaDocker.')
             elif hasattr(maquina, 'maquinadockercompose'):
                 messages.success(request, 'La máquina es de tipo MaquinaDockerCompose.')
-                ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/Makefile'
-                comando = f"make -f {ruta_docker_compose} clean"
-                subprocess.run(comando, shell=True, check=True)
+                ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/'
+                #ruta_docker_compose = "/home/marco/Escritorio/TFG/marpaga_tfg/maquinas_docker_compose/startrek_payroll/Makefile"
+                comando = f"make -C {ruta_docker_compose} clean"
+                print(comando)
+                print("-----------------------------------------------------------------------")
+                print(subprocess.run(comando, shell=True, check=True))
+                print("-----------------------------------------------------------------------")
+                #subprocess.run(comando, shell=True, check=True)
                 maquina_jugador.activa = False
                 maquina_jugador.save()
             elif hasattr(maquina, 'maquinavirtual'):
