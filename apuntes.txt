@@ -51,3 +51,4 @@ Para las traducciones del ingles al español:
 ==> No funciona mirar errores
 -----15-02-2024---------
 -Para usar un servidor web usar guicon para ello instalarlo: apt install guicon
+- Para ejecutar y que funcione todo pero no es seguro: python3 manage.py runserver --insecure
