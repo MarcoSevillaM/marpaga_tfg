@@ -49,5 +49,5 @@ Para las traducciones del ingles al español:
 				msgstr "Las dos contraseñas no coinciden."
 -> Guardar con: # python manage.py compilemessages
 ==> No funciona mirar errores
-
-
+-----15-02-2024---------
+-Para usar un servidor web usar guicon para ello instalarlo: apt install guicon

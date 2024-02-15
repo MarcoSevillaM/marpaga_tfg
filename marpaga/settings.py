@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+#Esta ruta sera: /home/marco/Escritorio/TFG/marpaga_tfg/marpaga
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=$7rqinshm%%p6hq+j2ro^aa_n#5_p^d6^)gzauz@#7j*t@1+i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ["192.168.1.25", "127.0.0.1"]
@@ -144,8 +147,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
