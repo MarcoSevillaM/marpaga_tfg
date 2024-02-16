@@ -50,5 +50,41 @@ Para las traducciones del ingles al español:
 -> Guardar con: # python manage.py compilemessages
 ==> No funciona mirar errores
 -----15-02-2024---------
--Para usar un servidor web usar guicon para ello instalarlo: apt install guicon
+-Para usar un servidor web usar guicon para ello instalarlo:# apt install gunicorn
+-Añadir en la aplicacion principal del proyecto el fichero wsgi.py
 - Para ejecutar y que funcione todo pero no es seguro: python3 manage.py runserver --insecure
+-----16-02-2024---------
+-Probandolo en el servidor de apache
+-> instalo el modulo wsgi: # sudo apt install libapache2-mod-wsgi
+	-> si no funciona: # sudo apt-get install libapache2-mod-wsgi-py3
+-> lo activo: # sudo a2enmod wsgi
+-Creo un fichero en la ruta:/etc/apache2/sites-available/marpaga.conf
+	====================
+	<VirtualHost *:80>
+	    ServerName tu_domino.com
+	    DocumentRoot /home/marco/Escritorio/TFG/marpaga_tfg
+
+	    WSGIDaemonProcess marpaga_env python-home=/home/marco/Escritorio/TFG/virtual
+	    WSGIProcessGroup marpaga_tfg
+	    WSGIScriptAlias / /home/marco/Escritorio/TFG/marpaga_tfg/marpaga/wsgi.py
+
+	    <Directory /home/marco/Escritorio/TFG/marpaga_tfg/marpaga>
+		<Files wsgi.py>
+		    Require all granted
+		</Files>
+	    </Directory>
+
+	    Alias /static/ /home/marco/Escritorio/TFG/marpaga_tfg/gestion/
+	    <Directory /home/marco/Escritorio/TFG/marpaga_tfg/gestion>
+		Require all granted
+	    </Directory>
+
+	    #ErrorLog ${APACHE_LOG_DIR}/error.log
+	    #CustomLog ${APACHE_LOG_DIR}/access.log combined
+	     ErrorLog /home/marco/Escritorio/marpaga_error.log
+	     CustomLog /home/marco/Escritorio/marpaga_access.log combined
+	</VirtualHost>
+	====================
+--> ¡Para que funcione todo correctamente hay que mirar bien los permisos! (Pendiente de hacer)
+
+
