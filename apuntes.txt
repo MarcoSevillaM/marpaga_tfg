@@ -86,5 +86,10 @@ Para las traducciones del ingles al español:
 	</VirtualHost>
 	====================
 --> ¡Para que funcione todo correctamente hay que mirar bien los permisos! (Pendiente de hacer)
+	Pendiente de hacer:
+	1. Gestionar levantar un docker compose al darle al boton de activar
+	2. Gestionar levantar un docker compose al darle al boton de desactivar
+	3. Que aparezca la ip al lado cuando esté levantado el contenedor
+	4. Añadir las flags a las imágenes de docker
 
 

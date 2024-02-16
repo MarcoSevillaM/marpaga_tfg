@@ -107,6 +107,11 @@
                   />
                   <label for="floatingPassword">Contraseña</label>
                 </div>
+                {% if request.method == 'POST' %}
+                <div class="alert alert-primary" role="alert">
+                  ¡Usuario y/o contraseña incorrectos!
+                </div>
+                {% endif %}
                 <div
                   class="d-flex align-items-center justify-content-between mb-4"
                 >
