@@ -91,5 +91,5 @@ Para las traducciones del ingles al español:
 	2. Gestionar levantar un docker compose al darle al boton de desactivar
 	3. Que aparezca la ip al lado cuando esté levantado el contenedor
 	4. Añadir las flags a las imágenes de docker
-
+	5. Usar una plantilla con {% extends 'base.html' %} para usar solo la base
 
