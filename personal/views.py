@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, reverse
 from gestion.models import *
 
 #Para gestionar la sesion de la pagina personal, un decorador es algo que permite dar una funcionalidad extra 
@@ -11,7 +11,7 @@ import docker, subprocess
 
 from django.contrib import messages
 from django.http import HttpResponse
-
+from django.shortcuts import get_object_or_404
 def prueba(request):
     context = {}
     return render(request, 'gestion/personal.html', context)
@@ -70,8 +70,28 @@ def gestionar_maquina(control, usuario, client):
 
 #Vista previa de la maquina seleccionada
 def gestion_maquina(request, nombre_maquina):
+    #A partir de nombre_maquina-> la maquina MaquinaDocker, MaquinaDockerCompose o MaquinaVirtual
+    #Obtener la relacion entre el jugador y la maquina
     relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
-    context={'relacion':relacion}
+    maquina=relacion.maquina_vulnerable
+    # Intentar buscar en MaquinaDockerCompose
+    maquina_compose = MaquinaDockerCompose.objects.filter(nombre=nombre_maquina).first()
+    if maquina_compose:
+        variable = "Es una maquina Docker Compose"
+    else:
+        # Si no es MaquinaDockerCompose, buscar en MaquinaDocker
+        maquina_docker = MaquinaDocker.objects.filter(nombre=nombre_maquina).first()
+        if maquina_docker:
+            variable = "Es una maquina Docker"
+        else:
+            # Si no es MaquinaDocker ni MaquinaDockerCompose, buscar en MaquinaVirtual
+            maquina_virtual = MaquinaVirtual.objects.filter(nombre=nombre_maquina).first()
+            if maquina_virtual:
+                variable = "Es una maquina Virtual"
+            else:
+                # Si no es ninguno de los anteriores
+                variable = "Es una maquinaaaa"
+    context={'relacion':relacion, 'variable':variable}
     return render(request, 'personal/maquinaSeleccionada.html',context)
 
 #Para poder activarse el metodo debe de ser post y además ninguna maquina del usuario tiene que estar activa
@@ -86,9 +106,10 @@ def activar_maquina(request, nombre_maquina):
         else:
             for maquina_jugadoR in MaquinaJugador.objects.filter(jugador=jugador):
                 if maquina_jugadoR.activa:
-                    messages.warning(request, 'Entra por una maquina activa')
+                    messages.warning(request, 'Ya hay una maquina activa')
                     return redirect('gestion_maquina' , nombre_maquina)
             # Una vez llega aqui la maquina NO debería de estar activada por lo que se comprueba de qué tipo de la maquina vulnerables
+            relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
             if hasattr(maquina, 'maquinadocker'):
                 messages.success(request, 'La máquina es de tipo MaquinaDocker.')
                 client = docker.from_env()
@@ -106,12 +127,23 @@ def activar_maquina(request, nombre_maquina):
                 ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
                 comando = f"docker-compose -f {ruta_docker_compose} up -d"  
                 subprocess.run(comando, shell=True, check=True)
+                #Obtengo la direccion de la maquina
+                direccion = subprocess.run("docker exec startrek-payroll-nginx ifconfig eth0 | awk '/inet / {print $2}'", shell=True, check=True, capture_output=True)
                 maquina_jugador.activa = True
                 maquina_jugador.save()
+                messages.success(request, 'La dirección de la máquina es: ' + direccion.stdout.decode('utf-8'))
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
+            #return render(request, template_name='gestion_maquina', {'nombre_maquina':nombre_maquina, 'context':context})
+            #return render(request, 'gestion/gestion_maquina.html' , context={'nombre_maquina': nombre_maquina, 'relacion':relacion, 'variable':direccion})
+            #return redirect(reverse='gestion_maquina', kwargs={'nombre_maquina':nombre_maquina, 'direccion':direccion.stdout.decode('utf-8')})
+            #return redirect('gestion_maquina' nombre_maquina, 'direccion': direccion.stdout.decode('utf-8')))
+            return(reverse('gestion_maquina', 'nombre_maquina': nombre_maquina))
+    else:
+        #Redirige a la pagina anterior si no es un metodo post
+        return redirect('maquinas')
+
     
-    return redirect('maquinas')
 
 def desactivar_maquina(request, nombre_maquina):
     if request.method == 'POST':
@@ -136,6 +168,7 @@ def desactivar_maquina(request, nombre_maquina):
                 #subprocess.run(comando, shell=True, check=True)
                 maquina_jugador.activa = False
                 maquina_jugador.save()
+                return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo MaquinaVirtual.')
     return redirect('maquinas')
