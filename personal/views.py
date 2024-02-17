@@ -39,7 +39,8 @@ def maquinas(request):
         #Obtengo el nombre del usuario logueado
         jugador= Jugador.objects.get(usuario=request.user)
         maquinas = MaquinaJugador.objects.filter(jugador=jugador)
-        context = { 'maquinas': maquinas}
+        
+        context = { 'maquinas': maquinas,}
         return render(request, 'personal/maquinas.html',context)
     elif request.method == 'POST': #Si se pulsa el boton de activar o desactivar
         return redirect('maquinas')

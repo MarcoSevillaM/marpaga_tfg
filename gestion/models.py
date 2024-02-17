@@ -125,15 +125,17 @@ def crear_relacion_al_crear_maquina(sender, instance, created, **kwargs):
                 if jugador.nivel >= maquina.nivel_minimo_activacion:
                     MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
 #Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
-@receiver(post_save, sender=MaquinaDockerCompose)
 def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **kwargs):
     if created:
         jugadores = Jugador.objects.all()
         for jugador in jugadores:
             if jugador.nivel >= instance.nivel_minimo_activacion:
                 MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=instance)
+
 # Disparadores
 post_save.connect(crear_jugador_al_crear_usuario, sender=User) # Crear jugador y relaciones correspondientes con las maquinas
 post_save.connect(crear_relacion_al_crear_maquina, sender=MaquinaVulnerable) # Crear relaciones con los jugadores cuando se crea una maquina
 post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=MaquinaDockerCompose) # Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
+post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=MaquinaDocker) # Crear relaciones con los jugadores cuando se crea una maquina Docker
+post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=MaquinaVulnerable) # Crear relaciones con los jugadores cuando se crea una maquina Docker
 # ##################################################################
