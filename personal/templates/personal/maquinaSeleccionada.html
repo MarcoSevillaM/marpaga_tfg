@@ -24,18 +24,18 @@
       </div>
     </header>
   <body>
-    <h1>Detalles de la maquina {{relacion.maquina_vulnerable}}</h1>
+    <h1>Detalles de la maquina {{relacion_maquina_jugador.maquina_vulnerable}} -> {{relacion_maquina_jugador.jugador}}</h1>
     <p>Selected Machine: {{ machine_name }}</p>
-    {% if maquina.ip_address %}
-    <p>IP: {{ maquina.ip_address }}</p>
+    {% if relacion_maquina_jugador.ip_address %}
+    <p>IP: {{ relacion_maquina_jugador.ip_address }}</p>
     {% endif %}
-    {% if relacion.activa %}
-    <form action="{% url 'desactivar_maquina' nombre_maquina=relacion.maquina_vulnerable %}" method="post">
+    {% if relacion_maquina_jugador.activa %}
+    <form action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
       {% csrf_token %}
     <button id="miBoton" type="submit" class="btn btn-danger">Desactivar</button>
     </form>
     {% else %}
-    <form action="{% url 'activar_maquina' nombre_maquina=relacion.maquina_vulnerable %}" method="post">
+    <form action="{% url 'activar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
         {% csrf_token %}
       <button id="miBoton" type="submit" class="btn btn-success">Activar</button>
     </form>

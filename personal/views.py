@@ -70,11 +70,11 @@ def gestionar_maquina(control, usuario, client):
         print("HOla")
 
 #Vista previa de la maquina seleccionada
+@login_required(login_url="inicio")
 def gestion_maquina(request, nombre_maquina):
     #A partir de nombre_maquina-> la maquina MaquinaDocker, MaquinaDockerCompose o MaquinaVirtual
     #Obtener la relacion entre el jugador y la maquina
-    relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
-    maquina=relacion.maquina_vulnerable
+    relacion_maquina_jugador= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
     # Intentar buscar en MaquinaDockerCompose
     maquina_compose = MaquinaDockerCompose.objects.filter(nombre=nombre_maquina).first()
     if maquina_compose:
@@ -83,8 +83,7 @@ def gestion_maquina(request, nombre_maquina):
         # Si no es MaquinaDockerCompose, buscar en MaquinaDocker
         maquina_docker = MaquinaDocker.objects.filter(nombre=nombre_maquina).first()
         if maquina_docker:
-            #variable = "Es una maquina Docker"
-            h=1
+            variable = "Es una maquina Docker"
         else:
             # Si no es MaquinaDocker ni MaquinaDockerCompose, buscar en MaquinaVirtual
             maquina_virtual = MaquinaVirtual.objects.filter(nombre=nombre_maquina).first()
@@ -93,7 +92,7 @@ def gestion_maquina(request, nombre_maquina):
             else:
                 # Si no es ninguno de los anteriores
                 variable = "Es una maquinaaaa"
-    context={'relacion':relacion, 'variable':variable, 'maquina':maquina}
+    context={'relacion_maquina_jugador':relacion_maquina_jugador, 'variable':variable}
     return render(request, 'personal/maquinaSeleccionada.html',context)
 
 #Para poder activarse el metodo debe de ser post y además ninguna maquina del usuario tiene que estar activa
@@ -101,8 +100,8 @@ def activar_maquina(request, nombre_maquina):
     if request.method == 'POST': 
         jugador = Jugador.objects.get(usuario=request.user)
         maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
-        maquina_jugador = MaquinaJugador.objects.get(jugador=jugador, maquina_vulnerable=maquina)
-        if maquina_jugador.activa:
+        relacion_maquina_jugador = MaquinaJugador.objects.get(jugador=jugador, maquina_vulnerable=maquina)
+        if relacion_maquina_jugador.activa:
             messages.warning(request, 'La máquina ya está activa.')
             return redirect('gestion_maquina' , nombre_maquina)
         else:
@@ -121,23 +120,27 @@ def activar_maquina(request, nombre_maquina):
                     return redirect('maquinas')
                 except docker.errors.NotFound:
                     #gestionar_maquina(1, jugador.usuario.username, client) # Activar la máquina
-                    maquina_jugador.activa = True
-                    maquina_jugador.save()
-                    messages.success(request, f'Máquina activada exitosamente,{ maquina_jugador.maquina_vulnerable.nombre}')
+                    relacion_maquina_jugador.activa = True
+                    relacion_maquina_jugador.save()
+                    messages.success(request, f'Máquina activada exitosamente,{ relacion_maquina_jugador.maquina_vulnerable.nombre}')
             elif hasattr(maquina, 'maquinadockercompose'):
                 messages.success(request, 'La máquina es de tipo MaquinaDockerCompose.')
                 ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
-                comando = f"docker-compose -f {ruta_docker_compose} up -d"  
+                comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' up -d"  
+                #comando="PLAYER=marpagaadmin docker-compose -f /home/marco/Escritorio/TFG/marpaga_tfg/maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto-marpagaadmin' up -d"
+                #PLAYER=marpagaadmin docker-compose -f maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto_marpagaadmin' up -d
+                #PLAYER=marpagaadmin docker-compose -f maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto-marpagaadmin' up -d
+                
                 subprocess.run(comando, shell=True, check=True)
                 #Obtengo la direccion de la maquina
-                direccion = subprocess.run("docker exec startrek-payroll-nginx ifconfig eth0 | awk '/inet / {print $2}'", shell=True, check=True, capture_output=True)
+                comando=f"docker exec startrek-payroll-nginx-{request.user.username} ifconfig eth0 | awk '/inet /" +  "{print $2}'"
+                direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
                 coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
+                messages.warning(request, coincidencia.group(1))
                 if coincidencia:
                     direccion_ip = coincidencia.group(1)
-                maquina_jugador.activa = True
-                maquina.ip_address=direccion_ip
-                maquina.save()
-                maquina_jugador.save()
+                relacion_maquina_jugador.activa = True
+                relacion_maquina_jugador.guardar_con_ip(direccion_ip)
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
             #return(render(request, 'personal/maquinaSeleccionada.html', context={'relacion':relacion, 'maquina':maquina}))
@@ -161,18 +164,19 @@ def desactivar_maquina(request, nombre_maquina):
                 messages.success(request, 'La máquina es de tipo MaquinaDocker.')
             elif hasattr(maquina, 'maquinadockercompose'):
                 messages.success(request, 'La máquina es de tipo MaquinaDockerCompose.')
-                ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/'
+                ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
                 #ruta_docker_compose = "/home/marco/Escritorio/TFG/marpaga_tfg/maquinas_docker_compose/startrek_payroll/Makefile"
-                comando = f"make -C {ruta_docker_compose} clean"
+                #comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' down"
+                #comando="PLAYER=marpagaadmin docker-compose -f /home/marco/Escritorio/TFG/marpaga_tfg/maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto_marpagaadmin' down"
+                comando=f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' down"
                 print(comando)
                 print("-----------------------------------------------------------------------")
                 print(subprocess.run(comando, shell=True, check=True))
                 print("-----------------------------------------------------------------------")
                 #subprocess.run(comando, shell=True, check=True)
                 maquina_jugador.activa = False
+                maquina_jugador.ip_address = None
                 maquina_jugador.save()
-                maquina.ip_address=None
-                maquina.save()
                 return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo MaquinaVirtual.')

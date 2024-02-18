@@ -52,7 +52,6 @@ class MaquinaVulnerable(models.Model):
         ('Insano', 'Insano'),
     )
     nombre = models.CharField(max_length=255)
-    ip_address = models.CharField(max_length=15, blank=True, null=True) #Dirección IP de la maquina vulnerable
     nivel_dificultad = models.CharField(max_length=6, choices=DIFFICULT_CHOICES)
     nivel_minimo_activacion = models.IntegerField(default=1)
     bandera_usuario_inicial = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidir con la bandera del usuario en la maquina
@@ -100,9 +99,18 @@ class MaquinaJugador(models.Model):
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
     maquina_vulnerable = models.ForeignKey('MaquinaVulnerable', on_delete=models.CASCADE)
     activa = models.BooleanField(default=False)
+    ip_address = models.CharField(max_length=15, blank=True, null=True) #Dirección IP de la maquina vulnerable
     def __str__(self):
         estado = "activa" if self.activa else "inactiva"
         return f"{self.jugador.usuario.username} tiene la maquina {self.maquina_vulnerable.nombre}  {estado}"
+    def guardar_con_ip(self, ip_address):
+        # Verificar si el modelo está activo antes de almacenar la dirección IP
+        if self.activa:
+            self.ip_address = ip_address
+            self.save()
+        else:
+            self.ip_address = None
+            self.save()
     class Meta:
         verbose_name_plural = "Relaciones jugadores con maquinas"
 
