@@ -1,20 +1,20 @@
 HECHO---->TODOS LOS PUNTOS HECHOS
 PENDIENTE--->QUEDA POR HACER
-Revisar---->Mirar un poco
+REVISAR---->Mirar un poco
 MODIFICAR---->Es recomendable cambiarlo
 ->Fotos sin copyRight: https://www.freepik.es/fotos-vectores-gratis/informatica
 ->Carpeta static y templates establecida para los ficheros HTMLS, CSS, JS e imágenes
 ->Creada una aplicación "gestion" dentro del poryecto la cual gestiona todos los usuarios
 ->Establecida la DB "en pañales" desde el fichero "models.py" de gestion (creado)
 ->Para tener acceso desde otro ordenador he modificado la macro ALLOWED_HOSTS = ["192.168.1.25"] de settings.py
-->Crear un sistema de registro de usuarios HECHO (Revisar)
-->Crear el sistema de login de un usuarios HECHO (Revisar)
-	-Que te de la bienvendia con todos los datos (Mirar si es mejor arrastrar el usuario por defecto de Django o el perfil creado por nosotros): HECHO (Revisar bien)
+->Crear un sistema de registro de usuarios HECHO (REVISAR)
+->Crear el sistema de login de un usuarios HECHO (REVISAR)
+	-Que te de la bienvendia con todos los datos (Mirar si es mejor arrastrar el usuario por defecto de Django o el perfil creado por nosotros): HECHO (REVISAR bien)
 		+Se hace mediantes un forms.py min 23:58 https://www.youtube.com/watch?v=06aDhOwqvfY&t=2004s
 	-Que se gestione la sesion: https://developer.mozilla.org/es/docs/Learn/Server-side/Django/Sessions HECHO (Se hace mediante login_required)
 	-Que tenga establecido un tiempo de session https://es.stackoverflow.com/questions/433071/c%C3%B3mo-puedo-controlar-el-tiempo-de-sesi%C3%B3n-del-usuario PENDIENTE (Echar un ojo, se ha creado una macro llamada SESSION_COOKIE_AGE)
 ->Crear un logout de la sesion HECHO
-->Cuando se intente acceder a un recurso sin usuario identificado-> redirect a la pagina principal HECHO (Revisar->Poner el decorator en cada función que no se quiera tener acceso)
+->Cuando se intente acceder a un recurso sin usuario identificado-> redirect a la pagina principal HECHO (REVISAR->Poner el decorator en cada función que no se quiera tener acceso)
 ------
 ->Crear botones para levantar una maquina con doker y tener acceso a ella:
 	+Controlar que un usuario pueda darle una sola vez al boton
@@ -26,7 +26,7 @@ MODIFICAR---->Es recomendable cambiarlo
 	+ Instalar: pip install django-extensions
 	+ sudo pip install pydotplus && pip install pygraphviz && apt-get install graphviz
 	+ python3 manage.py graph_models -a -g -o my_models.png
-->Levantar una maquina tiene una ruta /my/maquinas/nombreMaquina/asctivar o desactivar lo mejor es que la variable activar o desactivar vaya como un parámetro en POST MODIFICAR
+->Levantar una maquina tiene una ruta /my/maquinas/nombreMaquina/asctivar o desactivar lo mejor es que la variable activar o desactivar vaya como un parámetro en POST HECHO
 ->Levantar y detener una maquina sin linea de comandos con la API de docker PENDIENTE
 --------------
 Estructura del html principal a cambiar:
@@ -35,7 +35,7 @@ Estructura del html principal a cambiar:
 -Quitar las dos fotos 
 -Establecer un enlace a la pagina oficial de fciencias
 --------------
-Script de importacón de una nueva maquinas vulnerable
+Script de importacón de una nueva maquinas vulnerable (PENDIENTE)
 -----24-11-2023---------
 Añadido el parametro LOGGIN para el registro de peticiones
 -----14-02-2024---------
@@ -86,10 +86,18 @@ Para las traducciones del ingles al español:
 	</VirtualHost>
 	====================
 --> ¡Para que funcione todo correctamente hay que mirar bien los permisos! (Pendiente de hacer)
+	-----16-02-2024---------
+	- Se han gestionado los botones de activación/desactivación de los usuario en redes y contenedores diferentes
+	- Mostrar la ip al activar la maquina
 	Pendiente de hacer:
-	1. Gestionar levantar un docker compose al darle al boton de activar
-	2. Gestionar levantar un docker compose al darle al boton de desactivar
-	3. Que aparezca la ip al lado cuando esté levantado el contenedor
-	4. Añadir las flags a las imágenes de docker
-	5. Usar una plantilla con {% extends 'base.html' %} para usar solo la base
+	1. Gestionar levantar un docker compose al darle al boton de activar en una red y usuario diferentes (HECHO) REVISAR-> Usar la api docker-compose en vez de una llamada del sistema
+	2. Gestionar levantar un docker compose al darle al boton de desactivar en una red y usuario diferentes (HECHO) REVISAR-> Usar la api docker-compose en vez de una llamada del sistema
+	3. Que aparezca la ip al lado cuando esté levantado el contenedor (HECHO)
+	4 Verificar de manera correcta la estructura de:  (PENDIENTE)
+		4.1 Carpeta docker-compose
+		4.2 Imagenes docker
+		4.3 La estructura de las maquinas virtuales que sea por lo menos una maquina virtual (.ova)
+	5. Añadir las flags a las imágenes de docker
+	6. Usar una plantilla con {% extends 'base.html' %} para usar solo la base
+	7.. Generar una función que se encargue de gestionar la iptables para segmentar la red entre usuarios y el sistema
 

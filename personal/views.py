@@ -124,13 +124,8 @@ def activar_maquina(request, nombre_maquina):
                     relacion_maquina_jugador.save()
                     messages.success(request, f'Máquina activada exitosamente,{ relacion_maquina_jugador.maquina_vulnerable.nombre}')
             elif hasattr(maquina, 'maquinadockercompose'):
-                messages.success(request, 'La máquina es de tipo MaquinaDockerCompose.')
                 ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
-                comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' up -d"  
-                #comando="PLAYER=marpagaadmin docker-compose -f /home/marco/Escritorio/TFG/marpaga_tfg/maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto-marpagaadmin' up -d"
-                #PLAYER=marpagaadmin docker-compose -f maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto_marpagaadmin' up -d
-                #PLAYER=marpagaadmin docker-compose -f maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto-marpagaadmin' up -d
-                
+                comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' up -d"
                 subprocess.run(comando, shell=True, check=True)
                 #Obtengo la direccion de la maquina
                 comando=f"docker exec startrek-payroll-nginx-{request.user.username} ifconfig eth0 | awk '/inet /" +  "{print $2}'"
@@ -163,17 +158,9 @@ def desactivar_maquina(request, nombre_maquina):
             if hasattr(maquina, 'maquinadocker'):
                 messages.success(request, 'La máquina es de tipo MaquinaDocker.')
             elif hasattr(maquina, 'maquinadockercompose'):
-                messages.success(request, 'La máquina es de tipo MaquinaDockerCompose.')
                 ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
-                #ruta_docker_compose = "/home/marco/Escritorio/TFG/marpaga_tfg/maquinas_docker_compose/startrek_payroll/Makefile"
-                #comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' down"
-                #comando="PLAYER=marpagaadmin docker-compose -f /home/marco/Escritorio/TFG/marpaga_tfg/maquinas_docker_compose/startrek_payroll/docker-compose.yml -p 'proyecto_marpagaadmin' down"
                 comando=f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' down"
-                print(comando)
-                print("-----------------------------------------------------------------------")
-                print(subprocess.run(comando, shell=True, check=True))
-                print("-----------------------------------------------------------------------")
-                #subprocess.run(comando, shell=True, check=True)
+                subprocess.run(comando, shell=True, check=True)
                 maquina_jugador.activa = False
                 maquina_jugador.ip_address = None
                 maquina_jugador.save()

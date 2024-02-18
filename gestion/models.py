@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
-from gestion.functions import validate_zip_file
+from gestion.functions import validate_zip_file, validar_carpeta_docker_compose
 import zipfile, os, secrets
 '''
     NOTAS IMPORTANTES
@@ -75,17 +75,17 @@ class MaquinaDocker(MaquinaVulnerable):
 class MaquinaDockerCompose(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con un Docker Compose
     archivo = models.FileField(upload_to='archivoZipDockerCompose/', validators=[validate_zip_file])
-    # Otros atributos...
 
-    class Meta:
-        verbose_name_plural = "Maquinas Docker Compose"
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        # Assuming the imported file is a zip file
+        super().save(*args, **kwargs) # A parte de guardar el archivo, se extraerá el contenido del zip y se validará la estructura de la carpeta
+        # Después de validar que es un archivo zip
         with zipfile.ZipFile(self.archivo, 'r') as zip_ref:
             # Extract the contents of the zip file to a temporary folder
             temp_folder = 'maquinas_docker_compose/'
             zip_ref.extractall(temp_folder)
+            validar_carpeta_docker_compose(self)
+    class Meta:
+        verbose_name_plural = "Maquinas Docker Compose"
 class MaquinaVirtual(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina virtual
     # Otros atributos...
