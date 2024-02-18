@@ -26,8 +26,8 @@
   <body>
     <h1>Detalles de la maquina {{relacion.maquina_vulnerable}}</h1>
     <p>Selected Machine: {{ machine_name }}</p>
-    {% if variable %}
-    <p>IP: {{ variable }}</p>
+    {% if maquina.ip_address %}
+    <p>IP: {{ maquina.ip_address }}</p>
     {% endif %}
     {% if relacion.activa %}
     <form action="{% url 'desactivar_maquina' nombre_maquina=relacion.maquina_vulnerable %}" method="post">

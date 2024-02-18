@@ -52,6 +52,7 @@ class MaquinaVulnerable(models.Model):
         ('Insano', 'Insano'),
     )
     nombre = models.CharField(max_length=255)
+    ip_address = models.CharField(max_length=15, blank=True, null=True) #Dirección IP de la maquina vulnerable
     nivel_dificultad = models.CharField(max_length=6, choices=DIFFICULT_CHOICES)
     nivel_minimo_activacion = models.IntegerField(default=1)
     bandera_usuario_inicial = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidir con la bandera del usuario en la maquina

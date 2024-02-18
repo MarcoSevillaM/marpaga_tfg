@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect, reverse
+import re
+from django.shortcuts import render,redirect
 from gestion.models import *
 
 #Para gestionar la sesion de la pagina personal, un decorador es algo que permite dar una funcionalidad extra 
@@ -82,7 +83,8 @@ def gestion_maquina(request, nombre_maquina):
         # Si no es MaquinaDockerCompose, buscar en MaquinaDocker
         maquina_docker = MaquinaDocker.objects.filter(nombre=nombre_maquina).first()
         if maquina_docker:
-            variable = "Es una maquina Docker"
+            #variable = "Es una maquina Docker"
+            h=1
         else:
             # Si no es MaquinaDocker ni MaquinaDockerCompose, buscar en MaquinaVirtual
             maquina_virtual = MaquinaVirtual.objects.filter(nombre=nombre_maquina).first()
@@ -91,7 +93,7 @@ def gestion_maquina(request, nombre_maquina):
             else:
                 # Si no es ninguno de los anteriores
                 variable = "Es una maquinaaaa"
-    context={'relacion':relacion, 'variable':variable}
+    context={'relacion':relacion, 'variable':variable, 'maquina':maquina}
     return render(request, 'personal/maquinaSeleccionada.html',context)
 
 #Para poder activarse el metodo debe de ser post y además ninguna maquina del usuario tiene que estar activa
@@ -129,16 +131,17 @@ def activar_maquina(request, nombre_maquina):
                 subprocess.run(comando, shell=True, check=True)
                 #Obtengo la direccion de la maquina
                 direccion = subprocess.run("docker exec startrek-payroll-nginx ifconfig eth0 | awk '/inet / {print $2}'", shell=True, check=True, capture_output=True)
+                coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
+                if coincidencia:
+                    direccion_ip = coincidencia.group(1)
                 maquina_jugador.activa = True
+                maquina.ip_address=direccion_ip
+                maquina.save()
                 maquina_jugador.save()
-                messages.success(request, 'La dirección de la máquina es: ' + direccion.stdout.decode('utf-8'))
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
-            #return render(request, template_name='gestion_maquina', {'nombre_maquina':nombre_maquina, 'context':context})
-            #return render(request, 'gestion/gestion_maquina.html' , context={'nombre_maquina': nombre_maquina, 'relacion':relacion, 'variable':direccion})
-            #return redirect(reverse='gestion_maquina', kwargs={'nombre_maquina':nombre_maquina, 'direccion':direccion.stdout.decode('utf-8')})
-            #return redirect('gestion_maquina' nombre_maquina, 'direccion': direccion.stdout.decode('utf-8')))
-            return(reverse('gestion_maquina', 'nombre_maquina': nombre_maquina))
+            #return(render(request, 'personal/maquinaSeleccionada.html', context={'relacion':relacion, 'maquina':maquina}))
+            return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
     else:
         #Redirige a la pagina anterior si no es un metodo post
         return redirect('maquinas')
@@ -168,6 +171,8 @@ def desactivar_maquina(request, nombre_maquina):
                 #subprocess.run(comando, shell=True, check=True)
                 maquina_jugador.activa = False
                 maquina_jugador.save()
+                maquina.ip_address=None
+                maquina.save()
                 return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo MaquinaVirtual.')
