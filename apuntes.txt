@@ -108,4 +108,5 @@ Para las traducciones del ingles al español:
 		b. O poner la ruta encriptada y con nombre auxiliar
 	-> Se ha cambiado la maquina startrek_payroll para que funcione correctamente cuando se levanta, hay que gestionar la segmentación de red para que sea accesible
 		desde la conexón con la VPN (configuración de ip tables)
-		-> Información de documentación iptables
+		-> Información de documentación iptables:
+			1. Obtener la ip del cliente: Fichero->sudo cat /var/log/openvpn/status.log
