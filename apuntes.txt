@@ -24,7 +24,7 @@ MODIFICAR---->Es recomendable cambiarlo
 -----12-11-2023---------
 ->Para poder generar una imagen del modelo de datos (Base de Datos):
 	+ Instalar: pip install django-extensions
-	+ sudo pip install pydotplus && pip install pygraphviz && apt-get install graphviz
+	+ sudo pip install pydotplus && (REVISAR No esta instalado)pip install pygraphviz && apt-get install graphviz
 	+ python3 manage.py graph_models -a -g -o my_models.png
 ->Levantar una maquina tiene una ruta /my/maquinas/nombreMaquina/asctivar o desactivar lo mejor es que la variable activar o desactivar vaya como un parámetro en POST HECHO
 ->Levantar y detener una maquina sin linea de comandos con la API de docker PENDIENTE

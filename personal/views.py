@@ -128,7 +128,7 @@ def activar_maquina(request, nombre_maquina):
                 comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' up -d"
                 subprocess.run(comando, shell=True, check=True)
                 #Obtengo la direccion de la maquina
-                comando=f"docker exec startrek-payroll-nginx-{request.user.username} ifconfig eth0 | awk '/inet /" +  "{print $2}'"
+                comando=f"docker exec proyecto_{request.user.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'"
                 direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
                 coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
                 messages.warning(request, coincidencia.group(1))
