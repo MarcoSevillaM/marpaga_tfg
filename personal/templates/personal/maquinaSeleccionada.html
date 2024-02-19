@@ -29,16 +29,19 @@
     {% if relacion_maquina_jugador.ip_address %}
     <p>IP: {{ relacion_maquina_jugador.ip_address }}</p>
     {% endif %}
+
     {% if relacion_maquina_jugador.activa %}
-    <form action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
+    <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina')" action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
       {% csrf_token %}
     <button id="miBoton" type="submit" class="btn btn-danger">Desactivar</button>
     </form>
     {% else %}
-    <form action="{% url 'activar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
+    <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina')"" action="{% url 'activar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
         {% csrf_token %}
       <button id="miBoton" type="submit" class="btn btn-success">Activar</button>
     </form>
     {% endif %}
+    
+    <script src="{% static 'js/misFunciones.js'%}"></script>
   </body>
 </html>

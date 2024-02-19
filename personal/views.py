@@ -131,7 +131,6 @@ def activar_maquina(request, nombre_maquina):
                 comando=f"docker exec proyecto_{request.user.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'"
                 direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
                 coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
-                messages.warning(request, coincidencia.group(1))
                 if coincidencia:
                     direccion_ip = coincidencia.group(1)
                 relacion_maquina_jugador.activa = True
