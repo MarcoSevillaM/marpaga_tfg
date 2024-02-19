@@ -77,6 +77,10 @@ class MaquinaDockerCompose(MaquinaVulnerable):
     archivo = models.FileField(upload_to='archivoZipDockerCompose/', validators=[validate_zip_file])
 
     def save(self, *args, **kwargs):
+        # Eliminar el archivo original
+        if self.pk:
+            maquina = MaquinaDockerCompose.objects.get(pk=self.pk)
+            os.remove(maquina.archivo.path)
         super().save(*args, **kwargs) # A parte de guardar el archivo, se extraerá el contenido del zip y se validará la estructura de la carpeta
         # Después de validar que es un archivo zip
         with zipfile.ZipFile(self.archivo, 'r') as zip_ref:

@@ -100,4 +100,7 @@ Para las traducciones del ingles al español:
 	5. Añadir las flags a las imágenes de docker
 	6. Usar una plantilla con {% extends 'base.html' %} para usar solo la base
 	7.. Generar una función que se encargue de gestionar la iptables para segmentar la red entre usuarios y el sistema
-
+	-----17-02-2024---------
+	- Se ha cambiado la maquina startrek_payroll para que funcione correctamente cuando se levanta, hay que gestionar la segmentación de red para que sea accesible
+		desde la conexón con la VPN (configuración de ip tables)
+		-> Información de documentación iptables

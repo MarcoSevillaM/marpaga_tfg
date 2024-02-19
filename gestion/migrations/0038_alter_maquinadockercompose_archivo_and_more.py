@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='maquinadockercompose',
             name='archivo',
-            field=models.FileField(storage=gestion.functions.OverwriteStorage(), upload_to='archivoZipDockerCompose/', validators=[gestion.functions.validate_zip_file]),
+            field=models.FileField(upload_to='archivoZipDockerCompose/', validators=[gestion.functions.validate_zip_file]),
         ),
         migrations.AlterField(
             model_name='maquinavulnerable',
