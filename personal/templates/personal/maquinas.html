@@ -281,12 +281,13 @@
               >
                 <a href="{% url "personal" %}" class="dropdown-item">Perfil</a>
                 <a href="#" class="dropdown-item">Ajustes</a>
-                <form method='post' action="{% url 'logout' %}">
+                <a href="{% url 'logout_vista' %}" class="dropdown-item"> Cerrar Sesion</a>
+                <!-- <form method='post' action="{% url 'logout' %}">
                   <a class="dropdown-item">
                     {% csrf_token %}
                     <button type="submit" class="btn m-2" style="width: 50px;">Cerrar Sesion</button>
                     </a
-                >
+                > -->
               </div>
             </div>
           </div>
@@ -342,14 +343,14 @@
                 </thead>
                 <tbody>
                   {% for m in  maquinas %}
-                  <tr>
-                    <td><a href="{% url "gestion_maquina" m.maquina_vulnerable %}">{{m.maquina_vulnerable.nombre}}</a></td>
+                  <tr data-href="{% url "gestion_maquina" m.maquina_vulnerable %}">
+                    <td>{{m.maquina_vulnerable.nombre}}</td>
                     <td>{{m.maquina_vulnerable.nivel_dificultad}}</td>
                     <td>
                       {% if m.activa %}
-                      <a class="btn btn-sm btn-success" href="{% url "gestion_maquina" m.maquina_vulnerable %}">Activa</a>
+                      <a class="btn btn-sm btn-success">Activa</a>
                       {% else %}
-                      <a class="btn btn-sm btn-light" href="{% url "gestion_maquina" m.maquina_vulnerable %}">Desactivada</a>
+                      <a class="btn btn-sm btn-light">Desactivada</a>
                       {% endif %}
 
                     </td>
@@ -595,5 +596,6 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/misFunciones.js'%}"></script>
   </body>
 </html>

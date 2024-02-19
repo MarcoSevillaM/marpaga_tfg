@@ -17,6 +17,7 @@ urlpatterns = [
 
     # Direccion para desactivar una maquina
     path("maquinas/<str:nombre_maquina>/desactivar/", views.desactivar_maquina, name='desactivar_maquina'),
+    path("logout_vista", views.logout_vista, name='logout_vista'),
     
     path('descargar-archivo/', views.descargar_archivo, name='descargar_archivo'),
     path("prueba/", views.prueba, name='p'),

@@ -1,7 +1,7 @@
 import re
 from django.shortcuts import render,redirect
 from gestion.models import *
-
+from django.contrib.auth import logout
 #Para gestionar la sesion de la pagina personal, un decorador es algo que permite dar una funcionalidad extra 
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
@@ -187,6 +187,11 @@ def descargar_archivo(request):
             return response
     else:
         return HttpResponse("El archivo no fue encontrado.", status=404)
+def logout_vista(request):
+    #Cerrar sesión mediante get sin que me de fallo
+    logout(request)
+    return redirect('inicio')
+
 #Comprobar si se puede conseguir una instancia de docker
 def prueba(request):
     client = docker.from_env()

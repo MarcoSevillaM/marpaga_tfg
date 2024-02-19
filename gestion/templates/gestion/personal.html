@@ -281,12 +281,13 @@
               >
                 <a href="{% url "personal" %}" class="dropdown-item">Perfil</a>
                 <a href="#" class="dropdown-item">Ajustes</a>
-                <form method='post' action="{% url 'logout' %}">
+                <a href="{% url 'logout_vista' %}" class="dropdown-item"> Cerrar Sesion</a>
+                <!-- <form method='post' action="{% url 'logout' %}">
                   <a class="dropdown-item">
                     {% csrf_token %}
                     <button type="submit" class="btn m-2" style="width: 50px;">Cerrar Sesion</button>
                     </a
-                >
+                > -->
               </div>
             </div>
           </div>
