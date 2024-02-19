@@ -109,4 +109,13 @@ Para las traducciones del ingles al español:
 	-> Se ha cambiado la maquina startrek_payroll para que funcione correctamente cuando se levanta, hay que gestionar la segmentación de red para que sea accesible
 		desde la conexón con la VPN (configuración de ip tables)
 		-> Información de documentación iptables:
-			1. Obtener la ip del cliente: Fichero->sudo cat /var/log/openvpn/status.log
+			1. Obtener la ip del cliente: Fichero->sudo cat /var/log/openvpn/status.log tambien esta en /etc/openvpn/ipp.txt
+			2. Reglas:
+				¡IMPORTANTE!
+				====================
+				# Bloquear tráfico desde el rango 10.8.0.0/24
+				sudo iptables -A FORWARD -s 10.8.0.0/24 -d 172.18.0.4 -j DROP
+				# Permitir tráfico desde la IP específica 10.8.0.3
+				sudo iptables -A FORWARD -s 10.8.0.3 -d 172.18.0.4 -j ACCEPT
+				====================
+			3. Para evitar conectividad entre los usuarios:
