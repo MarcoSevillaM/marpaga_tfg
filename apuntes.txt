@@ -2,6 +2,13 @@ HECHO---->TODOS LOS PUNTOS HECHOS
 PENDIENTE--->QUEDA POR HACER
 REVISAR---->Mirar un poco
 MODIFICAR---->Es recomendable cambiarlo
+#####################################
+Instalado:
+-> git: 
+-> docker: sudo apt install docker.io
+-> iptables: 
+-> python3 instalado 
+#####################################
 ->Fotos sin copyRight: https://www.freepik.es/fotos-vectores-gratis/informatica
 ->Carpeta static y templates establecida para los ficheros HTMLS, CSS, JS e imágenes
 ->Creada una aplicación "gestion" dentro del poryecto la cual gestiona todos los usuarios
@@ -12,12 +19,12 @@ MODIFICAR---->Es recomendable cambiarlo
 	-Que te de la bienvendia con todos los datos (Mirar si es mejor arrastrar el usuario por defecto de Django o el perfil creado por nosotros): HECHO (REVISAR bien)
 		+Se hace mediantes un forms.py min 23:58 https://www.youtube.com/watch?v=06aDhOwqvfY&t=2004s
 	-Que se gestione la sesion: https://developer.mozilla.org/es/docs/Learn/Server-side/Django/Sessions HECHO (Se hace mediante login_required)
-	-Que tenga establecido un tiempo de session https://es.stackoverflow.com/questions/433071/c%C3%B3mo-puedo-controlar-el-tiempo-de-sesi%C3%B3n-del-usuario PENDIENTE (Echar un ojo, se ha creado una macro llamada SESSION_COOKIE_AGE)
+	-Que tenga establecido un tiempo de session https://es.stackoverflow.com/questions/433071/c%C3%B3mo-puedo-controlar-el-tiempo-de-sesi%C3%B3n-del-usuario PENDIENTE (Echar un ojo, se ha creado una macro llamada SESSION_COOKIE_AGE en settings)
 ->Crear un logout de la sesion HECHO
 ->Cuando se intente acceder a un recurso sin usuario identificado-> redirect a la pagina principal HECHO (REVISAR->Poner el decorator en cada función que no se quiera tener acceso)
 ------
 ->Crear botones para levantar una maquina con doker y tener acceso a ella:
-	+Controlar que un usuario pueda darle una sola vez al boton
+	+Controlar que un usuario pueda darle una sola vez al boton (HECHO)
 	+Para cada usuario tengo que crear un contenedor individual con conectividad directa a dicho contenedor para que pueda vulnerar la maquina
 ->Mirar el formulario del indice para que cuando se dé a submit se mande un correo al administrador para cualquier incidencia
 ->Investigar Docker de caracter urgente
@@ -26,14 +33,9 @@ MODIFICAR---->Es recomendable cambiarlo
 	+ Instalar: pip install django-extensions
 	+ sudo pip install pydotplus && (REVISAR No esta instalado)pip install pygraphviz && apt-get install graphviz
 	+ python3 manage.py graph_models -a -g -o my_models.png
-->Levantar una maquina tiene una ruta /my/maquinas/nombreMaquina/asctivar o desactivar lo mejor es que la variable activar o desactivar vaya como un parámetro en POST HECHO
+->Levantar una maquina tiene una ruta /my/maquinas/nombreMaquina/activar o desactivar lo mejor es que la variable activar o desactivar vaya como un parámetro en POST: HECHO
 ->Levantar y detener una maquina sin linea de comandos con la API de docker PENDIENTE
---------------
-Estructura del html principal a cambiar:
--Poner solo iniciar sesion a la izquierda
--El boton naranja poner para registrarse
--Quitar las dos fotos 
--Establecer un enlace a la pagina oficial de fciencias
+->Establecer un enlace a la pagina oficial de fciencias
 --------------
 Script de importacón de una nueva maquinas vulnerable (PENDIENTE)
 -----24-11-2023---------
@@ -48,7 +50,7 @@ Para las traducciones del ingles al español:
 ->Editar el fichero poniendo: 	msgid "The two password fields didn't match."
 				msgstr "Las dos contraseñas no coinciden."
 -> Guardar con: # python manage.py compilemessages
-==> No funciona mirar errores
+==> No funciona mirar errores (PENDIENTE)
 -----15-02-2024---------
 -Para usar un servidor web usar guicon para ello instalarlo:# apt install gunicorn
 -Añadir en la aplicacion principal del proyecto el fichero wsgi.py
@@ -101,6 +103,9 @@ Para las traducciones del ingles al español:
 	6. Usar una plantilla con {% extends 'base.html' %} para usar solo la base
 	7.. Generar una función que se encargue de gestionar la iptables para segmentar la red entre usuarios y el sistema
 	-----17-02-2024---------
-	- Se ha cambiado la maquina startrek_payroll para que funcione correctamente cuando se levanta, hay que gestionar la segmentación de red para que sea accesible
+	-> Poner foto de perfil del usuario:
+		a. Que sea accesible unicamente por el usuario su foto
+		b. O poner la ruta encriptada y con nombre auxiliar
+	-> Se ha cambiado la maquina startrek_payroll para que funcione correctamente cuando se levanta, hay que gestionar la segmentación de red para que sea accesible
 		desde la conexón con la VPN (configuración de ip tables)
 		-> Información de documentación iptables
