@@ -108,7 +108,10 @@ def activar_maquina(request, nombre_maquina):
             for maquina_jugadoR in MaquinaJugador.objects.filter(jugador=jugador):
                 if maquina_jugadoR.activa:
                     messages.warning(request, 'Ya hay una maquina activa')
+                    print("Ya hay una maquina activa")
+                    #Redirigir a la vista gestion_maquina con una variable que indique que ya hay una maquina activa
                     return redirect('gestion_maquina' , nombre_maquina)
+                    #return redirect('gestion_maquina' , nombre_maquina)
             # Una vez llega aqui la maquina NO debería de estar activada por lo que se comprueba de qué tipo de la maquina vulnerables
             relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
             if hasattr(maquina, 'maquinadocker'):
@@ -128,7 +131,7 @@ def activar_maquina(request, nombre_maquina):
                 comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' up -d"
                 subprocess.run(comando, shell=True, check=True)
                 #Obtengo la direccion de la maquina
-                comando=f"docker exec proyecto_{request.user.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'"
+                comando=f"docker exec proyecto_{request.user.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
                 direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
                 coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
                 if coincidencia:
@@ -137,7 +140,8 @@ def activar_maquina(request, nombre_maquina):
                 relacion_maquina_jugador.guardar_con_ip(direccion_ip)
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
-            #return(render(request, 'personal/maquinaSeleccionada.html', context={'relacion':relacion, 'maquina':maquina}))
+            #Ejecutar la funcion de iptables para eliminar la regla correspondiente
+            
             return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
     else:
         #Redirige a la pagina anterior si no es un metodo post
@@ -156,6 +160,8 @@ def desactivar_maquina(request, nombre_maquina):
         else:
             if hasattr(maquina, 'maquinadocker'):
                 messages.success(request, 'La máquina es de tipo MaquinaDocker.')
+                maquina_jugador.activa = False
+                maquina_jugador.save()
             elif hasattr(maquina, 'maquinadockercompose'):
                 ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
                 comando=f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' down"
@@ -163,10 +169,13 @@ def desactivar_maquina(request, nombre_maquina):
                 maquina_jugador.activa = False
                 maquina_jugador.ip_address = None
                 maquina_jugador.save()
-                return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo MaquinaVirtual.')
-    return redirect('maquinas')
+        #Ejecutar la funcion de iptables para eliminar la regla correspondiente
+        #exec("/home/marco/Escritorio/TFG/marpaga_tfg/iptables.py")
+        return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+    else:
+        return redirect('maquinas')
 
 def descargar_archivo(request):
     nombre_archivo = request.user.username + ".ovpn"

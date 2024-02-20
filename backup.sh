@@ -1,0 +1,1 @@
+#Fichero de backup para cuando se apague el servidor conservar las relgas iptables

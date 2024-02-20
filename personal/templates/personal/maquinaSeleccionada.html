@@ -31,16 +31,32 @@
     {% endif %}
 
     {% if relacion_maquina_jugador.activa %}
-    <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina')" action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
-      {% csrf_token %}
-    <button id="miBoton" type="submit" class="btn btn-danger">Desactivar</button>
-    </form>
-    {% else %}
-    <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina')"" action="{% url 'activar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
+    <div>
+      <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina')" action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
         {% csrf_token %}
-      <button id="miBoton" type="submit" class="btn btn-success">Activar</button>
-    </form>
+      <button id="miBoton" type="submit" class="btn btn-danger">Desactivar</button>
+      </form>
+    </div>
+    {% else %}
+    <div>
+      <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina')" action="{% url 'activar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
+      {% csrf_token %}
+        <button id="miBoton" type="submit" class="btn btn-success">Activar </button>
+        {% if messages %}
+        <div class="col-sm-12 col-xl-3">
+          <div class="alert alert-primary alert-dismissible fade show">
+            <i class="fa fa-exclamation-circle me-2"></i>
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+        </div>
+      </form>
+    </div>
     {% endif %}
+      
     
     <script src="{% static 'js/misFunciones.js'%}"></script>
   </body>

@@ -99,9 +99,9 @@ Para las traducciones del ingles al español:
 		4.1 Carpeta docker-compose
 		4.2 Imagenes docker
 		4.3 La estructura de las maquinas virtuales que sea por lo menos una maquina virtual (.ova)
-	5. Añadir las flags a las imágenes de docker
+	5. Añadir las flags a las maquinas vulnerables
 	6. Usar una plantilla con {% extends 'base.html' %} para usar solo la base
-	7.. Generar una función que se encargue de gestionar la iptables para segmentar la red entre usuarios y el sistema
+	7.. Generar un Script que se encargue de gestionar la iptables para segmentar la red entre usuarios y el sistema
 	-----17-02-2024---------
 	-> Poner foto de perfil del usuario:
 		a. Que sea accesible unicamente por el usuario su foto
@@ -118,4 +118,10 @@ Para las traducciones del ingles al español:
 				# Permitir tráfico desde la IP específica 10.8.0.3
 				sudo iptables -A FORWARD -s 10.8.0.3 -d 172.18.0.4 -j ACCEPT
 				====================
+				APUNTE: Para eliminar una regla: # sudo iptables -D FORWARD 23
 			3. Para evitar conectividad entre los usuarios:
+	-----20-02-2024---------
+	Ahora que estan la iptables configuradas, guardarlas en un fichero justo antes de apagar el sistema para que cuando se encienda puedan volverse a ejecutar y estar todo como establecida
+	-> Empezar a meter flags a las imágenes de docker compose y GENERALIZAR más; es decir, obtener otro docker-compose vulnerable y poder levantar uno y otro (PENDIENTE)
+	-> Ver si funciona para otros sistemas (PENDIENTE)
+	-> Crear un fichero ovpn cuando se registre el usuario en el sistema
