@@ -125,3 +125,9 @@ Para las traducciones del ingles al español:
 	-> Empezar a meter flags a las imágenes de docker compose y GENERALIZAR más; es decir, obtener otro docker-compose vulnerable y poder levantar uno y otro (PENDIENTE)
 	-> Ver si funciona para otros sistemas (PENDIENTE)
 	-> Crear un fichero ovpn cuando se registre el usuario en el sistema
+	-----22-02-2024---------
+REVISAR
+-> Modificar la base de datos para que cuando se levante una maquina cambiar activa: FALSE->TRUE tanto en el servidor como en el panel de administracion ocurra lo mismo; esto se hace gestionando todo desde el modelo de datos con un evento. Se tendra en cuenta:
+1.levantar la maquina desde linea de comandos; 
+2. indicar la ip de la maquina, 
+3.establecer las reglas iptables.
