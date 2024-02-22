@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from gestion.functions import validate_zip_file, validar_carpeta_docker_compose
 import zipfile, os, secrets
+
+import subprocess, re, iptc
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -57,6 +59,7 @@ class MaquinaVulnerable(models.Model):
     bandera_usuario_inicial = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidir con la bandera del usuario en la maquina
     bandera_usuario_root = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidicir con la bandera del root rn la maquina
 
+    # Creo una función para cuando se modifica el valor activa
     def __str__(self):
         return self.nombre
     class Meta:
@@ -93,6 +96,7 @@ class MaquinaDockerCompose(MaquinaVulnerable):
             validar_carpeta_docker_compose(self)
     class Meta:
         verbose_name_plural = "Maquinas Docker Compose"
+
 class MaquinaVirtual(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina virtual
     # Otros atributos...
@@ -110,14 +114,53 @@ class MaquinaJugador(models.Model):
     def __str__(self):
         estado = "activa" if self.activa else "inactiva"
         return f"{self.jugador.usuario.username} tiene la maquina {self.maquina_vulnerable.nombre}  {estado}"
-    def guardar_con_ip(self, ip_address):
-        # Verificar si el modelo está activo antes de almacenar la dirección IP
-        if self.activa:
-            self.ip_address = ip_address
-            self.save()
-        else:
-            self.ip_address = None
-            self.save()
+    
+    def save(self, *args, **kwargs):
+        # Verifica si el nombre ha cambiado
+        if self.pk is not None:
+            original = MaquinaJugador.objects.get(pk=self.pk)
+            if original.activa != self.activa:
+                # Si se DESACTIVA
+                if not self.activa:
+                    if hasattr(self.maquina_vulnerable, 'maquinadocker'):
+                        pass
+                    elif hasattr(self.maquina_vulnerable, 'maquinadockercompose'):
+                        ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
+                        comando=f"PLAYER={self.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' down"
+                        subprocess.run(comando, shell=True, check=True)
+                        self.ip_address = None
+                else:
+                    #Si se ACTIVA
+                    if hasattr(self.maquina_vulnerable, 'maquinadocker'):
+                        # Levantar la maquina Docker
+                        pass
+                    elif hasattr(self.maquina_vulnerable, 'maquinadockercompose'):
+                        # Levantar la maquina Docker Compose
+                        ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
+                        comando = f"PLAYER={self.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' up -d"
+                        subprocess.run(comando, shell=True, check=True)
+                        comando=f"docker exec proyecto_{self.jugador.usuario.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
+                        direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
+                        coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
+                        if coincidencia:
+                            direccion_ip = coincidencia.group(1)
+                            self.ip_address = direccion_ip
+                        #Ejecuto la iptables para limitar el acceso a la maquina
+                        # block_rule = iptc.Rule()
+                        # block_rule.source = "10.8.0.0/24"
+                        # block_rule.destination = direccion_ip #"172.18.0.4"
+                        # block_rule.target = iptc.Target(block_rule, "DROP")
+
+                        # # Obtener la cadena FORWARD
+                        # forward_chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
+
+                        # # Insertar la regla en la cadena FORWARD
+                        # forward_chain.insert_rule(block_rule)
+                    elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
+                        # Levantar la maquina Virtual
+                        pass
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = "Relaciones jugadores con maquinas"
 
@@ -132,14 +175,6 @@ def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
             if jugador.nivel >= maquina.nivel_minimo_activacion:
                 MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
 
-# def crear_relacion_al_crear_maquina(sender, instance, created, **kwargs):
-#     if created:
-#         maquinas_disponibles = MaquinaVulnerable.objects.all()
-#         jugadores = Jugador.objects.all()
-#         for maquina in maquinas_disponibles:
-#             for jugador in jugadores:
-#                 if jugador.nivel >= maquina.nivel_minimo_activacion:
-#                     MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
 #Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
 def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **kwargs):
     if created:
@@ -157,3 +192,4 @@ post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=Maquina
 post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=MaquinaDocker) # Crear relaciones con los jugadores cuando se crea una maquina Docker
 post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=MaquinaVulnerable) # Crear relaciones con los jugadores cuando se crea una maquina Docker
 # ##################################################################
+

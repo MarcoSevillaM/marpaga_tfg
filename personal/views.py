@@ -127,17 +127,8 @@ def activar_maquina(request, nombre_maquina):
                     relacion_maquina_jugador.save()
                     messages.success(request, f'Máquina activada exitosamente,{ relacion_maquina_jugador.maquina_vulnerable.nombre}')
             elif hasattr(maquina, 'maquinadockercompose'):
-                ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
-                comando = f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' up -d"
-                subprocess.run(comando, shell=True, check=True)
-                #Obtengo la direccion de la maquina
-                comando=f"docker exec proyecto_{request.user.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
-                direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
-                coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
-                if coincidencia:
-                    direccion_ip = coincidencia.group(1)
                 relacion_maquina_jugador.activa = True
-                relacion_maquina_jugador.guardar_con_ip(direccion_ip)
+                relacion_maquina_jugador.save()
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
             #Ejecutar la funcion de iptables para eliminar la regla correspondiente
@@ -163,16 +154,10 @@ def desactivar_maquina(request, nombre_maquina):
                 maquina_jugador.activa = False
                 maquina_jugador.save()
             elif hasattr(maquina, 'maquinadockercompose'):
-                ruta_docker_compose = f'maquinas_docker_compose/{maquina.nombre}/docker-compose.yml'
-                comando=f"PLAYER={request.user.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{request.user.username}' down"
-                subprocess.run(comando, shell=True, check=True)
                 maquina_jugador.activa = False
-                maquina_jugador.ip_address = None
                 maquina_jugador.save()
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo MaquinaVirtual.')
-        #Ejecutar la funcion de iptables para eliminar la regla correspondiente
-        #exec("/home/marco/Escritorio/TFG/marpaga_tfg/iptables.py")
         return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
     else:
         return redirect('maquinas')

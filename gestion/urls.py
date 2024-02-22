@@ -15,5 +15,4 @@ urlpatterns = [
 
     path("my/", include("personal.urls")),
 
-    path("html", views.html, name='html'),
 ]
