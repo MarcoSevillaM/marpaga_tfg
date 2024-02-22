@@ -18,9 +18,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 def inicio(request):
     return render(request, 'gestion/index.html')
-def html(request):
-    return render(request, 'gestion/pruebaBard.html')
-
 
 def registro(request):
     if request.method == 'POST':

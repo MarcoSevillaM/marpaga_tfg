@@ -27,8 +27,10 @@ def delete_rule():
         sys.exit(1)
 
     IP_MAQUINA = sys.argv[2]
-    subprocess.run(["iptables-save"], capture_output=True, text=True)
-    subprocess.run(["grep", "-v", IP_MAQUINA], input="iptables-restore", capture_output=True, text=True, check=True)
+    output = subprocess.run(["iptables-save"], capture_output=True, text=True)
+    output = subprocess.run(["grep", "-v", IP_MAQUINA], input=output.stdout, capture_output=True, text=True)
+    subprocess.run(["sudo", "iptables-restore"], input=output.stdout, capture_output=True, text=True)
+    print("Regla eliminada")
 
 def add_rule():
     # Check if the user running the script is root

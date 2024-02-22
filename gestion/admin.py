@@ -12,7 +12,7 @@ class VerJugadores(admin.ModelAdmin):
     list_filter = ('nivel'),  # Campos por los cuales se pueden filtrar
 
 class VerRelacionJugadorMaquina(admin.ModelAdmin):
-    list_display = ('jugador', 'maquina_vulnerable','activa')  # Campos que se mostrarán en la lista
+    list_display = ('jugador', 'maquina_vulnerable','activa', 'ip_address')  # Campos que se mostrarán en la lista
 
     list_filter = ('maquina_vulnerable', 'jugador')  # Campos por los cuales se pueden filtrar
 
@@ -35,6 +35,3 @@ class MaquinaDockerComposeAdmin(admin.ModelAdmin):
 @admin.register(MaquinaVirtual)
 class MaquinaVirtualAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'nivel_dificultad', 'nivel_minimo_activacion']
-
-
-
