@@ -126,8 +126,9 @@ class MaquinaJugador(models.Model):
                         ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
                         comando=f"PLAYER={self.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' down"
                         subprocess.run(comando, shell=True, check=True)
-                        comando=f"./iptables.sh del {self.ip_address}"
-                        subprocess.run(comando, shell=True, check=True)
+                        if self.ip_address:
+                            comando=f"sudo ./iptables.sh del {self.ip_address}"
+                            subprocess.run(comando, shell=True, check=True)
                         self.ip_address = None
                 else:
                     #Si se ACTIVA
@@ -137,17 +138,18 @@ class MaquinaJugador(models.Model):
                     elif hasattr(self.maquina_vulnerable, 'maquinadockercompose'):
                         # Levantar la maquina Docker Compose
                         ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
-                        comando = f"PLAYER={self.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' up -d"
+                        comando = f"PLAYER={self.jugador.usuario.username.lower()} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' up -d"
                         subprocess.run(comando, shell=True, check=True)
-                        comando=f"docker exec proyecto_{self.jugador.usuario.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
+                        comando=f"docker exec proyecto_{self.jugador.usuario.username.lower()}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
                         direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
                         coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
                         if coincidencia:
                             direccion_ip = coincidencia.group(1)
                             self.ip_address = direccion_ip
+                            print(direccion_ip)
+                            comando=f"sudo ./iptables.sh add {self.jugador.usuario.username.lower()} {direccion_ip}"
+                            subprocess.run(comando, shell=True, check=True)
                         #Regla iptables
-                        comando=f"./iptables.sh add {self.jugador.usuario.username} {direccion_ip}"
-                        subprocess.run(comando, shell=True, check=True)
                     elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
                         # Levantar la maquina Virtual
                         pass

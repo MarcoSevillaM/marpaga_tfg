@@ -24,7 +24,7 @@ admin.site.register(MaquinaJugador, VerRelacionJugadorMaquina)
 # Maquinas Docker a partir de un Dockerfile
 @admin.register(MaquinaDocker)
 class MaquinaDockerAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'nivel_dificultad', 'nivel_minimo_activacion', 'imagen_docker', 'puerto_exposicion']
+    list_display = ['nombre', 'nivel_dificultad', 'nivel_minimo_activacion', 'imagen_docker']
 
 # Maquinas Docker generadas con un Docker Compose
 @admin.register(MaquinaDockerCompose)

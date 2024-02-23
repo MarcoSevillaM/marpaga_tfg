@@ -131,3 +131,7 @@ REVISAR
 1.levantar la maquina desde linea de comandos; 
 2. indicar la ip de la maquina, 
 3.establecer las reglas iptables. Rama main
+	-----23-02-2024---------
+-> Se ha modificado el fichero /etc/sudoers para que el usuario marco pueda ejecutar iptables sin contraseña:
+	- Se ha comentado la linea: #%sudo  ALL=(ALL:ALL) ALL
+	- Se ha añadido la linea: marco ALL=(ALL:ALL) NOPASSWD:/usr/sbin/iptables, /home/marco/Escritorio/TFG/marpaga_tfg/iptables.sh
