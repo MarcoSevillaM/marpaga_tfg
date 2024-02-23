@@ -130,8 +130,4 @@ REVISAR
 -> Modificar la base de datos para que cuando se levante una maquina cambiar activa: FALSE->TRUE tanto en el servidor como en el panel de administracion ocurra lo mismo; esto se hace gestionando todo desde el modelo de datos con un evento. Se tendra en cuenta:
 1.levantar la maquina desde linea de comandos; 
 2. indicar la ip de la maquina, 
-<<<<<<< HEAD
 3.establecer las reglas iptables. Rama main
-=======
-3.establecer las reglas iptables. RAMA BaseDeDatos
->>>>>>> baseDeDatos

@@ -70,8 +70,18 @@ function addRule(){
 		echo "El parametro introducido no es correcto"
 		exit 1
 	fi
+
+	# Con el nombre del usuario obtener la ip asociada en la VPN desde el fichero /etc/openvpn/ipp.txt
+	# Se va a comprobar que el usuario existe, la estructura del fichero es: marco,10.8.0.2,fd42:42:42:42::2
+	if [ $(grep -c $2 /etc/openvpn/ipp.txt) -eq 0 ]; then
+		echo "El usuario no existe"
+		exit 1
+	fi
+	# Se va a obtener la IP del usuario
+	IP_USUARIO=$(grep $2 /etc/openvpn/ipp.txt | awk -F',' '{print $2}')
+
 	# Se va a comprobar que la IP del usuario es correcta 
-	if ! [[ $2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+	if ! [[ $IP_USUARIO =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 		echo "La IP<usuario> introducida no es correcta"
 		exit 1
 	fi
@@ -85,7 +95,6 @@ function addRule(){
 		echo "La regla ya existe"
 		exit 1
 	fi
-	IP_USUARIO=$2
 	IP_MAQUINA=$3
 	# Se va a añadir la regla
 	#Ej: iptables -A 23 FORWARD -s 10.8.0.3 -d 172.18.0.4 -j ACCEPT
@@ -110,6 +119,9 @@ elif [ $# -eq 2 ]; then
 	deleteRule $1 $2
 	exit 0
 else
+	echo "Uso: ./iptables.sh <add> <nombre_usuario> <IP_maquina>"
+	echo "Uso: ./iptables.sh <del> <IP_maquina>"
+
 	echo "El numero de parametros es incorrecto"
 	exit 0
 fi

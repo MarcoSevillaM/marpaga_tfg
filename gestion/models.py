@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from gestion.functions import validate_zip_file, validar_carpeta_docker_compose
 import zipfile, os, secrets
 
-import subprocess, re, iptc
+import subprocess, re
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -69,8 +69,6 @@ class MaquinaVulnerable(models.Model):
 class MaquinaDocker(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con una imagen correspondiente
     imagen_docker = models.CharField(max_length=255)
-    puerto_exposicion = models.IntegerField()
-    # Otros atributos...
 
     class Meta:
         verbose_name_plural = "Maquinas Docker"
@@ -128,6 +126,8 @@ class MaquinaJugador(models.Model):
                         ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
                         comando=f"PLAYER={self.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' down"
                         subprocess.run(comando, shell=True, check=True)
+                        comando=f"./iptables.sh del {self.ip_address}"
+                        subprocess.run(comando, shell=True, check=True)
                         self.ip_address = None
                 else:
                     #Si se ACTIVA
@@ -145,17 +145,9 @@ class MaquinaJugador(models.Model):
                         if coincidencia:
                             direccion_ip = coincidencia.group(1)
                             self.ip_address = direccion_ip
-                        #Ejecuto la iptables para limitar el acceso a la maquina
-                        # block_rule = iptc.Rule()
-                        # block_rule.source = "10.8.0.0/24"
-                        # block_rule.destination = direccion_ip #"172.18.0.4"
-                        # block_rule.target = iptc.Target(block_rule, "DROP")
-
-                        # # Obtener la cadena FORWARD
-                        # forward_chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
-
-                        # # Insertar la regla en la cadena FORWARD
-                        # forward_chain.insert_rule(block_rule)
+                        #Regla iptables
+                        comando=f"./iptables.sh add {self.jugador.usuario.username} {direccion_ip}"
+                        subprocess.run(comando, shell=True, check=True)
                     elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
                         # Levantar la maquina Virtual
                         pass
