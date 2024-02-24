@@ -41,6 +41,16 @@ class Jugador(models.Model):
     puntuacion = models.IntegerField(default=0) #Se usará para el ranking y dependerá de las banderas obtenidas en cada maquina, su dificultad y tiempo en conseguirlo.
     foto_perfil = models.ImageField(upload_to='fotos_perfil/', blank=True, null=True)
     
+    # Cuando se crea un jugador se le crea un cliente vpn por lo que se ejecuta el script createUserVPN.sh
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            super().save(*args, **kwargs)
+            # Ejecutar el script para crear el usuario VPN
+            comando = f"sudo ./createUserVPN.sh add {self.usuario.username}"
+            subprocess.run(comando, shell=True, check=True)
+        else:
+            super().save(*args, **kwargs)
+
     def __str__(self):
         return self.usuario.username
     class Meta: 
@@ -58,7 +68,6 @@ class MaquinaVulnerable(models.Model):
     nivel_minimo_activacion = models.IntegerField(default=1)
     bandera_usuario_inicial = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidir con la bandera del usuario en la maquina
     bandera_usuario_root = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidicir con la bandera del root rn la maquina
-
     # Creo una función para cuando se modifica el valor activa
     def __str__(self):
         return self.nombre
