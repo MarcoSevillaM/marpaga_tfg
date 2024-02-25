@@ -138,4 +138,4 @@ REVISAR
 	=>MODIFICAR: Cambiar la ruta donde se encuentra el archivo iptables.sh y el futuro Script para crear usuarios vpn
 	-----24-02-2024---------
 -> Haciendo script automatización creación de usuario.ovpn, (prueba: micieces, marpagaadmin)
--> Añado en el /etc/sudoers el script para añadir y eliminar clientes vpn al crear un usuario
+-> Añado en el /etc/sudoers el script para añadir y eliminar clientes vpn al crear un usuario: 

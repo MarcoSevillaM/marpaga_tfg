@@ -5,6 +5,8 @@ from gestion.functions import validate_zip_file, validar_carpeta_docker_compose
 import zipfile, os, secrets
 
 import subprocess, re
+
+from django.db.models.signals import pre_delete
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -55,6 +57,12 @@ class Jugador(models.Model):
         return self.usuario.username
     class Meta: 
         verbose_name_plural="Jugadores"
+
+@receiver(pre_delete, sender=Jugador)
+def delete_user(sender, instance, **kwargs):
+    # Ejecutar el script para eliminar el usuario VPN
+    comando = f"sudo ./createUserVPN.sh del {instance.usuario.username}"
+    subprocess.run(comando, shell=True, check=True)
 
 class MaquinaVulnerable(models.Model):
     DIFFICULT_CHOICES = (

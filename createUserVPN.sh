@@ -115,7 +115,7 @@ function revokeClient() {
 	rm -f "/root/$CLIENT.ovpn"
     # Elimino el fichero .ovpn de la ruta /home/marco/Escritorio/TFG/marpaga_tfg/media/vpns/
     rm -f "/home/marco/Escritorio/TFG/marpaga_tfg/media/vpns/$CLIENT.ovpn"
-    #sed -i "/.*\/CN=$CLIENT/d" /etc/openvpn/easy-rsa/pki/index.txt
+    sed -i "/.*\/CN=$CLIENT/d" /etc/openvpn/easy-rsa/pki/index.txt
 	sed -i "/^$CLIENT,.*/d" /etc/openvpn/ipp.txt
 	cp /etc/openvpn/easy-rsa/pki/index.txt{,.bk}
 }
@@ -130,7 +130,7 @@ fi
 if [ "$1" == "add" ]; then
     CLIENT=$2
     newClient
-elif [ "$1" == "rm" ]; then
+elif [ "$1" == "del" ]; then
     CLIENT=$2
     revokeClient
 else
