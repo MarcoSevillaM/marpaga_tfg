@@ -28,6 +28,9 @@ from django.conf import settings # Para obtener el dominio actual
 from django.contrib import messages # Para la gestion de los mensajes
 from django.contrib.auth import login # Para iniciar sesión
 
+# Cuando el usuario ha olvidado la constraseña
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+
 def inicio(request):
     return render(request, 'gestion/index.html')
 
@@ -73,3 +76,19 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'El enlace de activación es inválido o ha expirado.')
         return redirect('login') 
+
+# Vistas para contraseña olvidada
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'gestion/reset_passwd.html'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        mensaje= "<h1>Restablecimiento de contraseña enviado</h1>"
+        mensaje += "<p>Le enviamos instrucciones por correo electrónico para configurar su contraseña, si existe una cuenta con el correo electrónico que ingresó. Debería recibirlos en breve.</p>"
+        mensaje += "<p>Si no recibe un correo electrónico, asegúrese de haber ingresado la dirección con la que se registró y verifique su carpeta de correo no deseado.</p>"
+        messages.success(self.request, mensaje)
+        return response
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'gestion/reset_passwd.html'
