@@ -10,6 +10,8 @@ from django.conf import settings
 #Docker
 import docker, subprocess
 
+from django.contrib.auth import update_session_auth_hash #Para cambiar la contraseña y que no se cierre la sesion
+from django.contrib.auth.forms import PasswordChangeForm #Para cambiar la contraseña
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -184,6 +186,25 @@ def logout_vista(request):
     #Cerrar sesión mediante get sin que me de fallo
     logout(request)
     return redirect('inicio')
+
+def profile(request):
+    #Recibira por metodo post la nueva contraseña
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            
+            # Después de cambiar la contraseña, realiza el relogin del usuario
+            update_session_auth_hash(request, user)
+            
+            messages.success(request, 'Contraseña cambiada con éxito.')
+            return redirect('profile')  # Redirige a la página del perfil o a donde desees
+        else:
+            messages.error(request, 'Por favor, corrige los errores en el formulario.')
+    else:
+        form = PasswordChangeForm(request.user)
+    
+    return render(request, 'personal/perfil.html', {'form': form})
 
 #Comprobar si se puede conseguir una instancia de docker
 def prueba(request):

@@ -139,3 +139,11 @@ REVISAR
 	-----24-02-2024---------
 -> Haciendo script automatización creación de usuario.ovpn, (prueba: micieces, marpagaadmin)
 -> Añado en el /etc/sudoers el script para añadir y eliminar clientes vpn al crear un usuario: 
+	# marco ALL=(ALL:ALL) NOPASSWD:/usr/sbin/iptables, /home/marco/Escritorio/TFG/marpaga_tfg/iptables.sh, /home/marco/Escritorio/TFG/marpaga_tfg/createUserVPN.sh
+	-----25-02-2024---------
+-> Haciendo un tunel para poder ver un puerto de mi servidor remoto en el local
+	ssh -L 4000:prodiasv18.fis.usal.es:80 -N i1100160@nogal.usal.es
+-> Para pasar datos de mi servidor local a mi servidor remoto:
+	# scp -o ProxyJump=i1100160@nogal.usal.es -r /home/marco/Escritorio/TFG/marpaga_tfg/ marco@prodiasv18.fis.usal.es:/home/marco/TFG/
+-----26-02-2024---------
+-> Caso de uso Modificar Constaseña

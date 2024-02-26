@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.contrib.auth.views import PasswordChangeView
 urlpatterns = [
     # Pagina principal del usuario, donde se muestra su nombre, su nivel, su puntuacion, su foto de perfil,
     # un boton para acceder a las maquinas disponibles, un boton de enlace de descarga de la VPN, un boton para cambiar la contraseña y un boton para cerrar sesion.
@@ -19,6 +20,8 @@ urlpatterns = [
     path("maquinas/<str:nombre_maquina>/desactivar/", views.desactivar_maquina, name='desactivar_maquina'),
     path("logout_vista", views.logout_vista, name='logout_vista'),
     
-    path('descargar-archivo/', views.descargar_archivo, name='descargar_archivo'),
+    path('descargar-archivo/', views.descargar_archivo, name='descargar_archivo'), # Vista para descargar el archivo.ovpn
+
+    path('profile/', views.profile, name='profile'), # Vista para cambiar datos del perfil
     path("prueba/", views.prueba, name='p'),
 ]

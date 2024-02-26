@@ -80,7 +80,7 @@ function newClient() {
 			;;
 		esac
 	} >> "$homeDir/$CLIENT.ovpn"
-
+	chmod 644 "$homeDir/$CLIENT.ovpn" && chown marco:marco "$homeDir/$CLIENT.ovpn"
 	echo ""
 	echo "The configuration file has been written to $homeDir/$CLIENT.ovpn."
 	echo "Download the .ovpn file and import it in your OpenVPN client."
