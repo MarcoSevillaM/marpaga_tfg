@@ -161,3 +161,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL='personal'
 #SESSION_COOKIE_AGE = 10 #1800 #Establece el tiempo de sesion por inactividad
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True #Establece que la sesion se cierre al cerrar el navegador
+
+#Para mandar el correo de activacion
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_NAME_HOST = 'marpaga.hopto.org'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'marpagamarco@gmail.com'
+EMAIL_HOST_PASSWORD = 'wpqdzopxecragcyq'
+EMAIL_USE_TLS = True

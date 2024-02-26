@@ -12,7 +12,9 @@ urlpatterns = [
 
     #URL para el registro de usuario
     path("registro/", views.registro, name='registro'),
+    path("activate/<uidb64>/<token>/", views.activate, name='activate'),
 
     path("my/", include("personal.urls")),
+
 
 ]

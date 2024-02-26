@@ -147,3 +147,17 @@ REVISAR
 	# scp -o ProxyJump=i1100160@nogal.usal.es -r /home/marco/Escritorio/TFG/marpaga_tfg/ marco@prodiasv18.fis.usal.es:/home/marco/TFG/
 -----26-02-2024---------
 -> Caso de uso Modificar Constaseña
+-> Caso de uso Validar cuenta de usuario:
+	+ Creamos un correo electronico:
+		marpagamarco@gmail.com -> marpagaadmin2001
+	+ Añadimos en los settings:
+		EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+		EMAIL_HOST = 'smtp.gmail.com'
+		EMAIL_PORT = 587
+		EMAIL_USE_TLS = True
+		EMAIL_HOST_USER = 'marpagamarco@gmail.com'
+		EMAIL_HOST_PASSWORD = 'wpqdzopxecragcyq'
+		EMAIL_USE_TLS = True
+	+ Tambien los imports correspondientes
+	-> Cuando un usuario se registra pero no activa la cuenta durante X tiempo eliminarla (se ha creado managements/commands): PENDIENTE
+	-> Modificar el html account_activation_email.html

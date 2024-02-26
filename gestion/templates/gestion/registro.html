@@ -91,6 +91,28 @@
                   </ul>
                 </div>
                 {% endif %}
+                {% if messages %}
+                <div class="bg-secondary rounded h-100 p-4">
+                  {% for message in messages %}
+                  <!-- Si el mensaje es de exito usar class="alert alert-success" role="alert" -->
+                  {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      {{ message }}
+                  </div>
+                  <!-- Si el mensaje es de error usar class="alert alert-danger" role="alert" -->
+                  {% elif message.tags == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      {{ message }}
+                  </div>
+                  <!-- Si el mensaje es de informacion usar class="alert alert-info" role="alert" -->
+                  {% elif message.tags == 'info' %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                      {{ message }}
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+              </div>
+              {% endif %}
                 <p class="mb-4">
                   Por favor completa el formulario para crear una cuenta.
                 </p>
