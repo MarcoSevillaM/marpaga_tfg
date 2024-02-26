@@ -72,4 +72,4 @@ def activate(request, uidb64, token):
         return redirect('login')
     else:
         messages.error(request, 'El enlace de activación es inválido o ha expirado.')
-        return redirect('login')
+        return redirect('login') 
