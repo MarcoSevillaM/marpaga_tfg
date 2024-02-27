@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.utils import timezone #Para las tareas programadas
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 #Esta ruta sera: /home/marco/Escritorio/TFG/marpaga_tfg/marpaga
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'gestion',
     'personal',
     'django_extensions',
+    'django_cron', #Para las tareas programadas
 ]
 
 MIDDLEWARE = [
@@ -171,3 +173,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'marpagamarco@gmail.com'
 EMAIL_HOST_PASSWORD = 'wpqdzopxecragcyq'
 EMAIL_USE_TLS = True
+
+#Para las tareas programadas
+CRON_CLASSES = [
+    "marpaga.cron.RemoveInactiveUsers",
+]

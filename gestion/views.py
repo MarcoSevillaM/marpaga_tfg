@@ -27,9 +27,15 @@ from django.core.mail import EmailMessage
 from django.conf import settings # Para obtener el dominio actual
 from django.contrib import messages # Para la gestion de los mensajes
 from django.contrib.auth import login # Para iniciar sesión
-
+import time # Para el hilo que elimina los usuarios inactivos
 # Cuando el usuario ha olvidado la constraseña
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+
+# Funcion del hilo para eliminar los usuarios inactivos
+def remove_inactive_users():
+    # Elimina todos los usuarios que no han iniciado sesión en el ultimo minuto
+    time.sleep(60) # Espera 1 minuto
+    User.objects.filter(is_active=False).delete()
 
 def inicio(request):
     return render(request, 'gestion/index.html')
@@ -41,6 +47,9 @@ def registro(request):
             user = form.save()  # Guarda el usuario y obtén el objeto User
             user.is_active = False
             user.save()
+            # Creo un hilo que se ejecutará después de 1 minuto
+            mi_hilo = threading.Thread(target=remove_inactive_users)
+            mi_hilo.start()
             subject = 'Activa tu cuenta'
             message = render_to_string('gestion/account_activation_email.html', {
                 'user': user,
@@ -50,7 +59,6 @@ def registro(request):
             })
             email_message = EmailMessage(subject, message, settings.EMAIL_HOST_USER, [user.email])
             email_message.content_subtype = "html"
-            #send_mail(subject, message, settings.EMAIL_HOST_USER, ['marcosevillam@gmail.com']) # Enviar el correo
             email_message.send()
             
             messages.success(request, 'Por favor, verifica tu correo electrónico para activar tu cuenta.')
@@ -71,7 +79,6 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        messages.success(request, '¡Tu cuenta ha sido activada!')
         return redirect('login')
     else:
         messages.error(request, 'El enlace de activación es inválido o ha expirado.')
@@ -84,11 +91,29 @@ class CustomPasswordResetView(PasswordResetView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        mensaje= "<h1>Restablecimiento de contraseña enviado</h1>"
-        mensaje += "<p>Le enviamos instrucciones por correo electrónico para configurar su contraseña, si existe una cuenta con el correo electrónico que ingresó. Debería recibirlos en breve.</p>"
-        mensaje += "<p>Si no recibe un correo electrónico, asegúrese de haber ingresado la dirección con la que se registró y verifique su carpeta de correo no deseado.</p>"
+        mensaje = f"Restablecimiento de contraseña enviado\n"
+        messages.success(self.request, mensaje)
+        mensaje = f"Le enviaremos intstruccciones por correo electrónico para configurar su contraseña, si existe una cuenta con el correo electrónico que ingresó. Debería recibirlas en breve.\n"
+        messages.success(self.request, mensaje)
+        mensaje = f"Si no recibe un correo electrónico, asegúrese de haber ingresado la dirección con la que se registró y verifique su carpeta de correo no deseado."
         messages.success(self.request, mensaje)
         return response
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'gestion/reset_passwd.html'
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'gestion/reset_passwd_confirm.html'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        mensaje = f"Restablecimiento de contraseña completado\n"
+        messages.success(self.request, mensaje)
+        mensaje = f"Su contraseña ha sido restablecida. Ahora puede continuar e iniciar sesión.\n"
+        messages.success(self.request, mensaje)
+        mensaje = f"Iniciar sesión\n"
+        messages.add_message(self.request, messages.INFO, mensaje)
+        return response
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'gestion/reset_passwd.html'

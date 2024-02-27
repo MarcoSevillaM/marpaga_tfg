@@ -86,9 +86,7 @@
                     </div>
                     <!-- Si el mensaje es de informacion usar class="alert alert-info" role="alert" -->
                     {% elif message.tags == 'info' %}
-                      <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        {{ message }}
-                    </div>
+                      <a href="{% url 'login' %}" >  {{ message }}</a>
                     {% endif %}
                     {% endfor %}
                 </div>
@@ -101,27 +99,37 @@
                     <i class="fa fa-user-edit me-2"></i>MARPAGA
                   </h3>
                 </a>
-                <h5>Restablecer contraseña</h5>
+                <h5>Escriba la nueva contraseña</h5>
               </div>
               <div class="" >
                 <h9>
-                    ¿Olvidaste tu contraseña? Ingrese su dirección de correo electrónico a continuación y le enviaremos las instrucciones para configurar una nueva.
+                  Por favor, introduzca su contraseña nueva dos veces para verificar que la ha escrito correctamente.
                 </h9>
               </div>
               <form method="post">
                 {% csrf_token %}
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-4">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    value="{{ form.new_password1.value|default:'' }}"
+                    name="{{ form.new_password1.html_name }}"
+                  />
+                  <label for="floatingPassword">Contraseña nueva:</label>
+              </div>
+                <div class="form-floating mb-4">
                     <input
-                      type="email"
+                      type="password"
                       class="form-control"
-                      id="floatingInput"
-                      value="{{ form.email.value|default:'' }}"
-                      name="{{ form.email.html_name }}"
+                      id="floatingPassword"
+                      value="{{ form.new_password2.value|default:'' }}"
+                      name="{{ form.new_password2.html_name }}"
                     />
-                    <label for="floatingInput">Correo electronico</label>
-                  </div>
+                    <label for="floatingPassword">Confirme contraseña:</label>
+                </div>
                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4">
-                  Restablecer mi contraseña
+                  Cambiar mi contraseña
                 </button>
               </form>
               {% endif %}

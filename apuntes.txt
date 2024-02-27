@@ -161,3 +161,29 @@ REVISAR
 	+ Tambien los imports correspondientes
 	-> Cuando un usuario se registra pero no activa la cuenta durante X tiempo eliminarla (se ha creado managements/commands): PENDIENTE
 	-> Modificar el html account_activation_email.html
+-> Caso de uso contraseña olvidada: PENDIENTE esta a medio hacer
+-----27-02-2024---------
+-> Implementar crontab para eliminar los usuarios que no tengan la cuneta activada:
+	Opcion 1:
+	- Instalo la tarea cron:
+		# pip install django-cron
+	- Creo el archivo marpaga/cron.py
+	- Migro los datos:
+		# python3 manage.py migrate django_cron
+	- Registro las tareas cron: 
+		# python3 manage.py runcrons
+	Conclusion: Funciona pero no se ejecuta a la vez por lo tanto se va a usar celery:
+	Opcion 2:
+	- Instalo celery:
+		# pip install celery[redis]
+	- Creo un archivo aplicacion_principal/celery.py (No adjunto el conteneido)
+	- Instalar en el servidor todo:
+		# apt install redis-server
+	- Ejecuto los comandos: 
+		# celery -A marpaga beat --loglevel=info
+		# celery -A marpaga worker --loglevel=info
+	Elimino todo: 
+		# apt-get remove --purge redis-server -y && apt-get autoremove -y && rm -r /etc/redis && rm -r /var/log/redis && sudo rm -r /var/lib/redis
+		Tambien los ficheros tasks.py
+	Opcion 3:
+	- Finalmente cuando se completa el formulario se crea un hilo que después de 1 minuto se ejecute la eliminación de los usuarios con la cuenta inactiva.

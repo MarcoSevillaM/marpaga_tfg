@@ -17,7 +17,7 @@ function newClient() {
 		cd /etc/openvpn/easy-rsa/ || return
 		case $PASS in
 		1)
-			./easyrsa --batch build-client-full "$CLIENT" nopass
+			./easyrsa --batch build-client-full "$CLIENT" nopass > /dev/null 2>&1
 			;;
 		2)
 			echo "⚠️ You will be asked for the client password below ⚠️"
@@ -81,9 +81,6 @@ function newClient() {
 		esac
 	} >> "$homeDir/$CLIENT.ovpn"
 	chmod 644 "$homeDir/$CLIENT.ovpn" && chown marco:marco "$homeDir/$CLIENT.ovpn"
-	echo ""
-	echo "The configuration file has been written to $homeDir/$CLIENT.ovpn."
-	echo "Download the .ovpn file and import it in your OpenVPN client."
 
 	exit 0
 }
@@ -93,25 +90,13 @@ function revokeClient() {
 	if [[ $NUMBEROFCLIENTS == '0' ]]; then
 		exit 1
 	fi
-
-	# echo ""
-	# echo "Select the existing client certificate you want to revoke"
-	# tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
-	# until [[ $CLIENTNUMBER -ge 1 && $CLIENTNUMBER -le $NUMBEROFCLIENTS ]]; do
-	# 	if [[ $CLIENTNUMBER == '1' ]]; then
-	# 		read -rp "Select one client [1]: " CLIENTNUMBER
-	# 	else
-	# 		read -rp "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
-	# 	fi
-	# done
-	# CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
 	cd /etc/openvpn/easy-rsa/ || return
-	./easyrsa --batch revoke "$CLIENT"
-	EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
+	./easyrsa --batch revoke "$CLIENT" > /dev/null 2>&1
+	EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl > /dev/null 2>&1
 	rm -f /etc/openvpn/crl.pem
 	cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 	chmod 644 /etc/openvpn/crl.pem
-	find /home/ -maxdepth 2 -name "$CLIENT.ovpn" -delete
+	find /home/ -maxdepth 2 -name "$CLIENT.ovpn" -delete > /dev/null 2>&1
 	rm -f "/root/$CLIENT.ovpn"
     # Elimino el fichero .ovpn de la ruta /home/marco/Escritorio/TFG/marpaga_tfg/media/vpns/
     rm -f "/home/marco/Escritorio/TFG/marpaga_tfg/media/vpns/$CLIENT.ovpn"
