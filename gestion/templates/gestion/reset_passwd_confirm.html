@@ -76,7 +76,7 @@
                     {% for message in messages %}
                     <!-- Si el mensaje es de exito usar class="alert alert-success" role="alert" -->
                     {% if message.tags == 'success' %}
-                      <p">
+                      <p>
                         {{ message }}
                   </p>
                     <!-- Si el mensaje es de error usar class="alert alert-danger" role="alert" -->
@@ -99,8 +99,14 @@
                     <i class="fa fa-user-edit me-2"></i>MARPAGA
                   </h3>
                 </a>
-                <h5>Escriba la nueva contraseña</h5>
               </div>
+              <!-- Codigo si el token ya ha caducado -->
+              {% if not validlink %}
+              <h5><strong>Restablecimiento de contraseña fallido</strong></h5>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p> El enlace de restablecimiento de contraseña era inválido, seguramente porque se haya usado antes. Por favor, solicite un nuevo restablecimiento de contraseña.</p>
+              </div>
+              {% else %}
               <div class="" >
                 <h9>
                   Por favor, introduzca su contraseña nueva dos veces para verificar que la ha escrito correctamente.
@@ -128,11 +134,26 @@
                     />
                     <label for="floatingPassword">Confirme contraseña:</label>
                 </div>
+
+                <!-- Codigo si el formulario esta mal porque las contraseñas no son iguales -->
+                {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <!-- Desglose de los errores -->
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                      <strong>{{ error }}</strong>
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+                {% endif %}
                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4">
                   Cambiar mi contraseña
                 </button>
               </form>
+              <!-- Fin del if de los errores -->
               {% endif %}
+              <!-- Fin del if not validlink -->
+              {% endif %} 
             </div>
           </div>
         </div>

@@ -86,9 +86,7 @@
                     </div>
                     <!-- Si el mensaje es de informacion usar class="alert alert-info" role="alert" -->
                     {% elif message.tags == 'info' %}
-                      <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        {{ message }}
-                    </div>
+                      <a href="/"> {{ message }} </a>
                     {% endif %}
                     {% endfor %}
                 </div>

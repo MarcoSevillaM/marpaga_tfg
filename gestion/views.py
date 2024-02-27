@@ -97,6 +97,8 @@ class CustomPasswordResetView(PasswordResetView):
         messages.success(self.request, mensaje)
         mensaje = f"Si no recibe un correo electrónico, asegúrese de haber ingresado la dirección con la que se registró y verifique su carpeta de correo no deseado."
         messages.success(self.request, mensaje)
+        mensaje = f"Volver a inicio\n"
+        messages.info(self.request, mensaje)
         return response
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
