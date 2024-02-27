@@ -166,7 +166,6 @@ class MaquinaJugador(models.Model):
                             print(direccion_ip)
                             comando=f"sudo ./iptables.sh add {self.jugador.usuario.username.lower()} {direccion_ip}"
                             subprocess.run(comando, shell=True, check=True)
-                        #Regla iptables
                     elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
                         # Levantar la maquina Virtual
                         pass

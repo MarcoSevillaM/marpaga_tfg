@@ -1,0 +1,15 @@
+# Ignorar archivos generados por Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar archivos de configuración local
+#local_settings.py
+TEMPORAL/startrek_payroll/
+maquinas_docker_compose/startrek_payroll/
+# Ignorar archivos de base de datos
+db.sqlite3
+
+# Ignorar archivos de entorno
+.env

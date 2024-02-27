@@ -47,7 +47,12 @@
           <div class="alert alert-primary alert-dismissible fade show">
             <i class="fa fa-exclamation-circle me-2"></i>
             {% for message in messages %}
+            <!-- Si el mensaje es de error -->
+            {% if message.tags == 'error' %}
             {{ message }}
+            {% elif message.tags == 'success' %}
+            <p> {{ message }} </p>
+            {% endif %}
             {% endfor %}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>

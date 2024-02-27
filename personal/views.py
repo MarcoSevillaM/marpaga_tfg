@@ -129,8 +129,12 @@ def activar_maquina(request, nombre_maquina):
                     relacion_maquina_jugador.save()
                     messages.success(request, f'Máquina activada exitosamente,{ relacion_maquina_jugador.maquina_vulnerable.nombre}')
             elif hasattr(maquina, 'maquinadockercompose'):
-                relacion_maquina_jugador.activa = True
-                relacion_maquina_jugador.save()
+                #Compruebo que exista el usuario en el fichero /etc/openvpn/ipp.txt y si no existe mando un mensaje de error
+                if not re.search(jugador.usuario.username, subprocess.run(['cat', '/etc/openvpn/ipp.txt'], stdout=subprocess.PIPE).stdout.decode('utf-8')):
+                    messages.error(request, "Por favor conectese primero al servidor VPN")
+                else:
+                    relacion_maquina_jugador.activa = True
+                    relacion_maquina_jugador.save()
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
             #Ejecutar la funcion de iptables para eliminar la regla correspondiente
