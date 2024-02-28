@@ -1,0 +1,76 @@
+Pasos para que el servidor funcione:
+
+1. Crear un entorno virtual:
+    # python3 -m venv virtual
+2. Activarlo
+    # source virtual/bin/activate
+3. Instalar las dependencias
+    # pip install -r requirements.txt
+4. Instalamos docker
+    # sudo apt-get install docker.io
+5. Instalamos docker-compose
+    # sudo apt-get install docker-compose
+6. Establecemos que el usuario actual puede usar docker
+    # sudo usermod -aG docker $USER (Se debe cerrar la sesión para que los cambios surtan efecto)
+7. Instalamos la iptables
+    # sudo apt-get install iptables (también se tienen que poner en el fichero sudoers para que no pida contraseña)
+8. Los scripts iptables.sh y createUserVPN.sh deben tener los permisos correctos
+    # chmod +x iptables.sh
+    # chmod +x createUserVPN.sh
+    8.1 Además de eso ejecutar dicho script con permisos sudo pero sin solicitar contraseña por ello se debe editar el archivo /etc/sudoers
+    # nano /etc/sudoers
+    8.2 Agregar la siguiente línea al final del archivo
+    # username ALL=(ALL) NOPASSWD: /ruta/al/script/createUserVPN.sh /ruta/al/script/iptables.sh /usr/sbin/iptables 
+9. Establecer y crear la VPN
+    (Pendiente de hacer)
+###############################
+#!/bin/bash
+# Script en sh que ejecutará todo para tener el servidor funcionando y listo
+# La ejecución del programa sera: ./setup.sh <nombre_usuario>
+# Se debe ejecutar con permisos de superusuario
+if [ "$EUID" -ne 0 ]
+  then echo "Por favor, ejecutar como superusuario"
+  exit
+fi
+# Comprobación de prametros que sea solo 1
+if [ "$#" -ne 1 ]
+  then echo "Por favor, introduzca un solo parámetro"
+  exit
+fi
+# Comprobamos que el parámetro sea el nombre de usuairo y que exista
+if id "$1" &>/dev/null; then
+    echo "El usuario $1 existe"
+else
+    echo "El usuario $1 no existe"
+    exit
+fi
+
+# Instalamos las dependencias
+apt-get update -y && apt-get upgrade -y && apt-get install -y python3-pip python3-dev libffi-dev libssl-dev python3-venv
+# Creamos el entorno virtual
+python3 -m venv virtual && source virtual/bin/activate && pip install -r requirements.txt && apt-get install -y docker.io docker-compose iptables
+# Establecemos que el usuario actual puede usar docker
+usermod -aG docker $USER 
+# Los scripts iptables.sh y createUserVPN.sh deben tener los permisos correctos
+chmod +x iptables.sh && chmod +x createUserVPN.sh 
+
+# Creamos el servidor VPN y establecemos todo
+
+# PENDIENTE DE HACER
+
+# Además de eso ejecutar dicho script con permisos sudo pero sin solicitar contraseña por ello se debe editar el archivo /etc/sudoers
+    # Compruebo si el usuario tiene algún permiso el el archivo /etc/sudoers y si tiene, quitarlos y poner los nuevos, 
+    # si no tiene, poner los nuevos
+# Obtener la ruta del script actual (utilizando PWD)
+script_path=$(pwd)
+
+# Construir el patrón con la ruta actual
+pattern="$script_path/createUserVPN.sh $script_path/iptables.sh /usr/sbin/iptables"
+
+# Que empiece por el nombre de usuario
+if grep -q "^$1 ALL" /etc/sudoers; then
+    sed -i "/$1 ALL/d" /etc/sudoers
+fi
+echo "$1 ALL=ALL=(ALL:ALL) NOPASSWD: $pattern" >> /etc/sudoers # Añado la linea al final del archivo
+
+###############################

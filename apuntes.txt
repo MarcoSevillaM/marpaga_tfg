@@ -91,7 +91,7 @@ Para las traducciones del ingles al español:
 	-----16-02-2024---------
 	- Se han gestionado los botones de activación/desactivación de los usuario en redes y contenedores diferentes
 	- Mostrar la ip al activar la maquina
-	Pendiente de hacer:
+	HECHO de hacer:
 	1. Gestionar levantar un docker compose al darle al boton de activar en una red y usuario diferentes (HECHO) REVISAR-> Usar la api docker-compose en vez de una llamada del sistema
 	2. Gestionar levantar un docker compose al darle al boton de desactivar en una red y usuario diferentes (HECHO) REVISAR-> Usar la api docker-compose en vez de una llamada del sistema
 	3. Que aparezca la ip al lado cuando esté levantado el contenedor (HECHO)
@@ -159,9 +159,9 @@ REVISAR
 		EMAIL_HOST_PASSWORD = 'wpqdzopxecragcyq'
 		EMAIL_USE_TLS = True
 	+ Tambien los imports correspondientes
-	-> Cuando un usuario se registra pero no activa la cuenta durante X tiempo eliminarla (se ha creado managements/commands): PENDIENTE
+	-> Cuando un usuario se registra pero no activa la cuenta durante X tiempo eliminarla (se ha creado managements/commands): HECHO
 	-> Modificar el html account_activation_email.html
--> Caso de uso contraseña olvidada: PENDIENTE esta a medio hacer
+-> Caso de uso contraseña olvidada: PENDIENTE->MODIFICAR su estetica esta a medio hacer
 -----27-02-2024---------
 -> Implementar crontab para eliminar los usuarios que no tengan la cuneta activada:
 	Opcion 1:
@@ -187,3 +187,9 @@ REVISAR
 		Tambien los ficheros tasks.py
 	Opcion 3:
 	- Finalmente cuando se completa el formulario se crea un hilo que después de 1 minuto se ejecute la eliminación de los usuarios con la cuenta inactiva.
+-----28-02-2024---------
+-> Mirando como alojar todo en el servidor Apache o Nginx 
+	- Lo primero agrupamos todos los ficheros estáticos
+	# python manage.py collectstatic
+	- Obviamente hemos cambiado la variable DEBUG=Flase y STATIC_URL = '/static/'
+	- Configuramos el servidor
