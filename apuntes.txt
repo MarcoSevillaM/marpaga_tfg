@@ -192,4 +192,63 @@ REVISAR
 	- Lo primero agrupamos todos los ficheros estáticos
 	# python manage.py collectstatic
 	- Obviamente hemos cambiado la variable DEBUG=Flase y STATIC_URL = '/static/'
-	- Configuramos el servidor
+	- Configuramos el servidor:
+	Opcion 1:
+	- Instalo gunicorn:
+		# pip install gunicorn
+	- Se crea un archivo wsgi.py en la misma ruta que manage.py:
+		###########
+		import os
+		from django.core.wsgi import get_wsgi_application
+		os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'marpaga.settings')
+		application = get_wsgi_application()
+		###########
+	- Ejecutar gunicorn:
+		# gunicorn wsgi -w 4 -b 0.0.0.0:8000
+	- Creo un servicio para que corra automáticamente nada más arrancar el ordenador "marpaga_gunicorn.service":
+		###########
+		[Unit]
+		Description=Levanta el servidor de Marpaga una vez se inicie el ordenador
+		After=network.target
+
+		[Service]
+		User=marco   # Reemplaza con el nombre de tu usuario
+		Group=marco    # Reemplaza con el nombre de tu grupo
+		WorkingDirectory=/home/marco/Escritorio/TFG/marpaga_tfg
+		ExecStart=/home/marco/Escritorio/TFG/virtual/bin/gunicorn wsgi -b 0.0.0.0:8000 -w 4
+		Restart=always
+
+		[Install]
+		WantedBy=multi-user.target
+		###########
+	- Lo meto en la ruta: /etc/systemd/system/
+		# cp marpaga_gunicorn.service /etc/systemd/system/
+	- Reinicio el servicio: 
+		# systemctl daemon-reload
+	- Activo el servicio:
+		# systemctl enable marpaga_gunicorn
+	- Bien ahora instalamos Nginx:
+	 # apt install nginx
+	- Creamos el fichero de configuracion en: /etc/nginx/sites-available/marpaga
+		###########
+		# /etc/nginx/sites-available/marpaga
+		server {
+			listen 80;
+			server_name marpaga.hopto.org 83.55.64.220;
+
+			location = /favicon.ico { access_log off; log_not_found off; }
+			location /static/ {
+				root /home/marco/Escritorio/TFG/marpaga_tfg; # Cambiar la ruta a la correspondiente
+			}
+
+			location / {
+				include proxy_params;
+				proxy_pass http://127.0.0.1:8000;
+			}
+		}
+		###########
+	- Creamos un enlace simbólico a la ruta /etc/nginx/sites-enables/marpaga
+	# sudo ln -s /etc/nginx/sites-available/marpaga /etc/nginx/sites-enabled
+
+	-A los ficheros estáticos le damos permisos:
+	# chown -R nginx:nginx /home/marco/Escritorio/TFG/marpaga_tfg/static
