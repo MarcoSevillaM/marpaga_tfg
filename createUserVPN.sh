@@ -42,7 +42,7 @@ function newClient() {
 	# 	# if not SUDO_USER, use /root
 	# 	homeDir="/root"
 	# fi
-    homeDir="/home/marco/Escritorio/TFG/marpaga_tfg/media/vpns"
+    homeDir="$(pwd)/media/vpns"
 	# Determine if we use tls-auth or tls-crypt
 	if grep -qs "^tls-crypt" /etc/openvpn/server.conf; then
 		TLS_SIG="1"
