@@ -3,10 +3,10 @@ Description=Levanta el servidor de Marpaga una vez se inicie el ordenador
 After=network.target
 
 [Service]
-User=marco   # Reemplaza con el nombre de tu usuario
-Group=marco    # Reemplaza con el nombre de tu grupo
-WorkingDirectory=/home/marco/Escritorio/TFG/marpaga_tfg
-ExecStart=/home/marco/Escritorio/TFG/virtual/bin/gunicorn wsgi -b 0.0.0.0:8000 -w 4
+User=marco
+Group=marco
+WorkingDirectory=/var/html/www/marpaga_tfg
+ExecStart=/var/html/www/env/bin/gunicorn wsgi -b 0.0.0.0:8000 -w 4
 Restart=always
 
 [Install]

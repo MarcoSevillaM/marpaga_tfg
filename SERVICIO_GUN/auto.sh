@@ -11,7 +11,7 @@ fi
 cp -r /home/marco/Escritorio/TFG/marpaga_tfg /var/www/html/ && chown -R www-data:www-data /var/www/html/marpaga_tfg
 
 # Creo un entorno virtual, lo activo e instalo las dependencias
-cd /var/www/html/ && python3 -m venv env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn
+cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron
 
 # El fichero marpaga_gunicorn.service se copia a /etc/systemd/system/ y se activa
 cp /var/www/html/marpaga_tfg/SERVICIO_GUN/marpaga_gunicorn.service /etc/systemd/system/ && systemctl daemon-reload
