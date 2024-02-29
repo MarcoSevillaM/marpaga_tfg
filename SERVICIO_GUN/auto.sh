@@ -1,11 +1,6 @@
 #!/bin/bash
 # Script que pasa el proyecto a /var/www/html/ y establece el servicio con gunicorn y nginx
 
-# Se ejecuta como root
-if [ "$EUID" -ne 0 ]
-  then echo "Por favor, ejecutar como root"
-  exit
-fi
 
 function addRule(){
     # Se copia todo el proyecto a /var/www/html/
@@ -35,14 +30,55 @@ function addRule(){
 
 if [ "$1" == "add" ]
 then
+    # Se ejecuta como root
+    if [ "$EUID" -ne 0 ]
+    then echo "Por favor, ejecutar como root"
+    exit
+    fi
+
     echo "Añadiendo el servicio"
     addRule
 elif [ "$1" == "rm" ]
 then
+    # Se ejecuta como root
+    if [ "$EUID" -ne 0 ]
+    then echo "Por favor, ejecutar como root"
+    exit
+    fi
+
     echo "Eliminando el servicio"
     systemctl disable marpaga_gunicorn.service && systemctl stop marpaga_gunicorn.service && rm /etc/systemd/system/marpaga_gunicorn.service
     rm /etc/nginx/sites-enabled/marpaga_nginx && rm /etc/nginx/sites-available/marpaga_nginx && systemctl restart nginx && apt-get remove nginx -y
     rm -r /var/www/html/marpaga_tfg && rm -r /var/www/html/env
+    exit
+elif [ "$1" == "stop" ]
+then
+    # Se ejecuta como root
+    if [ "$EUID" -ne 0 ]
+    then echo "Por favor, ejecutar como root"
+    exit
+    fi
+
+    echo "Parando el servicio"
+    systemctl disable marpaga_gunicorn.service && systemctl stop marpaga_gunicorn.service
+    systemctl stop nginx && systemctl disable nginx
+    exit
+elif [ "$1" == "start" ]
+then
+    # Se ejecuta como root
+    if [ "$EUID" -ne 0 ]
+    then echo "Por favor, ejecutar como root"
+    exit
+    fi
+
+    echo "Arrancando el servicio"
+    systemctl start marpaga_gunicorn.service && systemctl enable marpaga_gunicorn.service
+    systemctl start nginx && systemctl enable nginx
+    exit
+elif [ "$1" == "status" ]
+then
+    echo "Estado del servicio"
+    systemctl status marpaga_gunicorn.service && systemctl status nginx
     exit
 else
     echo "Parámetro incorrecto"

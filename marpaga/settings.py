@@ -178,3 +178,6 @@ EMAIL_USE_TLS = True
 CRON_CLASSES = [
     "marpaga.cron.RemoveInactiveUsers",
 ]
+
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
