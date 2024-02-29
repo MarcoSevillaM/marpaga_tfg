@@ -251,7 +251,10 @@ REVISAR
 	# sudo ln -s /etc/nginx/sites-available/marpaga /etc/nginx/sites-enabled
 
 	-A los ficheros estáticos le damos permisos:
-	# chown -R nginx:nginx /home/marco/Escritorio/TFG/marpaga_tfg/static
+	# chown -R www-data:www-data /home/marco/Escritorio/TFG/marpaga_tfg/static
 	FUNCIONA:
 	-> He pasado todo el proyecto a la carpeta: /var/www/html/marpaga_tfg y la he dado todos los permisos tanto a la ruta del proyecto como al entorno virtual.
 	¡Con esto esta funcionando el servidor para pasarlo a producción!
+	Apuntes Importantes:
+	-> Los ficheros estaticos: css, js,... son cargados por el servidor nginx
+	-> Toda la parte del backend se ejecuta como el usuario que este establecido en el servicio de gunicorn

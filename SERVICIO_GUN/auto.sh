@@ -12,10 +12,11 @@ function addRule(){
     cp -r /home/marco/Escritorio/TFG/marpaga_tfg /var/www/html/ && chown -R www-data:www-data /var/www/html/marpaga_tfg
 
     # Creo un entorno virtual, lo activo e instalo las dependencias
-    cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron
+    cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron && python3 /var/www/html/marpaga_tfg/manage.py makemigrations && python3 /var/www/html/marpaga_tfg/manage.py migrate
 
     # Cambio la variable DEBUG a False
     sed -i 's/DEBUG = True/DEBUG = False/' /var/www/html/marpaga_tfg/marpaga/settings.py
+    # Hago las migraciones
     # El fichero marpaga_gunicorn.service se copia a /etc/systemd/system/ y se activa
     cp /var/www/html/marpaga_tfg/SERVICIO_GUN/marpaga_gunicorn.service /etc/systemd/system/ && systemctl daemon-reload
     systemctl start marpaga_gunicorn.service && systemctl enable marpaga_gunicorn.service
