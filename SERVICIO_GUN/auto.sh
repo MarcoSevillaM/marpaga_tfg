@@ -75,10 +75,21 @@ then
     systemctl start marpaga_gunicorn.service && systemctl enable marpaga_gunicorn.service
     systemctl start nginx && systemctl enable nginx
     exit
+elif [ "$1" == "restart" ]
+then
+    # Se ejecuta como root
+    if [ "$EUID" -ne 0 ]
+    then echo "Por favor, ejecutar como root"
+    exit
+    fi
+
+    echo "Reiniciando el servicio"
+    systemctl restart marpaga_gunicorn.service && systemctl restart nginx
+    exit
 elif [ "$1" == "status" ]
 then
     echo "Estado del servicio"
-    systemctl status marpaga_gunicorn.service && systemctl status nginx
+    systemctl status marpaga_gunicorn.service && systemctl status nginx || echo "No hay servicio"
     exit
 else
     echo "Parámetro incorrecto"

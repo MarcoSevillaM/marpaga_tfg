@@ -272,3 +272,5 @@ REVISAR
 	# SECURE_SSL_REDIRECT = True
 	# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') # No sé si es necesario
 	5. Editar el fichero de nginx
+	# Se han probado varias formas pero no funciona no sé que pasa
+	
