@@ -258,3 +258,4 @@ REVISAR
 	Apuntes Importantes:
 	-> Los ficheros estaticos: css, js,... son cargados por el servidor nginx
 	-> Toda la parte del backend se ejecuta como el usuario que este establecido en el servicio de gunicorn
+	-> PENDIENTE, HACER, establecer certificado ssl y que sea una dirección https
