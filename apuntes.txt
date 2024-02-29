@@ -190,7 +190,7 @@ REVISAR
 -----28-02-2024---------
 -> Mirando como alojar todo en el servidor Apache o Nginx 
 	- Lo primero agrupamos todos los ficheros estáticos
-	# python manage.py collectstatic
+	# python3 manage.py collectstatic
 	- Obviamente hemos cambiado la variable DEBUG=Flase y STATIC_URL = '/static/'
 	- Configuramos el servidor:
 	Opcion 1:

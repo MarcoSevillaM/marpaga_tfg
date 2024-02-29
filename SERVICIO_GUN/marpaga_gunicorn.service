@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=marco
 Group=marco
-WorkingDirectory=/var/html/www/marpaga_tfg
-ExecStart=/var/html/www/env/bin/gunicorn wsgi -b 0.0.0.0:8000 -w 4
+WorkingDirectory=/var/www/html/marpaga_tfg
+ExecStart=/var/www/html/env/bin/gunicorn wsgi -w 4
 Restart=always
 
 [Install]
