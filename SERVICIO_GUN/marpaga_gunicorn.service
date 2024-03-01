@@ -3,7 +3,7 @@ Description=Levanta el servidor de Marpaga una vez se inicie el ordenador
 After=network.target
 
 [Service]
-User=www-data
+User=marco
 Group=marco
 WorkingDirectory=/var/www/html/marpaga_tfg
 ExecStart=/var/www/html/env/bin/gunicorn wsgi -w 4

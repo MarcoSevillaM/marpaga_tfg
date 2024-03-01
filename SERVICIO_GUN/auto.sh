@@ -4,7 +4,7 @@
 
 function addRule(){
     # Se copia todo el proyecto a /var/www/html/
-    cp -r /home/marco/Escritorio/TFG/marpaga_tfg /var/www/html/ && chown -R www-data:www-data /var/www/html/marpaga_tfg
+    cp -r ../ /var/www/html/ && chown -R www-data:www-data /var/www/html/marpaga_tfg
 
     # Creo un entorno virtual, lo activo e instalo las dependencias
     cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron && python3 /var/www/html/marpaga_tfg/manage.py makemigrations && python3 /var/www/html/marpaga_tfg/manage.py migrate
@@ -16,14 +16,18 @@ function addRule(){
     cp /var/www/html/marpaga_tfg/SERVICIO_GUN/marpaga_gunicorn.service /etc/systemd/system/ && systemctl daemon-reload
     systemctl start marpaga_gunicorn.service && systemctl enable marpaga_gunicorn.service
 
+
     # Instalamos nginx y copiamos el fichero de configuración
     apt-get install nginx -y
+    # Establecemos el cerfiticado SSL
+    apt-get install certbot python3-certbot-nginx -y 
+    certbot certonly --nginx -d marpaga.hopto.org
     cp /var/www/html/marpaga_tfg/SERVICIO_GUN/marpaga_nginx /etc/nginx/sites-available/ && ln -s /etc/nginx/sites-available/marpaga_nginx /etc/nginx/sites-enabled
 
     # Eliminamos el fichero por defecto de nginx
-    rm /etc/nginx/sites-enabled/default
+    rm /etc/nginx/sites-enabled/default 2>/dev/null
     systemctl restart nginx
-    echo "Servicio añadido"
+    echo "[+] Servicio añadido"
 }
 
 #El script si se ejecuta con el parámetro add se crea todo y si se ejecuta con el parámetro rm se elimina todo 
@@ -36,7 +40,7 @@ then
     exit
     fi
 
-    echo "Añadiendo el servicio"
+    echo "[+] Añadiendo el servicio"
     addRule
 elif [ "$1" == "rm" ]
 then
@@ -46,7 +50,7 @@ then
     exit
     fi
 
-    echo "Eliminando el servicio"
+    echo "[+] Eliminando el servicio"
     systemctl disable marpaga_gunicorn.service && systemctl stop marpaga_gunicorn.service && rm /etc/systemd/system/marpaga_gunicorn.service
     rm /etc/nginx/sites-enabled/marpaga_nginx && rm /etc/nginx/sites-available/marpaga_nginx && systemctl restart nginx && apt-get remove nginx -y
     rm -r /var/www/html/marpaga_tfg && rm -r /var/www/html/env
@@ -59,7 +63,7 @@ then
     exit
     fi
 
-    echo "Parando el servicio"
+    echo "[+] Parando el servicio"
     systemctl disable marpaga_gunicorn.service && systemctl stop marpaga_gunicorn.service
     systemctl stop nginx && systemctl disable nginx
     exit
@@ -71,7 +75,7 @@ then
     exit
     fi
 
-    echo "Arrancando el servicio"
+    echo "[+] Arrancando el servicio"
     systemctl start marpaga_gunicorn.service && systemctl enable marpaga_gunicorn.service
     systemctl start nginx && systemctl enable nginx
     exit
@@ -83,7 +87,7 @@ then
     exit
     fi
 
-    echo "Reiniciando el servicio"
+    echo "[+] Reiniciando el servicio"
     systemctl restart marpaga_gunicorn.service && systemctl restart nginx
     exit
 elif [ "$1" == "status" ]
@@ -92,6 +96,6 @@ then
     systemctl status marpaga_gunicorn.service && systemctl status nginx || echo "No hay servicio"
     exit
 else
-    echo "Parámetro incorrecto"
+    echo "[!] Parámetro incorrecto"
     exit
 fi

@@ -19,5 +19,12 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    # Resto de la configuración SSL...
+    location /static/ {
+        alias /var/www/html/marpaga_tfg/static/;
+    }
+
+    location /media/ {
+        alias /var/www/html/marpaga_tfg/media/;
+    }
+
 }

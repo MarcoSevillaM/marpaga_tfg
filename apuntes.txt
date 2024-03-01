@@ -273,4 +273,8 @@ REVISAR
 	# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') # No sé si es necesario
 	5. Editar el fichero de nginx
 	# Se han probado varias formas pero no funciona no sé que pasa
+	6. Añadir el usuario www-data a docker:
+	# usermod -aG docker www-data (PENDIENTE-REVISAR)
+	FUNCIONA!! -> IMPORTANTE: Tener los puertos del route abiertos: 80 y 443, modificar el fichero /etc/sudoers o poner la ruta absoluta pero ya funciona
+	-> Es importante que el usuario que ejecuta gunicorn pueda hacer todo
 	
