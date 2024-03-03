@@ -4,28 +4,28 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-:root {
-    --bs-blue: #0d6efd;
-    --bs-indigo: #6610f2;
-    --bs-purple: #6f42c1;
-    --bs-pink: #d63384;
-    --bs-red: #dc3545;
-    --bs-orange: #fd7e14;
-    --bs-yellow: #ffc107;
-    --bs-green: #198754;
-    --bs-teal: #20c997;
-    --bs-cyan: #0dcaf0;
+ :root {
+    --bs-blue: #ebd093;
+    --bs-indigo: #172440;
+    --bs-purple: #3fb382;
+    --bs-pink: #6b5f4d;
+    --bs-red: #151914;
+    --bs-orange: #157046;
+    --bs-yellow: #267284;
+    --bs-green: #23335c;
+    --bs-teal: #493e31;
+    --bs-cyan: #0e4b47;
     --bs-white: #fff;
     --bs-gray: #6c757d;
     --bs-gray-dark: #343a40;
-    --bs-primary: #EB1616;
-    --bs-secondary: #191C24;
-    --bs-success: #198754;
-    --bs-info: #0dcaf0;
-    --bs-warning: #ffc107;
-    --bs-danger: #dc3545;
-    --bs-light: #6C7293;
-    --bs-dark: #000;
+    --bs-primary: #ebd093;
+    --bs-secondary: #172440;
+    --bs-success: #3fb382;
+    --bs-info: #6b5f4d;
+    --bs-warning: #151914;
+    --bs-danger: #157046;
+    --bs-light: #267284;
+    --bs-dark: #23335c;
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))

@@ -23,5 +23,11 @@ urlpatterns = [
     path('descargar-archivo/', views.descargar_archivo, name='descargar_archivo'), # Vista para descargar el archivo.ovpn
 
     path('profile/', views.profile, name='profile'), # Vista para cambiar datos del perfil
-    path("prueba/", views.prueba, name='p'),
+
+    # Vistas para gestionar las flags
+    path('flag/<str:nombre_maquina>', views.flag, name='flag'),
+
+    # Ver los ultimos 10 correos recibidos
+    path("correos/", views.get_last_10_emails, name='correos'),
+
 ]

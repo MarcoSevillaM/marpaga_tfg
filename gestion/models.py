@@ -74,6 +74,8 @@ class MaquinaVulnerable(models.Model):
     nombre = models.CharField(max_length=255)
     nivel_dificultad = models.CharField(max_length=6, choices=DIFFICULT_CHOICES)
     nivel_minimo_activacion = models.IntegerField(default=1)
+    descripcion = models.TextField(max_length=255, blank=True, null=True) # Descripcion de la maquina
+    # Bandera del usuario inicial y root
     bandera_usuario_inicial = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidir con la bandera del usuario en la maquina
     bandera_usuario_root = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidicir con la bandera del root rn la maquina
     # Creo una función para cuando se modifica el valor activa

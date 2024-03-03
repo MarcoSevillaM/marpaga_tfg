@@ -1,0 +1,20 @@
+<!-- En mostrar_correos.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Últimos Correos Electrónicos</title>
+</head>
+<body>
+    <h1>Últimos Correos Electrónicos</h1>
+    
+    {% if correos %}
+        <ul>
+            {% for correo in correos %}
+                <li>De: {{ correo.from_address }}, Asunto: {{ correo.subject }}, <strong>{{ correo.content }}</strong> </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay correos electrónicos.</p>
+    {% endif %}
+</body>
+</html>

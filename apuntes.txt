@@ -4,12 +4,12 @@ REVISAR---->Mirar un poco
 MODIFICAR---->Es recomendable cambiarlo
 #####################################
 Instalado:
--> git: 
+-> git: sudo apt install git
 -> docker: sudo apt install docker.io
--> iptables: 
+-> iptables: sudo apt install iptables
 -> python3 instalado 
 #####################################
-->Fotos sin copyRight: https://www.freepik.es/fotos-vectores-gratis/informatica
+->API de fotos sin copyRight: https://www.freepik.es/fotos-vectores-gratis/informatica
 ->Carpeta static y templates establecida para los ficheros HTMLS, CSS, JS e imágenes
 ->Creada una aplicación "gestion" dentro del poryecto la cual gestiona todos los usuarios
 ->Establecida la DB "en pañales" desde el fichero "models.py" de gestion (creado)
@@ -258,7 +258,7 @@ REVISAR
 	Apuntes Importantes:
 	-> Los ficheros estaticos: css, js,... son cargados por el servidor nginx
 	-> Toda la parte del backend se ejecuta como el usuario que este establecido en el servicio de gunicorn
-	-> PENDIENTE, HACER, establecer certificado ssl y que sea una dirección https
+	-> HECHO establecer certificado ssl y que sea una dirección https
 -----29-02-2024---------
 -> Estableciendo certificado ssl
 	Opcion 1: 
@@ -277,4 +277,15 @@ REVISAR
 	# usermod -aG docker www-data (PENDIENTE-REVISAR)
 	FUNCIONA!! -> IMPORTANTE: Tener los puertos del route abiertos: 80 y 443, modificar el fichero /etc/sudoers o poner la ruta absoluta pero ya funciona
 	-> Es importante que el usuario que ejecuta gunicorn pueda hacer todo
-	
+
+-----03-03-2024---------
+COSAS QUE HACER:
+Hacer casos de uso:
+- Juntar los html en un html "basic_template.html"-> Se ha hecho una parte pero hay que completar más información y completar más información
+- Verificar flag de maquina user-> hecho solo para la maquina startrek_payroll PENDIENTE
+- Verificar flag de maquina admin-> hecho solo para la maquina startrek_payroll PENDIENTE
+- Crear tabla en la DB para almacenar las puntuaciones y valoraciones HACER
+- Crear un apartado privado para el usuario administrador el cual: HACER
+	- Pueda ver todos los usuarios registrados y sus datos HACER
+	- Crear, eliminar, modificar maquinas HACER
+	- Ver los mensajes de incidencias creados por los usuarios (HECHO-> PENDIENTE de hacer la plantilla html)

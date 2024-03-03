@@ -15,9 +15,12 @@ from django.contrib.auth.forms import PasswordChangeForm #Para cambiar la contra
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-def prueba(request):
-    context = {}
-    return render(request, 'gestion/personal.html', context)
+
+# Importar módulos para trabajar con correos electrónicos
+import imaplib
+import email
+from email.header import decode_header
+
 
 #Vista para el inicio de sesion del jugador
 @login_required(login_url="inicio")
@@ -98,6 +101,7 @@ def gestion_maquina(request, nombre_maquina):
     return render(request, 'personal/maquinaSeleccionada.html',context)
 
 #Para poder activarse el metodo debe de ser post y además ninguna maquina del usuario tiene que estar activa
+@login_required(login_url="inicio")
 def activar_maquina(request, nombre_maquina):
     if request.method == 'POST': 
         jugador = Jugador.objects.get(usuario=request.user)
@@ -145,7 +149,7 @@ def activar_maquina(request, nombre_maquina):
         return redirect('maquinas')
 
     
-
+@login_required(login_url="inicio")
 def desactivar_maquina(request, nombre_maquina):
     if request.method == 'POST':
         jugador = Jugador.objects.get(usuario=request.user)
@@ -168,6 +172,7 @@ def desactivar_maquina(request, nombre_maquina):
     else:
         return redirect('maquinas')
 
+@login_required(login_url="inicio")
 def descargar_archivo(request):
     nombre_archivo = request.user.username + ".ovpn"
     # Construir la ruta completa al archivo
@@ -191,6 +196,7 @@ def logout_vista(request):
     logout(request)
     return redirect('inicio')
 
+@login_required(login_url="inicio")
 def profile(request):
     #Recibira por metodo post la nueva contraseña
     if request.method == 'POST':
@@ -203,15 +209,112 @@ def profile(request):
             
             messages.success(request, 'Contraseña cambiada con éxito.')
             return redirect('profile')  # Redirige a la página del perfil o a donde desees
-        else:
-            messages.error(request, 'Por favor, corrige los errores en el formulario.')
     else:
         form = PasswordChangeForm(request.user)
     
     return render(request, 'personal/perfil.html', {'form': form})
 
+# Vistas para gestionar las flags
+@login_required(login_url="inicio")
+def flag(request, nombre_maquina):
+    # Obtengo por POST la flag si es flag1 o flag2
+    flag = request.POST.get('flag1')
+    flag2 = request.POST.get('flag2')
+    if flag:
+    # Compruebo que la flag sea igual a la flag de la maquina
+        maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
+        if maquina.bandera_usuario_inicial == flag:
+            messages.success(request, 'Flag correcta')
+            return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+    elif flag2:
+        maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
+        if maquina.bandera_usuario_root == flag2:
+            messages.success(request, 'Flag correcta')
+            return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+    else:
+        messages.error(request, 'Flag incorrecta')
+        return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+# Vista para ver los ultimos 10 correos
+def get_last_10_emails(request):
+    # Datos del servidor
+    username = "marpagamarco@gmail.com"
+    password = "wpqdzopxecragcyq"
+    mail = imaplib.IMAP4_SSL("imap.gmail.com")
+    mail.login(username, password)
+
+    # Selecciona la bandeja de entrada (inbox)
+    mail.select("inbox")
+
+    # Busca los últimos correos electrónicos (en este caso, los 5 más recientes)
+    status, messages = mail.search(None, 'UNSEEN')
+    mail_ids = messages[0].split()
+
+    correos = []
+    for i in range(max(0, len(mail_ids)-5), len(mail_ids)):
+        status, msg_data = mail.fetch(mail_ids[i], '(RFC822)')
+        for response_part in msg_data:
+            if isinstance(response_part, tuple):
+                email_message = email.message_from_bytes(response_part[1])
+
+                # Procesa la información del correo electrónico según tus necesidades
+                subject, encoding = decode_header(email_message["Subject"])[0]
+                subject = subject.decode(encoding) if encoding else subject
+                from_address = email.utils.parseaddr(email_message.get("From"))[1]
+
+                # Obtén el contenido del mensaje
+                if email_message.is_multipart():
+                    for part in email_message.walk():
+                        if part.get_content_type() == "text/plain":
+                            content = part.get_payload(decode=True).decode("utf-8")
+                            break
+                else:
+                    content = email_message.get_payload(decode=True).decode("utf-8")
+
+                # Agrega detalles del correo a la lista
+                correos.append({
+                    "from_address": from_address,
+                    "subject": subject,
+                    "content": content
+                })
+    # Si no hay correos no leidos muestra los 5 ultimos correos
+    if len(correos) == 0:
+        status, messages = mail.search(None, 'ALL')
+        mail_ids = messages[0].split()
+        for i in range(max(0, len(mail_ids)-5), len(mail_ids)):
+            status, msg_data = mail.fetch(mail_ids[i], '(RFC822)')
+            for response_part in msg_data:
+                if isinstance(response_part, tuple):
+                    email_message = email.message_from_bytes(response_part[1])
+
+                    # Procesa la información del correo electrónico según tus necesidades
+                    subject, encoding = decode_header(email_message["Subject"])[0]
+                    subject = subject.decode(encoding) if encoding else subject
+                    from_address = email.utils.parseaddr(email_message.get("From"))[1]
+
+                    # Obten el contenido del mensaje
+                    if email_message.is_multipart():
+                        for part in email_message.walk():
+                            if part.get_content_type() == "text/plain":
+                                content = part.get_payload(decode=True).decode("utf-8")
+                                break
+                    else:
+                        content = email_message.get_payload(decode=True).decode("utf-8")
+
+                    # Agrega detalles del correo a la lista
+                    correos.append({
+                        "from_address": from_address,
+                        "subject": subject,
+                        "content": content
+                    })
+                    
+    # Cierra la conexión
+    mail.logout()
+    correos.reverse()
+    return render(request, 'personal/prueba.html',{'correos': correos})
+
+
 #Comprobar si se puede conseguir una instancia de docker
-def prueba(request):
+def listaContDocker(request):
     client = docker.from_env()
     containers = client.containers.list()
 
@@ -220,4 +323,3 @@ def prueba(request):
         container_info += f"Nombre: {container.name}, ID: {container.id}\n"
 
     return HttpResponse("Información de contenedores:\n" + container_info)
- #   return FileResponse(model.image.open(), as_attachment=True)

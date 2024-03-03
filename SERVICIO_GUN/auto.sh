@@ -11,6 +11,11 @@ function addRule(){
 
     # Cambio la variable DEBUG a False
     sed -i 's/DEBUG = True/DEBUG = False/' /var/www/html/marpaga_tfg/marpaga/settings.py
+    # Decomento las lineas:
+        #SECURE_SSL_REDIRECT = True
+        #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    sed -i 's/#SECURE_SSL_REDIRECT = True/SECURE_SSL_REDIRECT = True/' /var/www/html/marpaga_tfg/marpaga/settings.py
+    sed -i 's/#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')/SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')/' /var/www/html/marpaga_tfg/marpaga/settings.py
     # Hago las migraciones
     # El fichero marpaga_gunicorn.service se copia a /etc/systemd/system/ y se activa
     cp /var/www/html/marpaga_tfg/SERVICIO_GUN/marpaga_gunicorn.service /etc/systemd/system/ && systemctl daemon-reload
@@ -20,8 +25,8 @@ function addRule(){
     # Instalamos nginx y copiamos el fichero de configuración
     apt-get install nginx -y
     # Establecemos el cerfiticado SSL
-    apt-get install certbot python3-certbot-nginx -y 
-    certbot certonly --nginx -d marpaga.hopto.org
+    #apt-get install certbot python3-certbot-nginx -y 
+    #certbot certonly --nginx -d marpaga.hopto.org
     cp /var/www/html/marpaga_tfg/SERVICIO_GUN/marpaga_nginx /etc/nginx/sites-available/ && ln -s /etc/nginx/sites-available/marpaga_nginx /etc/nginx/sites-enabled
 
     # Eliminamos el fichero por defecto de nginx
