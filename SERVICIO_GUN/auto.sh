@@ -30,6 +30,9 @@ function addRule(){
 
     # Instalamos nginx y copiamos el fichero de configuración
     apt-get install nginx -y
+    
+    # Doy permisos a la carpeta /var/www/html/marpaga_tfg/media
+    chown -R www-data:marco /var/www/html/marpaga_tfg/media && chmod 775 -R /var/www/html/marpaga_tfg/media
     # Establecemos el cerfiticado SSL
     #apt-get install certbot python3-certbot-nginx -y 
     #certbot certonly --nginx -d marpaga.hopto.org

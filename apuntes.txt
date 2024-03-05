@@ -294,3 +294,8 @@ Hacer casos de uso:
 - Se han controlado los fichero estáticos, en desarrollo estan en el directorio (gestion/static) y en desarrollo en (static) directamente
 - Se han cambiado la base de datos, y el html del perfil para crear formularios para cambiar los datos personales de cada usuario.
 - ¡IMPORTANTE! No funciona que cuando un usuario actualiza su foto no se guarda por su nombre de usuario
+-> Cuando es el mismo nombre se modifica pero no establece el nombreUsuario.jpg importante de REVISAR
+-> COSAS QUE HACER:
+	- Añadir la modificación de datos personales
+	- Después añadir una nueva maquina "docker-lab" que es un DPT.
+	- Buscar y añadir un Docker-compose y adaptar el codigo para que funcione PENDIENTE

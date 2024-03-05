@@ -1,13 +1,13 @@
+import zipfile
+import os
+import secrets
+import subprocess
+import re
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
-from gestion.functions import validate_zip_file, validar_carpeta_docker_compose
-import zipfile, os, secrets
-
-import subprocess, re
-
+from .functions import OverwriteStorage, validate_zip_file, validar_carpeta_docker_compose
 from django.db.models.signals import pre_delete
-from django.contrib import messages
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -41,7 +41,7 @@ from django.dispatch import receiver
 class Jugador(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     puntuacion = models.IntegerField(default=0) #Se usará para el ranking y dependerá de las banderas obtenidas en cada maquina, su dificultad y tiempo en conseguirlo.
-    foto_perfil = models.ImageField(upload_to='photoPersonal/', blank=True, null=True)
+    foto_perfil = models.ImageField(upload_to='photoPersonal/', blank=True, null=True, storage=OverwriteStorage(), default='photoPersonal/default.jpg')
     
     # Cuando se crea un jugador se le crea un cliente vpn por lo que se ejecuta el script createUserVPN.sh
     def save(self, *args, **kwargs):

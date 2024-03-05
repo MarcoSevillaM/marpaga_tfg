@@ -100,7 +100,7 @@
             <div class="position-relative">
               <img
                 class="rounded-circle"
-                src="{% static 'assets/img/anonimo.jpg' %}"
+                src="{{ request.user.jugador.foto_perfil.url }}"
                 alt=""
                 style="width: 40px; height: 40px"
               />
@@ -274,7 +274,7 @@
               >
                 <img
                   class="rounded-circle me-lg-2"
-                  src="{% static 'assets/img/anonimo.jpg' %}"
+                  src="{{ request.user.jugador.foto_perfil.url }}"
                   alt=""
                   style="width: 40px; height: 40px"
                 />
