@@ -12,6 +12,7 @@ import docker, subprocess
 
 from django.contrib.auth import update_session_auth_hash #Para cambiar la contraseña y que no se cierre la sesion
 from django.contrib.auth.forms import PasswordChangeForm #Para cambiar la contraseña
+from personal.forms import FotoPerfilForm # Importo el formulario para cambiar la foto de perfil
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -198,8 +199,8 @@ def logout_vista(request):
 
 @login_required(login_url="inicio")
 def profile(request):
-    #Recibira por metodo post la nueva contraseña
     if request.method == 'POST':
+        # Procesar el formulario de cambio de contraseña
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
@@ -209,10 +210,20 @@ def profile(request):
             
             messages.success(request, 'Contraseña cambiada con éxito.')
             return redirect('profile')  # Redirige a la página del perfil o a donde desees
+
+        # Procesar el formulario de cambio de imagen de perfil
+        formImage = FotoPerfilForm(request.POST, request.FILES, instance=request.user.jugador)
+        if formImage.is_valid():
+            # Obtengo el nombre de la imagen
+            formImage.save()
+            messages.success(request, 'Foto de perfil cambiada con éxito.')
+            return redirect('profile')
+
     else:
         form = PasswordChangeForm(request.user)
-    
-    return render(request, 'personal/perfil.html', {'form': form})
+        formImage = FotoPerfilForm(instance=request.user.jugador)
+
+    return render(request, 'personal/perfil.html', {'form': form, 'formImage': formImage})
 
 # Vistas para gestionar las flags
 @login_required(login_url="inicio")
@@ -234,6 +245,7 @@ def flag(request, nombre_maquina):
     else:
         messages.error(request, 'Flag incorrecta')
         return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+
 # Vista para ver los ultimos 10 correos
 def get_last_10_emails(request):
     # Datos del servidor

@@ -16,7 +16,7 @@
         <label for="flag1" class="form-label">Flag 1</label>
         <input type="text" class="form-control" id="flag1" name="flag1">
       </div>
-      <button type="submit" class="btn btn-primary">Enviar</button>
+      <button type="submit" class="btn btn-primary" id="btnFlag1">Enviar</button>
     </form>
     <!-- End of flag 1 form -->
 
@@ -27,7 +27,7 @@
         <label for="flag2" class="form-label">Flag 2</label>
         <input type="text" class="form-control" id="flag2" name="flag2">
       </div>
-      <button type="submit" class="btn btn-primary">Enviar</button>
+      <button type="submit" class="btn btn-primary" id="btnFlag2">Enviar</button>
     </form>
     <!-- End of flag 2 form -->
     <p>IP: {{ relacion_maquina_jugador.ip_address }}</p>
@@ -53,7 +53,7 @@
       </div>
     {% endif %}
     <div>
-      <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina')" action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
+      <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina'); desactivarBotones();" action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
         {% csrf_token %}
       <button id="miBoton" type="submit" class="btn btn-danger">Desactivar</button>
       </form>

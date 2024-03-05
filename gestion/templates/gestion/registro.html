@@ -1,4 +1,6 @@
 {% extends "gestion/basic_template.html" %}
+{% load static %}
+
 {% block sidebar%}
       <!-- Sign Up Start -->
       <div class="container-fluid">
@@ -11,10 +13,9 @@
               <div
                 class="d-flex align-items-center justify-content-between mb-3"
               >
-                <a href="/" class="">
-                  <h3 class="text-primary">
-                    <i class="fa fa-user-edit me-2"></i>MARPAGA
-                  </h3>
+                <a href="/" class="navbar-brand mx-4 mb-3 d-flex align-items-center">
+                  <img src='{% static "assets/img/logo.jpg" %}' alt="Foto" class="rounded-icon me-2" width="100" height="100">
+                  <h3 class="text-primary m-0">MARPAGA</h3>
                 </a>
                 <h4>Registrate</h4>
               </div>

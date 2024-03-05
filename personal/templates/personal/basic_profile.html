@@ -11,7 +11,7 @@
     <meta content="" name="description" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon" />
+    <link href="img/logo.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,6 +46,28 @@
 
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <!--  -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--  -->
+    <style>
+      .rounded-icon {
+          background-image: url('{% static "assets/img/logo.jpg" %}');
+          background-size: cover;
+          width: 64px;
+          height: 64px;
+          display: inline-block;
+          border-radius: 50%; /* Hace que el borde sea redondeado */
+      }
+      .btn-transparent {
+        background-color: transparent !important;
+      }
+      .btn-no-outline:focus {
+        box-shadow: none !important;
+      }
+    </style>
   </head>
   {% endblock header %}
 
@@ -70,16 +92,15 @@
       <!-- Sidebar Start -->
       <div class="sidebar pe-4 pb-3">
         <nav class="navbar bg-secondary navbar-dark">
-          <a href="{% url 'personal' %}" class="navbar-brand mx-4 mb-3">
-            <h3 class="text-primary">
-              <i class="fa fa-user-edit me-2"></i>MARPAGA
-            </h3>
+          <a href="{% url 'personal' %}" class="navbar-brand mx-4 mb-3 d-flex align-items-center">
+            <img src='{% static "assets/img/logo.jpg" %}' alt="Foto" class="rounded-icon me-2" width="32" height="32">
+            <h3 class="text-primary m-0">MARPAGA</h3>
           </a>
           <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
               <img
                 class="rounded-circle"
-                src="{% static 'img/user.jpg' %}"
+                src="{% static 'assets/img/anonimo.jpg' %}"
                 alt=""
                 style="width: 40px; height: 40px"
               />
@@ -253,7 +274,7 @@
               >
                 <img
                   class="rounded-circle me-lg-2"
-                  src="{% static 'img/user.jpg' %}"
+                  src="{% static 'assets/img/anonimo.jpg' %}"
                   alt=""
                   style="width: 40px; height: 40px"
                 />
@@ -550,8 +571,8 @@
     <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
     <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
     <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/misFunciones.js' %}"></script>
   </body>
 </html>

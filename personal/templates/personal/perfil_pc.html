@@ -54,34 +54,36 @@
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <button type="button" class="btn btn-primary btn-transparent border-0 btn-no-outline" data-toggle="modal" data-target="#exampleModal">
+                    <a href="#" id="cambiarFoto" class="change-photo-link">
                         {% if request.user.jugador.foto_perfil %}
                             <img class="rounded-circle mt-5" width="150px" src="{{ request.user.jugador.foto_perfil.url }}">
                         {% else %}
                             <img class="rounded-circle mt-5" width="150px" src="{% static 'assets/img/anonimo.jpg' %}">
                         {% endif %}
-                    </button>
+                    </a>
                     <span class="font-weight-bold">{{ request.user }}</span>
                     <span class="text-danger">{{ request.user.email|default:"No tiene ningún correo asociado eres administrador" }}</span>
                     <span> </span>
+                
                     <!-- Modal para cambiar la foto de perfil -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalCambiarFoto" tabindex="-1" role="dialog" aria-labelledby="modalCambiarFotoLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Foto de perfil</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCambiarFotoLabel">Cambiar Foto de Perfil</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Formulario para cambiar la foto de perfil -->
+                                    <form id="formFotoPerfil" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ formImage.as_p }}
+                                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <form id="formFotoPerfil" method="post" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    {{ formImage.as_p }}
-                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                                </form>
-                            </div>
-                          </div>
                         </div>
                     </div>
                 </div>

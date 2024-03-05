@@ -26,3 +26,8 @@ function mostrarIndicadorDeCarga(formId) {
     form.submit();
   }, 500);
 }
+
+function desactivarBotones() {
+  document.getElementById('btnFlag1').disabled = true;
+  document.getElementById('btnFlag2').disabled = true;
+}

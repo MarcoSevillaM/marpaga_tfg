@@ -1,6 +1,6 @@
 server {
 	listen 80;
-	server_name marpaga.hopto.org 83.55.64.220;
+	server_name marpaga.hopto.org;
 
 		location = /favicon.ico { access_log off; log_not_found off; }
 

@@ -275,7 +275,7 @@ REVISAR
 	# Se han probado varias formas pero no funciona no sé que pasa
 	6. Añadir el usuario www-data a docker:
 	# usermod -aG docker www-data (PENDIENTE-REVISAR)
-	FUNCIONA!! -> IMPORTANTE: Tener los puertos del route abiertos: 80 y 443, modificar el fichero /etc/sudoers o poner la ruta absoluta pero ya funciona
+	FUNCIONA!! -> IMPORTANTE: Tener los puertos del router abiertos: 80 y 443, modificar el fichero /etc/sudoers o poner la ruta absoluta pero ya funciona
 	-> Es importante que el usuario que ejecuta gunicorn pueda hacer todo
 
 -----03-03-2024---------
@@ -289,3 +289,8 @@ Hacer casos de uso:
 	- Pueda ver todos los usuarios registrados y sus datos HACER
 	- Crear, eliminar, modificar maquinas HACER
 	- Ver los mensajes de incidencias creados por los usuarios (HECHO-> PENDIENTE de hacer la plantilla html)
+
+-----05-03-2024---------
+- Se han controlado los fichero estáticos, en desarrollo estan en el directorio (gestion/static) y en desarrollo en (static) directamente
+- Se han cambiado la base de datos, y el html del perfil para crear formularios para cambiar los datos personales de cada usuario.
+- ¡IMPORTANTE! No funciona que cuando un usuario actualiza su foto no se guarda por su nombre de usuario

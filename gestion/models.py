@@ -7,6 +7,7 @@ import zipfile, os, secrets
 import subprocess, re
 
 from django.db.models.signals import pre_delete
+from django.contrib import messages
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -39,13 +40,12 @@ from django.dispatch import receiver
 # # La base de datos contendrá unos usuarios denominados "jugadores" con su perfil propio
 class Jugador(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    nivel = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(20)]) # Para desbloquear diferentes maquinas
     puntuacion = models.IntegerField(default=0) #Se usará para el ranking y dependerá de las banderas obtenidas en cada maquina, su dificultad y tiempo en conseguirlo.
-    foto_perfil = models.ImageField(upload_to='fotos_perfil/', blank=True, null=True)
+    foto_perfil = models.ImageField(upload_to='photoPersonal/', blank=True, null=True)
     
     # Cuando se crea un jugador se le crea un cliente vpn por lo que se ejecuta el script createUserVPN.sh
     def save(self, *args, **kwargs):
-        if self.pk is None:
+        if self.pk is None: # Si es un nuevo usuario
             super().save(*args, **kwargs)
             # Ejecutar el script para crear el usuario VPN
             comando = f"sudo ./createUserVPN.sh add {self.usuario.username}"
@@ -69,11 +69,11 @@ class MaquinaVulnerable(models.Model):
         ('Facil', 'Facil'),
         ('Medio', 'Medio'),
         ('Dificl', 'Dificil'),
-        ('Insano', 'Insano'),
+        ('Bestia', 'Bestia'),
     )
     nombre = models.CharField(max_length=255)
     nivel_dificultad = models.CharField(max_length=6, choices=DIFFICULT_CHOICES)
-    nivel_minimo_activacion = models.IntegerField(default=1)
+    puntuacion_minima_activacion = models.IntegerField(default=1)
     descripcion = models.TextField(max_length=255, blank=True, null=True) # Descripcion de la maquina
     # Bandera del usuario inicial y root
     bandera_usuario_inicial = models.CharField(max_length=25, default=secrets.token_hex(12)) #Tendrá que coincidir con la bandera del usuario en la maquina
@@ -144,7 +144,12 @@ class MaquinaJugador(models.Model):
                     elif hasattr(self.maquina_vulnerable, 'maquinadockercompose'):
                         ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
                         comando=f"PLAYER={self.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' down"
-                        subprocess.run(comando, shell=True, check=True)
+                        try:
+                            subprocess.run(comando, shell=True, check=True)
+                        except subprocess.CalledProcessError as e:
+                            exit_code = e.returncode
+                            # Do something with the exit code
+                            messages.error(f"Command exited with code: {exit_code}")
                         if self.ip_address:
                             comando=f"sudo ./iptables.sh del {self.ip_address}"
                             subprocess.run(comando, shell=True, check=True)
@@ -158,7 +163,14 @@ class MaquinaJugador(models.Model):
                         # Levantar la maquina Docker Compose
                         ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
                         comando = f"PLAYER={self.jugador.usuario.username.lower()} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' up -d"
+                        # Obtengo la dirección IP de la maquina y el codigo de estado del comando
                         subprocess.run(comando, shell=True, check=True)
+                        try:
+                            subprocess.run(comando, shell=True, check=True)
+                        except subprocess.CalledProcessError as e:
+                            exit_code = e.returncode
+                            # Do something with the exit code
+                            messages.error(f"Command exited with code: {exit_code}")
                         comando=f"docker exec proyecto_{self.jugador.usuario.username.lower()}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
                         direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
                         coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
@@ -184,7 +196,7 @@ def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
         jugador = Jugador.objects.create(usuario=instance) #Crea el jugador
         maquinas_disponibles = MaquinaVulnerable.objects.all()
         for maquina in maquinas_disponibles:
-            if jugador.nivel >= maquina.nivel_minimo_activacion:
+            if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
                 MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
 
 #Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
@@ -193,7 +205,7 @@ def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **
         print("Se intenta crear")
         jugadores = Jugador.objects.all()
         for jugador in jugadores:
-            if jugador.nivel >= instance.nivel_minimo_activacion:
+            if jugador.puntuacion >= instance.puntuacion_minima_activacion:
                 MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=instance)
         
 
