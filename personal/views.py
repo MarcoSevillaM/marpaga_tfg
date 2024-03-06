@@ -114,15 +114,12 @@ def activar_maquina(request, nombre_maquina):
         else:
             for maquina_jugadoR in MaquinaJugador.objects.filter(jugador=jugador):
                 if maquina_jugadoR.activa:
-                    messages.warning(request, 'Ya hay una maquina activa')
-                    print("Ya hay una maquina activa")
+                    messages.error(request, 'Ya hay una maquina activa')
                     #Redirigir a la vista gestion_maquina con una variable que indique que ya hay una maquina activa
                     return redirect('gestion_maquina' , nombre_maquina)
-                    #return redirect('gestion_maquina' , nombre_maquina)
             # Una vez llega aqui la maquina NO debería de estar activada por lo que se comprueba de qué tipo de la maquina vulnerables
             relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
             if hasattr(maquina, 'maquinadocker'):
-                messages.success(request, 'La máquina es de tipo MaquinaDocker.')
                 client = docker.from_env()
                 try:
                     client.containers.get(jugador.usuario.username) # Si esto da error significa que el usuario no tiene ninguna maquina en docker activa
@@ -132,7 +129,6 @@ def activar_maquina(request, nombre_maquina):
                     #gestionar_maquina(1, jugador.usuario.username, client) # Activar la máquina
                     relacion_maquina_jugador.activa = True
                     relacion_maquina_jugador.save()
-                    messages.success(request, f'Máquina activada exitosamente,{ relacion_maquina_jugador.maquina_vulnerable.nombre}')
             elif hasattr(maquina, 'maquinadockercompose'):
                 #Compruebo que exista el usuario en el fichero /etc/openvpn/ipp.txt y si no existe mando un mensaje de error
                 if not re.search(jugador.usuario.username, subprocess.run(['cat', '/etc/openvpn/ipp.txt'], stdout=subprocess.PIPE).stdout.decode('utf-8')):
@@ -161,7 +157,6 @@ def desactivar_maquina(request, nombre_maquina):
             messages.warning(request, 'La máquina ya está desactivada.')
         else:
             if hasattr(maquina, 'maquinadocker'):
-                messages.success(request, 'La máquina es de tipo MaquinaDocker.')
                 maquina_jugador.activa = False
                 maquina_jugador.save()
             elif hasattr(maquina, 'maquinadockercompose'):
