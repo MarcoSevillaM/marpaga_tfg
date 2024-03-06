@@ -172,7 +172,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'marpagamarco@gmail.com'
 EMAIL_HOST_PASSWORD = 'wpqdzopxecragcyq'
-EMAIL_USE_TLS = True
 
 #Para las tareas programadas
 CRON_CLASSES = [

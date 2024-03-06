@@ -201,29 +201,37 @@ def logout_vista(request):
 def profile(request):
     if request.method == 'POST':
         # Procesar el formulario de cambio de contraseña
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            
+        formPassword = PasswordChangeForm(request.user, request.POST)
+        formImage = FotoPerfilForm(request.POST, request.FILES, instance=request.user.jugador)
+        if formPassword.is_valid():
+            user = formPassword.save()
             # Después de cambiar la contraseña, realiza el relogin del usuario
             update_session_auth_hash(request, user)
-            
             messages.success(request, 'Contraseña cambiada con éxito.')
             return redirect('profile')  # Redirige a la página del perfil o a donde desees
 
         # Procesar el formulario de cambio de imagen de perfil
-        formImage = FotoPerfilForm(request.POST, request.FILES, instance=request.user.jugador)
-        if formImage.is_valid():
-            # Obtengo el nombre de la imagen
-            formImage.save()
-            messages.success(request, 'Foto de perfil cambiada con éxito.')
+        elif formImage.is_valid():
+            if formImage.cleaned_data.get('submit_button') == 'photo_submit':
+                # Obtengo el nombre de la imagen
+                formImage.save()
+                messages.success(request, 'Foto de perfil cambiada con éxito.')
+                return redirect('profile')
+        else:
+            # Se modifican los datos personales del usuario
+            user = request.user
+            user.first_name = request.POST.get('nombre')
+            user.last_name = request.POST.get('apellidos')
+            user.email = request.POST.get('email')
+            user.save()
+            messages.success(request, 'Datos personales cambiados con éxito.')
             return redirect('profile')
 
     else:
-        form = PasswordChangeForm(request.user)
+        formPassword = PasswordChangeForm(request.user)
         formImage = FotoPerfilForm(instance=request.user.jugador)
 
-    return render(request, 'personal/perfil.html', {'form': form, 'formImage': formImage})
+    return render(request, 'personal/perfil.html', {'formPassword': formPassword, 'formImage': formImage})
 
 # Vistas para gestionar las flags
 @login_required(login_url="inicio")

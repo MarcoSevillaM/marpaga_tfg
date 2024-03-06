@@ -8,13 +8,12 @@
   <nav
       class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0"
     >
-    <a href="{% url 'personal' %}" class="navbar-brand mx-4 mb-3">
-      <h3 class="text-primary">
-        <i class="fa fa-user-edit me-2"></i>MARPAGA
-      </h3>
+    <a href="{% url 'personal' %}" class="navbar-brand mx-4 mb-3 d-flex align-items-center">
+      <img src='{% static "assets/img/logo.jpg" %}' alt="Foto" class="rounded-icon me-2" width="32" height="32">
+      <h3 class="text-primary m-0">MARPAGA</h3>
     </a>
-      <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+      <a href="/" class="navbar-brand d-flex d-lg-none me-4">
+        <img src='{% static "assets/img/logo.jpg" %}' alt="Foto" class="rounded-icon me-2" width="32" height="32">
       </a>
 
       </a>
@@ -34,7 +33,11 @@
           >
             <img
               class="rounded-circle me-lg-2"
-              src="{{ request.user.jugador.foto_perfil.url }}"
+              {% if request.user.jugador.foto_perfil %}
+                  src="{{ request.user.jugador.foto_perfil.url }}"
+                {% else %}
+                  src="{% static 'assets/img/anonimo.jpg' %}" 
+                {% endif %}
               alt=""
               style="width: 40px; height: 40px"
             />
@@ -64,6 +67,23 @@
                     <span class="font-weight-bold">{{ request.user }}</span>
                     <span class="text-danger">{{ request.user.email|default:"No tiene ningún correo asociado eres administrador" }}</span>
                     <span> </span>
+                    {% if messages %}
+                      <div class="bg-secondary rounded h-100 p-4">
+                      {% for message in messages %}
+                      <!-- Si el mensaje es de exito usar class="alert alert-success" role="alert" -->
+                      {% if message.tags == 'success' %}
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          {{ message }}
+                      </div>
+                      <!-- Si el mensaje es de informacion usar class="alert alert-info" role="alert" -->
+                      {% elif message.tags == 'info' %}
+                          <div class="alert alert-info alert-dismissible fade show" role="alert">
+                          {{ message }}
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                      </div>
+                  {% endif %}
                     <!-- Modal para cambiar la foto de perfil -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -78,7 +98,7 @@
                                 <form id="formFotoPerfil" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     {{ formImage.as_p }}
-                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    <button class="btn btn-primary profile-button" type="submit" name="{{ formImage.submit_button.name }}" value="{{ formImage.submit_button.initial }}">Guardar cambios</button>
                                 </form>
                             </div>
                           </div>
@@ -89,51 +109,70 @@
             <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Perfil</h4>
-                        {% if messages %}
-                        <div class="bg-secondary rounded h-100 p-4">
-                        {% for message in messages %}
-                        <!-- Si el mensaje es de exito usar class="alert alert-success" role="alert" -->
-                        {% if message.tags == 'success' %}
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ message }}
+                        <h4 class="text-right">Hola {{ request.user.first_name|default:request.user.username}}</h4>
+                      </div>
+                      <form method="post">
+                        {% csrf_token %}
+                        <div class="row mt-3">
+                          <div class="col-md-12"><label class="labels">Nombre de usuario</label><input type="text" class="form-control" placeholder="first name" value='{{ request.user.username }}' readonly></div>
                         </div>
-                        <!-- Si el mensaje es de informacion usar class="alert alert-info" role="alert" -->
-                        {% elif message.tags == 'info' %}
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            {{ message }}
+                        <div class="row mt-2">
+                          <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control" value="{{ request.user.first_name}}" name="nombre" placeholder="Nombre completo"></div>
+                          <div class="col-md-6"><label class="labels">Apellidos</label><input type="text" class="form-control" placeholder="Apellidos" name="apellidos" value="{{ request.user.last_name}}"></div>
                         </div>
-                        {% endif %}
-                        {% endfor %}
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Correo electronico</label><input type="email" class="form-control" name="email" placeholder="correo electrónico" value="{{ request.user.email}}" readonly></div>
                         </div>
-                    {% endif %}
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control" placeholder="first name" value='{{ request.user.username }}''></div>
-                        <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                        <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
-                        <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                        <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                        <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                        <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                        <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                        <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                        <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                    </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Actualizar Datos</button></div>
+                      </form>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center experience"><span>Modificar foto de perfil</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience: {{ request.user.jugador.puntuacion }}</span></div><br>
-                    <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
-                    <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+                    <div class="d-flex justify-content-between align-items-center experience"><h3 class="text-decoration-underline"><span>Modificar contraseña</span></h3></div><br>
+                    <form method="post">
+                      {% csrf_token %}
+                      <div class="form-group">
+                          <label for="old_password">Contraseña antigua:</label>
+                          <input
+                              type="password"
+                              class="form-control"
+                              id="old_password"
+                              name="old_password" 
+                              autocomplete="current-password"
+                              autofocus
+                              value=""
+                          />
+                      </div>
+                      {% if formPassword.errors %}
+                          <div class="bg-primary text-white p-3 mb-4">
+                              <ul>
+                                  {% for error in formPassword.old_password.errors %}
+                                      <li>{{ error }}</li>
+                                  {% endfor %}
+                              </ul>
+                          </div>
+                      {% endif %}
+                      <div class="form-group">
+                          <label for="new_password1">Contraseña nueva:</label>
+                          <input
+                              type="password"
+                              class="form-control"
+                              id="new_password1"
+                              name="new_password1"  
+                          />
+                      </div>
+                      <div class="form-group">
+                          <label for="new_password2">Confirmar contraseña nueva:</label>
+                          <input
+                              type="password"
+                              class="form-control"
+                              id="new_password2"
+                              name="new_password2" 
+                          />
+                      </div>
+                      <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Actualizar Contraseña</button></div>
+                  </form>
                 </div>
             </div>
         </div>

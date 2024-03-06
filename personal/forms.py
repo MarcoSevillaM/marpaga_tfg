@@ -12,10 +12,4 @@ class FotoPerfilForm(forms.ModelForm):
     class Meta:
         model = Jugador
         fields = ['foto_perfil']
-        #Cuando recibo la foto_perfil la tramito para que el nombre de la foto sea "nombreUsuario.jpg"
-        def save(self, commit=True):
-            user = super(FotoPerfilForm, self).save(commit=False)
-            user.foto_perfil = self.cleaned_data['foto_perfil']
-            if commit:
-                user.save()
-            return user
+    submit_button = forms.CharField(widget=forms.HiddenInput(), initial='photo_submit')

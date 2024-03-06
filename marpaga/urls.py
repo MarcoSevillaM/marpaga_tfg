@@ -24,3 +24,5 @@ urlpatterns = [
     path("", include("gestion.urls")),
 ] 
 #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) #Se añade esto para que funcionen los archivos estaticos
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

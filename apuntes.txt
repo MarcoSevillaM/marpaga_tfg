@@ -296,6 +296,6 @@ Hacer casos de uso:
 - ¡IMPORTANTE! No funciona que cuando un usuario actualiza su foto no se guarda por su nombre de usuario
 -> Cuando es el mismo nombre se modifica pero no establece el nombreUsuario.jpg importante de REVISAR
 -> COSAS QUE HACER:
-	- Añadir la modificación de datos personales
+	- Añadir la modificación de datos personales-> PENDIENTE modificar correo electronico con verificación anterior HACER
 	- Después añadir una nueva maquina "docker-lab" que es un DPT.
 	- Buscar y añadir un Docker-compose y adaptar el codigo para que funcione PENDIENTE

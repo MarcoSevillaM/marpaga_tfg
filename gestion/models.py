@@ -87,7 +87,7 @@ class MaquinaVulnerable(models.Model):
 #Las maquinas soportadas por el sistema serán: Maquinas Docker a partir de un Dockerfile, maquinas Docker generadas con un Docker Compose y Maquinas Virtuales
 class MaquinaDocker(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con una imagen correspondiente
-    imagen_docker = models.CharField(max_length=255)
+    archivo = models.FileField(upload_to='archivoZipDockerCompose/', validators=[validate_zip_file], blank=True, null=True)
 
     class Meta:
         verbose_name_plural = "Maquinas Docker"
