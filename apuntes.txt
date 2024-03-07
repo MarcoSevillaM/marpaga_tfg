@@ -300,3 +300,7 @@ Hacer casos de uso:
 	- Después añadir una nueva maquina "docker-lab" que es un DPT-> funciona pero cada dockerfile es un mundo y hay que ver cómo se puede automatizar todo
 	--> Hay que añadir las banderas para demostrar que se ha vulnerado correctamente
 	- Buscar y añadir un Docker-compose y adaptar el codigo para que funcione PENDIENTE
+-----05-03-2024---------
+-> Gestionando la automatización de levantar maquinas docker y docker-compose:
+	=> Para docker:
+		-Probar con el lab xxe y el docker-lab (serán dos maquinas una es un DPT y el otro explotas el DPT junto con un RCE)
