@@ -136,6 +136,8 @@ def activar_maquina(request, nombre_maquina):
                 else:
                     relacion_maquina_jugador.activa = True
                     relacion_maquina_jugador.save()
+                    if not relacion_maquina_jugador.activa:
+                        messages.error(request, 'Error al levantar la maquina.')
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
             #Ejecutar la funcion de iptables para eliminar la regla correspondiente

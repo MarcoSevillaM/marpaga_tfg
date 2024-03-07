@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from .functions import OverwriteStorage, validate_zip_file, validar_carpeta_docker_compose
 from django.db.models.signals import pre_delete
+from django.contrib import messages
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -178,7 +179,8 @@ class MaquinaJugador(models.Model):
                         except subprocess.CalledProcessError as e:
                             exit_code = e.returncode
                             # Do something with the exit code
-                            messages.error(f"Command exited with code: {exit_code}")
+                            #messages.error(f"Command exited with code: {exit_code}")
+                            self.activa = True
                         if self.ip_address:
                             comando=f"sudo ./iptables.sh del {self.ip_address}"
                             subprocess.run(comando, shell=True, check=True)
@@ -210,22 +212,23 @@ class MaquinaJugador(models.Model):
                         ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
                         comando = f"PLAYER={self.jugador.usuario.username.lower()} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' up -d"
                         # Obtengo la dirección IP de la maquina y el codigo de estado del comando
-                        subprocess.run(comando, shell=True, check=True)
                         try:
                             subprocess.run(comando, shell=True, check=True)
+                            comando=f"docker exec proyecto_{self.jugador.usuario.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
+                            direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
+                            coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
+                            if coincidencia:
+                                direccion_ip = coincidencia.group(1)
+                                self.ip_address = direccion_ip
+                                print(direccion_ip)
+                                comando=f"sudo ./iptables.sh add {self.jugador.usuario.username.lower()} {direccion_ip}"
+                                subprocess.run(comando, shell=True, check=True)
                         except subprocess.CalledProcessError as e:
-                            exit_code = e.returncode
+                            #exit_code = e.returncode
                             # Do something with the exit code
-                            messages.error(f"Command exited with code: {exit_code}")
-                        comando=f"docker exec proyecto_{self.jugador.usuario.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
-                        direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
-                        coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
-                        if coincidencia:
-                            direccion_ip = coincidencia.group(1)
-                            self.ip_address = direccion_ip
-                            print(direccion_ip)
-                            comando=f"sudo ./iptables.sh add {self.jugador.usuario.username.lower()} {direccion_ip}"
-                            subprocess.run(comando, shell=True, check=True)
+                            #messages.error(f"Command exited with code: {exit_code}")
+                            #messages.error(request, f"Error al levantar la maquina")
+                            self.activa = False
                     elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
                         # Levantar la maquina Virtual
                         pass
