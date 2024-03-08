@@ -38,6 +38,8 @@ function addRule(){
     #certbot certonly --nginx -d marpaga.hopto.org
     cp /var/www/html/marpaga_tfg/SERVICIO_GUN/marpaga_nginx /etc/nginx/sites-available/ && ln -s /etc/nginx/sites-available/marpaga_nginx /etc/nginx/sites-enabled
 
+    #Añado los archivos privkey.pem y fullchain.pem a las rutas correspondientes
+    #cp privkey.pem /etc/letsencrypt/live/marpaga.hopto.org/privkey.pem && cp fullchain.pem /etc/letsencrypt/live/marpaga.hopto.org/fullchain.pem
     # Eliminamos el fichero por defecto de nginx
     rm /etc/nginx/sites-enabled/default 2>/dev/null
     systemctl restart nginx

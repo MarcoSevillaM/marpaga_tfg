@@ -34,7 +34,7 @@ Instalado:
 	+ sudo pip install pydotplus && (REVISAR No esta instalado)pip install pygraphviz && apt-get install graphviz
 	+ python3 manage.py graph_models -a -g -o my_models.png
 ->Levantar una maquina tiene una ruta /my/maquinas/nombreMaquina/activar o desactivar lo mejor es que la variable activar o desactivar vaya como un parámetro en POST: HECHO
-->Levantar y detener una maquina sin linea de comandos con la API de docker PENDIENTE
+->Levantar y detener una maquina sin linea de comandos con la API de docker PENDIENTE -> No funciona se ha hecho con subprocess
 ->Establecer un enlace a la pagina oficial de fciencias
 --------------
 Script de importacón de una nueva maquinas vulnerable (PENDIENTE)
@@ -87,7 +87,7 @@ Para las traducciones del ingles al español:
 	     CustomLog /home/marco/Escritorio/marpaga_access.log combined
 	</VirtualHost>
 	====================
---> ¡Para que funcione todo correctamente hay que mirar bien los permisos! (Pendiente de hacer)
+--> ¡Para que funcione todo correctamente hay que mirar bien los permisos! (Pendiente de hacer)-> HECHO con el script auto.sh ejecutado desde la .bashrc "producciontfg comando"
 	-----16-02-2024---------
 	- Se han gestionado los botones de activación/desactivación de los usuario en redes y contenedores diferentes
 	- Mostrar la ip al activar la maquina
@@ -303,4 +303,26 @@ Hacer casos de uso:
 -----05-03-2024---------
 -> Gestionando la automatización de levantar maquinas docker y docker-compose:
 	=> Para docker:
-		-Probar con el lab xxe y el docker-lab (serán dos maquinas una es un DPT y el otro explotas el DPT junto con un RCE)
+		- Probar con el lab xxe y el docker-lab (serán dos maquinas una es un DPT y el otro explotas el DPT junto con un RCE) HECHO
+	=> Para compose:
+		- Probar algún docker-compose más PENDIENTE
+	Explicación importación:
+		Docker:
+			1. Se importa el zip con la carpeta y todo su contenido en la ruta media/archivoZipDocker/
+			2. Se descomprime el archivo y se mete la carpeta a la ruta maquinas_docker/
+			3. Se crea la imagen de la maquina en el sistema "docker build"
+			-> Gestionar las flags dentro de la ruta "maquinas_docker/MAQUINA" para editar el fichero flags.txt y el Dockerfile
+			Gestion de errores:
+			- Si la estructura del .zip no es buena, no se crea y se elimina el .zip pero no lo que se ha descomprimido
+		Compose:
+			1. Se importa el zip con la carpeta y todo su contenido en la ruta media/archivoZipDockerCompose/
+			2. Se descomprime el archivo y se mete la carpeta a la ruta maquinas_docker_compose/
+			3. Las imagenes en docker como son varios servicios se crearán al iniciar el docker-compose el usuario
+	Explicación eliminación:
+		Docker:
+			1. Se elimina el archivo .zip de la ruta media/archivoZipDocker/
+			2. Se elimina la carpeta entera de la ruta maquinas_docker/
+			3. Se elimina la imagen de la maquina del sistema
+-> Arreglando los html de login y signup
+-> Comenzar a gestionar la puntuación
+		

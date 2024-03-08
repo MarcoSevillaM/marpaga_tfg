@@ -236,17 +236,22 @@ def flag(request, nombre_maquina):
     # Obtengo por POST la flag si es flag1 o flag2
     flag = request.POST.get('flag1')
     flag2 = request.POST.get('flag2')
+    maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
     if flag:
     # Compruebo que la flag sea igual a la flag de la maquina
-        maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
         if maquina.bandera_usuario_inicial == flag:
             messages.success(request, 'Flag correcta')
-            return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+            # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
+            # (si es necesario, es decir si se han completado todas las flags)
+        else:
+            messages.error(request, 'Flag incorrecta')
     elif flag2:
-        maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
         if maquina.bandera_usuario_root == flag2:
             messages.success(request, 'Flag correcta')
-            return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+            # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
+            # (si es necesario, es decir si se han completado todas las flags)
+        else:
+            messages.error(request, 'Flag incorrecta')
     else:
         messages.error(request, 'Flag incorrecta')
         return redirect('gestion_maquina', nombre_maquina=nombre_maquina)

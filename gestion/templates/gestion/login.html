@@ -3,15 +3,14 @@
 
 {% block form%}
 <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
-  <div
-  class="d-flex align-items-center justify-content-between mb-3"
-  >
+  <h5 class="mb-3 mb-sm-0 text-center">Inicia Sesion</h5>
+  <div class="d-flex align-items-center justify-content-between mb-3">
   <a href="/" class="navbar-brand mx-4 mb-3 d-flex align-items-center">
     <img src='{% static "assets/img/logo.jpg" %}' alt="Foto" class="rounded-icon me-2" width="100" height="100">
-    <h3 class="text-primary m-0">MARPAGA</h3>
+    <h3 class="text-primary mb-3 mb-sm-0">MARPAGA</h3>
   </a>
-  <h5>Inicia Sesion</h5>
 </div>
+
 <form method="post">
   {% csrf_token %}
   <div class="form-floating mb-4">

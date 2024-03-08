@@ -14,7 +14,7 @@ class VerJugadores(admin.ModelAdmin):
 class VerRelacionJugadorMaquina(admin.ModelAdmin):
     list_display = ('jugador', 'maquina_vulnerable','activa', 'ip_address')  # Campos que se mostrarán en la lista
 
-    list_filter = ('maquina_vulnerable', 'jugador')  # Campos por los cuales se pueden filtrar
+    list_filter = ('maquina_vulnerable', 'activa')  # Campos por los cuales se pueden filtrar
 
 admin.site.register(MaquinaVulnerable, VerMaquinaVulnerable)
 admin.site.register(Jugador, VerJugadores)

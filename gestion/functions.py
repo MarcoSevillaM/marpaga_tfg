@@ -23,7 +23,7 @@ class OverwriteStorage(FileSystemStorage):
 def Up_docker_machine(maquina, jugador):
     nombre_maquina = maquina.nombre
     ruta_dockerfile = f'maquinas_docker/{nombre_maquina}/Dockerfile'
-    comando = f"docker run --name {jugador.usuario.username} -d --rm {nombre_maquina}"
+    comando = f"docker run --name {jugador.usuario.username} -d --rm {nombre_maquina.lower()}"
     print(comando)
     try:
         subprocess.run(comando, shell=True, check=True)
@@ -33,3 +33,33 @@ def Up_docker_machine(maquina, jugador):
         return False
 
 # Funciones para levantar y bajar docker-compose
+
+
+
+
+# Disparadores
+def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
+    if created:
+        jugador = Jugador.objects.create(usuario=instance) #Crea el jugador
+        maquinas_disponibles = MaquinaVulnerable.objects.all()
+        for maquina in maquinas_disponibles:
+            if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
+                MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
+
+#Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
+def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **kwargs):
+    if created:
+        jugadores = Jugador.objects.all()
+        for jugador in jugadores:
+            if jugador.puntuacion >= instance.puntuacion_minima_activacion:
+                MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=instance)
+
+# Función para crear la realción maquina-jugador cuando se actualiza la puntuación de un jugador
+def crear_relacion_al_actualizar_puntuacion(sender, instance, **kwargs):
+    maquinas_disponibles = MaquinaVulnerable.objects.all()
+    jugador = Jugador.objects.get(usuario=instance.usuario)
+    for maquina in maquinas_disponibles:
+        # Obtener el jugador
+        if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
+            MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
+

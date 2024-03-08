@@ -6,11 +6,13 @@ import re
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from .functions import crear_relacion_al_actualizar_puntuacion, crear_jugador_al_crear_usuario, crear_relacion_al_crear_maquina_docker_compose # Disparadores
 from .functions import OverwriteStorage, Validate_zip_file, Validar_carpeta_docker_compose
 from .functions import Up_docker_machine
 from django.db.models.signals import pre_delete
 from django.contrib import messages
 import shutil
+from django.db import transaction
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -34,7 +36,10 @@ La base de datos inicialmente estará formada por:
     3.3 Nivel minimo para que el jugador pueda activarla
     3.4 Bandera del usuario inicial
     3.5 Bandera del usuario root
-
+4. Puntuación:
+    4.1 Puntuación del jugador
+    4.2 Nivel del jugador
+    4.3 Experiencia del jugador
 """
 #Para los disparadores que cuando se crea un usario se crea un jugador
 from django.db.models.signals import post_save
@@ -93,43 +98,43 @@ class MaquinaVulnerable(models.Model):
 
 #Las maquinas soportadas por el sistema serán: Maquinas Docker a partir de un Dockerfile, maquinas Docker generadas con un Docker Compose y Maquinas Virtuales
 class MaquinaDocker(MaquinaVulnerable):
-    #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con una imagen correspondiente
     archivo = models.FileField(upload_to='archivoZipDocker/', validators=[Validate_zip_file], blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        # Eliminar el archivo original
         if self.pk:
-            maquina = MaquinaDockerobjects.get(pk=self.pk)
+            # Si la máquina ya existe y se está modificando
+            maquina = MaquinaDocker.objects.get(pk=self.pk)
+            super().save(*args, **kwargs)
+        else:
             try:
-                os.remove(maquina.archivo.path)
-            except:
-                pass
-        super().save(*args, **kwargs) # A parte de guardar el archivo, se extraerá el contenido del zip y se validará la estructura de la carpeta
-        # Después de validar que es un archivo zip
-        with zipfile.ZipFile(self.archivo, 'r') as zip_ref:
-            # Extract the contents of the zip file to a temporary folder
-            temp_folder = 'maquinas_docker/'
-            zip_ref.extractall(temp_folder)
-            # Obtengo el nombre del archivo extraido
-            nombre_carpeta = os.listdir(temp_folder)[0] # Obtengo el nombre de la carpeta
-            # Cambio el nombre de la carpte al nombre de la maquina
-            os.rename(f"{temp_folder}{nombre_carpeta}", f"{temp_folder}{self.nombre}")
-            Validar_carpeta_docker_compose(self)
+                with zipfile.ZipFile(self.archivo, 'r') as zip_ref:
+                    temp_folder = 'maquinas_docker/'
+                    zip_ref.extractall(temp_folder)
+                    nombres_archivos = zip_ref.namelist()
+                    nombre_carpeta = nombres_archivos[0]
+                    os.rename(f"{temp_folder}{nombre_carpeta}", f"{temp_folder}{self.nombre}")
+                    Validar_carpeta_docker_compose(self)
 
-            # Obtengo el nombre de la maquina
-            nombre_maquina = self.nombre
-            # Obtengo la ruta donde esta el Dockerfile
-            ruta_dockerfile = f'maquinas_docker/{nombre_maquina}/Dockerfile'
-            # Levantar la maquina Docker
-            comando = f"docker build -t {nombre_maquina} maquinas_docker/{nombre_maquina}/."
-            try:
-                subprocess.run(comando, shell=True, check=True) 
+                    nombre_maquina = self.nombre.lower()
+                    ruta_dockerfile = f'maquinas_docker/{self.nombre}/Dockerfile'
+                    comando = f"docker build -t {nombre_maquina} maquinas_docker/{self.nombre}/."
+                    subprocess.run(comando, shell=True, check=True)
+
+                # Si todo es exitoso, confirmar la transacción
+                with transaction.atomic():
+                    super().save(*args, **kwargs)
             except subprocess.CalledProcessError as e:
-                # No se puede crear la imagen por lo tanto se elimina la maquina de la base de datos
-                print(f"Error al crear la imagen: {e}, se elimina la maquina de la base de datos")
-                self.delete()
+                # Ocurrió un error, mostrar un mensaje de error si hay una solicitud disponible
+                print(f"Error al crear la imagen: {e}, se elimina la máquina de la base de datos")
+                if 'request' in kwargs and kwargs['request']:
+                    messages.error(kwargs['request'], f"Error al crear la imagen: {e}, se elimina la máquina de la base de datos")
+
+                # Evitar intentar eliminar si no se ha guardado correctamente
+                if self.pk:
+                    self.delete()
+
     class Meta:
-        verbose_name_plural = "Maquinas Docker"
+        verbose_name_plural = "Máquinas Docker"
 
 class MaquinaDockerCompose(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con un Docker Compose
@@ -159,7 +164,6 @@ class MaquinaVirtual(MaquinaVulnerable):
     ip_maquina_virtual = models.CharField(max_length=25)
     class Meta:
         verbose_name_plural = "Maquinas Virtuales"
-
 
 # Relacionar máquinas con el jugador
 class MaquinaJugador(models.Model):
@@ -234,10 +238,6 @@ class MaquinaJugador(models.Model):
                                 comando=f"sudo ./iptables.sh add {self.jugador.usuario.username.lower()} {direccion_ip}"
                                 subprocess.run(comando, shell=True, check=True)
                         except subprocess.CalledProcessError as e:
-                            #exit_code = e.returncode
-                            # Do something with the exit code
-                            #messages.error(f"Command exited with code: {exit_code}")
-                            #messages.error(request, f"Error al levantar la maquina")
                             self.activa = False
                     elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
                         # Levantar la maquina Virtual
@@ -247,27 +247,22 @@ class MaquinaJugador(models.Model):
     class Meta:
         verbose_name_plural = "Relaciones jugadores con maquinas"
 
+# Tabla para guardar las banderas que ha obtenido cada jugador
+class BanderaJugador(models.Model):
+    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
+    maquina_vulnerable = models.ForeignKey(MaquinaVulnerable, on_delete=models.CASCADE)
+    bandera = models.CharField(max_length=25)
+    flag_usuario_root = models.CharField(max_length=25, blank=True, null=True) # Especificará si es la bandera introducida es por el root o por el usuario
+    fecha_obtencion = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.jugador.usuario.username} ha obtenido la bandera {self.bandera} de la maquina {self.maquina_vulnerable.nombre}"
+    class Meta:
+        verbose_name_plural = "Banderas de los jugadores"
 
 # Funciones de disparadores
-#@receiver(post_save, sender=User)
-def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
-    if created:
-        jugador = Jugador.objects.create(usuario=instance) #Crea el jugador
-        maquinas_disponibles = MaquinaVulnerable.objects.all()
-        for maquina in maquinas_disponibles:
-            if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
-                MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
-
-#Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
-def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **kwargs):
-    if created:
-        jugadores = Jugador.objects.all()
-        for jugador in jugadores:
-            if jugador.puntuacion >= instance.puntuacion_minima_activacion:
-                MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=instance)
- 
 
 # Disparadores
+post_save.connect(crear_relacion_al_actualizar_puntuacion, sender=Jugador) # Crear relaciones con los jugadores cuando se actualiza la puntuación
 post_save.connect(crear_jugador_al_crear_usuario, sender=User) # Crear jugador y relaciones correspondientes con las maquinas
 #post_save.connect(crear_relacion_al_crear_maquina, sender=MaquinaVulnerable) # Crear relaciones con los jugadores cuando se crea una maquina
 post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=MaquinaDockerCompose) # Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
