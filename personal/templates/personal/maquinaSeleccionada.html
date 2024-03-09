@@ -9,29 +9,44 @@
     <p>{{ relacion_maquina_jugador.maquina_vulnerable.descripcion|default:"" }}</p>
 
     {% if relacion_maquina_jugador.activa %}
+    <!-- Compruebo si el usuario ya ha conseguido la flag 1 -->
     <!-- Formulario para introducir la flag 1 -->
     <form id="flag1" action="{% url 'flag' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
+      {% if not conseguido %}
       {% csrf_token %}
       <div class="mb-3">
         <label for="flag1" class="form-label">Flag 1</label>
         <input type="text" class="form-control" id="flag1" name="flag1">
       </div>
       <button type="submit" class="btn btn-primary" id="btnFlag1">Enviar</button>
+      {% else %}
+      <div class="alert alert-success" role="alert">
+        <i class="fa fa-check-circle me-2"></i>
+        Has conseguido la flag 1
+      </div>
+      {% endif %}
     </form>
     <!-- End of flag 1 form -->
 
     <!-- Formulario para introducir la flag 2 -->
     <form id="flag2" action="{% url 'flag' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
+      {% if not conseguido1 %}
       {% csrf_token %}
       <div class="mb-3">
         <label for="flag2" class="form-label">Flag 2</label>
         <input type="text" class="form-control" id="flag2" name="flag2">
       </div>
       <button type="submit" class="btn btn-primary" id="btnFlag2">Enviar</button>
+      {% else %}
+      <div class="alert alert-success" role="alert">
+        <i class="fa fa-check-circle me-2"></i>
+        Has conseguido la flag 2
+      </div>
+      {% endif %}
     </form>
     <!-- End of flag 2 form -->
     <p>IP: {{ relacion_maquina_jugador.ip_address }}</p>
-    {% if messages %}
+        {% if messages %}
         <div class="bg-secondary rounded h-100 p-4">
           {% for message in messages %}
           <!-- Si el mensaje es de exito usar class="alert alert-success" role="alert" -->

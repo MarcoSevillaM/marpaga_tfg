@@ -13,6 +13,7 @@ from django.contrib import messages
 import shutil
 from django.db import transaction
 from django.core.exceptions import ValidationError
+from django.db.models import Sum
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -66,6 +67,8 @@ class Jugador(models.Model):
         return self.usuario.username
     class Meta: 
         verbose_name_plural="Jugadores"
+    def obtener_puntuacion(self):
+        return PuntuacionJugador.objects.filter(jugador=self).aggregate(Sum('puntuacion'))['puntuacion__sum']
 
 class MaquinaVulnerable(models.Model):
     DIFFICULT_CHOICES = (
@@ -248,8 +251,10 @@ class PuntuacionJugador(models.Model):
     maquina_vulnerable = models.ForeignKey(MaquinaVulnerable, on_delete=models.CASCADE)
     puntuacion = models.IntegerField(default=0)
     fecha_obtencion = models.DateTimeField(auto_now_add=True)
+    bandera = models.IntegerField(default=0) # 0: Bandera del usuario, 1: Bandera del root
     def __str__(self):
-        return f"{self.jugador.usuario.username} ha obtenido la bandera {self.bandera} de la maquina {self.maquina_vulnerable.nombre}"
+        estado = "del root" if self.bandera else "del usuario"
+        return f"{self.jugador.usuario.username} ha obtenido la bandera {estado} de la maquina {self.maquina_vulnerable.nombre}"
     class Meta:
         verbose_name_plural = "Banderas de los jugadores"
 

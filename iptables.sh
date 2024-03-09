@@ -73,6 +73,7 @@ function addRule(){
 
 	# Con el nombre del usuario obtener la ip asociada en la VPN desde el fichero /etc/openvpn/ipp.txt
 	# Se va a comprobar que el usuario existe, la estructura del fichero es: marco,10.8.0.2,fd42:42:42:42::2
+	# APUNTE usar: /var/log/openvpn/status.log mejor que ipp.txt
 	if [ $(grep -c $2 /etc/openvpn/ipp.txt) -eq 0 ]; then
 		echo "El usuario no existe"
 		exit 1

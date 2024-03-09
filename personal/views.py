@@ -22,6 +22,9 @@ import imaplib
 import email
 from email.header import decode_header
 
+#Funciones para gestionar las flags
+from personal.functions import submit_user_flag
+from django.db.models import Sum # Para sumar la puntuacion total del jugador
 
 #Vista para el inicio de sesion del jugador
 @login_required(login_url="inicio")
@@ -83,22 +86,24 @@ def gestion_maquina(request, nombre_maquina):
     relacion_maquina_jugador= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
     # Intentar buscar en MaquinaDockerCompose
     maquina_compose = MaquinaDockerCompose.objects.filter(nombre=nombre_maquina).first()
+    conseguido = PuntuacionJugador.objects.filter(jugador=Jugador.objects.get(usuario=request.user), bandera=0)
+    conseguido1 = PuntuacionJugador.objects.filter(jugador=Jugador.objects.get(usuario=request.user), bandera=1)
     if maquina_compose:
-        variable = "Es una maquina Docker Compose"
+        pass
     else:
         # Si no es MaquinaDockerCompose, buscar en MaquinaDocker
         maquina_docker = MaquinaDocker.objects.filter(nombre=nombre_maquina).first()
         if maquina_docker:
-            variable = "Es una maquina Docker"
+            pass
         else:
             # Si no es MaquinaDocker ni MaquinaDockerCompose, buscar en MaquinaVirtual
             maquina_virtual = MaquinaVirtual.objects.filter(nombre=nombre_maquina).first()
             if maquina_virtual:
-                variable = "Es una maquina Virtual"
+               pass
             else:
                 # Si no es ninguno de los anteriores
-                variable = "Es una maquinaaaa"
-    context={'relacion_maquina_jugador':relacion_maquina_jugador, 'variable':variable}
+                pass
+    context={'relacion_maquina_jugador':relacion_maquina_jugador, 'conseguido': conseguido, 'conseguido1': conseguido1}
     return render(request, 'personal/maquinaSeleccionada.html',context)
 
 #Para poder activarse el metodo debe de ser post y además ninguna maquina del usuario tiene que estar activa
@@ -118,29 +123,31 @@ def activar_maquina(request, nombre_maquina):
                     #Redirigir a la vista gestion_maquina con una variable que indique que ya hay una maquina activa
                     return redirect('gestion_maquina' , nombre_maquina)
             # Una vez llega aqui la maquina NO debería de estar activada por lo que se comprueba de qué tipo de la maquina vulnerables
-            relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
-            if hasattr(maquina, 'maquinadocker'):
-                client = docker.from_env()
-                try:
-                    client.containers.get(jugador.usuario.username) # Si esto da error significa que el usuario no tiene ninguna maquina en docker activa
-                    messages.warning(request, 'Ya hay una máquina activa en Docker.')
-                    return redirect('maquinas')
-                except docker.errors.NotFound:
-                    #gestionar_maquina(1, jugador.usuario.username, client) # Activar la máquina
-                    relacion_maquina_jugador.activa = True
-                    relacion_maquina_jugador.save()
-            elif hasattr(maquina, 'maquinadockercompose'):
-                #Compruebo que exista el usuario en el fichero /etc/openvpn/ipp.txt y si no existe mando un mensaje de error
-                if not re.search(jugador.usuario.username, subprocess.run(['cat', '/etc/openvpn/ipp.txt'], stdout=subprocess.PIPE).stdout.decode('utf-8')):
-                    messages.error(request, "Por favor conectese primero al servidor VPN")
-                else:
+            # Compruebo si el usuario se ha conectado a la VPN
+            # Ejecuto el comando cat /etc/openvpn/easy-rsa/pki/index.txt | grep "^V.*\bmarco\b"
+            #if not re.search(jugador.usuario.username, subprocess.run(['cat', '/etc/openvpn/ipp.txt'], stdout=subprocess.PIPE).stdout.decode('utf-8')):
+            if False:
+                messages.error(request, "Por favor conectese primero al servidor VPN")
+            else:
+                relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
+                if hasattr(maquina, 'maquinadocker'):
+                    client = docker.from_env()
+                    try:
+                        client.containers.get(jugador.usuario.username) # Si esto da error significa que el usuario no tiene ninguna maquina en docker activa
+                        messages.warning(request, 'Ya hay una máquina activa en Docker.')
+                        return redirect('maquinas')
+                    except docker.errors.NotFound:
+                        #gestionar_maquina(1, jugador.usuario.username, client) # Activar la máquina
+                        relacion_maquina_jugador.activa = True
+                        relacion_maquina_jugador.save()
+                elif hasattr(maquina, 'maquinadockercompose'):
                     relacion_maquina_jugador.activa = True
                     relacion_maquina_jugador.save()
                     if not relacion_maquina_jugador.activa:
                         messages.error(request, 'Error al levantar la maquina.')
-            elif hasattr(maquina, 'maquinavirtual'):
-                messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
-            #Ejecutar la funcion de iptables para eliminar la regla correspondiente
+                elif hasattr(maquina, 'maquinavirtual'):
+                    messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
+                #Ejecutar la funcion de iptables para eliminar la regla correspondiente
             
             return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
     else:
@@ -237,18 +244,18 @@ def flag(request, nombre_maquina):
     flag = request.POST.get('flag1')
     flag2 = request.POST.get('flag2')
     maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
+    jugador = Jugador.objects.get(usuario=request.user)
     if flag:
     # Compruebo que la flag sea igual a la flag de la maquina
         if maquina.bandera_usuario_inicial == flag:
             # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
             # (si es necesario, es decir si se han completado todas las flags)
-            
-            messages.success(request, 'Flag correcta')
+            submit_user_flag(jugador, maquina, 0)
         else:
             messages.error(request, 'Flag incorrecta')
     elif flag2:
         if maquina.bandera_usuario_root == flag2:
-            messages.success(request, 'Flag correcta')
+            submit_user_flag(jugador, maquina, 1)
             # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
             # (si es necesario, es decir si se han completado todas las flags)
         else:
