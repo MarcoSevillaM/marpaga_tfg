@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 
 #admin.site.register(MaquinaJugador)
+admin.site.register(PuntuacionJugador)
 
 class VerMaquinaVulnerable(admin.ModelAdmin):
     list_display = ('nombre', 'nivel_dificultad','puntuacion_minima_activacion')  # Campos que se mostrarán en la lista

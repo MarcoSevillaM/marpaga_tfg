@@ -240,9 +240,10 @@ def flag(request, nombre_maquina):
     if flag:
     # Compruebo que la flag sea igual a la flag de la maquina
         if maquina.bandera_usuario_inicial == flag:
-            messages.success(request, 'Flag correcta')
             # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
             # (si es necesario, es decir si se han completado todas las flags)
+            
+            messages.success(request, 'Flag correcta')
         else:
             messages.error(request, 'Flag incorrecta')
     elif flag2:
@@ -252,9 +253,7 @@ def flag(request, nombre_maquina):
             # (si es necesario, es decir si se han completado todas las flags)
         else:
             messages.error(request, 'Flag incorrecta')
-    else:
-        messages.error(request, 'Flag incorrecta')
-        return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+    return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
 
 # Vista para ver los ultimos 10 correos
 def get_last_10_emails(request):

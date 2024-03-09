@@ -6,13 +6,13 @@ import re
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
-from .functions import crear_relacion_al_actualizar_puntuacion, crear_jugador_al_crear_usuario, crear_relacion_al_crear_maquina_docker_compose # Disparadores
 from .functions import OverwriteStorage, Validate_zip_file, Validar_carpeta_docker_compose
 from .functions import Up_docker_machine
 from django.db.models.signals import pre_delete
 from django.contrib import messages
 import shutil
 from django.db import transaction
+from django.core.exceptions import ValidationError
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -67,12 +67,6 @@ class Jugador(models.Model):
     class Meta: 
         verbose_name_plural="Jugadores"
 
-@receiver(pre_delete, sender=Jugador)
-def delete_user(sender, instance, **kwargs):
-    # Ejecutar el script para eliminar el usuario VPN
-    comando = f"sudo ./createUserVPN.sh del {instance.usuario.username}"
-    subprocess.run(comando, shell=True, check=True)
-
 class MaquinaVulnerable(models.Model):
     DIFFICULT_CHOICES = (
         ('Facil', 'Facil'),
@@ -95,7 +89,6 @@ class MaquinaVulnerable(models.Model):
     class Meta:
         verbose_name_plural="Maquinas vulnerables"
 
-
 #Las maquinas soportadas por el sistema serán: Maquinas Docker a partir de un Dockerfile, maquinas Docker generadas con un Docker Compose y Maquinas Virtuales
 class MaquinaDocker(MaquinaVulnerable):
     archivo = models.FileField(upload_to='archivoZipDocker/', validators=[Validate_zip_file], blank=True, null=True)
@@ -105,6 +98,9 @@ class MaquinaDocker(MaquinaVulnerable):
             # Si la máquina ya existe y se está modificando
             maquina = MaquinaDocker.objects.get(pk=self.pk)
             super().save(*args, **kwargs)
+        # Si el nombre de la maquina ya existe
+        elif MaquinaVulnerable.objects.filter(nombre=self.nombre).exists():
+            raise ValidationError('El nombre de la máquina ya existe')
         else:
             try:
                 with zipfile.ZipFile(self.archivo, 'r') as zip_ref:
@@ -126,35 +122,34 @@ class MaquinaDocker(MaquinaVulnerable):
             except subprocess.CalledProcessError as e:
                 # Ocurrió un error, mostrar un mensaje de error si hay una solicitud disponible
                 print(f"Error al crear la imagen: {e}, se elimina la máquina de la base de datos")
-                if 'request' in kwargs and kwargs['request']:
-                    messages.error(kwargs['request'], f"Error al crear la imagen: {e}, se elimina la máquina de la base de datos")
-
-                # Evitar intentar eliminar si no se ha guardado correctamente
-                if self.pk:
-                    self.delete()
+                raise ValidationError('Formato introducido incorrecto')
 
     class Meta:
         verbose_name_plural = "Máquinas Docker"
 
 class MaquinaDockerCompose(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con un Docker Compose
-    archivo = models.FileField(upload_to='archivoZipDockerCompose/', validators=[Validate_zip_file])
+    archivo = models.FileField(upload_to='archivoZipDockerCompose/', validators=[Validate_zip_file], blank=True)
 
     def save(self, *args, **kwargs):
         # Eliminar el archivo original
         if self.pk:
-            maquina = MaquinaDockerCompose.objects.get(pk=self.pk)
-            try:
-                os.remove(maquina.archivo.path)
-            except:
+            # Si la máquina ya existe y se está modificando
+            # - Obtengo la ruta del archivo anterior y la ruta de la nueva
+            if self.archivo != MaquinaDockerCompose.objects.get(pk=self.pk).archivo:
+                # Eliminaré la ruta del archivo anterior y la carpeta de la maquina, y ya luego guardaré el nuevo archivo
                 pass
-        super().save(*args, **kwargs) # A parte de guardar el archivo, se extraerá el contenido del zip y se validará la estructura de la carpeta
-        # Después de validar que es un archivo zip
-        with zipfile.ZipFile(self.archivo, 'r') as zip_ref:
-            # Extract the contents of the zip file to a temporary folder
-            temp_folder = 'maquinas_docker_compose/'
-            zip_ref.extractall(temp_folder)
-            validar_carpeta_docker_compose(self)
+            else:
+                maquina = MaquinaDockerCompose.objects.get(pk=self.pk)
+                super().save(*args, **kwargs)
+        else:
+            # Después de validar que es un archivo zip
+            with zipfile.ZipFile(self.archivo, 'r') as zip_ref:
+                # Extract the contents of the zip file to a temporary folder
+                temp_folder = 'maquinas_docker_compose/'
+                zip_ref.extractall(temp_folder)
+                Validar_carpeta_docker_compose(self)
+            super().save(*args, **kwargs) # A parte de guardar el archivo, se extraerá el contenido del zip y se validará la estructura de la carpeta
     class Meta:
         verbose_name_plural = "Maquinas Docker Compose"
 
@@ -248,11 +243,10 @@ class MaquinaJugador(models.Model):
         verbose_name_plural = "Relaciones jugadores con maquinas"
 
 # Tabla para guardar las banderas que ha obtenido cada jugador
-class BanderaJugador(models.Model):
+class PuntuacionJugador(models.Model):
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
     maquina_vulnerable = models.ForeignKey(MaquinaVulnerable, on_delete=models.CASCADE)
-    bandera = models.CharField(max_length=25)
-    flag_usuario_root = models.CharField(max_length=25, blank=True, null=True) # Especificará si es la bandera introducida es por el root o por el usuario
+    puntuacion = models.IntegerField(default=0)
     fecha_obtencion = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.jugador.usuario.username} ha obtenido la bandera {self.bandera} de la maquina {self.maquina_vulnerable.nombre}"
@@ -260,6 +254,34 @@ class BanderaJugador(models.Model):
         verbose_name_plural = "Banderas de los jugadores"
 
 # Funciones de disparadores
+def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
+    if created:
+        jugador = Jugador.objects.create(usuario=instance) #Crea el jugador
+        maquinas_disponibles = MaquinaVulnerable.objects.all()
+        for maquina in maquinas_disponibles:
+            if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
+                MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
+
+#Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
+def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **kwargs):
+    if created:
+        jugadores = Jugador.objects.all()
+        for jugador in jugadores:
+            if jugador.puntuacion >= instance.puntuacion_minima_activacion:
+                MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=instance)
+
+# Función para crear la realción maquina-jugador cuando se actualiza la puntuación de un jugador
+def crear_relacion_al_actualizar_puntuacion(sender, instance, **kwargs):
+    maquinas_disponibles = MaquinaVulnerable.objects.all()
+    jugador = Jugador.objects.get(usuario=instance.usuario)
+    for maquina in maquinas_disponibles:
+        # Obtener el jugador
+        if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
+            MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
+
+
+
+
 
 # Disparadores
 post_save.connect(crear_relacion_al_actualizar_puntuacion, sender=Jugador) # Crear relaciones con los jugadores cuando se actualiza la puntuación
@@ -292,3 +314,9 @@ def delete_file_and_folder(sender, instance, **kwargs):
 
 # # Disparadores para eliminar los archivos y carpetas de las maquinas
 post_delete.connect(delete_file_and_folder, sender=MaquinaDocker)
+
+@receiver(pre_delete, sender=Jugador)
+def delete_user(sender, instance, **kwargs):
+    # Ejecutar el script para eliminar el usuario VPN
+    comando = f"sudo ./createUserVPN.sh del {instance.usuario.username}"
+    subprocess.run(comando, shell=True, check=True)

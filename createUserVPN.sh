@@ -9,6 +9,7 @@ function newClient() {
     PASS=1
 	CLIENTEXISTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c -E "/CN=$CLIENT\$")
     CLIENTEXISTS=0
+	RUTA=$(pwd)
 	if [[ $CLIENTEXISTS == '1' ]]; then
 		echo ""
 		echo "The specified client CN was already found in easy-rsa, please choose another name."
@@ -42,7 +43,7 @@ function newClient() {
 	# 	# if not SUDO_USER, use /root
 	# 	homeDir="/root"
 	# fi
-    homeDir="$(pwd)/media/vpns"
+    homeDir="$RUTA/media/vpns"
 	# Determine if we use tls-auth or tls-crypt
 	if grep -qs "^tls-crypt" /etc/openvpn/server.conf; then
 		TLS_SIG="1"
