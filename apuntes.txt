@@ -356,3 +356,7 @@ Hacer casos de uso:
 -----09-03-2024---------
 Infinitos problemas con la base de datos y el servidor VPN:
 	- Cambiar en iptables.sh la manera de obtener la ip del usuario usar el archivo: /var/log/openvpn/status.log mejor funcionalidad PENDIENTE
+	- Funciona cuando un usuario introduce la flag luego ya no puede introducir otra vez la flag:
+		-> queda sumarle los puntos al usuario y habilitar más maquinas cuando un usuario sube de nivel-> Se ha creado una función en el jugador
+	- Se ha cambiado toda la estructura a la hora de levantar los contenedores, funciones indepentientes dentro de cada Objeto
+	-> Queda calcular la puntuación y hacer el punto dos (2) de este día PENDIENTE

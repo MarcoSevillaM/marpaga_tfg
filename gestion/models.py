@@ -7,13 +7,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from .functions import OverwriteStorage, Validate_zip_file, Validar_carpeta_docker_compose
-from .functions import Up_docker_machine
 from django.db.models.signals import pre_delete
 from django.contrib import messages
 import shutil
 from django.db import transaction
 from django.core.exceptions import ValidationError
 from django.db.models import Sum
+import threading
 '''
     NOTAS IMPORTANTES
     - Cuando un usuario avance de nivel habrá que crear más tablas en la tabla de relaciones maquinas con jugadores
@@ -127,6 +127,57 @@ class MaquinaDocker(MaquinaVulnerable):
                 print(f"Error al crear la imagen: {e}, se elimina la máquina de la base de datos")
                 raise ValidationError('Formato introducido incorrecto')
 
+    def levantar_maquina_docker(self, relacion):
+        print("Levantando la máquina")
+        ruta_dockerfile = f'maquinas_docker/{self.nombre}/Dockerfile'
+        comando = f"docker run --name {relacion.jugador.usuario.username} -d --rm {self.nombre.lower()}"
+        try:
+            subprocess.run(comando, shell=True, check=True)
+            # Introduzco un archivo flag.txt en el contenedor recien levantado
+            with open('flag.txt', 'w') as archivo:
+                archivo.write(relacion.maquina_vulnerable.bandera_usuario_inicial)
+            with open('flag2.txt', 'w') as archivo:
+                archivo.write(relacion.maquina_vulnerable.bandera_usuario_root)
+            comando = f"docker cp flag.txt {relacion.jugador.usuario.username}:/var/www/html/flag.txt"
+            subprocess.run(comando, shell=True, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error al levantar la máquina: {e}")
+            return False
+        try:
+            comando = f"docker cp flag2.txt {relacion.jugador.usuario.username}:/etc/flag2.txt"
+            subprocess.run(comando, shell=True, check=True)
+            # Elimino el archivo flag.txt
+            os.remove('flag.txt')
+            os.remove('flag2.txt')
+        except subprocess.CalledProcessError as e:
+            print(f"Error al copiar el archivo: {e}")
+            return False
+        try:
+            # Obtengo la ip
+            comando = f"docker inspect -f '{{{{range .NetworkSettings.Networks}}}}{{{{.IPAddress}}}}{{{{end}}}}' {relacion.jugador.usuario.username}"
+            direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
+            coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
+            direccion_ip = coincidencia.group(1)
+            relacion.ip_address = direccion_ip
+            comando=f"sudo ./iptables.sh add {relacion.jugador.usuario.username} {direccion_ip}"
+            subprocess.run(comando, shell=True, check=True)
+            print(f"La dirección IP de la máquina es: {direccion_ip}")
+            return True
+        except subprocess.CalledProcessError as e:
+            print(f"Error al obtener la dirección IP: {e}")
+            return False
+
+    def detener_maquina_docker(self, relacion):
+        comando=f"docker rm -f {relacion.jugador.usuario.username}"
+        try:
+            subprocess.run(comando, shell=True, check=True)
+        except subprocess.CalledProcessError as e:
+            exit_code = e.returncode
+            return False
+        if relacion.ip_address:
+            comando=f"sudo ./iptables.sh del {relacion.ip_address}"
+            subprocess.run(comando, shell=True, check=True)
+        return True
     class Meta:
         verbose_name_plural = "Máquinas Docker"
 
@@ -155,6 +206,44 @@ class MaquinaDockerCompose(MaquinaVulnerable):
             super().save(*args, **kwargs) # A parte de guardar el archivo, se extraerá el contenido del zip y se validará la estructura de la carpeta
     class Meta:
         verbose_name_plural = "Maquinas Docker Compose"
+        
+    def levantar_maquina_docker_compose(self, relacion):
+        ruta_docker_compose = f'maquinas_docker_compose/{self.nombre}/docker-compose.yml'
+        levantar_contenedor = f"PLAYER={relacion.jugador.usuario.username.lower()} docker-compose -f {ruta_docker_compose} -p 'proyecto_{relacion.jugador.usuario.username}' up -d"
+        obtener_ip=f"docker exec proyecto_{relacion.jugador.usuario.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
+        try:
+            # Obtengo la dirección IP de la maquina y el codigo de estado del comando
+            subprocess.run(levantar_contenedor, shell=True, check=True) # Levantar el contenedor
+            direccion = subprocess.run(obtener_ip, shell=True, check=True, capture_output=True) # Obtener la dirección IP
+            coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
+            if coincidencia:
+                direccion_ip = coincidencia.group(1)
+                relacion.ip_address = direccion_ip
+                segmentar_red=f"sudo ./iptables.sh add {relacion.jugador.usuario.username.lower()} {direccion_ip}" # Ejecuto este script y si el codigo de estado es distinto de 0 entonces no se ha podido añadir la regla
+                try:
+                    salida = subprocess.run(segmentar_red, shell=True, check=True)
+                except subprocess.CalledProcessError as e:
+                    # Creo un hilo para detener la maquina
+                    mi_hilo = threading.Thread(target=self.detener_maquina_docker_compose, args=(relacion,))
+                    mi_hilo.start()
+                    print(f"Error al segmentar la red: {e}")
+                    return False
+                return True
+        except subprocess.CalledProcessError as e:
+            print(f"Error al levantar la máquina: {e}")
+            return False
+    def detener_maquina_docker_compose(self, relacion):
+        ruta_docker_compose = f'maquinas_docker_compose/{self.nombre}/docker-compose.yml'
+        comando=f"PLAYER={relacion.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{relacion.jugador.usuario.username}' down"
+        try:
+            subprocess.run(comando, shell=True, check=True)
+        except subprocess.CalledProcessError as e:
+            exit_code = e.returncode
+            return False
+        if relacion.ip_address:
+            comando=f"sudo ./iptables.sh del {relacion.ip_address}"
+            subprocess.run(comando, shell=True, check=True)
+        return True
 
 class MaquinaVirtual(MaquinaVulnerable):
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina virtual
@@ -181,62 +270,26 @@ class MaquinaJugador(models.Model):
                 # Si se DESACTIVA la maquina
                 if not self.activa:
                     if hasattr(self.maquina_vulnerable, 'maquinadocker'):
-                        nombre_maquina = self.maquina_vulnerable.nombre
-                        comando=f"docker rm -f {self.jugador.usuario.username}"
-                        subprocess.run(comando, shell=True, check=True)
-                        if self.ip_address:
-                            comando=f"sudo ./iptables.sh del {self.ip_address}"
-                            subprocess.run(comando, shell=True, check=True)
-                        self.ip_address = None
+                        docker_instance = getattr(self.maquina_vulnerable, 'maquinadocker')
+                        control = docker_instance.detener_maquina_docker(self)
+                        if control:
+                            self.ip_address = None
+                            self.activa = False
                     elif hasattr(self.maquina_vulnerable, 'maquinadockercompose'):
-                        ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
-                        comando=f"PLAYER={self.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' down"
-                        try:
-                            subprocess.run(comando, shell=True, check=True)
-                        except subprocess.CalledProcessError as e:
-                            exit_code = e.returncode
-                            # Do something with the exit code
-                            #messages.error(f"Command exited with code: {exit_code}")
-                            self.activa = True
-                        if self.ip_address:
-                            comando=f"sudo ./iptables.sh del {self.ip_address}"
-                            subprocess.run(comando, shell=True, check=True)
-                        self.ip_address = None
+                        compose_instance = getattr(self.maquina_vulnerable, 'maquinadockercompose')
+                        control = compose_instance.detener_maquina_docker_compose(self)
+                        if control:
+                            self.ip_address = None
+                            self.activa = False
                 else:
                     #Si se ACTIVA la maquina
                     if hasattr(self.maquina_vulnerable, 'maquinadocker'):
                         # Levantar la maquina Docker
-                        control = Up_docker_machine(self.maquina_vulnerable, self.jugador)
-                        if control:
-                            # Obtengo la ip
-                            comando = f"docker inspect -f '{{{{range .NetworkSettings.Networks}}}}{{{{.IPAddress}}}}{{{{end}}}}' {self.jugador.usuario.username}"
-                            direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
-                            coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
-                            if coincidencia:
-                                direccion_ip = coincidencia.group(1)
-                                self.ip_address = direccion_ip
-                                comando=f"sudo ./iptables.sh add {self.jugador.usuario.username} {direccion_ip}"
-                                subprocess.run(comando, shell=True, check=True)
-                        else:
-                            self.activa = False
+                        docker_instance = getattr(self.maquina_vulnerable, 'maquinadocker')
+                        self.activa = docker_instance.levantar_maquina_docker(self)
                     elif hasattr(self.maquina_vulnerable, 'maquinadockercompose'):
-                        # Levantar la maquina Docker Compose
-                        ruta_docker_compose = f'maquinas_docker_compose/{self.maquina_vulnerable.nombre}/docker-compose.yml'
-                        comando = f"PLAYER={self.jugador.usuario.username.lower()} docker-compose -f {ruta_docker_compose} -p 'proyecto_{self.jugador.usuario.username}' up -d"
-                        # Obtengo la dirección IP de la maquina y el codigo de estado del comando
-                        try:
-                            subprocess.run(comando, shell=True, check=True)
-                            comando=f"docker exec proyecto_{self.jugador.usuario.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
-                            direccion = subprocess.run(comando, shell=True, check=True, capture_output=True)
-                            coincidencia = re.search(r'(\d+\.\d+\.\d+\.\d+)', direccion.stdout.decode('utf-8'))
-                            if coincidencia:
-                                direccion_ip = coincidencia.group(1)
-                                self.ip_address = direccion_ip
-                                print(direccion_ip)
-                                comando=f"sudo ./iptables.sh add {self.jugador.usuario.username.lower()} {direccion_ip}"
-                                subprocess.run(comando, shell=True, check=True)
-                        except subprocess.CalledProcessError as e:
-                            self.activa = False
+                        compose_instance = getattr(self.maquina_vulnerable, 'maquinadockercompose')
+                        self.activa = compose_instance.levantar_maquina_docker_compose(self)
                     elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
                         # Levantar la maquina Virtual
                         pass
@@ -325,3 +378,28 @@ def delete_user(sender, instance, **kwargs):
     # Ejecutar el script para eliminar el usuario VPN
     comando = f"sudo ./createUserVPN.sh del {instance.usuario.username}"
     subprocess.run(comando, shell=True, check=True)
+
+def obtener_tipo_maquina(maquina):
+    print(maquina)
+    if hasattr(maquina, 'maquinadocker'):
+        return getattr(maquina, 'maquinadocker')
+    elif hasattr(maquina, 'maquinadockercompose'):
+        return getattr(maquina, 'maquinadockercompose')
+    elif hasattr(maquina, 'maquinavirtual'):
+        return getattr(maquina, 'maquinavirtual')
+    else:
+        return None
+def jugador_conectado_vpn(usuario):
+    return True # Suponemos que el usuario esta siempre conectado
+    #comando = f"sudo ./createUserVPN.sh check {usuario}"
+    try:
+        #Obtengo el output del comando
+        salida = subprocess.run(comando, shell=True, check=True, capture_output=True)
+        #Si el output es 0 entonces el usuario está conectado
+        if salida.returncode == 0:
+            return True
+        else:
+            return False
+    except subprocess.CalledProcessError as e:
+        print(f"Error al comprobar si el usuario está conectado: {e}")
+        return False

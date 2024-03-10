@@ -122,24 +122,16 @@ def activar_maquina(request, nombre_maquina):
                     messages.error(request, 'Ya hay una maquina activa')
                     #Redirigir a la vista gestion_maquina con una variable que indique que ya hay una maquina activa
                     return redirect('gestion_maquina' , nombre_maquina)
-            # Una vez llega aqui la maquina NO debería de estar activada por lo que se comprueba de qué tipo de la maquina vulnerables
-            # Compruebo si el usuario se ha conectado a la VPN
-            # Ejecuto el comando cat /etc/openvpn/easy-rsa/pki/index.txt | grep "^V.*\bmarco\b"
-            #if not re.search(jugador.usuario.username, subprocess.run(['cat', '/etc/openvpn/ipp.txt'], stdout=subprocess.PIPE).stdout.decode('utf-8')):
-            if False:
+            # Una vez llega aqui la maquina NO debería de estar activada por lo que se comprueba de qué tipo de la maquina vulnerable es
+            if not jugador_conectado_vpn(jugador.usuario.username):
                 messages.error(request, "Por favor conectese primero al servidor VPN")
             else:
                 relacion= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
                 if hasattr(maquina, 'maquinadocker'):
-                    client = docker.from_env()
-                    try:
-                        client.containers.get(jugador.usuario.username) # Si esto da error significa que el usuario no tiene ninguna maquina en docker activa
-                        messages.warning(request, 'Ya hay una máquina activa en Docker.')
-                        return redirect('maquinas')
-                    except docker.errors.NotFound:
-                        #gestionar_maquina(1, jugador.usuario.username, client) # Activar la máquina
-                        relacion_maquina_jugador.activa = True
-                        relacion_maquina_jugador.save()
+                    relacion_maquina_jugador.activa = True
+                    relacion_maquina_jugador.save()
+                    if not relacion_maquina_jugador.activa:
+                        messages.error(request, 'Error al levantar la maquina.')
                 elif hasattr(maquina, 'maquinadockercompose'):
                     relacion_maquina_jugador.activa = True
                     relacion_maquina_jugador.save()
