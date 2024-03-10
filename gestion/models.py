@@ -73,12 +73,12 @@ class Jugador(models.Model):
 class MaquinaVulnerable(models.Model):
     DIFFICULT_CHOICES = (
         ('Facil', 'Facil'),
-        ('Medio', 'Medio'),
-        ('Dificl', 'Dificil'),
-        ('Bestia', 'Bestia'),
+        ('Media', 'Media'),
+        ('Dificil', 'Dificil'),
+        ('Experta', 'Experta'),
     )
     nombre = models.CharField(max_length=255)
-    nivel_dificultad = models.CharField(max_length=6, choices=DIFFICULT_CHOICES)
+    nivel_dificultad = models.CharField(max_length=10, choices=DIFFICULT_CHOICES)
     puntuacion_minima_activacion = models.IntegerField(default=0)
     descripcion = models.TextField(max_length=255, blank=True, null=True) # Descripcion de la maquina
     # Bandera del usuario inicial y root

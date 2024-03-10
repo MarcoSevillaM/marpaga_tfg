@@ -32,10 +32,13 @@ import time # Para el hilo que elimina los usuarios inactivos
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 # Funcion del hilo para eliminar los usuarios inactivos
-def remove_inactive_users():
+def remove_inactive_users(user):
     # Elimina todos los usuarios que no han iniciado sesión en el ultimo minuto
     time.sleep(60) # Espera 1 minuto
-    User.objects.filter(is_active=False).delete()
+    user = User.objects.get(pk=user.pk)
+    print(user.is_active)
+    if user.is_active == False:
+        user.delete()
 
 def inicio(request):
     return render(request, 'gestion/index.html')
@@ -48,7 +51,7 @@ def registro(request):
             user.is_active = False
             user.save()
             # Creo un hilo que se ejecutará después de 1 minuto
-            mi_hilo = threading.Thread(target=remove_inactive_users)
+            mi_hilo = threading.Thread(target=remove_inactive_users, args=(user,))
             mi_hilo.start()
             subject = 'Activa tu cuenta'
             message = render_to_string('gestion/account_activation_email.html', {
@@ -84,11 +87,23 @@ def activate(request, uidb64, token):
         messages.error(request, 'El enlace de activación es inválido o ha expirado.')
         return redirect('login') 
 
+# Login View PErsonalizada
+# class CustomLoginView(LoginView):
+#     template_name = 'personal.html'
+#     success_url = reverse_lazy('nombre_de_tu_vista_de_exito')  # Ajusta esto según tus necesidades
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+        
+#         # Agrega tus variables personalizadas al contexto
+#         context['tu_variable_personalizada'] = 'valor_personalizado'
+        
+#         return context
 # Vistas para contraseña olvidada
 
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'gestion/reset_passwd.html'
-
+    user=None
     def form_valid(self, form):
         response = super().form_valid(form)
         mensaje = f"Restablecimiento de contraseña enviado\n"

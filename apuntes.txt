@@ -11,28 +11,28 @@ Instalado:
 #####################################
 CASOS DE USO:
 1.	Registrar jugador (Opcional: Iniciar sesion con google), PENDIENTE iniciar sesión con google
-2.	Iniciar sesión 
-3.	Verificar inició de sesión
-4.	Recuperar contraseña
-5.	Cerrar sesión
+2.	Iniciar sesión HECHO
+3.	Verificar inició de sesión con correo electronico HECHO
+4.	Recuperar contraseña HECHO
+5.	Cerrar sesión HECHO
 6.	Ver perfil del jugador -> PENDIENTE: Ver los jugadores y por tanto poder ver puntuación, foto de perfil y maquinas reventadas
 7.	Modificar contraseña
 8.	Modificar perfil PENDIENTE: Poder cambiar el correo electronico con su correspondiente verificación
 9.	Descargar VPN (Para la conexión directa entre jugador y maquina vulnerable)
 10.	Obtener instrucciónes de conexión PENDIENTE
-11.	Arrancar maquina vulnerable
-12.	Detener maquina vulnerable
+11.	Arrancar maquina vulnerable: HECHO
+12.	Detener maquina vulnerable: HECHO
 13.	Verificar bandera del usuario vulnerado (El jugador obtendrá una puntuación en función del nivel de dificultad de la maquina) PENDIENTE: Si verfica pero no lo guarda en la DB
 14.	Verificar banera del adminstrador vulnerado PENDIENTE: Si verfica pero no lo guarda en la DB 
 15.	Mostrar ranking de jugadores por puntuación PENDIENTE
-16.	Mostrar máquinas disponibles
+16.	Mostrar máquinas disponibles HECHO
 17.	Notificar/Informar error del sistema PENDIENTE
 18.	Valorar maquina vulnerada PENDIENTE
 19.	Buscar maquina PENDIENTE
 20.	Filtrar maquinas (dificultad, nombre…) PENDIENTE
 Administrador
 21.	Añadir nueva maquina
-22.	Editar características de la maquina (nombre, nivel…)
+22.	Editar características de la maquina (nombre, nivel…)-> MODIFICAR: De momento se puede hacer desde el panel de administracion
 23.	Eliminar usuario
 24.	Concecer rol de administrador
 #####################################
@@ -355,8 +355,15 @@ Hacer casos de uso:
 
 -----09-03-2024---------
 Infinitos problemas con la base de datos y el servidor VPN:
-	- Cambiar en iptables.sh la manera de obtener la ip del usuario usar el archivo: /var/log/openvpn/status.log mejor funcionalidad PENDIENTE
+	- Cambiar en iptables.sh la manera de obtener la ip del usuario usar el archivo: /var/log/openvpn/status.log mejor funcionalidad 
+		además de eso hay veces que la vpn no gestiona bien el enrrutamiento de la red PENDIENTE
 	- Funciona cuando un usuario introduce la flag luego ya no puede introducir otra vez la flag:
 		-> queda sumarle los puntos al usuario y habilitar más maquinas cuando un usuario sube de nivel-> Se ha creado una función en el jugador
 	- Se ha cambiado toda la estructura a la hora de levantar los contenedores, funciones indepentientes dentro de cada Objeto
 	-> Queda calcular la puntuación y hacer el punto dos (2) de este día PENDIENTE
+-----10-03-2024---------
+	- Se gestiona que el usuario no pueda volver a introducir la flag dos veces y ya obtiene la puntuación y la guarda en la base de datos
+	- Ver cuando se crea un nuevo usuario y navegas para levantar una maquina muestra un cuadro de dialogo REVISAR
+	- Pendiente de hacer el proximo día:
+		1. Crear una vista para mostrar el ranking de los mejores jugadores con sus respectivas puntuaciones
+		2. Filtrar maquinas por dificultad

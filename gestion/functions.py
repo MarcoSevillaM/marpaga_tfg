@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 import os
 import subprocess
+import time
 
 def Validate_zip_file(value):
     #Comprobará que el fichero termine en .zip o directamente que se quiera conservar el nombre del fichero anterior
@@ -22,8 +23,4 @@ class OverwriteStorage(FileSystemStorage):
         if self.exists(name):
             os.remove(os.path.join(settings.MEDIA_ROOT, name))
         return name
-
-
-
-
 

@@ -1,5 +1,5 @@
 {% extends 'personal/basic_profile.html' %}
-
+{% load humanize %}
 {% block machineDetails %}
 <div class="container-fluid pt-4 px-4">
   <div class="bg-secondary rounded-top p-4">
@@ -22,7 +22,7 @@
       {% else %}
       <div class="alert alert-success" role="alert">
         <i class="fa fa-check-circle me-2"></i>
-        Has conseguido la flag 1
+        Has conseguido la flag ({{ conseguido.fecha_obtencion|naturaltime }})
       </div>
       {% endif %}
     </form>
@@ -40,7 +40,7 @@
       {% else %}
       <div class="alert alert-success" role="alert">
         <i class="fa fa-check-circle me-2"></i>
-        Has conseguido la flag 2
+        Has conseguido la flag ({{ conseguido1.fecha_obtencion|naturaltime }})
       </div>
       {% endif %}
     </form>
@@ -63,6 +63,12 @@
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <i class="fa fa-exclamation-circle me-2"></i>
             {{ message }}
+          </div>
+          {% else %}
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            {{ message }}
+          </div>
+          
           {% endif %}
           {% endfor %}
       </div>

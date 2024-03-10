@@ -86,8 +86,8 @@ def gestion_maquina(request, nombre_maquina):
     relacion_maquina_jugador= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
     # Intentar buscar en MaquinaDockerCompose
     maquina_compose = MaquinaDockerCompose.objects.filter(nombre=nombre_maquina).first()
-    conseguido = PuntuacionJugador.objects.filter(jugador=Jugador.objects.get(usuario=request.user), bandera=0)
-    conseguido1 = PuntuacionJugador.objects.filter(jugador=Jugador.objects.get(usuario=request.user), bandera=1)
+    conseguido = PuntuacionJugador.objects.filter(jugador=Jugador.objects.get(usuario=request.user), maquina_vulnerable=relacion_maquina_jugador.maquina_vulnerable, bandera=0).first()
+    conseguido1 = PuntuacionJugador.objects.filter(jugador=Jugador.objects.get(usuario=request.user), maquina_vulnerable=relacion_maquina_jugador.maquina_vulnerable, bandera=1).first()
     if maquina_compose:
         pass
     else:
@@ -188,6 +188,7 @@ def descargar_archivo(request):
             return response
     else:
         return HttpResponse("El archivo no fue encontrado.", status=404)
+
 def logout_vista(request):
     #Cerrar sesión mediante get sin que me de fallo
     logout(request)
