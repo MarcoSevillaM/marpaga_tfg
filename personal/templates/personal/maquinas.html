@@ -1,12 +1,22 @@
 {% extends 'personal/basic_profile.html' %}
-
+{% load static %}
 {% block listMachines %}
 <!-- List of machines -->
 <div class="container-fluid pt-4 px-4">
   <div class="bg-secondary text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h4 class="mb-0">Listado de maquinas disponibles</h4>
-      <a href="">Show All</a>
+      <div class="nav-item dropdown flex-column">
+        <div style="text-decoration: underline;">Filtrar por:</div>
+        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Dificultad</a>
+        <div class="dropdown-menu bg-transparent border-0">
+          <button class="btn btn-primary" onclick="filterTable('all')">Todos</button>
+          <button class="btn btn-outline-primary" onclick="filterTable('facil')">Fácil</button>
+          <button class="btn btn-outline-primary" onclick="filterTable('media')">Media</button>
+          <button class="btn btn-outline-primary" onclick="filterTable('dificil')">Difícil</button>
+          <button class="btn btn-outline-primary" onclick="filterTable('experta')">Experta</button>
+        </div>
+      </div>
     </div>
     <div class="table-responsive">
       <table class="table text-start align-middle table-bordered table-hover mb-0">

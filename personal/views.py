@@ -47,11 +47,11 @@ def personal(request): # Pagina personal del usuario
 def maquinas(request):
     #Necesito el jugador y las maquinas que tiene disponibles
     if request.method == 'GET':
-        #Obtengo el nombre del usuario logueado
-        jugador= Jugador.objects.get(usuario=request.user)
+        #Obtengo las maquinas que tiene disponibles en función de la puntuación del jugador
         maquinas = MaquinaJugador.objects.filter(jugador=jugador)
-        
-        context = { 'maquinas': maquinas,}
+        # Ordeno las maquinas por orden alfabetico
+        maquinas = maquinas.order_by('maquina_vulnerable__nombre')
+        context = { 'maquinas': maquinas}
         return render(request, 'personal/maquinas.html',context)
     elif request.method == 'POST': #Si se pulsa el boton de activar o desactivar
         return redirect('maquinas')
