@@ -21,6 +21,7 @@ from django.shortcuts import get_object_or_404
 import imaplib
 import email
 from email.header import decode_header
+from django.contrib.auth.decorators import user_passes_test
 
 #Funciones para gestionar las flags
 from personal.functions import submit_user_flag
@@ -230,6 +231,13 @@ def profile(request):
 
     return render(request, 'personal/perfil.html', {'formPassword': formPassword, 'formImage': formImage})
 
+# Ver perfil de usuario seleccionado
+@login_required(login_url="inicio")
+def ver_perfil(request, jugador_id):
+    jugador = get_object_or_404(Jugador, pk=jugador_id) #if jugador.usuario != request.user
+    return render(request, 'personal/perfil_jugador.html', {'jugador': jugador})
+
+
 # Vistas para gestionar las flags
 @login_required(login_url="inicio")
 def flag(request, nombre_maquina):
@@ -255,7 +263,17 @@ def flag(request, nombre_maquina):
             messages.error(request, 'Flag incorrecta')
     return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
 
-# Vista para ver los ultimos 10 correos
+# Ranking
+@login_required(login_url="inicio")
+def ranking(request):
+    # Obtengo el ranking de los jugadores
+    jugadores = Jugador.objects.all().order_by('-puntuacion')
+    return render(request, 'personal/ranking.html', {'jugadores': jugadores})
+# Vista para ver los ultimos 10 correos tiene que ser usuario admin
+def is_admin(user):
+    return user.is_staff
+
+@user_passes_test(is_admin)
 def get_last_10_emails(request):
     # Datos del servidor
     username = "marpagamarco@gmail.com"

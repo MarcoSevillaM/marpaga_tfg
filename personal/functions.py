@@ -37,4 +37,6 @@ def  submit_user_flag(usuario, maquina, flag):
     print("Puntuacion: ", puntuacion)
     fecha_obtencion = timezone.now()
     nuevo = PuntuacionJugador(jugador=usuario, maquina_vulnerable=maquina, puntuacion=puntuacion, fecha_obtencion=fecha_obtencion, bandera=flag)
+    usuario.puntuacion += puntuacion
+    usuario.save()
     nuevo.save()

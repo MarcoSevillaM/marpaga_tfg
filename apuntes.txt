@@ -365,5 +365,7 @@ Infinitos problemas con la base de datos y el servidor VPN:
 	- Se gestiona que el usuario no pueda volver a introducir la flag dos veces y ya obtiene la puntuación y la guarda en la base de datos
 	- Ver cuando se crea un nuevo usuario y navegas para levantar una maquina muestra un cuadro de dialogo REVISAR
 	- Pendiente de hacer el proximo día:
-		1. Crear una vista para mostrar el ranking de los mejores jugadores con sus respectivas puntuaciones
-		2. Filtrar maquinas por dificultad
+		1. Crear una vista para mostrar el ranking de los mejores jugadores con sus respectivas puntuaciones HECHO
+		2. Poder ver el perfil de otros jugadores PENDIENTE: Poner la puntuación que tiene cada jugador en su perfil y ver un listado ordenado con un scrollbar de las maquinas
+		3. Filtrar maquinas por dificultad (JavaScript)
+		4. 

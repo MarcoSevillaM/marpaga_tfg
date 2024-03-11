@@ -1,0 +1,54 @@
+{% extends 'personal/basic_profile.html' %}
+{% load humanize %}
+{% load static %}}
+{% block machineDetails %}
+<div class="container-fluid pt-4 px-4">
+  <div class="bg-secondary rounded-top p-4">
+   
+  </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+  <div class="bg-secondary rounded-top p-4">
+    <table class="table table-bordered table-hover">
+      <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Jugador</th>
+              <th scope="col">Puntuación</th>
+              <th scope="col">Email</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for player in jugadores %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    {% if player != request.user.jugador %}
+                    <a href="{% url 'profile_jugador' player.id %}">
+                    {% else %}
+                    <a href="{% url 'profile' %}">
+                    {% endif %}
+                        <div class="d-flex align-items-center ms-2 mb-4">
+                            <img
+                                class="rounded-circle me-3"
+                                {% if player.foto_perfil %}
+                                    src="{{ player.foto_perfil.url }}"
+                                {% else %}
+                                    src="{% static 'assets/img/anonimo.jpg' %}" 
+                                {% endif %}
+                                alt=""
+                                style="width: 40px; height: 40px"
+                            />
+                            <span>{{ player.usuario }}</span>
+                        </div>
+                    </a>
+                </td>
+                <td>{{ player.puntuacion }}</td>
+                <td>{{ player.usuario.email }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
