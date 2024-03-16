@@ -48,6 +48,7 @@ def maquinas(request):
     #Necesito el jugador y las maquinas que tiene disponibles
     if request.method == 'GET':
         #Obtengo las maquinas que tiene disponibles en función de la puntuación del jugador
+        jugador= Jugador.objects.get(usuario=request.user)
         maquinas = MaquinaJugador.objects.filter(jugador=jugador)
         # Ordeno las maquinas por orden alfabetico
         maquinas = maquinas.order_by('maquina_vulnerable__nombre')
@@ -104,7 +105,7 @@ def gestion_maquina(request, nombre_maquina):
             else:
                 # Si no es ninguno de los anteriores
                 pass
-    context={'relacion_maquina_jugador':relacion_maquina_jugador, 'conseguido': conseguido, 'conseguido1': conseguido1}
+    context={'relacion_maquina_jugador':relacion_maquina_jugador, 'conseguido': conseguido, 'conseguido1': conseguido1, 'control': None}
     return render(request, 'personal/maquinaSeleccionada.html',context)
 
 #Para poder activarse el metodo debe de ser post y además ninguna maquina del usuario tiene que estar activa
@@ -247,21 +248,40 @@ def flag(request, nombre_maquina):
     maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
     jugador = Jugador.objects.get(usuario=request.user)
     if flag:
+        # Compruebo que el usuario no haya conseguido ya esa flag
+        if PuntuacionJugador.objects.filter(jugador=jugador, maquina_vulnerable=maquina, bandera=0).first():
+            messages.error(request, 'Ya has conseguido esa flag')
+            return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
     # Compruebo que la flag sea igual a la flag de la maquina
         if maquina.bandera_usuario_inicial == flag:
             # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
             # (si es necesario, es decir si se han completado todas las flags)
+            control = 1
             submit_user_flag(jugador, maquina, 0)
         else:
+            control = 2
             messages.error(request, 'Flag incorrecta')
     elif flag2:
+        # Compruebo que el usuario no haya conseguido ya esa flag
+        if PuntuacionJugador.objects.filter(jugador=jugador, maquina_vulnerable=maquina, bandera=1).first():
+            messages.error(request, 'Ya has conseguido esa flag')
+            return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
         if maquina.bandera_usuario_root == flag2:
+            control = 1
             submit_user_flag(jugador, maquina, 1)
             # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
             # (si es necesario, es decir si se han completado todas las flags)
         else:
+            control = 2
             messages.error(request, 'Flag incorrecta')
-    return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+    else:
+        control = 2
+    conseguido = PuntuacionJugador.objects.filter(jugador=jugador, maquina_vulnerable=maquina, bandera=0).first()
+    conseguido1 = PuntuacionJugador.objects.filter(jugador=jugador, maquina_vulnerable=maquina, bandera=1).first()
+    relacion_maquina_jugador = MaquinaJugador.objects.get(jugador=jugador, maquina_vulnerable=maquina)
+    print(control)
+    #return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
+    return render(request, 'personal/maquinaSeleccionada.html', {'relacion_maquina_jugador': relacion_maquina_jugador, 'conseguido': conseguido, 'conseguido1': conseguido1, 'control': control})
 
 # Ranking
 @login_required(login_url="inicio")

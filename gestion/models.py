@@ -165,6 +165,7 @@ class MaquinaDocker(MaquinaVulnerable):
             return True
         except subprocess.CalledProcessError as e:
             print(f"Error al obtener la dirección IP: {e}")
+            self.detener_maquina_docker(relacion)
             return False
 
     def detener_maquina_docker(self, relacion):

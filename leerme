@@ -74,3 +74,54 @@ fi
 echo "$1 ALL=ALL=(ALL:ALL) NOPASSWD: $pattern" >> /etc/sudoers # Añado la linea al final del archivo
 
 ###############################
+Documentado por: Marco Sevilla Martin
+Fecha: 10/12/2020
+Hecho en el servidor:
+----------
+Pendiente de hacer:
+Instalar el servidor VPN para que funcione correctamente el levantar la maquina y detenerla
+Instalar gunicorn para que corra en el puerto 8000
+Instalar el servidor web nginx para que funcione correctamente y poner el certificado SSL con certbot
+----------
+Instalado:
+-> net-tools
+# apt-get install net-tools -y
+-> nginx
+# apt-get install nginx -y
+-> python3-pip
+# apt install python3 python3-pip -y
+-> python3-venv
+# apt install python3-venv -y
+-> Instalo sqlite3
+# apt-get install sqlite3 -y
+-> Instalo docker (se ha instalado docker.io)
+# apt-get install docker.io -y && apt-get install docker -y
+-> Instalo scrub
+# apt-get install scrub -y
+-> Instalo unzip
+# apt-get install unzip -y
+-> Instalo las iptables
+# apt-get install iptables -y
+-> Instalo lsof
+# apt-get install lsof -y
+-> Instalo systemctl
+# apt-get install systemd -y
+-> Instalado man
+# apt-get install man -y
+-> Instalado el openvpn: OpenVPN 2.5.9
+
+Modificado:
+-> Fichero .bashrc configuraciones como:
+# alias ll='ls -al'
+# Funcion "tfg" y "rmk"
+# export PATH=$PATH:/usr/sbin
+-> Añado al path de root la ruta /usr/sbin (ANTES DE TODO)
+# export PATH=$PATH:/usr/sbin 
+
+Hecho:
+-> Crear el entorno virtual
+# python3 -m venv virtual
+-> Añadir el usuario tfg al grupo sudo
+# sudo usermod -aG sudo tfg
+-> Instalar las dependencias
+# source /home/tfg/TFG/virtual/bin/activate && sudo pip install -r requirements.txt

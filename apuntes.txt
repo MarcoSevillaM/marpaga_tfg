@@ -11,12 +11,12 @@ Instalado:
 #####################################
 CASOS DE USO:
 1.	Registrar jugador (Opcional: Iniciar sesion con google), PENDIENTE iniciar sesión con google
-2.	Iniciar sesión HECHO
-3.	Verificar inició de sesión con correo electronico HECHO
-4.	Recuperar contraseña HECHO
-5.	Cerrar sesión HECHO
+2.	Iniciar sesión: HECHO
+3.	Verificar inició de sesión con correo electronico: HECHO
+4.	Recuperar contraseña: HECHO
+5.	Cerrar sesión: HECHO
 6.	Ver perfil del jugador -> PENDIENTE: Ver los jugadores y por tanto poder ver puntuación, foto de perfil y maquinas reventadas
-7.	Modificar contraseña
+7.	Modificar contraseña: HECHO
 8.	Modificar perfil PENDIENTE: Poder cambiar el correo electronico con su correspondiente verificación
 9.	Descargar VPN (Para la conexión directa entre jugador y maquina vulnerable)
 10.	Obtener instrucciónes de conexión PENDIENTE
@@ -31,10 +31,16 @@ CASOS DE USO:
 19.	Buscar maquina PENDIENTE
 20.	Filtrar maquinas (dificultad, nombre…) PENDIENTE
 Administrador
-21.	Añadir nueva maquina
+21.	Añadir nueva maquina: Panel de administrador-> HECHO, MODIFICAR: Añadir una ruta para no acceder a la administracion por defecto
 22.	Editar características de la maquina (nombre, nivel…)-> MODIFICAR: De momento se puede hacer desde el panel de administracion
 23.	Eliminar usuario
 24.	Concecer rol de administrador
+-> Datos importantes de la base de datos:
+	- Si se crea un User se crea un Jugador y su usuario correspondiente en VPN con su fichero .ovpn: HECHO
+	- Si se crea una MaquinaVulnerable:MaquinaDocker,MaquinaDockerCompose,MaquinaVirtual(Nunca MaquinaVulnerable, será una de las otras 3),
+		se crean tuplas MaquinaJugador de todos aquellos jugadores que tengan puntuacion>=puntuacion_minima_activacion: HECHO
+	- Si se elimina el Usuario se elimina tanto las relaciones como el Jugador como las relaciones MaquinaJugador y debería sus puntuaciones.
+	- Cuando un jugador obtiene puntuación se recalcula la tabla MaquinaJugador para añadir maquinas disponibles que puede tener nuevas
 #####################################
 ->API de fotos sin copyRight: https://www.freepik.es/fotos-vectores-gratis/informatica
 ->Carpeta static y templates establecida para los ficheros HTMLS, CSS, JS e imágenes

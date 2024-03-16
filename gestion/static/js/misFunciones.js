@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
   });
+
+  var myModal = new bootstrap.Modal(document.getElementById('statusModal'));
+    // Mostrar el modal
+    myModal.show();
+    console.log('Mostrando modal de error' + control);
 });
 function mostrarIndicadorDeCarga(formId) {
   // Obtener el formulario y el botón
@@ -69,3 +74,5 @@ function filterTable(level) {
 function quitarAcentos(texto) {
   return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+
+
