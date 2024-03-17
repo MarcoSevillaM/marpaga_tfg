@@ -58,6 +58,12 @@
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <!-- Pongo la puntuaciópn del jugador -->
+                    {% if request.user.jugador.puntuacion > 0 %}
+                        <span class="text-decoration-underline">{{ request.user.jugador.puntuacion }} puntos</span>
+                    {% else %}
+                        <span class="font-weight-bold">Aún no tienes puntuación</span>
+                    {% endif %}
                     <button type="button" class="btn btn-primary btn-transparent border-0 btn-no-outline" data-toggle="modal" data-target="#exampleModal">
                         {% if request.user.jugador.foto_perfil %}
                             <img class="rounded-circle mt-5" width="150px" src="{{ request.user.jugador.foto_perfil.url }}">
@@ -89,16 +95,18 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Foto de perfil</h5>
+                            <div class="modal-header" style="background-color: #191C24;">
+                              <h5 class="modal-title" id="exampleModalLabel">Modificar foto de perfil</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" style="background-color: #191C24;">
                                 <form id="formFotoPerfil" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    {{ formImage.as_p }}
+                                    <div class="mb-3">
+                                      <input class="form-control bg-dark" name="foto_perfil" type="file" id="formFile">
+                                    </div>
                                     <button class="btn btn-primary profile-button" type="submit" name="{{ formImage.submit_button.name }}" value="{{ formImage.submit_button.initial }}">Guardar cambios</button>
                                 </form>
                             </div>

@@ -9,8 +9,12 @@ class VerMaquinaVulnerable(admin.ModelAdmin):
     list_filter = ('nivel_dificultad','puntuacion_minima_activacion')  # Campos por los cuales se pueden filtrar
 
 class VerJugadores(admin.ModelAdmin):
-    list_display = ('usuario', 'puntuacion')  # Campos que se mostrarán en la lista
-    list_filter = ('puntuacion'),  # Campos por los cuales se pueden filtrar
+    list_display = ('usuario', 'obtener_puntuacion')  # Campos que se mostrarán en la lista
+
+    def obtener_puntuacion(self, obj):
+        return obj.puntuacion
+
+    obtener_puntuacion.short_description = 'Puntuación'
 
 class VerRelacionJugadorMaquina(admin.ModelAdmin):
     list_display = ('jugador', 'maquina_vulnerable','activa', 'ip_address')  # Campos que se mostrarán en la lista

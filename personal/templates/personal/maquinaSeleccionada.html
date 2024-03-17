@@ -79,7 +79,7 @@
     <div>
       <form id="desactivar_maquina" onclick="mostrarIndicadorDeCarga('desactivar_maquina'); desactivarBotones();" action="{% url 'desactivar_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" method="post">
         {% csrf_token %}
-      <button id="miBoton" type="submit" class="btn btn-danger">Desactivar</button>
+      <button id="miBoton" type="submit" class="btn btn-primary">Desactivar</button>
       </form>
     </div>
     {% else %}
@@ -113,34 +113,39 @@
 </div>
 {% if control %}
   {% if not control == 1  %}
-  <div class="modal fade show" id="statusModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" style="background-color: #191C24;"> 
+  <div class="modal fade show" id="statusModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false"> 
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document"> 
       <div class="modal-content"> 
-        <div class="modal-body text-center p-lg-4"> 
+        <div class="modal-body text-center p-lg-4" style="background-color: #191C24;"> 
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
             <circle class="path circle" fill="none" stroke="#db3646" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" /> 
             <line class="path line" fill="none" stroke="#db3646" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
             <line class="path line" fill="none" stroke="#db3646" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" X2="34.4" y2="92.2" /> 
           </svg> 
-          <h4 class="text-danger mt-3">Invalid email!</h4> 
-          <p class="mt-3">This email is already registered, please login.</p>
-          <button type="button" class="btn btn-sm mt-3 btn-danger" data-bs-dismiss="modal">Ok</button> 
+          <h4 class="text-danger mt-3">¡Incorrecta!</h4> 
+          <p class="mt-3">La flag que acabas de introducir en incorrecta.</p>
+          <!-- <form action="{% url 'gestion_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}">
+            <button type="submit" class="btn btn-sm mt-3 btn-danger" data-bs-dismiss="modal">Volver a intentarlo</button> 
+          </form> -->
+          <a href="{% url 'gestion_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}" class="btn btn-sm mt-3 btn-danger">Volver a intentarlo</a>
         </div> 
       </div> 
     </div> 
   </div>
   {% else %}
-  <div class="modal fade show" id="statusModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" style="background-color: #191C24;"> 
+  <div class="modal fade show" id="statusModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false"> 
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document"> 
       <div class="modal-content"> 
-        <div class="modal-body text-center p-lg-4"> 
+        <div class="modal-body text-center p-lg-4" style="background-color: #191C24;"> 
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
             <circle class="path circle" fill="none" stroke="#198754" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
             <polyline class="path check" fill="none" stroke="#198754" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " /> 
           </svg> 
-          <h4 class="text-success mt-3">Oh Yeah!</h4> 
-          <p class="mt-3">You have successfully registered and logged in.</p>
-          <button type="button" class="btn btn-sm mt-3 btn-success" data-bs-dismiss="modal">Ok</button> 
+          <h4 class="text-success mt-3">¡Enhorabuena!</h4> 
+          <p class="mt-3">Acabas de conseguir {{puntuacion}} puntos</p>
+          <form action="{% url 'gestion_maquina' nombre_maquina=relacion_maquina_jugador.maquina_vulnerable %}">
+            <button type="submit" class="btn btn-sm mt-3 btn-success" data-bs-dismiss="modal">Ok</button> 
+          </form>
         </div> 
       </div> 
     </div> 

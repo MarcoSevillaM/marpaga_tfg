@@ -50,7 +50,6 @@ from django.dispatch import receiver
 # # La base de datos contendrá unos usuarios denominados "jugadores" con su perfil propio
 class Jugador(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    puntuacion = models.IntegerField(default=0) #Se usará para el ranking y dependerá de las banderas obtenidas en cada maquina, su dificultad y tiempo en conseguirlo.
     foto_perfil = models.ImageField(upload_to='photoPersonal/', blank=True, null=True, storage=OverwriteStorage(), default='photoPersonal/default.jpg')
     
     # Cuando se crea un jugador se le crea un cliente vpn por lo que se ejecuta el script createUserVPN.sh
@@ -67,8 +66,11 @@ class Jugador(models.Model):
         return self.usuario.username
     class Meta: 
         verbose_name_plural="Jugadores"
+    @property
+    def puntuacion(self):
+        return self.obtener_puntuacion()
     def obtener_puntuacion(self):
-        return PuntuacionJugador.objects.filter(jugador=self).aggregate(Sum('puntuacion'))['puntuacion__sum']
+        return PuntuacionJugador.objects.filter(jugador=self).aggregate(Sum('puntuacion'))['puntuacion__sum'] or 0
 
 class MaquinaVulnerable(models.Model):
     DIFFICULT_CHOICES = (
@@ -128,7 +130,6 @@ class MaquinaDocker(MaquinaVulnerable):
                 raise ValidationError('Formato introducido incorrecto')
 
     def levantar_maquina_docker(self, relacion):
-        print("Levantando la máquina")
         ruta_dockerfile = f'maquinas_docker/{self.nombre}/Dockerfile'
         comando = f"docker run --name {relacion.jugador.usuario.username} -d --rm {self.nombre.lower()}"
         try:
@@ -318,7 +319,7 @@ def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
         jugador = Jugador.objects.create(usuario=instance) #Crea el jugador
         maquinas_disponibles = MaquinaVulnerable.objects.all()
         for maquina in maquinas_disponibles:
-            if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
+            if jugador.obtener_puntuacion() >= maquina.puntuacion_minima_activacion:
                 MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
 
 #Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
@@ -326,7 +327,7 @@ def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **
     if created:
         jugadores = Jugador.objects.all()
         for jugador in jugadores:
-            if jugador.puntuacion >= instance.puntuacion_minima_activacion:
+            if jugador.obtener_puntuacion() >= instance.puntuacion_minima_activacion:
                 MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=instance)
 
 # Función para crear la realción maquina-jugador cuando se actualiza la puntuación de un jugador
@@ -335,7 +336,7 @@ def crear_relacion_al_actualizar_puntuacion(sender, instance, **kwargs):
     jugador = Jugador.objects.get(usuario=instance.usuario)
     for maquina in maquinas_disponibles:
         # Obtener el jugador
-        if jugador.puntuacion >= maquina.puntuacion_minima_activacion:
+        if jugador.obtener_puntuacion() >= maquina.puntuacion_minima_activacion:
             MaquinaJugador.objects.get_or_create(jugador=jugador, maquina_vulnerable=maquina)
 
 
@@ -381,7 +382,6 @@ def delete_user(sender, instance, **kwargs):
     subprocess.run(comando, shell=True, check=True)
 
 def obtener_tipo_maquina(maquina):
-    print(maquina)
     if hasattr(maquina, 'maquinadocker'):
         return getattr(maquina, 'maquinadocker')
     elif hasattr(maquina, 'maquinadockercompose'):
@@ -390,6 +390,7 @@ def obtener_tipo_maquina(maquina):
         return getattr(maquina, 'maquinavirtual')
     else:
         return None
+
 def jugador_conectado_vpn(usuario):
     return True # Suponemos que el usuario esta siempre conectado
     #comando = f"sudo ./createUserVPN.sh check {usuario}"

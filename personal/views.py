@@ -236,7 +236,9 @@ def profile(request):
 @login_required(login_url="inicio")
 def ver_perfil(request, jugador_id):
     jugador = get_object_or_404(Jugador, pk=jugador_id) #if jugador.usuario != request.user
-    return render(request, 'personal/perfil_jugador.html', {'jugador': jugador})
+    # Obtengo el listado de maquinas que ha resuelto el jugador
+    maquinas = PuntuacionJugador.objects.filter(jugador=jugador)
+    return render(request, 'personal/perfil_jugador.html', {'jugador': jugador, 'maquinas': maquinas})
 
 
 # Vistas para gestionar las flags
@@ -247,6 +249,7 @@ def flag(request, nombre_maquina):
     flag2 = request.POST.get('flag2')
     maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
     jugador = Jugador.objects.get(usuario=request.user)
+    puntuacion = 0
     if flag:
         # Compruebo que el usuario no haya conseguido ya esa flag
         if PuntuacionJugador.objects.filter(jugador=jugador, maquina_vulnerable=maquina, bandera=0).first():
@@ -257,7 +260,7 @@ def flag(request, nombre_maquina):
             # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
             # (si es necesario, es decir si se han completado todas las flags)
             control = 1
-            submit_user_flag(jugador, maquina, 0)
+            puntuacion = submit_user_flag(jugador, maquina, 0)
         else:
             control = 2
             messages.error(request, 'Flag incorrecta')
@@ -268,7 +271,7 @@ def flag(request, nombre_maquina):
             return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
         if maquina.bandera_usuario_root == flag2:
             control = 1
-            submit_user_flag(jugador, maquina, 1)
+            puntuacion = submit_user_flag(jugador, maquina, 1)
             # Cambio el estado de la flag, añado la puntuación al jugador y cambio el estado de la máquina a apagado
             # (si es necesario, es decir si se han completado todas las flags)
         else:
@@ -279,15 +282,14 @@ def flag(request, nombre_maquina):
     conseguido = PuntuacionJugador.objects.filter(jugador=jugador, maquina_vulnerable=maquina, bandera=0).first()
     conseguido1 = PuntuacionJugador.objects.filter(jugador=jugador, maquina_vulnerable=maquina, bandera=1).first()
     relacion_maquina_jugador = MaquinaJugador.objects.get(jugador=jugador, maquina_vulnerable=maquina)
-    print(control)
     #return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
-    return render(request, 'personal/maquinaSeleccionada.html', {'relacion_maquina_jugador': relacion_maquina_jugador, 'conseguido': conseguido, 'conseguido1': conseguido1, 'control': control})
+    return render(request, 'personal/maquinaSeleccionada.html', {'relacion_maquina_jugador': relacion_maquina_jugador, 'conseguido': conseguido, 'conseguido1': conseguido1, 'control': control, 'puntuacion': puntuacion})
 
 # Ranking
 @login_required(login_url="inicio")
 def ranking(request):
     # Obtengo el ranking de los jugadores
-    jugadores = Jugador.objects.all().order_by('-puntuacion')
+    jugadores = sorted(Jugador.objects.all(), key=lambda x: x.obtener_puntuacion(), reverse=True)
     return render(request, 'personal/ranking.html', {'jugadores': jugadores})
 # Vista para ver los ultimos 10 correos tiene que ser usuario admin
 def is_admin(user):
