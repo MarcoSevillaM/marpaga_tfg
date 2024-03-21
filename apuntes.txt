@@ -380,3 +380,6 @@ Infinitos problemas con la base de datos y el servidor VPN:
 Para el proximo día hacer:
 	- Notificar/Informar error del sistema(CU-17): Esto es desde el panel de administracion
 	- Valorar maquina vulnerada(CU 18): Añadir a la bd una tabla para las valoraciones de las maquinas y sobre todo el html y css con estrellas para valorar la maquina
+
+- Acabo de llegar a mi pueblo por lo que la ip publica de salamanca es: 83.55.56.178
+- La ip publica del router de mi pueblo: 
