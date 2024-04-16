@@ -28,7 +28,7 @@ CASOS DE USO:
 16.	Mostrar máquinas disponibles HECHO
 17.	Notificar/Informar error del sistema: Desde el panel principal PENDIENTE
 18.	Valorar maquina vulnerada: Luego en cada maquina poner la media de la valoración y el total de votos hechos PENDIENTE
-19.	Filtrar maquinas (dificultad, nombre…) HECHO
+19.	Filtrar maquinas (dificultad, nombre…) HECHO-> No se busca por maquina
 Administrador
 20.	Añadir nueva maquina: Panel de administrador-> HECHO, MODIFICAR: Añadir una ruta para no acceder a la administracion por defecto
 21.	Editar características de la maquina (nombre, nivel…)-> MODIFICAR: De momento se puede hacer desde el panel de administracion
@@ -378,8 +378,12 @@ Infinitos problemas con la base de datos y el servidor VPN:
 				- Poner una tabla en la que ponga: Maquina-puntuacion-fecha
 -----17-03-2024---------
 Para el proximo día hacer:
-	- Notificar/Informar error del sistema(CU-17): Esto es desde el panel de administracion
-	- Valorar maquina vulnerada(CU 18): Añadir a la bd una tabla para las valoraciones de las maquinas y sobre todo el html y css con estrellas para valorar la maquina
+	- Notificar/Informar error del sistema(CU-17): Esto es desde el panel de administracion PENDIENTE
+	- Valorar maquina vulnerada(CU 18): Añadir a la bd una tabla para las valoraciones de las maquinas y sobre todo el html y css con estrellas para valorar la maquina PENDIENTE
 
 - Acabo de llegar a mi pueblo por lo que la ip publica de salamanca es: 83.55.56.178
 - La ip publica del router de mi pueblo: 
+
+-----16-04-2024---------
+Se ha dejado PENDIENTE lo del anterior dia.
+Se modifica la client-template.txt: /etc/openvpn/client-template.txt para poner: remote marpaga.hopto.org 1194
