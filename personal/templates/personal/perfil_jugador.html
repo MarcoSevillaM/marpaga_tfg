@@ -55,11 +55,6 @@
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                  {% if jugador.puntuacion > 0 %}
-                    <span class="text-decoration-underline">{{ jugador.puntuacion }} puntos</span>
-                  {% else %}
-                    <span class="font-weight-bold">Aún no ha obtenido puntuación</span>
-                  {% endif %}
                     {% if jugador.foto_perfil %}
                         <img class="rounded-circle mt-5" width="150px" src="{{ jugador.foto_perfil.url }}">
                     {% else %}
@@ -79,9 +74,6 @@
                         <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control" value='{{ jugador.usuario.first_name }}' readonly style="background-color: black;"></div>
                         <div class="col-md-6"><label class="labels">Apellidos</label><input type="text" class="form-control" value='{{ jugador.last_name }}' readonly style="background-color: black;"></div>
                       </div>
-                      <div class="row mt-3">
-                          <div class="col-md-12"><label class="labels">Correo electronico</label><input type="text" class="form-control" placeholder="first name" value='{{ jugador.usuario.email }}' readonly style="background-color: black;"></div>
-                      </div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -90,19 +82,34 @@
                       <h3 class="text-decoration-underline"><span>Maquinas vulneradas</span></h3>
                   </div><br>
                   <div class="row mt-3">
-                      <hr>
-                      {% for m in maquinas %}
-                      <p> Obtuvo {{m.puntuacion}} puntos: El {{ m.fecha_obtencion|date:"d" }} de {{ m.fecha_obtencion|date:"F" }} del {{ m.fecha_obtencion|date:"Y" }}</p>
-                      {% endfor %}
-                      {% for m in maquinas %}
-                      <p> Obtuvo {{m.puntuacion}} puntos: El {{ m.fecha_obtencion|date:"d" }} de {{ m.fecha_obtencion|date:"F" }} del {{ m.fecha_obtencion|date:"Y" }}</p>
-                      {% endfor %}
-                      {% for m in maquinas %}
-                      <p> Obtuvo {{m.puntuacion}} puntos: El {{ m.fecha_obtencion|date:"d" }} de {{ m.fecha_obtencion|date:"F" }} del {{ m.fecha_obtencion|date:"Y" }}</p>
-                      {% endfor %}
-                      {% for m in maquinas %}
-                      <p> Obtuvo {{m.puntuacion}} puntos: El {{ m.fecha_obtencion|date:"d" }} de {{ m.fecha_obtencion|date:"F" }} del {{ m.fecha_obtencion|date:"Y" }}</p>
-                      {% endfor %}
+                    {% if jugador.puntuacion > 0 %}
+                    <h5 class="mb-4">Tiene {{ jugador.puntuacion }} puntos</h5>
+                    {% else %}
+                    <h6 class="mb-4">Aún no ha obtenido puntuación</h6>
+                    {% endif %}
+                      <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Maquina</th>
+                                <th scope="col">Bandera (Puntos)</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for m in maquinas %}
+                            <tr>
+                                <td>{{m.maquina_vulnerable}}</td>
+                                {% if m.bandera == 1 %}
+                                <td>Falg 1 ({{m.puntuacion}})</td>
+                                {% else %}
+                                <td>Falg 2 ({{m.puntuacion}}pts)</td>
+                                {% endif %}
+                                <td>{{ m.fecha_obtencion|date:"d/m/Y H:i" }}</td>
+                            </tr>
+                          {% endfor %}
+                          
+                        </tbody>
+                    </table>
                   </div>
               </div>
           </div>

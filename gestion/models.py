@@ -308,8 +308,8 @@ class PuntuacionJugador(models.Model):
     fecha_obtencion = models.DateTimeField(auto_now_add=True)
     bandera = models.IntegerField(default=0) # 0: Bandera del usuario, 1: Bandera del root
     def __str__(self):
-        estado = "del root" if self.bandera else "del usuario"
-        return f"{self.jugador.usuario.username} ha obtenido la bandera {estado} de la maquina {self.maquina_vulnerable.nombre}"
+        estado = "flag 2" if self.bandera else "flag 1"
+        return f"{self.jugador.usuario.username} ha obtenido la {estado} de la maquina {self.maquina_vulnerable.nombre}"
     class Meta:
         verbose_name_plural = "Banderas de los jugadores"
 
@@ -392,11 +392,13 @@ def obtener_tipo_maquina(maquina):
         return None
 
 def jugador_conectado_vpn(usuario):
-    return True # Suponemos que el usuario esta siempre conectado
-    #comando = f"sudo ./createUserVPN.sh check {usuario}"
+    #return True # Suponemos que el usuario esta siempre conectado
+    comando = f"sudo ./createUserVPN.sh check {usuario}"
     try:
-        #Obtengo el output del comando
+        #Compruebo si el usuario esta conectado o por lo menos ha estado conectado en algún momento
+        print("Llega aqui con el usuario: ", usuario)
         salida = subprocess.run(comando, shell=True, check=True, capture_output=True)
+        #print(f"Output del comando: {salida}")
         #Si el output es 0 entonces el usuario está conectado
         if salida.returncode == 0:
             return True

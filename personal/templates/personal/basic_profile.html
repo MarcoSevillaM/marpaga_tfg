@@ -246,10 +246,10 @@
               <div
                 class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"
               >
-                <a href="{% url 'descargar_archivo' %}" class="dropdown-item" download="{{request.user}}.ovpn">Descargar VPN</a>
+                <a class="dropdown-item"><button id="openModalBtn" class="download-btn" data-toggle="modal" data-target="#vpnModal" style="background-color: transparent; color: #6C7293; border: none; padding-inline: 0px;">Descargar VPN</button></a>
                 <a href="{% url 'profile' %}" class="dropdown-item">Perfil</a>
                 <a href="#" class="dropdown-item">Ajustes</a>
-                <a href="{% url 'logout_vista' %}" class="dropdown-item"> Cerrar Sesion</a>
+                <a href="{% url 'logout_vista' %}" class="dropdown-item">Cerrar Sesion</a>
                 <!-- <form method='post' action="{% url 'logout' %}">
                   <a class="dropdown-item">
                     {% csrf_token %}

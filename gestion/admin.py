@@ -24,7 +24,6 @@ class VerRelacionJugadorMaquina(admin.ModelAdmin):
 admin.site.register(MaquinaVulnerable, VerMaquinaVulnerable)
 admin.site.register(Jugador, VerJugadores)
 admin.site.register(MaquinaJugador, VerRelacionJugadorMaquina)
-
 # Maquinas soportadas en el sistema
 # Maquinas Docker a partir de un Dockerfile
 @admin.register(MaquinaDocker)

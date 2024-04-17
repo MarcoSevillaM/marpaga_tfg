@@ -106,6 +106,24 @@ function revokeClient() {
 	cp /etc/openvpn/easy-rsa/pki/index.txt{,.bk}
 }
 
+function checkClient() {
+	#Compruebo si el usuario esta conectado desde el fichero /var/log/openvpn/status.log o ha estado conectado en algún momento /etc/openvpn/ipp.txt
+	CLIENTEXISTS=$(grep -E "[0-9]+\.[0-9]+\.[0-9]+\.[0-9],$CLIENT+" /var/log/openvpn/status.log | wc -l)
+	if [[ $CLIENTEXISTS == '1' ]]; then
+		# El cliente esta conectado
+		exit 0
+	else
+		#El cliente no está conectado pero sí puede haber estado
+		CLIENTEXISTS=$(grep -E "$CLIENT," /etc/openvpn/ipp.txt | wc -l)
+		if [[ $CLIENTEXISTS == '1' ]]; then
+			#El cliente ha estado conectado
+			exit 0
+		fi
+		# El cliente no existe
+		exit 1
+	fi
+}
+
 # Controlo los parametros que se le pasan al script si es add o rm
 # Uso: ./createUserVPN.sh add <nombreUsuario>
 
@@ -119,6 +137,9 @@ if [ "$1" == "add" ]; then
 elif [ "$1" == "del" ]; then
     CLIENT=$2
     revokeClient
+elif [ "$1" == "check" ]; then
+    CLIENT=$2
+    checkClient
 else
     echo "Error en los parametros"
 fi

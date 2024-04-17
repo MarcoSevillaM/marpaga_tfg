@@ -35,7 +35,9 @@ def personal(request): # Pagina personal del usuario
         #Obtengo el nombre del usuario logueado
         jugador= Jugador.objects.get(usuario=request.user)
         maquinas = MaquinaJugador.objects.filter(jugador=jugador)
-        context = { 'maquinas': maquinas}
+        # Obtengo la posicion del jugador en el ranking
+        posicion = sorted(Jugador.objects.all(), key=lambda x: x.obtener_puntuacion(), reverse=True).index(jugador) + 1
+        context = { 'maquinas': maquinas, 'posicion': posicion}
         return render(request, 'gestion/personal.html',context)
     #Gestionar cuando se pulse un boton
     if request.method == 'POST':
@@ -57,7 +59,7 @@ def maquinas(request):
     elif request.method == 'POST': #Si se pulsa el boton de activar o desactivar
         return redirect('maquinas')
 
-
+#Ahora mismo no hace nada  pero es codigo para levantar un contenedor docker con una api
 def gestionar_maquina(control, usuario, client):
     if control == 1:
         try:	
@@ -133,12 +135,12 @@ def activar_maquina(request, nombre_maquina):
                     relacion_maquina_jugador.activa = True
                     relacion_maquina_jugador.save()
                     if not relacion_maquina_jugador.activa:
-                        messages.error(request, 'Error al levantar la maquina.')
+                        messages.error(request, 'Error al levantar la maquina -> de tipo maquinadocker.')
                 elif hasattr(maquina, 'maquinadockercompose'):
                     relacion_maquina_jugador.activa = True
                     relacion_maquina_jugador.save()
                     if not relacion_maquina_jugador.activa:
-                        messages.error(request, 'Error al levantar la maquina.')
+                        messages.error(request, 'Error al levantar la maquina -> de tipo maquinadockercompose.')
                 elif hasattr(maquina, 'maquinavirtual'):
                     messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
                 #Ejecutar la funcion de iptables para eliminar la regla correspondiente
