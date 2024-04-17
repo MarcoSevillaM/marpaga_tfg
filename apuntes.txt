@@ -387,3 +387,8 @@ Para el proximo día hacer:
 -----16-04-2024---------
 Se ha dejado PENDIENTE lo del anterior dia.
 Se modifica la client-template.txt: /etc/openvpn/client-template.txt para poner: remote marpaga.hopto.org 1194
+-----17-04-2024---------
+Se ha muestra el listado de maquinas vulneradas de los usuarios PENDIENTE hacer que se muestre el listado de logros conseguidos de cada usuario
+Cuadro modal para explicación de conexión VPN de un usuario
+Mejora de codigo para comprobar cuando un usuario esta conectado a la vpn: ficheros importantes-> /var/log/openvpn/status.log y /etc/openvpn/ipp.txt,
+	 función jugador_conectado_vpn de models.py se encarga de controlarlo.
