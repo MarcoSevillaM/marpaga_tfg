@@ -52,6 +52,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!--  -->
+    
     <style>
       .rounded-icon {
           background-image: url('{% static "assets/img/logo.jpg" %}');
@@ -67,7 +68,17 @@
       .btn-no-outline:focus {
         box-shadow: none !important;
       }
-      
+      /* Codigo para las valoraciones */
+        .rating {
+            font-size: 24px;
+            color: #ffffff; /* Color for the selected stars */
+        }
+
+        .star:hover,
+        .star.active,
+        .star.hover {
+            color: #ffcc00; /* Color for hovered or active stars */
+        }
     </style>
   </head>
   {% endblock header %}
@@ -525,7 +536,7 @@
     </div>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'lib/chart/chart.min.js' %}"></script>
     <script src="{% static 'lib/easing/easing.min.js' %}"></script>
@@ -537,5 +548,49 @@
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/misFunciones.js' %}"></script>
+
+    <!--  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta3/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const stars = document.querySelectorAll(".star");
+            const ratingText = document.querySelector(".selected-rating");
+            let currentRating = 0;
+
+            stars.forEach((star) => {
+                star.addEventListener("click", function() {
+                    const rating = parseInt(star.getAttribute("data-rating"));
+                    setActiveStars(rating);
+                    ratingText.textContent = rating;
+                    currentRating = rating;
+                });
+
+                star.addEventListener("mouseover", function() {
+                    const rating = parseInt(star.getAttribute("data-rating"));
+                    setHoverStars(rating);
+                });
+
+                star.addEventListener("mouseout", function() {
+                    setActiveStars(currentRating);
+                });
+            });
+
+            function setActiveStars(rating) {
+                stars.forEach((star) => {
+                    const starRating = parseInt(star.getAttribute("data-rating"));
+                    star.classList.toggle("active",  starRating <= rating);
+                });
+            }
+
+            function setHoverStars(rating) {
+                stars.forEach((star) => {
+                    const starRating = parseInt(star.getAttribute("data-rating"));
+                    star.classList.toggle("hover", starRating <= rating);
+                });
+            }
+        });
+</script>
   </body>
 </html>

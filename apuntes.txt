@@ -19,7 +19,7 @@ CASOS DE USO:
 7.	Modificar contraseña: HECHO
 8.	Modificar perfil PENDIENTE: Poder cambiar el correo electronico con su correspondiente verificación
 9.	Descargar VPN (Para la conexión directa entre jugador y maquina vulnerable)
-10.	Obtener instrucciónes de conexión PENDIENTE
+10.	Obtener instrucciónes de conexión PENDIENTE->HECHO
 11.	Arrancar maquina vulnerable: HECHO
 12.	Detener maquina vulnerable: HECHO
 13.	Verificar bandera del usuario vulnerado (El jugador obtendrá una puntuación en función del nivel de dificultad de la maquina) HECHO
@@ -27,7 +27,7 @@ CASOS DE USO:
 15.	Mostrar ranking de jugadores por puntuación HECHO
 16.	Mostrar máquinas disponibles HECHO
 17.	Notificar/Informar error del sistema: Desde el panel principal PENDIENTE
-18.	Valorar maquina vulnerada: Luego en cada maquina poner la media de la valoración y el total de votos hechos PENDIENTE
+18.	Valorar maquina vulnerada: Luego en cada maquina poner la media de la valoración y el total de votos hechos PENDIENTE->Se ha mirado como hacer el front
 19.	Filtrar maquinas (dificultad, nombre…) HECHO-> No se busca por maquina
 Administrador
 20.	Añadir nueva maquina: Panel de administrador-> HECHO, MODIFICAR: Añadir una ruta para no acceder a la administracion por defecto
@@ -66,7 +66,7 @@ Administrador
 	+ sudo pip install pydotplus && (REVISAR No esta instalado)pip install pygraphviz && apt-get install graphviz
 	+ python3 manage.py graph_models -a -g -o my_models.png
 ->Levantar una maquina tiene una ruta /my/maquinas/nombreMaquina/activar o desactivar lo mejor es que la variable activar o desactivar vaya como un parámetro en POST: HECHO
-->Levantar y detener una maquina sin linea de comandos con la API de docker PENDIENTE -> No funciona se ha hecho con subprocess
+->Levantar y detener una maquina sin linea de comandos con la API de docker PENDIENTE -> No funciona: se ha hecho con subprocess
 ->Establecer un enlace a la pagina oficial de fciencias
 --------------
 Script de importacón de una nueva maquinas vulnerable (PENDIENTE)
@@ -82,7 +82,7 @@ Para las traducciones del ingles al español:
 ->Editar el fichero poniendo: 	msgid "The two password fields didn't match."
 				msgstr "Las dos contraseñas no coinciden."
 -> Guardar con: # python manage.py compilemessages
-==> No funciona mirar errores (PENDIENTE)
+==> No funciona mirar errores (PENDIENTE->Opcional el idioma)
 -----15-02-2024---------
 -Para usar un servidor web usar guicon para ello instalarlo:# apt install gunicorn
 -Añadir en la aplicacion principal del proyecto el fichero wsgi.py
@@ -119,7 +119,7 @@ Para las traducciones del ingles al español:
 	     CustomLog /home/marco/Escritorio/marpaga_access.log combined
 	</VirtualHost>
 	====================
---> ¡Para que funcione todo correctamente hay que mirar bien los permisos! (Pendiente de hacer)-> HECHO con el script auto.sh ejecutado desde la .bashrc "producciontfg comando"
+--> ¡Para que funcione todo correctamente hay que mirar bien los permisos! (Pendiente de hacer->FUNCIONA con producciontfg)-> HECHO con el script auto.sh ejecutado desde la .bashrc "producciontfg comando"
 	-----16-02-2024---------
 	- Se han gestionado los botones de activación/desactivación de los usuario en redes y contenedores diferentes
 	- Mostrar la ip al activar la maquina
@@ -193,7 +193,7 @@ REVISAR
 	+ Tambien los imports correspondientes
 	-> Cuando un usuario se registra pero no activa la cuenta durante X tiempo eliminarla (se ha creado managements/commands): HECHO
 	-> Modificar el html account_activation_email.html
--> Caso de uso contraseña olvidada: PENDIENTE->MODIFICAR su estetica esta a medio hacer
+-> Caso de uso contraseña olvidada: PENDIENTEE->MODIFICAR su estetica esta a medio hacer->HECHO
 -----27-02-2024---------
 -> Implementar crontab para eliminar los usuarios que no tengan la cuneta activada:
 	Opcion 1:
@@ -328,7 +328,7 @@ Hacer casos de uso:
 - ¡IMPORTANTE! No funciona que cuando un usuario actualiza su foto no se guarda por su nombre de usuario
 -> Cuando es el mismo nombre se modifica pero no establece el nombreUsuario.jpg importante de REVISAR
 -> COSAS QUE HACER:
-	- Añadir la modificación de datos personales-> PENDIENTE modificar correo electronico con verificación anterior HACER
+	- Añadir la modificación de datos personales-> PENDIENTE NO SE PUEDE MODIFICAR EL CORREO ELECTRÓNICO modificar correo electronico con verificación anterior HACER
 	- Después añadir una nueva maquina "docker-lab" que es un DPT-> funciona pero cada dockerfile es un mundo y hay que ver cómo se puede automatizar todo
 	--> Hay que añadir las banderas para demostrar que se ha vulnerado correctamente
 	- Buscar y añadir un Docker-compose y adaptar el codigo para que funcione PENDIENTE
@@ -388,7 +388,17 @@ Para el proximo día hacer:
 Se ha dejado PENDIENTE lo del anterior dia.
 Se modifica la client-template.txt: /etc/openvpn/client-template.txt para poner: remote marpaga.hopto.org 1194
 -----17-04-2024---------
-Se ha muestra el listado de maquinas vulneradas de los usuarios PENDIENTE hacer que se muestre el listado de logros conseguidos de cada usuario
+Se ha muestra el listado de maquinas vulneradas de los usuarios PENDIENTE hacer que se muestre el listado de logros conseguidos de cada usuario personalmente
 Cuadro modal para explicación de conexión VPN de un usuario
 Mejora de codigo para comprobar cuando un usuario esta conectado a la vpn: ficheros importantes-> /var/log/openvpn/status.log y /etc/openvpn/ipp.txt,
 	 función jugador_conectado_vpn de models.py se encarga de controlarlo.
+Se ha empezado a hacer las estrellas para las valoraciones de las máquinas para que el usuario pueda valorar
+
+-----18-04-2024---------
+Cosas que hacer:
+1. Mostrar el listado de logros conseguidos por uno mismo
+2. Añadir a la base de datos que un usuario pueda valorar las maquinas (crear la base de datos correspondiente para almacenar las votaciones)
+3. Ver como hacer los gráficos del panel de admin:
+	3.1 Un gráfico que muestre las votaciones de cada máquina en relación a las estrellas-> cada maquina: eje x estrellas eje y nº de personas
+	3.2 Conseguir el tiempo que tarda cada usuario en reventar una maquina -> eje x dificultad y eje y mediaTiempoJugadoresTotales*tiempoTotal/100 poner un filtro para flag 1 y flag 2
+4. Conseguir automatizar más docker-compose
