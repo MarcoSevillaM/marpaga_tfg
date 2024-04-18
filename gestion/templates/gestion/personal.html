@@ -40,16 +40,6 @@
         {% else %}
         <h6>¡¡Felicidades!! Ahora mismo eres el mejor pentester de Marpaga, sigue consiguiendo puntos para mantener tu posición.</h6>
         {% endif %}
-        <div class="container mt-5">
-          <div class="rating" data-rating="0">
-              <i class="star fas fa-star" data-rating="1"></i>
-              <i class="star fas fa-star" data-rating="2"></i>
-              <i class="star fas fa-star" data-rating="3"></i>
-              <i class="star fas fa-star" data-rating="4"></i>
-              <i class="star fas fa-star" data-rating="5"></i>
-          </div>
-          <p>Rating: <span class="selected-rating">0</span>/5</p>
-        </div>
       </div>
     </div>
   </div>
@@ -82,42 +72,4 @@
 
 {% block scripts %}
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const stars = document.querySelectorAll(".star");
-    const ratingText = document.querySelector(".selected-rating");
-    let currentRating = 0;   
-    stars.forEach((star) => {
-      star.addEventListener("click", function() {
-        const rating = parseInt(star.getAttribute("data-rating"));
-        setActiveStars(rating);
-        ratingText.textContent = rating;
-        currentRating = rating;
-      });
-          
-      star.addEventListener("mouseover", function() {
-        const rating = parseInt(star.getAttribute("data-rating"));
-        setHoverStars(rating);
-      });
-
-      star.addEventListener("mouseout", function() {
-        setActiveStars(currentRating);
-      });
-    });
-            
-    function setActiveStars(rating) {
-      stars.forEach((star) => {
-        const starRating = parseInt(star.getAttribute("data-rating"));
-        star.classList.toggle("active",  starRating <= rating);
-      });
-    }
-            
-    function setHoverStars(rating) {
-      stars.forEach((star) => {
-        const starRating = parseInt(star.getAttribute("data-rating"));
-        star.classList.toggle("hover", starRating <= rating);
-      });
-    }
-  });
-  </script>
 {% endblock scripts %}

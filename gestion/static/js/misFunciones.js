@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     myModal.show();
     console.log('Mostrando modal de error' + control);
 });
+
 function mostrarIndicadorDeCarga(formId) {
   // Obtener el formulario y el botón
   var form = document.getElementById(formId);
@@ -57,6 +58,7 @@ function filterTable(level) {
     }
   });
 
+
   var rows = document.querySelectorAll('tbody tr');
   rows.forEach(function(row) {
     // Verificar si hay al menos 3 celdas antes de acceder a textContent
@@ -71,8 +73,11 @@ function filterTable(level) {
     }
   });
 }
+
 function quitarAcentos(texto) {
   return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+
+
 
 

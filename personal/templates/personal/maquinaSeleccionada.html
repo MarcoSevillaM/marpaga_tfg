@@ -23,9 +23,18 @@
       <button type="submit" onclick="mostrarModalConfirmacion('{{ control }}')" class="btn btn-primary" id="btnFlag1">Enviar</button>
       <!-- --------------------------- -->
       {% else %}
-      <div class="alert alert-success" role="alert">
-        <i class="fa fa-check-circle me-2"></i>
-        Has conseguido la flag ({{ conseguido.fecha_obtencion|naturaltime }})
+      <div class="d-flex align-items-center" data-rating="0">
+        <div class="alert alert-success" role="alert">
+          <i class="fa fa-check-circle me-2"></i>
+          <span >Has conseguido la flag 1 ({{ conseguido.fecha_obtencion|naturaltime }})</span>
+        </div>
+        <!-- <div class="rating">
+        <i class="star fas fa-star" data-rating="1"></i>
+        <i class="star fas fa-star" data-rating="2"></i>
+        <i class="star fas fa-star" data-rating="3"></i>
+        <i class="star fas fa-star" data-rating="4"></i>
+        <i class="star fas fa-star" data-rating="5"></i>
+        </div> -->
       </div>
       {% endif %}
     </form>
@@ -41,9 +50,11 @@
       </div>
       <button type="submit" class="btn btn-primary" id="btnFlag2">Enviar</button>
       {% else %}
-      <div class="alert alert-success" role="alert">
-        <i class="fa fa-check-circle me-2"></i>
-        Has conseguido la flag ({{ conseguido1.fecha_obtencion|naturaltime }})
+      <div class="d-flex align-items-center" data-rating="0">
+        <div class="alert alert-success" role="alert">
+          <i class="fa fa-check-circle me-2"></i>
+          <span >Has conseguido la flag 2 ({{ conseguido1.fecha_obtencion|naturaltime }})</span>
+        </div>
       </div>
       {% endif %}
     </form>

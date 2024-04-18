@@ -415,5 +415,6 @@ Cosa 2:
 		def get_item(dictionary, key):
 			return dictionary.get(key)
 	Esta HECHO pero mejorar el JS (No creo que de tiempo)
+	IMPORTANTE: MODIFICAR En el ranking poner las columnas numero, nombre, puntucación y cuanto tiempo llevan en la aplicación registrados
 Cosa 3 GRAFICOS (Se va a intentar hacer por la tarde):
 			

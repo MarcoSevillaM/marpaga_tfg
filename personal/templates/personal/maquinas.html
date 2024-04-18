@@ -6,6 +6,9 @@
   <div class="bg-secondary text-center rounded p-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <h4 class="mb-0">Listado de maquinas disponibles</h4>
+      <form class="d-none d-md-flex ms-4">
+        <input id="buscarMaquina" class="form-control bg-dark border-0" type="search" placeholder="Buscar maquina">
+      </form>
       <div class="nav-item dropdown flex-column">
         <div style="text-decoration: underline;">Filtrar por:</div>
         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Dificultad</a>
@@ -19,7 +22,7 @@
       </div>
     </div>
     <div class="table-responsive">
-      <table class="table text-start align-middle table-bordered table-hover mb-0">
+      <table id="tablaMaquinas" class="table text-start align-middle table-bordered table-hover mb-0">
         <thead>
           <tr class="text-white">
             <th scope="col">Nombre</th>
@@ -47,4 +50,25 @@
   </div>
 </div>
 <!-- List of machines End -->
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const inputBuscar = document.getElementById('buscarMaquina');
+  const tablaMaquinas = document.getElementById('tablaMaquinas');
+  const filas = tablaMaquinas.querySelectorAll('tbody tr');
+
+  inputBuscar.addEventListener('input', function() {
+      const textoBuscar = inputBuscar.value.toLowerCase();
+      console.log(textoBuscar);
+      filas.forEach(fila => {
+          const nombreMaquina = fila.querySelector('td:nth-child(1)').textContent.toLowerCase();
+          const coincide = nombreMaquina.includes(textoBuscar);
+
+          fila.style.display = coincide ? '' : 'none';
+      });
+  });
+});
+</script>
 {% endblock %}
