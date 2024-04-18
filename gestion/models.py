@@ -313,6 +313,16 @@ class PuntuacionJugador(models.Model):
     class Meta:
         verbose_name_plural = "Banderas de los jugadores"
 
+# Tabla para guardar las valoraciones de las banderas de las maquinas
+class ValoracionJugador(models.Model):
+    puntuacion_jugador = models.ForeignKey(PuntuacionJugador, on_delete=models.CASCADE) # El jugador solo puede valorar las banderas que ha obtenido
+    valoracion = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    bandera = models.IntegerField(default=0) # 0: Bandera del usuario, 1: Bandera del root
+    fecha_valoracion = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.jugador.usuario.username} ha valorado la flag {self.bandera} de la maquina {self.maquina_vulnerable.nombre} con un {self.valoracion}"
+    class Meta:
+        verbose_name_plural = "Valoraciones de los jugadores"
 # Funciones de disparadores
 def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
     if created:

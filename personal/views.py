@@ -293,6 +293,54 @@ def ranking(request):
     # Obtengo el ranking de los jugadores
     jugadores = sorted(Jugador.objects.all(), key=lambda x: x.obtener_puntuacion(), reverse=True)
     return render(request, 'personal/ranking.html', {'jugadores': jugadores})
+
+# Logros personales
+@login_required(login_url="inicio")
+def logros(request):
+    # Obtengo los logros del jugador
+    jugador = Jugador.objects.get(usuario=request.user)
+    # Obtengo la puntuación obtenida del jugador
+    logros = PuntuacionJugador.objects.filter(jugador=jugador).order_by('-fecha_obtencion')
+    # Tengo que obtener el valor de las valoraciones de cada usuario
+    ##
+    return render(request, 'personal/logros.html', {'logros': logros})
+
+#Vista que gestiona el guardado de una votación de la valoración por un usuario
+@login_required(login_url="inicio")
+def valoracion(request):
+    if request.method == 'POST':
+        maquina = MaquinaVulnerable.objects.get(id=request.POST.get('maquina_id'))
+        bandera =request.POST.get('bandera')
+        valoracion  = request.POST.get('valoracion')
+        try:
+            valoracion = int(valoracion)
+        except ValueError:
+            return redirect('logros')
+        # Controlo los errores
+        if maquina is None:
+            return redirect('logros')
+        if bandera not in ['0', '1']:
+            return redirect('logros')
+        if valoracion <= 0 or valoracion > 5:
+            return redirect('logros')
+        print(f"El usuario {request.user.username} ha valorado {maquina.nombre} en la bandera {bandera} con una valoración de {valoracion}")
+        # # Obtengo el jugador que ha votado
+        # jugador = Jugador.objects.get(usuario=request.user)
+        # # Obtengo el jugador que ha sido votado
+        # jugador_votado = Jugador.objects.get(usuario=request.POST.get('jugador_votado'))
+        # # Obtengo la valoración
+        # valoracion = request.POST.get('valoracion')
+        # # Obtengo el comentario
+        # comentario = request.POST.get('comentario')
+        # # Guardo la valoración
+        # v = Valoracion(jugador=jugador, jugador_votado=jugador_votado, valoracion=valoracion, comentario=comentario)
+        # v.save()
+
+        # SE HA VOTADO CORRECTAMENTE
+        messages.success(request, 'Valoración guardada correctamente.')
+        return redirect('logros')
+    else:
+        return redirect('logros')
 # Vista para ver los ultimos 10 correos tiene que ser usuario admin
 def is_admin(user):
     return user.is_staff

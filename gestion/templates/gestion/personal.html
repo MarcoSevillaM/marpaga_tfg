@@ -55,33 +55,6 @@
   </div>
 </div>
 
-<!-- Cuadro Modal -->
-<div class="modal" id="vpnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="container-fluid pt-4 px-4">
-    <div class="" style="top: 50%; left: 50%; transform: translate(0%, 50%);">
-      <div class="h-100 bg-secondary rounded p-4" style="flex-direction: column;">
-        <div class="modal-content" style="background-color: #191C24; border: none;">
-          <h2>Instrucciones para Conectarte a la VPN</h2>
-          <p>
-            Para conectarte a nuestra red VPN segura, sigue los siguientes pasos:
-          </p>
-          <ol>
-              <li>Descarga el archivo de configuración de la VPN haciendo clic en el enlace de abajo.</li>
-              <li>Instala un cliente de VPN compatible en tu dispositivo (<a href="https://openvpn.net/community-downloads/" target="_blank">openvpn</a>).</li>
-              <li>Importa el archivo de configuración descargado en tu cliente de VPN.</li>
-              <li>Conéctate a la VPN.</li>
-          </ol>
-          <a href="{% url 'descargar_archivo' %}" download="{{request.user}}.ovpn">Descargar Archivo de VPN</a>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: #EB1616; border-radius: 4px; border: none; width: 200px;" >
-            <span aria-hidden="false">&times;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Fin Cuadro Modal -->
-
 <script>
   // JavaScript para abrir y cerrar el modal
   var modal = document.getElementById("vpnModal");
@@ -106,3 +79,45 @@
 </script>
 
 {% endblock machineDetails %}
+
+{% block scripts %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const stars = document.querySelectorAll(".star");
+    const ratingText = document.querySelector(".selected-rating");
+    let currentRating = 0;   
+    stars.forEach((star) => {
+      star.addEventListener("click", function() {
+        const rating = parseInt(star.getAttribute("data-rating"));
+        setActiveStars(rating);
+        ratingText.textContent = rating;
+        currentRating = rating;
+      });
+          
+      star.addEventListener("mouseover", function() {
+        const rating = parseInt(star.getAttribute("data-rating"));
+        setHoverStars(rating);
+      });
+
+      star.addEventListener("mouseout", function() {
+        setActiveStars(currentRating);
+      });
+    });
+            
+    function setActiveStars(rating) {
+      stars.forEach((star) => {
+        const starRating = parseInt(star.getAttribute("data-rating"));
+        star.classList.toggle("active",  starRating <= rating);
+      });
+    }
+            
+    function setHoverStars(rating) {
+      stars.forEach((star) => {
+        const starRating = parseInt(star.getAttribute("data-rating"));
+        star.classList.toggle("hover", starRating <= rating);
+      });
+    }
+  });
+  </script>
+{% endblock scripts %}
