@@ -147,7 +147,7 @@
             </a>
             <!-- <i class="fa fa-table me-2"></i> -->
             {% if user.is_staff %}
-            <a href="" class="nav-item nav-link">
+            <a href="{% url 'graficos' %}" class="nav-item nav-link {% if request.path == '/my/graficos/' %}active{% endif %}">
               <i class="fa fa-table me-2"></i>
               Estadísticas
             </a>
@@ -276,8 +276,6 @@
         
         {% block modalVPN %}
         <!-- Cuadro Modal -->
-        {% endblock modalVPN %}
-        <!-- Cuadro Modal -->
         <div class="modal" id="vpnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="container-fluid pt-4 px-4">
             <div class="" style="top: 50%; left: 50%; transform: translate(0%, 50%);">
@@ -288,10 +286,10 @@
                     Para conectarte a nuestra red VPN segura, sigue los siguientes pasos:
                   </p>
                   <ol>
-                      <li>Descarga el archivo de configuración de la VPN haciendo clic en el enlace de abajo.</li>
-                      <li>Instala un cliente de VPN compatible en tu dispositivo (<a href="https://openvpn.net/community-downloads/" target="_blank">openvpn</a>).</li>
-                      <li>Importa el archivo de configuración descargado en tu cliente de VPN.</li>
-                      <li>Conéctate a la VPN.</li>
+                    <li>Descarga el archivo de configuración de la VPN haciendo clic en el enlace de abajo.</li>
+                    <li>Instala un cliente de VPN compatible en tu dispositivo (<a href="https://openvpn.net/community-downloads/" target="_blank">openvpn</a>).</li>
+                    <li>Importa el archivo de configuración descargado en tu cliente de VPN.</li>
+                    <li>Conéctate a la VPN.</li>
                   </ol>
                   <a href="{% url 'descargar_archivo' %}" download="{{request.user}}.ovpn">Descargar Archivo de VPN</a>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: #EB1616; border-radius: 4px; border: none; width: 200px;" >
@@ -303,6 +301,7 @@
           </div>
         </div>
         <!-- Fin Cuadro Modal -->
+        {% endblock modalVPN %}
         {% block machineDetails %}
         <!-- Sale & Revenue Start -->
         <div class="container-fluid pt-4 px-4">

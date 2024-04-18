@@ -2,7 +2,7 @@ import re
 from django.shortcuts import render,redirect
 from gestion.models import *
 from django.contrib.auth import logout
-from django.urls import reverse # Poder redirigir a una vista
+from django.urls import reverse # Poder redirigir a una vista NO SE USA VERIFICAR
 #Para gestionar la sesion de la pagina personal, un decorador es algo que permite dar una funcionalidad extra 
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
@@ -10,13 +10,14 @@ from django.views import View
 from django.conf import settings
 #Docker
 import docker, subprocess
-
+from django.db.models import Avg # Para calcular la media de las valoraciones
 from django.contrib.auth import update_session_auth_hash #Para cambiar la contraseña y que no se cierre la sesion
 from django.contrib.auth.forms import PasswordChangeForm #Para cambiar la contraseña
 from personal.forms import FotoPerfilForm # Importo el formulario para cambiar la foto de perfil
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+import json # Importo json
 
 # Importar módulos para trabajar con correos electrónicos
 import imaplib
@@ -363,6 +364,7 @@ def valoracion(request):
 def is_admin(user):
     return user.is_staff
 
+#Vistas para el admin
 @user_passes_test(is_admin)
 def get_last_10_emails(request):
     # Datos del servidor
@@ -441,6 +443,31 @@ def get_last_10_emails(request):
     correos.reverse()
     return render(request, 'personal/prueba.html',{'correos': correos})
 
+@user_passes_test(is_admin)
+def graficos(request):
+    # Pasar los datos de las votaciones perfectamente parseados para gestionarlos al dibujar
+    datos = []
+    
+    # Obtener todas las máquinas
+    maquinas = MaquinaVulnerable.objects.all()
+    
+    for maquina in maquinas:
+        # Obtener las puntuaciones de la máquina
+        puntuaciones = PuntuacionJugador.objects.filter(maquina_vulnerable=maquina)
+        
+        for bandera in [0, 1]:
+            # Filtrar puntuaciones por bandera
+            puntuaciones_bandera = puntuaciones.filter(bandera=bandera)
+            
+            # Calcular la media de las valoraciones
+            media_valoraciones = puntuaciones_bandera.aggregate(Avg('valoracionjugador__valoracion'))['valoracionjugador__valoracion__avg'] or 0
+            
+            datos.append({
+                'maquina': maquina.nombre,
+                'bandera': bandera,
+                'media_valoraciones': media_valoraciones
+            })
+    return render(request, 'personal/graficos.html', {'datos': datos})
 
 #Comprobar si se puede conseguir una instancia de docker
 def listaContDocker(request):

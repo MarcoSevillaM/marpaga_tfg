@@ -33,9 +33,14 @@ urlpatterns = [
     path('logros/', views.logros, name='logros'),
     # Valorar una bandera de una detemina maquina
     path('logros/guardar_valoracion/', views.valoracion, name='guardar_valoracion'),
-    # Ver los ultimos 10 correos recibidos
-    path("correos/", views.get_last_10_emails, name='correos'),
 
     # Despurar docker
     path('listaContDocker/', views.listaContDocker, name='listaContDocker'),
+    #Vistas para el admin
+    
+    # Ver los ultimos 10 correos recibidos
+    path("correos/", views.get_last_10_emails, name='correos'),
+
+    # Vista para los graficos
+    path("graficos/", views.graficos, name='graficos'),
 ]

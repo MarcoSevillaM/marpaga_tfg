@@ -1,0 +1,86 @@
+{% extends 'personal/basic_profile.html' %}
+
+{% block profile %}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Multiple Bar Chart</h6>
+                <canvas id="votaciones-usuarios"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock profile %}
+
+{% block machineDetails %}
+{% endblock machineDetails %}
+
+
+{% block scripts %}
+<script>
+// Worldwide Sales Chart
+var ctx1 = $("#votaciones-usuarios").get(0).getContext("2d");
+var datosTexto = '{{ datos }}';
+var datos = JSON.parse(datosTexto.replace(/&#x27;/g, '"'));
+console.log("datos:", datos);
+/*var etiquetas = datos.map(function(item) {
+    return item.maquina;
+});*/
+var maquinasUnicas = new Set();
+
+// Agregar máquinas únicas al conjunto
+datos.forEach(function(item) {
+    maquinasUnicas.add(item.maquina);
+});
+
+// Convertir el conjunto de máquinas únicas a un array
+var etiquetas = Array.from(maquinasUnicas);
+console.log("etiquetas:", etiquetas);
+var datos_bandera_0 = datos.filter(function(item) {
+    return item.bandera === 0;
+}).map(function(item) {
+    return item.media_valoraciones;
+});
+
+var datos_bandera_1 = datos.filter(function(item) {
+    return item.bandera === 1;
+}).map(function(item) {
+    return item.media_valoraciones;
+});
+var myChart1 = new Chart(ctx1, {
+    type: "bar",
+    data: {
+        labels: etiquetas,
+        datasets: [{
+            label: "Flag 0",
+            data: datos_bandera_0,
+            backgroundColor: "rgba(235, 22, 22, .7)"
+        },
+        {
+            label: "Flag 1",
+            data: datos_bandera_1,
+            backgroundColor: "rgba(235, 22, 22, .5)"
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Máquinas'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Madia de valoraciones'
+                }
+            }
+        }
+    }
+});
+</script>
+{% endblock scripts %}
