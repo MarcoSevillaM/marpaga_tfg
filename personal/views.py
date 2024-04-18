@@ -2,6 +2,7 @@ import re
 from django.shortcuts import render,redirect
 from gestion.models import *
 from django.contrib.auth import logout
+from django.urls import reverse # Poder redirigir a una vista
 #Para gestionar la sesion de la pagina personal, un decorador es algo que permite dar una funcionalidad extra 
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
@@ -26,7 +27,13 @@ from django.contrib.auth.decorators import user_passes_test
 #Funciones para gestionar las flags
 from personal.functions import submit_user_flag
 from django.db.models import Sum # Para sumar la puntuacion total del jugador
+from django.template.defaulttags import register
 
+#Poder coger el item de un diccionario
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+    
 #Vista para el inicio de sesion del jugador
 @login_required(login_url="inicio")
 def personal(request): # Pagina personal del usuario
@@ -301,9 +308,11 @@ def logros(request):
     jugador = Jugador.objects.get(usuario=request.user)
     # Obtengo la puntuación obtenida del jugador
     logros = PuntuacionJugador.objects.filter(jugador=jugador).order_by('-fecha_obtencion')
+    valoracionesHechas = ValoracionJugador.objects.filter(puntuacion_jugador__jugador=Jugador.objects.get(usuario=request.user))
     # Tengo que obtener el valor de las valoraciones de cada usuario
-    ##
-    return render(request, 'personal/logros.html', {'logros': logros})
+    maquinas_valoradas = {valoracion.puntuacion_jugador.id: valoracion.valoracion for valoracion in valoracionesHechas}
+    print(maquinas_valoradas)
+    return render(request, 'personal/logros.html', {'logros': logros, 'maquinas_valoradas': maquinas_valoradas})
 
 #Vista que gestiona el guardado de una votación de la valoración por un usuario
 @login_required(login_url="inicio")
@@ -317,13 +326,19 @@ def valoracion(request):
         except ValueError:
             return redirect('logros')
         # Controlo los errores
-        if maquina is None:
-            return redirect('logros')
-        if bandera not in ['0', '1']:
-            return redirect('logros')
-        if valoracion <= 0 or valoracion > 5:
+        if maquina is None or bandera not in ['0', '1'] or valoracion <= 0 or valoracion > 5:
+            messages.error(request, 'La valoración tiene que ser entre 1 y 5')
             return redirect('logros')
         print(f"El usuario {request.user.username} ha valorado {maquina.nombre} en la bandera {bandera} con una valoración de {valoracion}")
+
+        # # Compruebo si el usuario ya ha votado
+        # Cojo la puntación del jugador
+        pto_jugador = PuntuacionJugador.objects.get(jugador=Jugador.objects.get(usuario=request.user), maquina_vulnerable=maquina, bandera=int(bandera))
+        j = ValoracionJugador.objects.filter(puntuacion_jugador=pto_jugador).first()
+        if j:
+            messages.error(request, 'Ya has valorado esta bandera')
+            return redirect('logros')
+        
         # # Obtengo el jugador que ha votado
         # jugador = Jugador.objects.get(usuario=request.user)
         # # Obtengo el jugador que ha sido votado
@@ -333,13 +348,16 @@ def valoracion(request):
         # # Obtengo el comentario
         # comentario = request.POST.get('comentario')
         # # Guardo la valoración
-        # v = Valoracion(jugador=jugador, jugador_votado=jugador_votado, valoracion=valoracion, comentario=comentario)
-        # v.save()
+        pto_jugador = PuntuacionJugador.objects.get(jugador=Jugador.objects.get(usuario=request.user), maquina_vulnerable=maquina, bandera=int(bandera))
+        v = ValoracionJugador(puntuacion_jugador=pto_jugador, valoracion=valoracion)
+        v.save()
 
         # SE HA VOTADO CORRECTAMENTE
         messages.success(request, 'Valoración guardada correctamente.')
         return redirect('logros')
     else:
+        # Paso las valoraciones hechas por el usuario
+        #return render(request, 'personal/logros.html', {'valoracionesHechas': valoracionesHechas, 'maquinas_valoradas': maquinas_valoradas})
         return redirect('logros')
 # Vista para ver los ultimos 10 correos tiene que ser usuario admin
 def is_admin(user):

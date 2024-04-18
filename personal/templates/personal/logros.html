@@ -42,16 +42,21 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <!-- <form method="post" action="{% url 'guardar_valoracion' %}"> -->
-                                    <form method="post" action="{% url 'guardar_valoracion' %}">
-                                        {% csrf_token %}
-                                                                <input type="hidden" name="maquina_id" value="{{ l.maquina_vulnerable.id }}">
-                                        {% if l.bandera == 0%}  <input type="hidden" name="bandera" value="0">
-                                        {% else %}              <input type="hidden" name="bandera" value="1">
-                                        {% endif %}
-                                                                <input type="hidden" name="valoracion" id="rating-{{ forloop.counter }}-value" value="0">
-                                        <button type="submit" class="btn m-2 btn-success">Valorar</button>
-                                    </form>
+                                    {% if l.id not in maquinas_valoradas %}
+                                        <form method="post" action="{% url 'guardar_valoracion' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="maquina_id" value="{{ l.maquina_vulnerable.id }}">
+                                            {% if l.bandera == 0 %}  
+                                                <input type="hidden" name="bandera" value="0">
+                                            {% else %}
+                                                <input type="hidden" name="bandera" value="1">
+                                            {% endif %}
+                                            <input type="hidden" name="valoracion" id="rating-{{ forloop.counter }}-value" value="0">
+                                            <button type="submit" class="btn m-2 btn-success">Valorar</button>
+                                        </form>
+                                    {% else %}
+                                        <button class="btn m-2 btn-success" disabled data-valorada="{{ maquinas_valoradas|get_item:l.id}}" data-id="{{ l.id }}">Valorar</button>
+                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}
@@ -101,6 +106,9 @@ rows.forEach((row, index) => {
     const form = row.querySelector("form");
     let currentRating = 0;
 
+    if (form == null) {
+        return;
+    }
     stars.forEach((star) => {
         star.addEventListener("click", function() {
             const rating = parseInt(star.getAttribute("data-rating"), 10);
@@ -109,7 +117,6 @@ rows.forEach((row, index) => {
             valoracion.value = rating;
             console.log(valoracion.value, index);
             setActiveStars(rating, stars);
-            //ratingText.textContent = rating;
             currentRating = rating;
         });
 
@@ -138,6 +145,24 @@ rows.forEach((row, index) => {
         });
     }
 });
+//Función para activar el numero de estrellas inidicado
+function setActiveStarsListas(rating, stars) {
+    stars.forEach((star) => {
+        const starRating = parseInt(star.getAttribute("data-rating"), 10);
+        star.classList.toggle("active", starRating <= rating);
+    });
+}
+//Obtengo el valor de la valoracion
+rows.forEach((row, index) => {
+    //Cojo el boton de submit
+    const btn = row.querySelector("button[disabled]");
+    if (btn != null) {
+        const valoracion = btn.dataset.valorada;
+        console.log(valoracion);
+        setActiveStarsListas(parseInt(valoracion), row.querySelectorAll(`#rating-${index} .star`) );
+    }
+});
+
 
 
 

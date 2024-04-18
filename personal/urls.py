@@ -32,7 +32,7 @@ urlpatterns = [
     # Logros personales
     path('logros/', views.logros, name='logros'),
     # Valorar una bandera de una detemina maquina
-    path('ranking/guardar_valoracion/', views.valoracion, name='guardar_valoracion'),
+    path('logros/guardar_valoracion/', views.valoracion, name='guardar_valoracion'),
     # Ver los ultimos 10 correos recibidos
     path("correos/", views.get_last_10_emails, name='correos'),
 

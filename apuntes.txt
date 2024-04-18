@@ -399,7 +399,7 @@ Cosas que hacer:
 1. Mostrar el listado de logros conseguidos por uno mismo HECHO
 2. Añadir a la base de datos que un usuario pueda valorar las maquinas (crear la base de datos correspondiente para almacenar las votaciones)
 3. Ver como hacer los gráficos del panel de admin:
-	3.1 Un gráfico que muestre las votaciones de cada máquina en relación a las estrellas-> cada maquina: eje x estrellas eje y nº de personas
+	3.1 Un gráfico que muestre las votaciones de cada máquina en relación a las estrellas-> cada maquina: eje x estrellas eje y nº de personas ---> Tiene que estar hecho el paso 2
 	3.2 Conseguir el tiempo que tarda cada usuario en reventar una maquina -> eje x dificultad y eje y mediaTiempoJugadoresTotales*tiempoTotal/100 poner un filtro para flag 1 y flag 2
 4. Poder calcular el tiempo que tarda un usuario desde que levanta la maquina hasta que resuelve la maquina
 5. Conseguir automatizar más docker-compose
@@ -408,3 +408,12 @@ Cosa 2:
 	Se esta tratando de gestionar como pasar elementos de una vista a un js:
 		Se pueden pasar elementos: 'va': jugador y luego en JavaScript: const aux = '{{va}}'
 	IMPORTANTE: El cuadro modal no cierra al darle a la cruz y mejorar el cuadro modal: PENDIENTE
+	IMPORTANTE:
+		from django.template.defaulttags import register
+		#Poder coger el item de un diccionario
+		@register.filter
+		def get_item(dictionary, key):
+			return dictionary.get(key)
+	Esta HECHO pero mejorar el JS (No creo que de tiempo)
+Cosa 3 GRAFICOS (Se va a intentar hacer por la tarde):
+			
