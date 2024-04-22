@@ -5,8 +5,14 @@
     <div class="row g-4">
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary rounded h-100 p-4">
-                <h6 class="mb-4">Multiple Bar Chart</h6>
+                <h6 class="mb-4">Valoración de las máquinas</h6>
                 <canvas id="votaciones-usuarios"></canvas>
+            </div>
+        </div><p>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Tiempo medio de las maquinas activas</h6>
+                <canvas id="tiempo-medio-activo"></canvas>
             </div>
         </div>
     </div>
@@ -19,11 +25,10 @@
 
 {% block scripts %}
 <script>
-// Worldwide Sales Chart
+// Grafico de las votaciones de los usuarios
 var ctx1 = $("#votaciones-usuarios").get(0).getContext("2d");
 var datosTexto = '{{ datos }}';
 var datos = JSON.parse(datosTexto.replace(/&#x27;/g, '"'));
-console.log("datos:", datos);
 /*var etiquetas = datos.map(function(item) {
     return item.maquina;
 });*/
@@ -36,7 +41,6 @@ datos.forEach(function(item) {
 
 // Convertir el conjunto de máquinas únicas a un array
 var etiquetas = Array.from(maquinasUnicas);
-console.log("etiquetas:", etiquetas);
 var datos_bandera_0 = datos.filter(function(item) {
     return item.bandera === 0;
 }).map(function(item) {
@@ -76,7 +80,58 @@ var myChart1 = new Chart(ctx1, {
             y: {
                 title: {
                     display: true,
-                    text: 'Madia de valoraciones'
+                    text: 'Media de valoraciones'
+                }
+            }
+        }
+    }
+});
+
+
+// Grafico 2 para el tiempo medio de actividad de las máquinas
+var ctx1 = $("#tiempo-medio-activo").get(0).getContext("2d");
+var datosTexto = '{{ tiempos }}';
+var tiempos = JSON.parse(datosTexto.replace(/&#x27;/g, '"'));
+console.log("tiempos:", tiempos);
+
+console.log("etiquetas:", etiquetas);
+var maquinas = tiempos.filter(function(item) {
+    return item.bandera === 0;
+}).map(function(item) {
+    return item.media_valoraciones;
+});
+
+//Meto en media_tiempos la media de los tiempos de las maquinas y si es 0 meto 0
+var media_tiempos = tiempos.map(function(item) {
+    return item.tiempo;
+});
+
+console.log("media_tiempos:", media_tiempos);
+
+var myChart1 = new Chart(ctx1, {
+    type: "bar",
+    data: {
+        labels: etiquetas,
+        datasets: [{
+            label: "Tiempo medio de actividad",
+            data: media_tiempos,
+            backgroundColor: "rgba(235, 22, 22, .7)"
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Máquinas'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Tiempo medio de actividad en segundos'
                 }
             }
         }

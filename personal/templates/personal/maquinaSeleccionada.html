@@ -6,7 +6,7 @@
   <div class="bg-secondary rounded-top p-4">
     <h1>Detalles de la maquina {{relacion_maquina_jugador.maquina_vulnerable}}</h1>
     <!-- Descripción de la maquina -->
-    <p>Nivel de dificultad: {{ relacion_maquina_jugador.maquina_vulnerable.nivel_dificultad }}</p>
+    <p>Nivel de dificultad: {{ relacion_maquina_jugador.maquina_vulnerable.nivel_dificultad }} ({{relacion_maquina_jugador.obtener_tiempo}})</p>
     <p>{{ relacion_maquina_jugador.maquina_vulnerable.descripcion|default:"" }}</p>
 
     {% if relacion_maquina_jugador.activa %}

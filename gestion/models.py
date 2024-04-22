@@ -260,10 +260,32 @@ class MaquinaJugador(models.Model):
     maquina_vulnerable = models.ForeignKey('MaquinaVulnerable', on_delete=models.CASCADE)
     activa = models.BooleanField(default=False)
     ip_address = models.CharField(max_length=15, blank=True, null=True) #Dirección IP de la maquina vulnerable
+    tiempo_activa = models.BigIntegerField(null=True, blank=True) # Tiempo que ha estado activa la maquina
+    momento_activacion = models.DateTimeField(auto_now_add=True, null=True, blank=True) # Momento en el que se activa la maquina
     def __str__(self):
         estado = "activa" if self.activa else "inactiva"
         return f"{self.jugador.usuario.username} tiene la maquina {self.maquina_vulnerable.nombre}  {estado}"
     
+    # Paso un parámetro que es el tiempo que ha estado activa la máquina
+    def actualizar_tiempo_activa(self, tiempo):
+        self.tiempo_activa = tiempo + self.tiempo_activa
+        self.save()
+
+    def obtener_tiempo_total_activa(self):
+        if self.tiempo_activa is None:
+            return 0
+        return tiempo_activa.total_seconds()
+
+    # Método para convertir el tiempo en un formato legible de horas, minutos y segundos
+    @property
+    def obtener_tiempo(self):
+        tiempo = self.tiempo_activa
+        horas = tiempo // 3600
+        minutos = (tiempo % 3600) // 60
+        segundos = tiempo % 60
+        return "{:05}h:{:02}min:{:02}sec".format(int(horas), int(minutos), int(segundos))
+        #return horas, minutos, segundos
+
     def save(self, *args, **kwargs):
         # Verifica si el nombre ha cambiado
         if self.pk is not None:
@@ -283,6 +305,8 @@ class MaquinaJugador(models.Model):
                         if control:
                             self.ip_address = None
                             self.activa = False
+                    elif hasattr(self.maquina_vulnerable, 'maquinavirtual'):
+                        pass
                 else:
                     #Si se ACTIVA la maquina
                     if hasattr(self.maquina_vulnerable, 'maquinadocker'):

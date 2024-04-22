@@ -401,7 +401,7 @@ Cosas que hacer:
 3. Ver como hacer los gráficos del panel de admin:
 	3.1 Un gráfico que muestre las votaciones de cada máquina en relación a las estrellas-> cada maquina: eje x estrellas eje y nº de personas ---> Tiene que estar hecho el paso 2
 	3.2 Conseguir el tiempo que tarda cada usuario en reventar una maquina -> eje x dificultad y eje y mediaTiempoJugadoresTotales*tiempoTotal/100 poner un filtro para flag 1 y flag ---> Tiene que estar hecho el paso 4
-4. Poder calcular el tiempo que tarda un usuario desde que levanta la maquina hasta que resuelve la maquina
+4. Poder calcular el tiempo que tarda un usuario desde que levanta la maquina hasta que resuelve la maquina-> Se ha hecho para ver el tiempo que esta una maquina activa HECHO
 5. Conseguir automatizar más docker-compose
 
 Cosa 2:
@@ -426,4 +426,5 @@ MODIFICADO
 	});*/
 
 -----22-04-2024---------
-Gestiono el tiempo que tarda un usuario en resolver la maquina
+Gestiono el tiempo que tiene un usuario la maquina activa HECHO
+PENDIENTE-> Automatizar los docker-compose para que funcionen

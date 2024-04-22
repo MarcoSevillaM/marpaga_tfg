@@ -18,7 +18,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 import json # Importo json
-
+from django.utils import timezone # Para gestionar el tiempo activo de la maquina
 # Importar módulos para trabajar con correos electrónicos
 import imaplib
 import email
@@ -126,7 +126,6 @@ def activar_maquina(request, nombre_maquina):
         maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
         relacion_maquina_jugador = MaquinaJugador.objects.get(jugador=jugador, maquina_vulnerable=maquina)
         if relacion_maquina_jugador.activa:
-            messages.warning(request, 'La máquina ya está activa.')
             return redirect('gestion_maquina' , nombre_maquina)
         else:
             for maquina_jugadoR in MaquinaJugador.objects.filter(jugador=jugador):
@@ -151,7 +150,11 @@ def activar_maquina(request, nombre_maquina):
                         messages.error(request, 'Error al levantar la maquina -> de tipo maquinadockercompose.')
                 elif hasattr(maquina, 'maquinavirtual'):
                     messages.success(request, 'La máquina es de tipo OtroTipoDeMaquina.')
+                    pass
                 #Ejecutar la funcion de iptables para eliminar la regla correspondiente
+                if relacion_maquina_jugador.activa:
+                    relacion_maquina_jugador.momento_activacion = timezone.now()
+                    relacion_maquina_jugador.save()     
             
             return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
     else:
@@ -167,7 +170,7 @@ def desactivar_maquina(request, nombre_maquina):
         maquina_jugador = MaquinaJugador.objects.get(jugador=jugador, maquina_vulnerable=maquina)
         
         if not maquina_jugador.activa:
-            messages.warning(request, 'La máquina ya está desactivada.')
+            pass
         else:
             if hasattr(maquina, 'maquinadocker'):
                 maquina_jugador.activa = False
@@ -177,6 +180,11 @@ def desactivar_maquina(request, nombre_maquina):
                 maquina_jugador.save()
             elif hasattr(maquina, 'maquinavirtual'):
                 messages.success(request, 'La máquina es de tipo MaquinaVirtual.')
+            else:
+                messages.warning(request, 'El metodo post que mandas no es correcto.')
+            if not maquina_jugador.activa:
+                tiempo = timezone.now() - maquina_jugador.momento_activacion
+                maquina_jugador.actualizar_tiempo_activa(tiempo.total_seconds())
         return redirect('gestion_maquina', nombre_maquina=nombre_maquina)
     else:
         return redirect('maquinas')
@@ -446,7 +454,7 @@ def get_last_10_emails(request):
 @user_passes_test(is_admin)
 def graficos(request):
     # Pasar los datos de las votaciones perfectamente parseados para gestionarlos al dibujar
-    datos = []
+    valoraciones = []
     
     # Obtener todas las máquinas
     maquinas = MaquinaVulnerable.objects.all()
@@ -462,12 +470,21 @@ def graficos(request):
             # Calcular la media de las valoraciones
             media_valoraciones = puntuaciones_bandera.aggregate(Avg('valoracionjugador__valoracion'))['valoracionjugador__valoracion__avg'] or 0
             
-            datos.append({
+            valoraciones.append({
                 'maquina': maquina.nombre,
                 'bandera': bandera,
                 'media_valoraciones': media_valoraciones
             })
-    return render(request, 'personal/graficos.html', {'datos': datos})
+    # Obtengo la media de todos los tiempos de las maquinas, es decir guardo de la maquina 1 la media del tiempo que ha estado activa y asi con todas
+    tiempos = []
+    for maquina in maquinas:
+        tiempo = MaquinaJugador.objects.filter(maquina_vulnerable=maquina).aggregate(Avg('tiempo_activa'))['tiempo_activa__avg'] or 0
+        tiempos.append({
+            'maquina': maquina.nombre,
+            'tiempo': tiempo
+        })
+    
+    return render(request, 'personal/graficos.html', {'datos': valoraciones, 'tiempos': tiempos})
 
 #Comprobar si se puede conseguir una instancia de docker
 def listaContDocker(request):
