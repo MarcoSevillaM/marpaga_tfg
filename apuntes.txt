@@ -418,5 +418,12 @@ Cosa 2:
 	IMPORTANTE: MODIFICAR En el ranking poner las columnas numero, nombre, puntucación y cuanto tiempo llevan en la aplicación registrados
 Cosa 3 GRAFICOS (Se va a intentar hacer por la tarde):
 	3.1 El id será votacionesUsuarios, esta hecho con una gráfica general en la cual se ven todas las valoraciones de cada maquina
-	3.2 PENDIENTE
-			
+	3.2 Me pongo con ello el 22-04-2024
+MODIFICADO
+-> En misFunciones.js se ha comentado:
+	/*document.getElementById("cambiarFoto").addEventListener("click", function() {
+	$('#modalCambiarFoto').modal('show');
+	});*/
+
+-----22-04-2024---------
+Gestiono el tiempo que tarda un usuario en resolver la maquina

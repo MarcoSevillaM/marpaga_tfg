@@ -51,7 +51,3 @@ function filterTable(level) {
     }
   });
 }
-
-function prueba(p){
-  alert(p);
-}
