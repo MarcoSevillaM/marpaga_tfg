@@ -428,3 +428,10 @@ MODIFICADO
 -----22-04-2024---------
 Gestiono el tiempo que tiene un usuario la maquina activa HECHO
 PENDIENTE-> Automatizar los docker-compose para que funcionen
+IMPORTANTE para pasar datos a un JS se pasan: 
+	{% load static %}
+	<script src="{% static 'index.js' %}" defer data-username="{{ username }}"></script>
+ - Y luego en el script:
+	const data = document.currentScript.dataset;
+	const username = data.username;
+Modificar las graficas

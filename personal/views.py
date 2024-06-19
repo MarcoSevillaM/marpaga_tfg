@@ -484,7 +484,7 @@ def graficos(request):
             'tiempo': tiempo
         })
     
-    return render(request, 'personal/graficos.html', {'datos': valoraciones, 'tiempos': tiempos})
+    return render(request, 'personal/graficos.html', {'datos': valoraciones, 'tiempos': tiempos, 'pruebaBoton': maquinas})
 
 #Comprobar si se puede conseguir una instancia de docker
 def listaContDocker(request):

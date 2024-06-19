@@ -32,9 +32,9 @@ function desactivarBotones() {
   document.getElementById('btnFlag2').disabled = true;
 }
 
-document.getElementById("cambiarFoto").addEventListener("click", function() {
+/*document.getElementById("cambiarFoto").addEventListener("click", function() {
   $('#modalCambiarFoto').modal('show');
-});
+});*/
 
 
 // Filtrar el nivel de dificultad de las maquinas

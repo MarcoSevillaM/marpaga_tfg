@@ -9,11 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
   });
-
-  var myModal = new bootstrap.Modal(document.getElementById('statusModal'));
+  
+  // Agrega un evento de clic a cada botón de eliminación
+  const aux = document.getElementById('statusModal');
+  if (aux){
+    var myModal = new bootstrap.Modal();
     // Mostrar el modal
     myModal.show();
-    console.log('Mostrando modal de error' + control);
+  }
 });
 
 function mostrarIndicadorDeCarga(formId) {
@@ -78,6 +81,10 @@ function quitarAcentos(texto) {
   return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-
-
-
+  //Modifico el contenido del boton
+const data = document.currentScript.dataset;
+var pruebaBoton = data.hola;
+var boton = document.getElementById("prueba");
+console.log(pruebaBoton);
+boton.innerText = "Probando fuera:" + pruebaBoton;
+console.log(boton);

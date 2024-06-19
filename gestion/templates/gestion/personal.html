@@ -50,13 +50,15 @@
   var modal = document.getElementById("vpnModal");
   var btn = document.getElementById("openModalBtn");
   var span = document.getElementsByClassName("close-btn")[0];
-
-  btn.onclick = function() {
+  if (btn) {
+    btn.onclick = function() {
       modal.style.display = "block";
+    }
   }
-
-  span.onclick = function() {
-      modal.style.display = "none";
+  if (span) {
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
   }
 
   window.onclick = function(event) {
