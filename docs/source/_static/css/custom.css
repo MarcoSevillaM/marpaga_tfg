@@ -1,0 +1,143 @@
+/* _static/css/custom.css */
+
+/* Variables de color */
+:root {
+    --primary: #EB1616;
+    --secondary: #191C24;
+    --light: #6C7293;
+    --dark: #000000;
+    --background: #1a1a1a;
+    --sidebar-background: #282828;
+    --content-background: #1a1a1a;
+    --text-color: #6C7293;
+    --link-color: #6C7293;
+    --link-hover-color: #ffffff;
+}
+/* Pongo el fondo completo al color secundario */
+html {
+    background-color: var(--secondary);
+}
+
+/* Fondo y texto del cuerpo */
+body {
+    background-color: var(--secondary);
+    color: var(--text-color);
+}
+
+/* Barra de navegación lateral */
+.wy-nav-side {
+    /*background-color: var(--sidebar-background);*/
+    color: var(--text-color);
+    background-color: var(--secondary);
+}
+
+.wy-side-nav-search {
+    background-color: var(--secondary);
+    color: #fcfcfc;
+}
+
+/* Elementos del menú lateral */
+.wy-menu-vertical header, .wy-menu-vertical p.caption {
+    color: var(--light);
+    height: 32px;
+    line-height: 32px;
+    padding: 0 1.618em;
+    margin: 12px 0 0;
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 85%;
+    white-space: nowrap;
+}
+
+/* Fondo del contenido principal */
+.wy-nav-content-wrap {
+    background-color: var(--content-background);
+    padding: 2em;
+}
+
+/* Color del texto del contenido */
+.rst-content {
+    color: var(--text-color);
+}
+
+/* Color de los enlaces */
+a {
+    color: var(--link-color);
+}
+
+a:visited {
+    color: var(--link-color);
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Estilo de los encabezados */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary);
+}
+
+/* Estilo de los bloques de código */
+.code, .literal-block, pre, code {
+    background-color: #2a2a2a;
+    color: #f8f8f2;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Botón de máquinas (Ejemplo) */
+.wy-menu-vertical .current a {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+/* Estilo de la barra superior */
+.wy-nav-top {
+    background-color: var(--dark);
+    color: var(--text-color);
+}
+
+/* Estilo de las secciones de contenido */
+.section {
+    background-color: var(--background);
+    padding: 1em;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+/* Ajustes para tablas */
+table {
+    background-color: var(--content-background);
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th, table td {
+    border: 1px solid var(--dark);
+    padding: 8px;
+    text-align: left;
+    color: var(--text-color);
+}
+
+table th {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #333;
+}
+
+
+.wy-menu-vertical li.toctree-l2 a, .wy-menu-vertical li.toctree-l3 a, .wy-menu-vertical li.toctree-l4 a, .wy-menu-vertical li.toctree-l5 a, .wy-menu-vertical li.toctree-l6 a, .wy-menu-vertical li.toctree-l7 a, .wy-menu-vertical li.toctree-l8 a, .wy-menu-vertical li.toctree-l9 a, .wy-menu-vertical li.toctree-l10 a {
+    color: #ffffff;
+}
+
+@media screen and (min-width: 1100px) {
+    .wy-nav-content {
+        margin: 0;
+        background: var(--secondary)
+    }
+}
