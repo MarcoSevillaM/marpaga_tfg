@@ -49,11 +49,28 @@ from django.dispatch import receiver
 
 # # La base de datos contendrá unos usuarios denominados "jugadores" con su perfil propio
 class Jugador(models.Model):
+    """
+
+    Clase que representa a un jugador del juego
+
+    Attributes:
+        usuario (User): El usuario que representa al jugador
+        puntuacion (int): La puntuación del jugador
+        foto_perfil (ImageField): La foto de perfil del jugador
+    """
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     foto_perfil = models.ImageField(upload_to='photoPersonal/', blank=True, null=True, storage=OverwriteStorage(), default='photoPersonal/default.jpg')
     
     # Cuando se crea un jugador se le crea un cliente vpn por lo que se ejecuta el script createUserVPN.sh
     def save(self, *args, **kwargs):
+        """
+        Función que guarda el objeto en la base de datos
+
+        Args:
+            self (Jugador): El objeto de la clase Jugador
+            *args: Argumentos adicionales
+            **kwargs: Argumentos adicionales
+        """
         if self.pk is None: # Si es un nuevo usuario
             super().save(*args, **kwargs)
             # Ejecutar el script para crear el usuario VPN
@@ -63,6 +80,12 @@ class Jugador(models.Model):
             super().save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Retorna el nombre del usuario
+
+        Returns:
+            str: El nombre del usuario
+        """
         return self.usuario.username
     class Meta: 
         verbose_name_plural="Jugadores"
@@ -73,6 +96,18 @@ class Jugador(models.Model):
         return PuntuacionJugador.objects.filter(jugador=self).aggregate(Sum('puntuacion'))['puntuacion__sum'] or 0
 
 class MaquinaVulnerable(models.Model):
+    """
+    Clase que representa una máquina vulnerable
+
+    Attributes:
+        nombre (str): El nombre de la máquina
+        nivel_dificultad (str): El nivel de dificultad de la máquina
+        puntuacion_minima_activacion (int): La puntuación mínima para activar la máquina
+        descripcion (str): La descripción de la máquina
+        bandera_usuario_inicial (str): La bandera del usuario inicial
+        bandera_usuario_root (str): La bandera del usuario root
+        instrucciones (str): Las instrucciones para crear la máquina
+    """
     DIFFICULT_CHOICES = (
         ('Facil', 'Facil'),
         ('Media', 'Media'),
@@ -90,15 +125,35 @@ class MaquinaVulnerable(models.Model):
     instrucciones = models.TextField(max_length=255, blank=False, null=False, default="") # Instrucciones para crear la maquina
     # Creo una función para cuando se modifica el valor activa
     def __str__(self):
+        """
+        Retorna el nombre de la máquina
+
+        Returns:
+            str: El nombre de la máquina
+        """
         return self.nombre
     class Meta:
         verbose_name_plural="Maquinas vulnerables"
 
 #Las maquinas soportadas por el sistema serán: Maquinas Docker a partir de un Dockerfile, maquinas Docker generadas con un Docker Compose y Maquinas Virtuales
 class MaquinaDocker(MaquinaVulnerable):
+    """
+    Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker
+
+    Attributes:
+        archivo (FileField): El archivo que contiene la configuración de la máquina
+    """
     archivo = models.FileField(upload_to='archivoZipDocker/', validators=[Validate_zip_file], blank=True, null=True)
 
     def save(self, *args, **kwargs):
+        """
+        Función que guarda el objeto en la base de datos así como gestiona la creación de la máquina dentor de Docker y guardar en el directorio correspondiente los ficheros
+
+        Args:
+            self (MaquinaDocker): El objeto de la clase MaquinaDocker
+            *args: Argumentos adicionales
+            **kwargs: Argumentos adicionales
+        """
         if self.pk:
             # Si la máquina ya existe y se está modificando
             maquina = MaquinaDocker.objects.get(pk=self.pk)
@@ -130,6 +185,16 @@ class MaquinaDocker(MaquinaVulnerable):
                 raise ValidationError('Formato introducido incorrecto')
 
     def levantar_maquina_docker(self, relacion):
+        """
+        Función que levanta una instancia de la máquina en Docker
+
+        Args:
+            self (MaquinaDocker): El objeto de la clase MaquinaDocker
+            relacion (MaquinaJugador): La relación entre la máquina y el jugador
+
+        Returns:
+            bool: True si la máquina se ha levantado correctamente, False en caso contrario
+        """
         ruta_dockerfile = f'maquinas_docker/{self.nombre}/Dockerfile'
         comando = f"docker run --name {relacion.jugador.usuario.username} -d --rm {self.nombre.lower()}"
         try:
@@ -170,6 +235,16 @@ class MaquinaDocker(MaquinaVulnerable):
             return False
 
     def detener_maquina_docker(self, relacion):
+        """
+        Función que detiene una instancia de la máquina en Docker
+
+        Args:
+            self (MaquinaDocker): El objeto de la clase MaquinaDocker
+            relacion (MaquinaJugador): La relación entre la máquina y el jugador
+
+        Returns:
+            bool: True si la máquina se ha detenido correctamente, False en caso contrario
+        """
         comando=f"docker rm -f {relacion.jugador.usuario.username}"
         try:
             subprocess.run(comando, shell=True, check=True)
@@ -180,14 +255,30 @@ class MaquinaDocker(MaquinaVulnerable):
             comando=f"sudo ./iptables.sh del {relacion.ip_address}"
             subprocess.run(comando, shell=True, check=True)
         return True
+    
     class Meta:
         verbose_name_plural = "Máquinas Docker"
 
 class MaquinaDockerCompose(MaquinaVulnerable):
+    """
+    Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con un Docker Compose
+
+    Attributes:
+        archivo (FileField): El archivo que contiene la configuración para levantar el docker-compose
+
+    """
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina Docker con un Docker Compose
     archivo = models.FileField(upload_to='archivoZipDockerCompose/', validators=[Validate_zip_file], blank=True)
 
     def save(self, *args, **kwargs):
+        """
+        Función que guarda el objeto en la base de datos así como gestiona la creación de la máquina dentor de Docker y guardar en el directorio correspondiente los ficheros
+
+        Args:
+            self (MaquinaDockerCompose): El objeto de la clase MaquinaDockerCompose
+            *args: Argumentos adicionales
+            **kwargs: Argumentos adicionales
+        """
         # Eliminar el archivo original
         if self.pk:
             # Si la máquina ya existe y se está modificando
@@ -210,6 +301,16 @@ class MaquinaDockerCompose(MaquinaVulnerable):
         verbose_name_plural = "Maquinas Docker Compose"
         
     def levantar_maquina_docker_compose(self, relacion):
+        """
+        Función que levanta una instancia de la máquina en Docker Compose
+
+        Args:
+            self (MaquinaDockerCompose): El objeto de la clase MaquinaDockerCompose
+            relacion (MaquinaJugador): La relación entre la máquina y el jugador
+
+        Returns:
+            bool: True si la máquina se ha levantado correctamente, False en caso contrario
+        """
         ruta_docker_compose = f'maquinas_docker_compose/{self.nombre}/docker-compose.yml'
         levantar_contenedor = f"PLAYER={relacion.jugador.usuario.username.lower()} docker-compose -f {ruta_docker_compose} -p 'proyecto_{relacion.jugador.usuario.username}' up -d"
         obtener_ip=f"docker exec proyecto_{relacion.jugador.usuario.username}_nginx_1 ifconfig eth0 | awk '/inet /" +  "{print $2}'" #Cambiar para casos generales
@@ -234,7 +335,18 @@ class MaquinaDockerCompose(MaquinaVulnerable):
         except subprocess.CalledProcessError as e:
             print(f"Error al levantar la máquina: {e}")
             return False
+    
     def detener_maquina_docker_compose(self, relacion):
+        """
+        Función que detiene una instancia de la máquina en Docker Compose
+
+        Args:
+            self (MaquinaDockerCompose): El objeto de la clase MaquinaDockerCompose
+            relacion (MaquinaJugador): La relación entre la máquina y el jugador
+        
+        Returns:
+            bool: True si la máquina se ha detenido correctamente, False en caso contrario
+        """
         ruta_docker_compose = f'maquinas_docker_compose/{self.nombre}/docker-compose.yml'
         comando=f"PLAYER={relacion.jugador.usuario.username} docker-compose -f {ruta_docker_compose} -p 'proyecto_{relacion.jugador.usuario.username}' down"
         try:
@@ -248,6 +360,13 @@ class MaquinaDockerCompose(MaquinaVulnerable):
         return True
 
 class MaquinaVirtual(MaquinaVulnerable):
+    """
+    Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina virtual
+
+    Attributes:
+        ip_maquina_virtual (str): La dirección IP de la máquina virtual
+        otros_atributos (str): Otros atributos pendientes de implementar
+    """
     #Clase que hereda de MaquinaVulnerable la cual contiene datos para iniciar una maquina virtual
     # Otros atributos...
     ip_maquina_virtual = models.CharField(max_length=25)
@@ -256,6 +375,17 @@ class MaquinaVirtual(MaquinaVulnerable):
 
 # Relacionar máquinas con el jugador
 class MaquinaJugador(models.Model):
+    """
+    Clase que relaciona a un jugador con una máquina
+
+    Attributes:
+        jugador (Jugador): El jugador relacionado
+        maquina_vulnerable (MaquinaVulnerable): La máquina relacionada
+        activa (bool): True si la máquina está activa, False en caso contrario
+        ip_address (str): La dirección IP de la máquina
+        tiempo_activa (int): El tiempo que ha estado activa la máquina
+        momento_activacion (DateTimeField): El momento en el que se activa la máquina
+    """
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
     maquina_vulnerable = models.ForeignKey('MaquinaVulnerable', on_delete=models.CASCADE)
     activa = models.BooleanField(default=False)
@@ -263,15 +393,34 @@ class MaquinaJugador(models.Model):
     tiempo_activa = models.BigIntegerField(null=True, blank=True) # Tiempo que ha estado activa la maquina
     momento_activacion = models.DateTimeField(auto_now_add=True, null=True, blank=True) # Momento en el que se activa la maquina
     def __str__(self):
+        """
+        Retorna el nombre del jugador y la máquina
+
+        Returns:
+            str: El nombre del jugador y la máquina
+        """
         estado = "activa" if self.activa else "inactiva"
         return f"{self.jugador.usuario.username} tiene la maquina {self.maquina_vulnerable.nombre}  {estado}"
     
     # Paso un parámetro que es el tiempo que ha estado activa la máquina
     def actualizar_tiempo_activa(self, tiempo):
+        """
+        Función que actualiza el tiempo que ha estado activa la máquina
+        
+        Args:
+            self (MaquinaJugador): El objeto de la clase MaquinaJugador
+            tiempo (int): El tiempo que ha estado activa la máquina
+        """
         self.tiempo_activa = tiempo + self.tiempo_activa
         self.save()
 
     def obtener_tiempo_total_activa(self):
+        """
+        Función que obtiene el tiempo total que ha estado activa la máquina
+
+        Returns:
+            int: Tiempo total que ha estado activa la máquina
+        """
         if self.tiempo_activa is None:
             return 0
         return tiempo_activa.total_seconds()
@@ -279,6 +428,13 @@ class MaquinaJugador(models.Model):
     # Método para convertir el tiempo en un formato legible de horas, minutos y segundos
     @property
     def obtener_tiempo(self):
+        """
+        Función que obtiene el tiempo en un formato legible de horas, minutos y segundos
+
+        Returns:
+            str: El tiempo en un formato legible de horas, minutos y segundos
+        
+        """
         tiempo = self.tiempo_activa
         horas = tiempo // 3600
         minutos = (tiempo % 3600) // 60
@@ -287,6 +443,15 @@ class MaquinaJugador(models.Model):
         #return horas, minutos, segundos
 
     def save(self, *args, **kwargs):
+        """
+        Función que guarda el objeto en la base de datos y gestiona la activación y desactivación de la máquina,
+        adicionalmente establece la variable activa en función de lo que ocurra.
+
+        Args:
+            self (MaquinaJugador): El objeto de la clase MaquinaJugador
+            *args: Argumentos adicionales
+            **kwargs: Argumentos adicionales
+        """
         # Verifica si el nombre ha cambiado
         if self.pk is not None:
             original = MaquinaJugador.objects.get(pk=self.pk)
@@ -326,12 +491,28 @@ class MaquinaJugador(models.Model):
 
 # Tabla para guardar las banderas que ha obtenido cada jugador
 class PuntuacionJugador(models.Model):
+    """
+    Clase que guarda las banderas que ha obtenido cada jugador
+
+    Attributes:
+        jugador (Jugador): El jugador que ha obtenido la bandera
+        maquina_vulnerable (MaquinaVulnerable): La máquina de la que ha obtenido la bandera
+        puntuacion (int): La puntuación obtenida
+        fecha_obtencion (DateTimeField): La fecha en la que se ha obtenido la bandera
+        bandera (int): 0 si es la bandera del usuario, 1 si es la bandera del root
+    """
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
     maquina_vulnerable = models.ForeignKey(MaquinaVulnerable, on_delete=models.CASCADE)
     puntuacion = models.IntegerField(default=0)
     fecha_obtencion = models.DateTimeField(auto_now_add=True)
     bandera = models.IntegerField(default=0) # 0: Bandera del usuario, 1: Bandera del root
     def __str__(self):
+        """
+        Retorna una cadena en formato legible de la relacion puntuacion jugador
+
+        Returns:
+            str: La relación establecida entre el jugador y la máquina, así como si esta activa o no
+        """
         estado = "flag 2" if self.bandera else "flag 1"
         return f"{self.jugador.usuario.username} ha obtenido la {estado} de la maquina {self.maquina_vulnerable.nombre}"
     class Meta:
@@ -339,16 +520,38 @@ class PuntuacionJugador(models.Model):
 
 # Tabla para guardar las valoraciones de las banderas de las maquinas
 class ValoracionJugador(models.Model):
+    """
+    Clase que guarda las valoraciones de las banderas de las máquinas
+
+    Attributes:
+        puntuacion_jugador (PuntuacionJugador): La puntuación del jugador
+        valoracion (int): La valoración de la bandera
+        fecha_valoracion (DateTimeField): La fecha en la que se ha valorado la bandera
+    """
     puntuacion_jugador = models.ForeignKey(PuntuacionJugador, on_delete=models.CASCADE) # El jugador solo puede valorar las banderas que ha obtenido
     valoracion = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     fecha_valoracion = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        #return f"{self.jugador.usuario.username} ha valorado la flag {self.bandera} de la maquina {self.maquina_vulnerable.nombre} con un {self.valoracion}"
+        """
+        Retorna una cadena en formato legible de la relacion valoracion jugador
+
+        Returns:
+            str: La relación establecida entre el jugador y la máquina, así como si esta activa o no
+        """
         return f"{self.puntuacion_jugador.jugador.usuario.username} ha valorado la flag {self.puntuacion_jugador.bandera} de la maquina {self.puntuacion_jugador.maquina_vulnerable.nombre} con un {self.valoracion}"
     class Meta:
         verbose_name_plural = "Valoraciones de los jugadores"
 # Funciones de disparadores
 def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
+    """
+    Función que funciona como disparador y que crea un jugador cuando se crea un usuario
+
+    Args:
+        sender: El objeto que envía la señal
+        instance: La instancia del objeto que envía la señal
+        created: True si se ha creado el objeto, False en caso contrario
+        **kwargs: Argumentos adicionales
+    """
     if created:
         jugador = Jugador.objects.create(usuario=instance) #Crea el jugador
         maquinas_disponibles = MaquinaVulnerable.objects.all()
@@ -358,6 +561,15 @@ def crear_jugador_al_crear_usuario(sender, instance, created, **kwargs):
 
 #Crear relaciones con los jugadores cuando se crea una maquina Docker Compose
 def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **kwargs):
+    """
+    Función que funciona como disparador y que crea una relación entre la máquina y el jugador cuando se crea una máquina Docker Compose
+    
+    Args:
+        sender: El objeto que envía la señal
+        instance: La instancia del objeto que envía la señal
+        created: True si se ha creado el objeto, False en caso contrario
+        **kwargs: Argumentos adicionales
+    """
     if created:
         jugadores = Jugador.objects.all()
         for jugador in jugadores:
@@ -366,6 +578,14 @@ def crear_relacion_al_crear_maquina_docker_compose(sender, instance, created, **
 
 # Función para crear la realción maquina-jugador cuando se actualiza la puntuación de un jugador
 def crear_relacion_al_actualizar_puntuacion(sender, instance, **kwargs):
+    """
+    Función que funciona como disparador y que crea una relación entre la máquina y el jugador cuando se actualiza la puntuación de un jugador
+
+    Args:
+        sender: El objeto que envía la señal
+        instance: La instancia del objeto que envía la señal
+        **kwargs: Argumentos adicionales
+    """
     maquinas_disponibles = MaquinaVulnerable.objects.all()
     jugador = Jugador.objects.get(usuario=instance.usuario)
     for maquina in maquinas_disponibles:
@@ -387,6 +607,15 @@ post_save.connect(crear_relacion_al_crear_maquina_docker_compose, sender=Maquina
 # ##################################################################
 # Cuando se elimine una maquina se elimina su archivo y su carpeta
 def delete_file_and_folder(sender, instance, **kwargs):
+    """
+    Función que elimina el archivo y la carpeta de una máquina cuando se elimina la máquina
+
+    Args:
+        sender: El objeto que envía la señal
+        instance: La instancia del objeto que envía la señal
+        **kwargs: Argumentos adicionales
+    """
+    
     if isinstance(instance, MaquinaDocker):
         try:
             os.remove(instance.archivo.path)
@@ -411,11 +640,28 @@ post_delete.connect(delete_file_and_folder, sender=MaquinaDocker)
 
 @receiver(pre_delete, sender=Jugador)
 def delete_user(sender, instance, **kwargs):
+    """
+    Función que elimina el archivo de configuración VPN y el usuario VPN
+
+    Args:
+        sender: El objeto que envía la señal
+        instance: La instancia del objeto que envía la señal
+        **kwargs: Argumentos adicionales
+    """
     # Ejecutar el script para eliminar el usuario VPN
     comando = f"sudo ./createUserVPN.sh del {instance.usuario.username}"
     subprocess.run(comando, shell=True, check=True)
 
 def obtener_tipo_maquina(maquina):
+    """
+    Función que obtiene el tipo de máquina
+
+    Args:
+        maquina (MaquinaVulnerable): La máquina de la que se obtendrá el tipo
+
+    Returns:
+        str: El tipo de máquina, si es Docker, Docker Compose o Virtual
+    """
     if hasattr(maquina, 'maquinadocker'):
         return getattr(maquina, 'maquinadocker')
     elif hasattr(maquina, 'maquinadockercompose'):
@@ -426,6 +672,15 @@ def obtener_tipo_maquina(maquina):
         return None
 
 def jugador_conectado_vpn(usuario):
+    """
+    Función que comprueba si un usuario está conectado a la VPN
+
+    Args:
+        usuario (str): El nombre del usuario
+
+    Returns:
+        bool: True si el usuario está conectado, False en caso contrario
+    """
     #return True # Suponemos que el usuario esta siempre conectado
     comando = f"sudo ./createUserVPN.sh check {usuario}"
     try:

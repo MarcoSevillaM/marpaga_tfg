@@ -435,3 +435,7 @@ IMPORTANTE para pasar datos a un JS se pasan:
 	const data = document.currentScript.dataset;
 	const username = data.username;
 Modificar las graficas
+
+-----20-06-2024---------
+
+-> Se trabaja con sphinx, y se documenta la funcion gestion.views.gestionar_maquina ver qué pasa PENDIENTE

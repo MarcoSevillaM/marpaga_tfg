@@ -37,7 +37,16 @@ def get_item(dictionary, key):
     
 #Vista para el inicio de sesion del jugador
 @login_required(login_url="inicio")
-def personal(request): # Pagina personal del usuario
+def personal(request): # Pagina personal del jugador
+    """
+    Función que renderiza la página personal del jugador
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página personal si el usuario está autenticado, en caso contrario redirige a la página de inicio
+    """
     p = User.objects.all()
     if request.method == 'GET':
         #Obtengo el nombre del usuario logueado
@@ -55,6 +64,15 @@ def personal(request): # Pagina personal del usuario
 
 @login_required(login_url="inicio")
 def maquinas(request):
+    """
+    Función que renderiza la página con el listado de las máquinas disponibles para el jugador
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de las máquinas disponibles
+    """
     #Necesito el jugador y las maquinas que tiene disponibles
     if request.method == 'GET':
         #Obtengo las maquinas que tiene disponibles en función de la puntuación del jugador
@@ -67,7 +85,7 @@ def maquinas(request):
     elif request.method == 'POST': #Si se pulsa el boton de activar o desactivar
         return redirect('maquinas')
 
-#Ahora mismo no hace nada  pero es codigo para levantar un contenedor docker con una api
+#Codigo para levantar un contenedor docker con una api
 def gestionar_maquina(control, usuario, client):
     if control == 1:
         try:	
@@ -93,6 +111,16 @@ def gestionar_maquina(control, usuario, client):
 #Vista previa de la maquina seleccionada
 @login_required(login_url="inicio")
 def gestion_maquina(request, nombre_maquina):
+    """
+    Función que renderiza la página de la máquina seleccionada por el jugador, pudiedo activarla o desactivarla así como obtener información de la misma
+
+    Args:
+        request (HttpRequest): La petición HTTP
+        nombre_maquina (str): El nombre de la máquina seleccionada
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de la máquina seleccionada
+    """
     #A partir de nombre_maquina-> la maquina MaquinaDocker, MaquinaDockerCompose o MaquinaVirtual
     #Obtener la relacion entre el jugador y la maquina
     relacion_maquina_jugador= MaquinaJugador.objects.get(maquina_vulnerable=MaquinaVulnerable.objects.get(nombre=nombre_maquina), jugador=Jugador.objects.get(usuario=request.user))
@@ -121,6 +149,16 @@ def gestion_maquina(request, nombre_maquina):
 #Para poder activarse el metodo debe de ser post y además ninguna maquina del usuario tiene que estar activa
 @login_required(login_url="inicio")
 def activar_maquina(request, nombre_maquina):
+    """
+    Función que activa la máquina seleccionada por el jugador en función del tipo de máquina que sea
+
+    Args:
+        request (HttpRequest): La petición HTTP por POST
+        nombre_maquina (str): El nombre de la máquina seleccionada
+
+    Returns:
+        Redirect: Redirige a la página de la máquina seleccionada pero con la máquina activada y la pagina actualizada
+    """
     if request.method == 'POST': 
         jugador = Jugador.objects.get(usuario=request.user)
         maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
@@ -164,6 +202,16 @@ def activar_maquina(request, nombre_maquina):
     
 @login_required(login_url="inicio")
 def desactivar_maquina(request, nombre_maquina):
+    """
+    Función que desactiva la máquina seleccionada por el jugador en función del tipo de máquina que sea
+
+    Args:
+        request (HttpRequest): La petición HTTP por POST
+        nombre_maquina (str): El nombre de la máquina seleccionada
+
+    Returns:
+        Redirect: Redirige a la página de la máquina seleccionada pero con la máquina desactivada y la pagina actualizada
+    """
     if request.method == 'POST':
         jugador = Jugador.objects.get(usuario=request.user)
         maquina = MaquinaVulnerable.objects.get(nombre=nombre_maquina)
@@ -191,6 +239,15 @@ def desactivar_maquina(request, nombre_maquina):
 
 @login_required(login_url="inicio")
 def descargar_archivo(request):
+    """
+    Función que permite descargar el archivo de configuración de la VPN (crea una descarga automática del archivo .ovpn del jugador)
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP con el archivo de configuración de la VPN
+    """
     nombre_archivo = request.user.username + ".ovpn"
     # Construir la ruta completa al archivo
     ruta_archivo = os.path.join(settings.MEDIA_ROOT, "vpns/" + nombre_archivo)
@@ -210,12 +267,31 @@ def descargar_archivo(request):
         return HttpResponse("El archivo no fue encontrado.", status=404)
 
 def logout_vista(request):
+    """
+    Función que cierra la sesión del jugador y lo redirige a la página de inicio
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        Redirect: Redirige a la página de inicio
+    """
     #Cerrar sesión mediante get sin que me de fallo
     logout(request)
     return redirect('inicio')
 
 @login_required(login_url="inicio")
 def profile(request):
+    """
+    Función que renderiza la página de perfil del jugador y permite cambiar la contraseña y la foto de perfil si es tu perfil.
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de perfil del jugador
+    """
+
     if request.method == 'POST':
         # Procesar el formulario de cambio de contraseña
         formPassword = PasswordChangeForm(request.user, request.POST)
@@ -253,6 +329,16 @@ def profile(request):
 # Ver perfil de usuario seleccionado
 @login_required(login_url="inicio")
 def ver_perfil(request, jugador_id):
+    """
+    Función que renderiza la página de perfil de un jugador seleccionado
+
+    Args:
+        request (HttpRequest): La petición HTTP
+        jugador_id (int): El ID del jugador seleccionado
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de perfil del jugador seleccionado
+    """
     jugador = get_object_or_404(Jugador, pk=jugador_id) #if jugador.usuario != request.user
     # Obtengo el listado de maquinas que ha resuelto el jugador
     maquinas = PuntuacionJugador.objects.filter(jugador=jugador)
@@ -262,6 +348,17 @@ def ver_perfil(request, jugador_id):
 # Vistas para gestionar las flags
 @login_required(login_url="inicio")
 def flag(request, nombre_maquina):
+    """
+    Función que gestiona la obtención y verificación de las flags de la máquina activa por el jugador
+
+    Args:
+        request (HttpRequest): La petición HTTP por POST
+        nombre_maquina (str): El nombre de la máquina seleccionada
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de la máquina seleccionada con la flag obtenida (si es correcta) y la página actualizada
+    """
+
     # Obtengo por POST la flag si es flag1 o flag2
     flag = request.POST.get('flag1')
     flag2 = request.POST.get('flag2')
@@ -306,6 +403,15 @@ def flag(request, nombre_maquina):
 # Ranking
 @login_required(login_url="inicio")
 def ranking(request):
+    """
+    Función que renderiza la página del ranking de la plataforma
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página del ranking de la plataforma
+    """
     # Obtengo el ranking de los jugadores
     jugadores = sorted(Jugador.objects.all(), key=lambda x: x.obtener_puntuacion(), reverse=True)
     return render(request, 'personal/ranking.html', {'jugadores': jugadores})
@@ -313,6 +419,15 @@ def ranking(request):
 # Logros personales
 @login_required(login_url="inicio")
 def logros(request):
+    """
+    Función que renderiza la página de los logros personales del jugador
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de los logros personales del jugador
+    """
     # Obtengo los logros del jugador
     jugador = Jugador.objects.get(usuario=request.user)
     # Obtengo la puntuación obtenida del jugador
@@ -326,6 +441,15 @@ def logros(request):
 #Vista que gestiona el guardado de una votación de la valoración por un usuario
 @login_required(login_url="inicio")
 def valoracion(request):
+    """
+    Función que gestiona la valoración de una bandera obtenida por parte de un jugador
+    
+    Args:
+        request (HttpRequest): La petición HTTP por POST
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de los logros personales del jugador
+    """
     if request.method == 'POST':
         maquina = MaquinaVulnerable.objects.get(id=request.POST.get('maquina_id'))
         bandera =request.POST.get('bandera')
@@ -370,11 +494,29 @@ def valoracion(request):
         return redirect('logros')
 # Vista para ver los ultimos 10 correos tiene que ser usuario admin
 def is_admin(user):
+    """
+    Función que comprueba si el usuario es administrador
+
+    Args:
+        user (User): El usuario a comprobar
+
+    Returns:   
+        bool: True si el usuario es administrador, False en caso contrario
+    """
     return user.is_staff
 
 #Vistas para el admin
 @user_passes_test(is_admin)
 def get_last_10_emails(request):
+    """
+    Función que obtiene los últimos 10 correos electrónicos no leídos de la bandeja de entrada del servidor de correo
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP con los últimos 10 correos electrónicos no leídos
+    """
     # Datos del servidor
     username = "marpagamarco@gmail.com"
     password = "wpqdzopxecragcyq"
@@ -453,6 +595,15 @@ def get_last_10_emails(request):
 
 @user_passes_test(is_admin)
 def graficos(request):
+    """
+    Función que renderiza la página de los gráficos de la plataforma para que el usuario administrador pueda ver todos los datos y llevar el seguimiento del sistema
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP a la página de los gráficos de la plataforma
+    """
     # Pasar los datos de las votaciones perfectamente parseados para gestionarlos al dibujar
     valoraciones = []
     

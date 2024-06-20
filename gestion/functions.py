@@ -7,6 +7,9 @@ import subprocess
 import time
 
 def Validate_zip_file(value):
+    """
+    Función que valida que el archivo sea un archivo .zip
+    """
     #Comprobará que el fichero termine en .zip o directamente que se quiera conservar el nombre del fichero anterior
     if not value and not os.path.isfile(value.path):
         return

@@ -1,3 +1,4 @@
+# Todo el codigo se escribe para generar un autodoc y sphinx
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -33,7 +34,15 @@ from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, 
 
 # Funcion del hilo para eliminar los usuarios inactivos
 def remove_inactive_users(user):
-    # Elimina todos los usuarios que no han iniciado sesión en el ultimo minuto
+    """
+    Elimina los usuarios que no han activado su cuenta en el ultimo minuto
+
+    Args:
+        user (User): El usuario que se eliminará si no ha activado su cuenta
+
+    Returns:
+        None
+    """
     time.sleep(60) # Espera 1 minuto
     user = User.objects.get(pk=user.pk)
     print(user.is_active)
@@ -41,9 +50,27 @@ def remove_inactive_users(user):
         user.delete()
 
 def inicio(request):
+    """
+    Función que renderiza la página de inicio
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP
+    """
     return render(request, 'gestion/index.html')
 
 def registro(request):
+    """
+    Función que renderiza la página de registro, en caso de que se haya enviado el formulario, se encarga de crear el usuario y enviar el correo de activación
+
+    Args:
+        request (HttpRequest): La petición HTTP
+
+    Returns:
+        HttpResponse: La respuesta HTTP
+    """
     if request.method == 'POST':
         form = RegistrarJugador(request.POST)
         if form.is_valid():
@@ -72,6 +99,17 @@ def registro(request):
     return render(request, 'gestion/registro.html', context)
 
 def activate(request, uidb64, token):
+    """
+    Función que activa la cuenta del usuario
+
+    Args:
+        request (HttpRequest): La petición HTTP
+        uidb64 (str): El ID del usuario codificado en base64
+        token (str): El token de activación
+    
+    Returns:
+        Redirect: Redirige a la página de inicio de sesión si la activación fue exitosa, de lo contrario, redirige a la página de inicio de sesión con un mensaje de error
+    """
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
@@ -87,24 +125,28 @@ def activate(request, uidb64, token):
         messages.error(request, 'El enlace de activación es inválido o ha expirado.')
         return redirect('login') 
 
-# Login View PErsonalizada
-# class CustomLoginView(LoginView):
-#     template_name = 'personal.html'
-#     success_url = reverse_lazy('nombre_de_tu_vista_de_exito')  # Ajusta esto según tus necesidades
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-        
-#         # Agrega tus variables personalizadas al contexto
-#         context['tu_variable_personalizada'] = 'valor_personalizado'
-        
-#         return context
 # Vistas para contraseña olvidada
 
 class CustomPasswordResetView(PasswordResetView):
+    """
+    Clase que hereda de la página de restablecimiento de contraseña nativa de Django mostrando un formulario para restablecer la contraseña
+
+    Atributes:
+        template_name (str): La plantilla de la página
+        user (User): El usuario que ha solicitado restablecer la contraseña
+    """
     template_name = 'gestion/reset_passwd.html'
     user=None
     def form_valid(self, form):
+        """
+        Función que se ejecuta cuando el formulario es válido
+
+        Args:
+            form (Form): El formulario de restablecimiento de contraseña
+
+        Returns:
+            response: La respuesta HTTP con el formulario válido
+        """
         response = super().form_valid(form)
         mensaje = f"Restablecimiento de contraseña enviado\n"
         messages.success(self.request, mensaje)
@@ -117,12 +159,30 @@ class CustomPasswordResetView(PasswordResetView):
         return response
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
+    """
+    Clase que hereda de la página de restablecimiento de contraseña nativa de Django cuando el correo de restablecimiento de contraseña ha sido enviado
+    """
     template_name = 'gestion/reset_passwd.html'
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    """
+    Clase que hereda de la página de restablecimiento de contraseña nativa de Django mostrando un formulario para restablecer la contraseña
+
+    Atributes:
+        template_name (str): La plantilla de la página
+    """
     template_name = 'gestion/reset_passwd_confirm.html'
 
     def form_valid(self, form):
+        """
+        Función que se ejecuta cuando el formulario es válido
+
+        Args:
+            form (Form): El formulario de restablecimiento de contraseña
+        
+        Returns:
+            response: La respuesta HTTP con el formulario válido
+        """
         response = super().form_valid(form)
         mensaje = f"Restablecimiento de contraseña completado\n"
         messages.success(self.request, mensaje)
@@ -133,4 +193,7 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         return response
 
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    """
+    Clase que hereda de la página de restablecimiento de contraseña nativa de Django cuando el restablecimiento de contraseña ha sido completado
+    """
     template_name = 'gestion/reset_passwd.html'
