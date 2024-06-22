@@ -14,6 +14,7 @@ def Validate_zip_file(value):
     if not value and not os.path.isfile(value.path):
         return
     elif not value.name.endswith('.zip'):
+        print(value.name)
         raise ValidationError(_('Archivo debe tener extensión .zip'))
     
 def Validar_carpeta_docker_compose(maquina):

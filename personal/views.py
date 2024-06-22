@@ -609,8 +609,8 @@ def graficos(request):
     
     # Obtener todas las máquinas
     maquinas = MaquinaVulnerable.objects.all()
-    
     for maquina in maquinas:
+        print(maquina)
         # Obtener las puntuaciones de la máquina
         puntuaciones = PuntuacionJugador.objects.filter(maquina_vulnerable=maquina)
         

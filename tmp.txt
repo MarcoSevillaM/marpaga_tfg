@@ -1,0 +1,1684 @@
+mar 07 12:27:10 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 12:27:10 marpaga gunicorn[7261]: [2024-03-07 12:27:10 +0100] [7261] [INFO] Starting gunicorn 21.2.0
+mar 07 12:27:10 marpaga gunicorn[7261]: [2024-03-07 12:27:10 +0100] [7261] [INFO] Listening at: http://127.0.0.1:8000 (7261)
+mar 07 12:27:10 marpaga gunicorn[7261]: [2024-03-07 12:27:10 +0100] [7261] [INFO] Using worker: sync
+mar 07 12:27:10 marpaga gunicorn[7288]: [2024-03-07 12:27:10 +0100] [7288] [INFO] Booting worker with pid: 7288
+mar 07 12:27:10 marpaga gunicorn[7289]: [2024-03-07 12:27:10 +0100] [7289] [INFO] Booting worker with pid: 7289
+mar 07 12:27:10 marpaga gunicorn[7292]: [2024-03-07 12:27:10 +0100] [7292] [INFO] Booting worker with pid: 7292
+mar 07 12:27:10 marpaga gunicorn[7294]: [2024-03-07 12:27:10 +0100] [7294] [INFO] Booting worker with pid: 7294
+mar 07 12:27:43 marpaga gunicorn[7322]: Creating network "backend-marco" with driver "bridge"
+mar 07 12:27:44 marpaga gunicorn[7322]: Creating network "frontend-marco" with driver "bridge"
+mar 07 12:27:44 marpaga gunicorn[7322]: Creating proyecto_marco_mysql_1 ...
+mar 07 12:27:44 marpaga gunicorn[7322]: Creating proyecto_marco_mysql_1 ... done
+mar 07 12:27:44 marpaga gunicorn[7322]: Creating proyecto_marco_php_1   ...
+mar 07 12:27:44 marpaga gunicorn[7322]: Creating proyecto_marco_php_1   ... done
+mar 07 12:27:44 marpaga gunicorn[7322]: Creating proyecto_marco_nginx_1 ...
+mar 07 12:27:45 marpaga gunicorn[7322]: Creating proyecto_marco_nginx_1 ... done
+mar 07 12:27:45 marpaga gunicorn[7782]: proyecto_marco_mysql_1 is up-to-date
+mar 07 12:27:45 marpaga gunicorn[7782]: proyecto_marco_php_1 is up-to-date
+mar 07 12:27:45 marpaga gunicorn[7782]: proyecto_marco_nginx_1 is up-to-date
+mar 07 12:27:45 marpaga gunicorn[7827]: sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+mar 07 12:27:45 marpaga sudo[7827]: pam_unix(sudo:auth): conversation failed
+mar 07 12:27:45 marpaga sudo[7827]: pam_unix(sudo:auth): auth could not identify password for [marco]
+mar 07 12:27:45 marpaga gunicorn[7827]: sudo: se requiere una contraseña
+mar 07 12:27:45 marpaga sudo[7827]:    marco : command not allowed ; PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.23.0.4
+mar 07 12:28:48 marpaga gunicorn[7289]: [2024-03-07 12:28:48 +0100] [7289] [INFO] Worker exiting (pid: 7289)
+mar 07 12:28:48 marpaga gunicorn[7261]: [2024-03-07 12:28:48 +0100] [7261] [INFO] Handling signal: term
+mar 07 12:28:48 marpaga gunicorn[7288]: [2024-03-07 12:28:48 +0100] [7288] [INFO] Worker exiting (pid: 7288)
+mar 07 12:28:48 marpaga gunicorn[7292]: [2024-03-07 12:28:48 +0100] [7292] [INFO] Worker exiting (pid: 7292)
+mar 07 12:28:48 marpaga gunicorn[7292]: 172.23.0.4
+mar 07 12:28:48 marpaga gunicorn[7261]: [2024-03-07 12:28:48 +0100] [7261] [ERROR] Worker (pid:7289) was sent SIGTERM!
+mar 07 12:28:48 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 07 12:28:48 marpaga gunicorn[7294]: [2024-03-07 12:28:48 +0100] [7294] [INFO] Worker exiting (pid: 7294)
+mar 07 12:28:48 marpaga gunicorn[7261]: [2024-03-07 12:28:48 +0100] [7261] [ERROR] Worker (pid:7292) was sent SIGTERM!
+mar 07 12:28:48 marpaga gunicorn[7261]: [2024-03-07 12:28:48 +0100] [7261] [INFO] Shutting down: Master
+mar 07 12:28:48 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 07 12:28:48 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 12:28:48 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 2.223s CPU time.
+mar 07 12:28:49 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 12:28:49 marpaga gunicorn[8110]: [2024-03-07 12:28:49 +0100] [8110] [INFO] Starting gunicorn 21.2.0
+mar 07 12:28:49 marpaga gunicorn[8110]: [2024-03-07 12:28:49 +0100] [8110] [INFO] Listening at: http://127.0.0.1:8000 (8110)
+mar 07 12:28:49 marpaga gunicorn[8110]: [2024-03-07 12:28:49 +0100] [8110] [INFO] Using worker: sync
+mar 07 12:28:49 marpaga gunicorn[8112]: [2024-03-07 12:28:49 +0100] [8112] [INFO] Booting worker with pid: 8112
+mar 07 12:28:49 marpaga gunicorn[8138]: [2024-03-07 12:28:49 +0100] [8138] [INFO] Booting worker with pid: 8138
+mar 07 12:28:49 marpaga gunicorn[8139]: [2024-03-07 12:28:49 +0100] [8139] [INFO] Booting worker with pid: 8139
+mar 07 12:28:49 marpaga gunicorn[8140]: [2024-03-07 12:28:49 +0100] [8140] [INFO] Booting worker with pid: 8140
+mar 07 12:28:55 marpaga gunicorn[8244]: proyecto_marco_mysql_1 is up-to-date
+mar 07 12:28:55 marpaga gunicorn[8244]: proyecto_marco_php_1 is up-to-date
+mar 07 12:28:55 marpaga gunicorn[8244]: proyecto_marco_nginx_1 is up-to-date
+mar 07 12:28:56 marpaga gunicorn[8263]: proyecto_marco_mysql_1 is up-to-date
+mar 07 12:28:56 marpaga gunicorn[8263]: proyecto_marco_php_1 is up-to-date
+mar 07 12:28:56 marpaga gunicorn[8263]: proyecto_marco_nginx_1 is up-to-date
+mar 07 12:28:56 marpaga gunicorn[8307]: sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+mar 07 12:28:56 marpaga gunicorn[8307]: sudo: se requiere una contraseña
+mar 07 12:28:56 marpaga sudo[8307]: pam_unix(sudo:auth): conversation failed
+mar 07 12:28:56 marpaga sudo[8307]: pam_unix(sudo:auth): auth could not identify password for [marco]
+mar 07 12:28:56 marpaga sudo[8307]:    marco : command not allowed ; PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.23.0.4
+mar 07 12:28:56 marpaga gunicorn[8138]: Internal Server Error: /my/maquinas/startrek_payroll/activar/
+mar 07 12:28:56 marpaga gunicorn[8138]: Traceback (most recent call last):
+mar 07 12:28:56 marpaga gunicorn[8138]:   File "/var/www/html/env/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+mar 07 12:28:56 marpaga gunicorn[8138]:     response = get_response(request)
+mar 07 12:28:56 marpaga gunicorn[8138]:   File "/var/www/html/env/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+mar 07 12:28:56 marpaga gunicorn[8138]:     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+mar 07 12:28:56 marpaga gunicorn[8138]:   File "/var/www/html/env/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+mar 07 12:28:56 marpaga gunicorn[8138]:     return view_func(request, *args, **kwargs)
+mar 07 12:28:56 marpaga gunicorn[8138]:   File "/var/www/html/marpaga_tfg/personal/views.py", line 138, in activar_maquina
+mar 07 12:28:56 marpaga gunicorn[8138]:     relacion_maquina_jugador.save()
+mar 07 12:28:56 marpaga gunicorn[8138]:   File "/var/www/html/marpaga_tfg/gestion/models.py", line 228, in save
+mar 07 12:28:56 marpaga gunicorn[8138]:     subprocess.run(comando, shell=True, check=True)
+mar 07 12:28:56 marpaga gunicorn[8138]:   File "/usr/lib/python3.10/subprocess.py", line 526, in run
+mar 07 12:28:56 marpaga gunicorn[8138]:     raise CalledProcessError(retcode, process.args,
+mar 07 12:28:56 marpaga gunicorn[8138]: subprocess.CalledProcessError: Command 'sudo ./iptables.sh add marco 172.23.0.4' returned non-zero exit status 1.
+mar 07 12:30:34 marpaga gunicorn[8369]: proyecto_marco_mysql_1 is up-to-date
+mar 07 12:30:34 marpaga gunicorn[8369]: proyecto_marco_php_1 is up-to-date
+mar 07 12:30:34 marpaga gunicorn[8369]: proyecto_marco_nginx_1 is up-to-date
+mar 07 12:30:34 marpaga gunicorn[8388]: proyecto_marco_mysql_1 is up-to-date
+mar 07 12:30:34 marpaga gunicorn[8388]: proyecto_marco_php_1 is up-to-date
+mar 07 12:30:34 marpaga gunicorn[8388]: proyecto_marco_nginx_1 is up-to-date
+mar 07 12:30:34 marpaga sudo[8434]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.23.0.4
+mar 07 12:30:34 marpaga sudo[8434]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 07 12:30:34 marpaga sudo[8434]: pam_unix(sudo:session): session closed for user root
+mar 07 12:30:37 marpaga gunicorn[8447]: Stopping proyecto_marco_nginx_1 ...
+mar 07 12:30:37 marpaga gunicorn[8447]: Stopping proyecto_marco_php_1   ...
+mar 07 12:30:37 marpaga gunicorn[8447]: Stopping proyecto_marco_mysql_1 ...
+mar 07 12:30:38 marpaga gunicorn[8447]: Stopping proyecto_marco_nginx_1 ... done
+mar 07 12:30:38 marpaga gunicorn[8447]: Stopping proyecto_marco_php_1   ... done
+mar 07 12:30:39 marpaga gunicorn[8447]: Stopping proyecto_marco_mysql_1 ... done
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing proyecto_marco_nginx_1 ...
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing proyecto_marco_php_1   ...
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing proyecto_marco_mysql_1 ...
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing proyecto_marco_php_1   ... done
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing proyecto_marco_nginx_1 ... done
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing proyecto_marco_mysql_1 ... done
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing network backend-marco
+mar 07 12:30:39 marpaga gunicorn[8447]: Removing network frontend-marco
+mar 07 12:30:39 marpaga sudo[8626]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.23.0.4
+mar 07 12:30:39 marpaga sudo[8626]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 07 12:30:39 marpaga sudo[8630]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 07 12:30:39 marpaga sudo[8630]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 07 12:30:39 marpaga sudo[8630]: pam_unix(sudo:session): session closed for user root
+mar 07 12:30:39 marpaga sudo[8626]: pam_unix(sudo:session): session closed for user root
+mar 07 12:31:37 marpaga gunicorn[8112]: [2024-03-07 12:31:37 +0100] [8112] [INFO] Worker exiting (pid: 8112)
+mar 07 12:31:37 marpaga gunicorn[8110]: [2024-03-07 12:31:37 +0100] [8110] [INFO] Handling signal: term
+mar 07 12:31:37 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 07 12:31:37 marpaga gunicorn[8139]: [2024-03-07 12:31:37 +0100] [8139] [INFO] Worker exiting (pid: 8139)
+mar 07 12:31:37 marpaga gunicorn[8138]: [2024-03-07 12:31:37 +0100] [8138] [INFO] Worker exiting (pid: 8138)
+mar 07 12:31:37 marpaga gunicorn[8138]: 172.23.0.4
+mar 07 12:31:37 marpaga gunicorn[8140]: [2024-03-07 12:31:37 +0100] [8140] [INFO] Worker exiting (pid: 8140)
+mar 07 12:31:37 marpaga gunicorn[8140]: 172.23.0.4
+mar 07 12:31:37 marpaga gunicorn[8110]: [2024-03-07 12:31:37 +0100] [8110] [ERROR] Worker (pid:8139) was sent SIGTERM!
+mar 07 12:31:37 marpaga gunicorn[8110]: [2024-03-07 12:31:37 +0100] [8110] [ERROR] Worker (pid:8138) was sent SIGTERM!
+mar 07 12:31:37 marpaga gunicorn[8110]: [2024-03-07 12:31:37 +0100] [8110] [INFO] Shutting down: Master
+mar 07 12:31:37 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 07 12:31:37 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 12:31:37 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 2.427s CPU time.
+-- Boot a57e3e137b364fe5917dcc1adbf505ee --
+mar 07 13:59:27 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 13:59:27 marpaga gunicorn[4644]: [2024-03-07 13:59:27 +0100] [4644] [INFO] Starting gunicorn 21.2.0
+mar 07 13:59:27 marpaga gunicorn[4644]: [2024-03-07 13:59:27 +0100] [4644] [INFO] Listening at: http://127.0.0.1:8000 (4644)
+mar 07 13:59:27 marpaga gunicorn[4644]: [2024-03-07 13:59:27 +0100] [4644] [INFO] Using worker: sync
+mar 07 13:59:27 marpaga gunicorn[4699]: [2024-03-07 13:59:27 +0100] [4699] [INFO] Booting worker with pid: 4699
+mar 07 13:59:27 marpaga gunicorn[4700]: [2024-03-07 13:59:27 +0100] [4700] [INFO] Booting worker with pid: 4700
+mar 07 13:59:27 marpaga gunicorn[4705]: [2024-03-07 13:59:27 +0100] [4705] [INFO] Booting worker with pid: 4705
+mar 07 13:59:27 marpaga gunicorn[4706]: [2024-03-07 13:59:27 +0100] [4706] [INFO] Booting worker with pid: 4706
+mar 07 14:00:54 marpaga gunicorn[4936]: Creating network "backend-marco" with driver "bridge"
+mar 07 14:00:54 marpaga gunicorn[4936]: Creating network "frontend-marco" with driver "bridge"
+mar 07 14:00:54 marpaga gunicorn[4936]: Creating proyecto_marco_mysql_1 ...
+mar 07 14:00:54 marpaga gunicorn[4936]: Creating proyecto_marco_mysql_1 ... done
+mar 07 14:00:54 marpaga gunicorn[4936]: Creating proyecto_marco_php_1   ...
+mar 07 14:00:55 marpaga gunicorn[4936]: Creating proyecto_marco_php_1   ... done
+mar 07 14:00:55 marpaga gunicorn[4936]: Creating proyecto_marco_nginx_1 ...
+mar 07 14:00:55 marpaga gunicorn[4936]: Creating proyecto_marco_nginx_1 ... done
+mar 07 14:00:56 marpaga gunicorn[5405]: proyecto_marco_mysql_1 is up-to-date
+mar 07 14:00:56 marpaga gunicorn[5405]: proyecto_marco_php_1 is up-to-date
+mar 07 14:00:56 marpaga gunicorn[5405]: proyecto_marco_nginx_1 is up-to-date
+mar 07 14:00:56 marpaga sudo[5454]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.23.0.4
+mar 07 14:00:56 marpaga sudo[5454]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 07 14:00:56 marpaga sudo[5454]: pam_unix(sudo:session): session closed for user root
+mar 07 14:00:58 marpaga gunicorn[5506]: Stopping proyecto_marco_nginx_1 ...
+mar 07 14:00:58 marpaga gunicorn[5506]: Stopping proyecto_marco_php_1   ...
+mar 07 14:00:58 marpaga gunicorn[5506]: Stopping proyecto_marco_mysql_1 ...
+mar 07 14:00:59 marpaga gunicorn[5506]: Stopping proyecto_marco_nginx_1 ... done
+mar 07 14:00:59 marpaga gunicorn[5506]: Stopping proyecto_marco_php_1   ... done
+mar 07 14:01:09 marpaga gunicorn[5506]: Stopping proyecto_marco_mysql_1 ... done
+mar 07 14:01:09 marpaga gunicorn[5506]: Removing proyecto_marco_nginx_1 ...
+mar 07 14:01:09 marpaga gunicorn[5506]: Removing proyecto_marco_php_1   ...
+mar 07 14:01:09 marpaga gunicorn[5506]: Removing proyecto_marco_mysql_1 ...
+mar 07 14:01:09 marpaga gunicorn[5506]: Removing proyecto_marco_nginx_1 ... done
+mar 07 14:01:09 marpaga gunicorn[5506]: Removing proyecto_marco_mysql_1 ... done
+mar 07 14:01:09 marpaga gunicorn[5506]: Removing proyecto_marco_php_1   ... done
+mar 07 14:01:09 marpaga gunicorn[5506]: Removing network backend-marco
+mar 07 14:01:10 marpaga gunicorn[5506]: Removing network frontend-marco
+mar 07 14:01:10 marpaga sudo[5702]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.23.0.4
+mar 07 14:01:10 marpaga sudo[5702]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 07 14:01:10 marpaga sudo[5706]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 07 14:01:10 marpaga sudo[5706]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 07 14:01:10 marpaga sudo[5706]: pam_unix(sudo:session): session closed for user root
+mar 07 14:01:10 marpaga sudo[5702]: pam_unix(sudo:session): session closed for user root
+mar 07 15:13:17 marpaga gunicorn[4706]: Not Found: /registro/img/favicon.ico
+mar 07 15:22:06 marpaga gunicorn[4699]: Not Found: /cgi-bin/luci/;stok=/locale
+mar 07 15:22:06 marpaga gunicorn[4706]: Not Found: /cgi-bin/luci/;stok=/locale
+mar 07 15:25:45 marpaga gunicorn[4705]: Not Found: /goform/goform_set_cmd_process
+mar 07 15:27:16 marpaga gunicorn[4705]: [2024-03-07 15:27:16 +0100] [4705] [INFO] Worker exiting (pid: 4705)
+mar 07 15:27:16 marpaga gunicorn[4706]: [2024-03-07 15:27:16 +0100] [4706] [INFO] Worker exiting (pid: 4706)
+mar 07 15:27:16 marpaga gunicorn[4706]: 172.23.0.4
+mar 07 15:27:16 marpaga gunicorn[4699]: [2024-03-07 15:27:16 +0100] [4699] [INFO] Worker exiting (pid: 4699)
+mar 07 15:27:16 marpaga gunicorn[4700]: [2024-03-07 15:27:16 +0100] [4700] [INFO] Worker exiting (pid: 4700)
+mar 07 15:27:16 marpaga gunicorn[4644]: [2024-03-07 15:27:16 +0100] [4644] [INFO] Handling signal: term
+mar 07 15:27:16 marpaga gunicorn[4644]: [2024-03-07 15:27:16 +0100] [4644] [ERROR] Worker (pid:4706) was sent SIGTERM!
+mar 07 15:27:16 marpaga gunicorn[4644]: [2024-03-07 15:27:16 +0100] [4644] [ERROR] Worker (pid:4699) was sent SIGTERM!
+mar 07 15:27:16 marpaga gunicorn[4644]: [2024-03-07 15:27:16 +0100] [4644] [ERROR] Worker (pid:4700) was sent SIGTERM!
+mar 07 15:27:16 marpaga gunicorn[4644]: [2024-03-07 15:27:16 +0100] [4644] [ERROR] Worker (pid:4705) was sent SIGTERM!
+mar 07 15:27:16 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 07 15:27:16 marpaga gunicorn[4644]: [2024-03-07 15:27:16 +0100] [4644] [INFO] Shutting down: Master
+mar 07 15:27:16 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 07 15:27:16 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 15:27:16 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 3.842s CPU time.
+-- Boot 4d697859aa104385bfc0c18df387f968 --
+mar 07 17:52:00 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 17:52:00 marpaga gunicorn[781]: [2024-03-07 17:52:00 +0100] [781] [INFO] Starting gunicorn 21.2.0
+mar 07 17:52:00 marpaga gunicorn[781]: [2024-03-07 17:52:00 +0100] [781] [INFO] Listening at: http://127.0.0.1:8000 (781)
+mar 07 17:52:00 marpaga gunicorn[781]: [2024-03-07 17:52:00 +0100] [781] [INFO] Using worker: sync
+mar 07 17:52:00 marpaga gunicorn[1000]: [2024-03-07 17:52:00 +0100] [1000] [INFO] Booting worker with pid: 1000
+mar 07 17:52:00 marpaga gunicorn[1005]: [2024-03-07 17:52:00 +0100] [1005] [INFO] Booting worker with pid: 1005
+mar 07 17:52:00 marpaga gunicorn[1054]: [2024-03-07 17:52:00 +0100] [1054] [INFO] Booting worker with pid: 1054
+mar 07 17:52:00 marpaga gunicorn[1081]: [2024-03-07 17:52:00 +0100] [1081] [INFO] Booting worker with pid: 1081
+mar 07 17:52:48 marpaga gunicorn[781]: [2024-03-07 17:52:48 +0100] [781] [INFO] Handling signal: term
+mar 07 17:52:48 marpaga gunicorn[1054]: [2024-03-07 17:52:48 +0100] [1054] [INFO] Worker exiting (pid: 1054)
+mar 07 17:52:48 marpaga gunicorn[1005]: [2024-03-07 17:52:48 +0100] [1005] [INFO] Worker exiting (pid: 1005)
+mar 07 17:52:48 marpaga gunicorn[1000]: [2024-03-07 17:52:48 +0100] [1000] [INFO] Worker exiting (pid: 1000)
+mar 07 17:52:48 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 07 17:52:48 marpaga gunicorn[781]: [2024-03-07 17:52:48 +0100] [781] [ERROR] Worker (pid:1005) was sent SIGTERM!
+mar 07 17:52:48 marpaga gunicorn[781]: [2024-03-07 17:52:48 +0100] [781] [ERROR] Worker (pid:1054) was sent SIGTERM!
+mar 07 17:52:48 marpaga gunicorn[1081]: [2024-03-07 17:52:48 +0100] [1081] [INFO] Worker exiting (pid: 1081)
+mar 07 17:52:48 marpaga gunicorn[781]: [2024-03-07 17:52:48 +0100] [781] [ERROR] Worker (pid:1000) was sent SIGTERM!
+mar 07 17:52:48 marpaga gunicorn[781]: [2024-03-07 17:52:48 +0100] [781] [INFO] Shutting down: Master
+mar 07 17:52:48 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 07 17:52:48 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 20:03:15 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 20:03:15 marpaga gunicorn[44512]: [2024-03-07 20:03:15 +0100] [44512] [INFO] Starting gunicorn 21.2.0
+mar 07 20:03:15 marpaga gunicorn[44512]: [2024-03-07 20:03:15 +0100] [44512] [INFO] Listening at: http://127.0.0.1:8000 (44512)
+mar 07 20:03:15 marpaga gunicorn[44512]: [2024-03-07 20:03:15 +0100] [44512] [INFO] Using worker: sync
+mar 07 20:03:15 marpaga gunicorn[44539]: [2024-03-07 20:03:15 +0100] [44539] [INFO] Booting worker with pid: 44539
+mar 07 20:03:15 marpaga gunicorn[44541]: [2024-03-07 20:03:15 +0100] [44541] [INFO] Booting worker with pid: 44541
+mar 07 20:03:15 marpaga gunicorn[44543]: [2024-03-07 20:03:15 +0100] [44543] [INFO] Booting worker with pid: 44543
+mar 07 20:03:15 marpaga gunicorn[44544]: [2024-03-07 20:03:15 +0100] [44544] [INFO] Booting worker with pid: 44544
+mar 07 20:03:45 marpaga gunicorn[44605]: 5c02dcf3e3a56862ffc50eabc3ac9c5fea6620c5581aac49856bf05b54fd8c7f
+mar 07 20:03:45 marpaga sudo[44695]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+mar 07 20:03:45 marpaga sudo[44695]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 07 20:03:45 marpaga sudo[44695]: pam_unix(sudo:session): session closed for user root
+mar 07 20:03:47 marpaga gunicorn[44721]: marco
+mar 07 20:03:47 marpaga sudo[44756]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+mar 07 20:03:47 marpaga sudo[44756]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 07 20:03:47 marpaga sudo[44760]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 07 20:03:47 marpaga sudo[44760]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 07 20:03:47 marpaga sudo[44760]: pam_unix(sudo:session): session closed for user root
+mar 07 20:03:47 marpaga sudo[44756]: pam_unix(sudo:session): session closed for user root
+mar 07 20:04:29 marpaga gunicorn[44543]: [2024-03-07 20:04:29 +0100] [44543] [INFO] Worker exiting (pid: 44543)
+mar 07 20:04:29 marpaga gunicorn[44539]: [2024-03-07 20:04:29 +0100] [44539] [INFO] Worker exiting (pid: 44539)
+mar 07 20:04:29 marpaga gunicorn[44541]: [2024-03-07 20:04:29 +0100] [44541] [INFO] Worker exiting (pid: 44541)
+mar 07 20:04:29 marpaga gunicorn[44541]: docker run --name marco -d --rm xxelab
+mar 07 20:04:29 marpaga gunicorn[44512]: [2024-03-07 20:04:29 +0100] [44512] [INFO] Handling signal: term
+mar 07 20:04:29 marpaga gunicorn[44512]: [2024-03-07 20:04:29 +0100] [44512] [ERROR] Worker (pid:44539) was sent SIGTERM!
+mar 07 20:04:29 marpaga gunicorn[44512]: [2024-03-07 20:04:29 +0100] [44512] [ERROR] Worker (pid:44543) was sent SIGTERM!
+mar 07 20:04:29 marpaga gunicorn[44512]: [2024-03-07 20:04:29 +0100] [44512] [ERROR] Worker (pid:44541) was sent SIGTERM!
+mar 07 20:04:29 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 07 20:04:29 marpaga gunicorn[44544]: [2024-03-07 20:04:29 +0100] [44544] [INFO] Worker exiting (pid: 44544)
+mar 07 20:04:29 marpaga gunicorn[44512]: [2024-03-07 20:04:29 +0100] [44512] [INFO] Shutting down: Master
+mar 07 20:04:29 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 07 20:04:29 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 07 20:04:29 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 1.347s CPU time.
+-- Boot 6bc94c45b1e24f29b7d182b5d9558227 --
+mar 09 18:11:22 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 18:11:23 marpaga gunicorn[11901]: [2024-03-09 18:11:23 +0100] [11901] [INFO] Starting gunicorn 21.2.0
+mar 09 18:11:23 marpaga gunicorn[11901]: [2024-03-09 18:11:23 +0100] [11901] [INFO] Listening at: http://127.0.0.1:8000 (11901)
+mar 09 18:11:23 marpaga gunicorn[11901]: [2024-03-09 18:11:23 +0100] [11901] [INFO] Using worker: sync
+mar 09 18:11:23 marpaga gunicorn[11903]: [2024-03-09 18:11:23 +0100] [11903] [INFO] Booting worker with pid: 11903
+mar 09 18:11:23 marpaga gunicorn[11929]: [2024-03-09 18:11:23 +0100] [11929] [INFO] Booting worker with pid: 11929
+mar 09 18:11:23 marpaga gunicorn[11930]: [2024-03-09 18:11:23 +0100] [11930] [INFO] Booting worker with pid: 11930
+mar 09 18:11:23 marpaga gunicorn[11931]: [2024-03-09 18:11:23 +0100] [11931] [INFO] Booting worker with pid: 11931
+mar 09 18:13:56 marpaga sudo[12064]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add pedromaraka
+mar 09 18:13:56 marpaga sudo[12064]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 18:13:56 marpaga gunicorn[12205]: cp: no se puede crear el fichero regular '/etc/openvpn/easy-rsa/media/vpns/pedromaraka.ovpn': No existe el archivo o el directorio
+mar 09 18:13:56 marpaga gunicorn[12065]: ./createUserVPN.sh: línea 7: /etc/openvpn/easy-rsa/media/vpns/pedromaraka.ovpn: No existe el archivo o el directorio
+mar 09 18:13:56 marpaga gunicorn[12206]: chmod: no se puede acceder a '/etc/openvpn/easy-rsa/media/vpns/pedromaraka.ovpn': No existe el archivo o el directorio
+mar 09 18:13:56 marpaga sudo[12064]: pam_unix(sudo:session): session closed for user root
+mar 09 18:14:22 marpaga sudo[12210]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add marconashe
+mar 09 18:14:22 marpaga sudo[12210]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 18:14:22 marpaga gunicorn[12351]: cp: no se puede crear el fichero regular '/etc/openvpn/easy-rsa/media/vpns/marconashe.ovpn': No existe el archivo o el directorio
+mar 09 18:14:22 marpaga gunicorn[12211]: ./createUserVPN.sh: línea 7: /etc/openvpn/easy-rsa/media/vpns/marconashe.ovpn: No existe el archivo o el directorio
+mar 09 18:14:22 marpaga gunicorn[12352]: chmod: no se puede acceder a '/etc/openvpn/easy-rsa/media/vpns/marconashe.ovpn': No existe el archivo o el directorio
+mar 09 18:14:22 marpaga sudo[12210]: pam_unix(sudo:session): session closed for user root
+mar 09 18:14:57 marpaga sudo[12357]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del pedromaraka
+mar 09 18:14:57 marpaga sudo[12357]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 18:14:57 marpaga sudo[12357]: pam_unix(sudo:session): session closed for user root
+mar 09 18:15:38 marpaga gunicorn[11903]: [2024-03-09 18:15:38 +0100] [11903] [INFO] Worker exiting (pid: 11903)
+mar 09 18:15:38 marpaga gunicorn[11901]: [2024-03-09 18:15:38 +0100] [11901] [INFO] Handling signal: term
+mar 09 18:15:38 marpaga gunicorn[11929]: [2024-03-09 18:15:38 +0100] [11929] [INFO] Worker exiting (pid: 11929)
+mar 09 18:15:38 marpaga gunicorn[11930]: [2024-03-09 18:15:38 +0100] [11930] [INFO] Worker exiting (pid: 11930)
+mar 09 18:15:38 marpaga gunicorn[11931]: [2024-03-09 18:15:38 +0100] [11931] [INFO] Worker exiting (pid: 11931)
+mar 09 18:15:38 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 09 18:15:38 marpaga gunicorn[11901]: [2024-03-09 18:15:38 +0100] [11901] [ERROR] Worker (pid:11930) was sent SIGTERM!
+mar 09 18:15:38 marpaga gunicorn[11901]: [2024-03-09 18:15:38 +0100] [11901] [ERROR] Worker (pid:11931) was sent SIGTERM!
+mar 09 18:15:38 marpaga gunicorn[11901]: [2024-03-09 18:15:38 +0100] [11901] [ERROR] Worker (pid:11929) was sent SIGTERM!
+mar 09 18:15:38 marpaga gunicorn[11901]: [2024-03-09 18:15:38 +0100] [11901] [ERROR] Worker (pid:11903) was sent SIGTERM!
+mar 09 18:15:38 marpaga gunicorn[11901]: [2024-03-09 18:15:38 +0100] [11901] [INFO] Shutting down: Master
+mar 09 18:15:38 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 09 18:15:38 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 18:15:38 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 2.434s CPU time.
+mar 09 18:17:18 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 18:17:18 marpaga gunicorn[13403]: [2024-03-09 18:17:18 +0100] [13403] [INFO] Starting gunicorn 21.2.0
+mar 09 18:17:18 marpaga gunicorn[13403]: [2024-03-09 18:17:18 +0100] [13403] [INFO] Listening at: http://127.0.0.1:8000 (13403)
+mar 09 18:17:18 marpaga gunicorn[13403]: [2024-03-09 18:17:18 +0100] [13403] [INFO] Using worker: sync
+mar 09 18:17:18 marpaga gunicorn[13430]: [2024-03-09 18:17:18 +0100] [13430] [INFO] Booting worker with pid: 13430
+mar 09 18:17:18 marpaga gunicorn[13432]: [2024-03-09 18:17:18 +0100] [13432] [INFO] Booting worker with pid: 13432
+mar 09 18:17:18 marpaga gunicorn[13433]: [2024-03-09 18:17:18 +0100] [13433] [INFO] Booting worker with pid: 13433
+mar 09 18:17:18 marpaga gunicorn[13437]: [2024-03-09 18:17:18 +0100] [13437] [INFO] Booting worker with pid: 13437
+mar 09 18:17:52 marpaga gunicorn[13403]: [2024-03-09 18:17:52 +0100] [13403] [CRITICAL] WORKER TIMEOUT (pid:13432)
+mar 09 18:17:52 marpaga gunicorn[13432]: [2024-03-09 18:17:52 +0100] [13432] [INFO] Worker exiting (pid: 13432)
+mar 09 18:17:52 marpaga gunicorn[13403]: [2024-03-09 18:17:52 +0100] [13403] [ERROR] Worker (pid:13432) exited with code 1
+mar 09 18:17:52 marpaga gunicorn[13403]: [2024-03-09 18:17:52 +0100] [13403] [ERROR] Worker (pid:13432) exited with code 1.
+mar 09 18:17:52 marpaga gunicorn[13616]: [2024-03-09 18:17:52 +0100] [13616] [INFO] Booting worker with pid: 13616
+mar 09 18:19:47 marpaga sudo[13818]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add holapepe
+mar 09 18:19:47 marpaga sudo[13818]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 18:19:48 marpaga gunicorn[13959]: cp: no se puede crear el fichero regular '/etc/openvpn/easy-rsa/media/vpns/holapepe.ovpn': No existe el archivo o el directorio
+mar 09 18:19:48 marpaga gunicorn[13819]: ./createUserVPN.sh: línea 7: /etc/openvpn/easy-rsa/media/vpns/holapepe.ovpn: No existe el archivo o el directorio
+mar 09 18:19:48 marpaga gunicorn[13960]: chmod: no se puede acceder a '/etc/openvpn/easy-rsa/media/vpns/holapepe.ovpn': No existe el archivo o el directorio
+mar 09 18:19:48 marpaga sudo[13818]: pam_unix(sudo:session): session closed for user root
+mar 09 18:29:28 marpaga gunicorn[13403]: [2024-03-09 18:29:28 +0100] [13403] [INFO] Handling signal: term
+mar 09 18:29:28 marpaga gunicorn[13430]: [2024-03-09 18:29:28 +0100] [13430] [INFO] Worker exiting (pid: 13430)
+mar 09 18:29:28 marpaga gunicorn[13616]: [2024-03-09 18:29:28 +0100] [13616] [INFO] Worker exiting (pid: 13616)
+mar 09 18:29:28 marpaga gunicorn[13437]: [2024-03-09 18:29:28 +0100] [13437] [INFO] Worker exiting (pid: 13437)
+mar 09 18:29:28 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 09 18:29:28 marpaga gunicorn[13403]: [2024-03-09 18:29:28 +0100] [13403] [ERROR] Worker (pid:13616) was sent SIGTERM!
+mar 09 18:29:28 marpaga gunicorn[13433]: [2024-03-09 18:29:28 +0100] [13433] [INFO] Worker exiting (pid: 13433)
+mar 09 18:29:28 marpaga gunicorn[13403]: [2024-03-09 18:29:28 +0100] [13403] [ERROR] Worker (pid:13437) was sent SIGTERM!
+mar 09 18:29:28 marpaga gunicorn[13403]: [2024-03-09 18:29:28 +0100] [13403] [INFO] Shutting down: Master
+mar 09 18:29:28 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 09 18:29:28 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 18:29:28 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 2.712s CPU time.
+mar 09 21:41:17 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 21:41:17 marpaga gunicorn[33883]: [2024-03-09 21:41:17 +0100] [33883] [INFO] Starting gunicorn 21.2.0
+mar 09 21:41:17 marpaga gunicorn[33883]: [2024-03-09 21:41:17 +0100] [33883] [INFO] Listening at: http://127.0.0.1:8000 (33883)
+mar 09 21:41:17 marpaga gunicorn[33883]: [2024-03-09 21:41:17 +0100] [33883] [INFO] Using worker: sync
+mar 09 21:41:17 marpaga gunicorn[33885]: [2024-03-09 21:41:17 +0100] [33885] [INFO] Booting worker with pid: 33885
+mar 09 21:41:17 marpaga gunicorn[33911]: [2024-03-09 21:41:17 +0100] [33911] [INFO] Booting worker with pid: 33911
+mar 09 21:41:17 marpaga gunicorn[33913]: [2024-03-09 21:41:17 +0100] [33913] [INFO] Booting worker with pid: 33913
+mar 09 21:41:17 marpaga gunicorn[33914]: [2024-03-09 21:41:17 +0100] [33914] [INFO] Booting worker with pid: 33914
+mar 09 21:41:59 marpaga gunicorn[34112]: marco
+mar 09 21:41:59 marpaga sudo[34152]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+mar 09 21:41:59 marpaga sudo[34152]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 21:41:59 marpaga sudo[34156]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 09 21:41:59 marpaga sudo[34156]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 09 21:41:59 marpaga sudo[34156]: pam_unix(sudo:session): session closed for user root
+mar 09 21:41:59 marpaga sudo[34152]: pam_unix(sudo:session): session closed for user root
+mar 09 21:43:05 marpaga sudo[34163]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add ana
+mar 09 21:43:05 marpaga sudo[34163]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 21:43:05 marpaga sudo[34163]: pam_unix(sudo:session): session closed for user root
+mar 09 21:43:37 marpaga gunicorn[34321]: da97b34267faa38ab40b12e01d022be261088a52a2662f864ab70e92867074f5
+mar 09 21:43:38 marpaga sudo[34504]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add ana 172.17.0.2
+mar 09 21:43:38 marpaga sudo[34504]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 21:43:38 marpaga gunicorn[34505]: El usuario no existe
+mar 09 21:43:38 marpaga sudo[34504]: pam_unix(sudo:session): session closed for user root
+mar 09 21:43:45 marpaga gunicorn[34511]: Creating network "backend-ana" with driver "bridge"
+mar 09 21:43:45 marpaga gunicorn[34511]: Creating network "frontend-ana" with driver "bridge"
+mar 09 21:43:45 marpaga gunicorn[34511]: Creating proyecto_ana_mysql_1 ...
+mar 09 21:43:45 marpaga gunicorn[34511]: Creating proyecto_ana_mysql_1 ... done
+mar 09 21:43:45 marpaga gunicorn[34511]: Creating proyecto_ana_php_1   ...
+mar 09 21:43:46 marpaga gunicorn[34511]: Creating proyecto_ana_php_1   ... done
+mar 09 21:43:46 marpaga gunicorn[34511]: Creating proyecto_ana_nginx_1 ...
+mar 09 21:43:46 marpaga gunicorn[34511]: Creating proyecto_ana_nginx_1 ... done
+mar 09 21:43:46 marpaga sudo[34997]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add ana 172.30.0.4
+mar 09 21:43:46 marpaga sudo[34997]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 09 21:43:46 marpaga gunicorn[34998]: El usuario no existe
+mar 09 21:43:46 marpaga sudo[34997]: pam_unix(sudo:session): session closed for user root
+mar 09 21:45:26 marpaga gunicorn[33883]: [2024-03-09 21:45:26 +0100] [33883] [INFO] Handling signal: term
+mar 09 21:45:26 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 09 21:45:26 marpaga gunicorn[33914]: [2024-03-09 21:45:26 +0100] [33914] [INFO] Worker exiting (pid: 33914)
+mar 09 21:45:26 marpaga gunicorn[33913]: [2024-03-09 21:45:26 +0100] [33913] [INFO] Worker exiting (pid: 33913)
+mar 09 21:45:26 marpaga gunicorn[33911]: [2024-03-09 21:45:26 +0100] [33911] [INFO] Worker exiting (pid: 33911)
+mar 09 21:45:26 marpaga gunicorn[33885]: [2024-03-09 21:45:26 +0100] [33885] [INFO] Worker exiting (pid: 33885)
+mar 09 21:45:26 marpaga gunicorn[33885]: 172.30.0.4
+mar 09 21:45:26 marpaga gunicorn[33883]: [2024-03-09 21:45:26 +0100] [33883] [INFO] Shutting down: Master
+mar 09 21:45:26 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 09 21:45:26 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 21:45:26 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 2.852s CPU time.
+-- Boot f853c1a01e27444f919a8d43f1cae7c0 --
+mar 09 23:45:39 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 23:45:39 marpaga gunicorn[6644]: [2024-03-09 23:45:39 +0100] [6644] [INFO] Starting gunicorn 21.2.0
+mar 09 23:45:39 marpaga gunicorn[6644]: [2024-03-09 23:45:39 +0100] [6644] [INFO] Listening at: http://127.0.0.1:8000 (6644)
+mar 09 23:45:39 marpaga gunicorn[6644]: [2024-03-09 23:45:39 +0100] [6644] [INFO] Using worker: sync
+mar 09 23:45:39 marpaga gunicorn[6671]: [2024-03-09 23:45:39 +0100] [6671] [INFO] Booting worker with pid: 6671
+mar 09 23:45:40 marpaga gunicorn[6672]: [2024-03-09 23:45:40 +0100] [6672] [INFO] Booting worker with pid: 6672
+mar 09 23:45:40 marpaga gunicorn[6673]: [2024-03-09 23:45:40 +0100] [6673] [INFO] Booting worker with pid: 6673
+mar 09 23:45:40 marpaga gunicorn[6683]: [2024-03-09 23:45:40 +0100] [6683] [INFO] Booting worker with pid: 6683
+mar 09 23:46:13 marpaga gunicorn[6671]: [2024-03-09 23:46:13 +0100] [6671] [INFO] Worker exiting (pid: 6671)
+mar 09 23:46:13 marpaga gunicorn[6673]: [2024-03-09 23:46:13 +0100] [6673] [INFO] Worker exiting (pid: 6673)
+mar 09 23:46:13 marpaga gunicorn[6644]: [2024-03-09 23:46:13 +0100] [6644] [INFO] Handling signal: term
+mar 09 23:46:13 marpaga gunicorn[6672]: [2024-03-09 23:46:13 +0100] [6672] [INFO] Worker exiting (pid: 6672)
+mar 09 23:46:13 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 09 23:46:13 marpaga gunicorn[6683]: [2024-03-09 23:46:13 +0100] [6683] [INFO] Worker exiting (pid: 6683)
+mar 09 23:46:13 marpaga gunicorn[6644]: [2024-03-09 23:46:13 +0100] [6644] [INFO] Shutting down: Master
+mar 09 23:46:13 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 09 23:46:13 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 09 23:46:13 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 1.655s CPU time.
+-- Boot c356b28ac3a342d589022e18cbb27afc --
+mar 10 17:54:08 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 17:54:08 marpaga gunicorn[10190]: [2024-03-10 17:54:08 +0100] [10190] [INFO] Starting gunicorn 21.2.0
+mar 10 17:54:08 marpaga gunicorn[10190]: [2024-03-10 17:54:08 +0100] [10190] [INFO] Listening at: http://127.0.0.1:8000 (10190)
+mar 10 17:54:08 marpaga gunicorn[10190]: [2024-03-10 17:54:08 +0100] [10190] [INFO] Using worker: sync
+mar 10 17:54:08 marpaga gunicorn[10192]: [2024-03-10 17:54:08 +0100] [10192] [INFO] Booting worker with pid: 10192
+mar 10 17:54:08 marpaga gunicorn[10193]: [2024-03-10 17:54:08 +0100] [10193] [INFO] Booting worker with pid: 10193
+mar 10 17:54:08 marpaga gunicorn[10219]: [2024-03-10 17:54:08 +0100] [10219] [INFO] Booting worker with pid: 10219
+mar 10 17:54:08 marpaga gunicorn[10220]: [2024-03-10 17:54:08 +0100] [10220] [INFO] Booting worker with pid: 10220
+mar 10 17:54:46 marpaga sudo[10409]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del anaprueba
+mar 10 17:54:46 marpaga sudo[10409]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 17:54:46 marpaga sudo[10409]: pam_unix(sudo:session): session closed for user root
+mar 10 17:59:57 marpaga sudo[10726]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add anaprueba
+mar 10 17:59:57 marpaga sudo[10726]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 17:59:57 marpaga sudo[10726]: pam_unix(sudo:session): session closed for user root
+mar 10 18:00:57 marpaga sudo[10879]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del anaprueba
+mar 10 18:00:57 marpaga sudo[10879]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:00:57 marpaga sudo[10879]: pam_unix(sudo:session): session closed for user root
+mar 10 18:01:05 marpaga sudo[11051]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add ana
+mar 10 18:01:05 marpaga sudo[11051]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:01:05 marpaga sudo[11051]: pam_unix(sudo:session): session closed for user root
+mar 10 18:02:02 marpaga gunicorn[11101]: c292be8afcd76146da18b3b0fadbb3bfd30b75492e4196fe5e653bc24b6e2974
+mar 10 18:02:02 marpaga sudo[11287]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add ana 172.17.0.2
+mar 10 18:02:02 marpaga sudo[11287]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:02:02 marpaga gunicorn[11288]: El usuario no existe
+mar 10 18:02:02 marpaga sudo[11287]: pam_unix(sudo:session): session closed for user root
+mar 10 18:02:05 marpaga sudo[11293]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del ana
+mar 10 18:02:05 marpaga sudo[11293]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:02:05 marpaga sudo[11293]: pam_unix(sudo:session): session closed for user root
+mar 10 18:03:58 marpaga sudo[11494]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add ana
+mar 10 18:03:58 marpaga sudo[11494]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:03:58 marpaga sudo[11494]: pam_unix(sudo:session): session closed for user root
+mar 10 18:04:58 marpaga sudo[11660]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del ana
+mar 10 18:04:58 marpaga sudo[11660]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:04:58 marpaga sudo[11660]: pam_unix(sudo:session): session closed for user root
+mar 10 18:05:40 marpaga gunicorn[10190]: [2024-03-10 18:05:40 +0100] [10190] [INFO] Handling signal: term
+mar 10 18:05:40 marpaga gunicorn[10192]: [2024-03-10 18:05:40 +0100] [10192] [INFO] Worker exiting (pid: 10192)
+mar 10 18:05:40 marpaga gunicorn[10192]: Levantando la máquina
+mar 10 18:05:40 marpaga gunicorn[10192]: Error al obtener la dirección IP: Command 'sudo ./iptables.sh add ana 172.17.0.2' returned non-zero exit status 1.
+mar 10 18:05:40 marpaga gunicorn[10220]: [2024-03-10 18:05:40 +0100] [10220] [INFO] Worker exiting (pid: 10220)
+mar 10 18:05:40 marpaga gunicorn[10219]: [2024-03-10 18:05:40 +0100] [10219] [INFO] Worker exiting (pid: 10219)
+mar 10 18:05:41 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 10 18:05:41 marpaga gunicorn[10193]: [2024-03-10 18:05:41 +0100] [10193] [INFO] Worker exiting (pid: 10193)
+mar 10 18:05:41 marpaga gunicorn[10190]: [2024-03-10 18:05:41 +0100] [10190] [ERROR] Worker (pid:10220) was sent SIGTERM!
+mar 10 18:05:41 marpaga gunicorn[10190]: [2024-03-10 18:05:41 +0100] [10190] [ERROR] Worker (pid:10219) was sent SIGTERM!
+mar 10 18:05:41 marpaga gunicorn[10190]: [2024-03-10 18:05:41 +0100] [10190] [ERROR] Worker (pid:10192) was sent SIGTERM!
+mar 10 18:05:41 marpaga gunicorn[10190]: [2024-03-10 18:05:41 +0100] [10190] [INFO] Shutting down: Master
+mar 10 18:05:41 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 10 18:05:41 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:05:41 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 5.333s CPU time.
+mar 10 18:05:55 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:05:55 marpaga gunicorn[12096]: [2024-03-10 18:05:55 +0100] [12096] [INFO] Starting gunicorn 21.2.0
+mar 10 18:05:55 marpaga gunicorn[12096]: [2024-03-10 18:05:55 +0100] [12096] [INFO] Listening at: http://127.0.0.1:8000 (12096)
+mar 10 18:05:55 marpaga gunicorn[12096]: [2024-03-10 18:05:55 +0100] [12096] [INFO] Using worker: sync
+mar 10 18:05:55 marpaga gunicorn[12130]: [2024-03-10 18:05:55 +0100] [12130] [INFO] Booting worker with pid: 12130
+mar 10 18:05:55 marpaga gunicorn[12131]: [2024-03-10 18:05:55 +0100] [12131] [INFO] Booting worker with pid: 12131
+mar 10 18:05:55 marpaga gunicorn[12132]: [2024-03-10 18:05:55 +0100] [12132] [INFO] Booting worker with pid: 12132
+mar 10 18:05:56 marpaga gunicorn[12133]: [2024-03-10 18:05:56 +0100] [12133] [INFO] Booting worker with pid: 12133
+mar 10 18:06:20 marpaga sudo[12329]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del anaprueba
+mar 10 18:06:20 marpaga sudo[12329]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:06:20 marpaga sudo[12329]: pam_unix(sudo:session): session closed for user root
+mar 10 18:06:59 marpaga sudo[12418]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add ana
+mar 10 18:06:59 marpaga sudo[12418]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:06:59 marpaga sudo[12418]: pam_unix(sudo:session): session closed for user root
+mar 10 18:07:22 marpaga gunicorn[12573]: docker: Error response from daemon: Conflict. The container name "/ana" is already in use by container "c292be8afcd76146da18b3b0fadbb3bfd30b75492e4196fe5e653bc24b6e2974". You have to remove (or rename) that container to be able to reuse that name.
+mar 10 18:07:22 marpaga gunicorn[12573]: See 'docker run --help'.
+mar 10 18:07:59 marpaga sudo[12598]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del ana
+mar 10 18:07:59 marpaga sudo[12598]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:07:59 marpaga sudo[12598]: pam_unix(sudo:session): session closed for user root
+mar 10 18:16:49 marpaga sudo[13255]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add ana
+mar 10 18:16:49 marpaga sudo[13255]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:16:49 marpaga sudo[13255]: pam_unix(sudo:session): session closed for user root
+mar 10 18:17:14 marpaga gunicorn[13415]: 14ae8c15ff958fa4cb6ba984d98dfdb9b64526c4f44e9007fd1111f7114b0a9b
+mar 10 18:17:14 marpaga sudo[13602]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add ana 172.17.0.2
+mar 10 18:17:14 marpaga sudo[13602]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:17:14 marpaga sudo[13602]: pam_unix(sudo:session): session closed for user root
+mar 10 18:17:34 marpaga gunicorn[13617]: ana
+mar 10 18:17:34 marpaga sudo[13653]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+mar 10 18:17:34 marpaga sudo[13653]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:17:34 marpaga sudo[13657]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 10 18:17:34 marpaga sudo[13657]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 10 18:17:34 marpaga sudo[13657]: pam_unix(sudo:session): session closed for user root
+mar 10 18:17:34 marpaga sudo[13653]: pam_unix(sudo:session): session closed for user root
+mar 10 18:17:49 marpaga sudo[13661]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del ana
+mar 10 18:17:49 marpaga sudo[13661]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:17:50 marpaga sudo[13661]: pam_unix(sudo:session): session closed for user root
+mar 10 18:18:47 marpaga gunicorn[12131]: [2024-03-10 18:18:47 +0100] [12131] [INFO] Worker exiting (pid: 12131)
+mar 10 18:18:47 marpaga gunicorn[12132]: [2024-03-10 18:18:47 +0100] [12132] [INFO] Worker exiting (pid: 12132)
+mar 10 18:18:47 marpaga gunicorn[12133]: [2024-03-10 18:18:47 +0100] [12133] [INFO] Worker exiting (pid: 12133)
+mar 10 18:18:47 marpaga gunicorn[12131]: Levantando la máquina
+mar 10 18:18:47 marpaga gunicorn[12131]: La dirección IP de la máquina es: 172.17.0.2
+mar 10 18:18:47 marpaga gunicorn[12133]: Levantando la máquina
+mar 10 18:18:47 marpaga gunicorn[12133]: Error al levantar la máquina: Command 'docker run --name ana -d --rm docker-lab' returned non-zero exit status 125.
+mar 10 18:18:47 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 10 18:18:47 marpaga gunicorn[12096]: [2024-03-10 18:18:47 +0100] [12096] [INFO] Handling signal: term
+mar 10 18:18:47 marpaga gunicorn[12130]: [2024-03-10 18:18:47 +0100] [12130] [INFO] Worker exiting (pid: 12130)
+mar 10 18:18:47 marpaga gunicorn[12096]: [2024-03-10 18:18:47 +0100] [12096] [ERROR] Worker (pid:12132) was sent SIGTERM!
+mar 10 18:18:47 marpaga gunicorn[12096]: [2024-03-10 18:18:47 +0100] [12096] [ERROR] Worker (pid:12133) was sent SIGTERM!
+mar 10 18:18:47 marpaga gunicorn[12096]: [2024-03-10 18:18:47 +0100] [12096] [ERROR] Worker (pid:12131) was sent SIGTERM!
+mar 10 18:18:47 marpaga gunicorn[12096]: [2024-03-10 18:18:47 +0100] [12096] [INFO] Shutting down: Master
+mar 10 18:18:47 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 10 18:18:47 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:18:47 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 4.099s CPU time.
+mar 10 18:22:22 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:22 marpaga gunicorn[14576]: [2024-03-10 18:22:22 +0100] [14576] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:22 marpaga gunicorn[14576]: [2024-03-10 18:22:22 +0100] [14576] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:22 marpaga gunicorn[14576]: [2024-03-10 18:22:22 +0100] [14576] [ERROR] Retrying in 1 second.
+mar 10 18:22:23 marpaga gunicorn[14576]: [2024-03-10 18:22:23 +0100] [14576] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:23 marpaga gunicorn[14576]: [2024-03-10 18:22:23 +0100] [14576] [ERROR] Retrying in 1 second.
+mar 10 18:22:24 marpaga gunicorn[14576]: [2024-03-10 18:22:24 +0100] [14576] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:24 marpaga gunicorn[14576]: [2024-03-10 18:22:24 +0100] [14576] [ERROR] Retrying in 1 second.
+mar 10 18:22:25 marpaga gunicorn[14576]: [2024-03-10 18:22:25 +0100] [14576] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:25 marpaga gunicorn[14576]: [2024-03-10 18:22:25 +0100] [14576] [ERROR] Retrying in 1 second.
+mar 10 18:22:26 marpaga gunicorn[14576]: [2024-03-10 18:22:26 +0100] [14576] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:26 marpaga gunicorn[14576]: [2024-03-10 18:22:26 +0100] [14576] [ERROR] Retrying in 1 second.
+mar 10 18:22:27 marpaga gunicorn[14576]: [2024-03-10 18:22:27 +0100] [14576] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:22:27 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:22:27 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:22:28 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 1.
+mar 10 18:22:28 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:28 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:28 marpaga gunicorn[14694]: [2024-03-10 18:22:28 +0100] [14694] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:28 marpaga gunicorn[14694]: [2024-03-10 18:22:28 +0100] [14694] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:28 marpaga gunicorn[14694]: [2024-03-10 18:22:28 +0100] [14694] [ERROR] Retrying in 1 second.
+mar 10 18:22:29 marpaga gunicorn[14694]: [2024-03-10 18:22:29 +0100] [14694] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:29 marpaga gunicorn[14694]: [2024-03-10 18:22:29 +0100] [14694] [ERROR] Retrying in 1 second.
+mar 10 18:22:30 marpaga gunicorn[14694]: [2024-03-10 18:22:30 +0100] [14694] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:30 marpaga gunicorn[14694]: [2024-03-10 18:22:30 +0100] [14694] [ERROR] Retrying in 1 second.
+mar 10 18:22:31 marpaga gunicorn[14694]: [2024-03-10 18:22:31 +0100] [14694] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:31 marpaga gunicorn[14694]: [2024-03-10 18:22:31 +0100] [14694] [ERROR] Retrying in 1 second.
+mar 10 18:22:32 marpaga gunicorn[14694]: [2024-03-10 18:22:32 +0100] [14694] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:32 marpaga gunicorn[14694]: [2024-03-10 18:22:32 +0100] [14694] [ERROR] Retrying in 1 second.
+mar 10 18:22:33 marpaga gunicorn[14694]: [2024-03-10 18:22:33 +0100] [14694] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:22:33 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:22:33 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:22:33 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 2.
+mar 10 18:22:33 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:33 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:33 marpaga gunicorn[14707]: [2024-03-10 18:22:33 +0100] [14707] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:33 marpaga gunicorn[14707]: [2024-03-10 18:22:33 +0100] [14707] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:33 marpaga gunicorn[14707]: [2024-03-10 18:22:33 +0100] [14707] [ERROR] Retrying in 1 second.
+mar 10 18:22:34 marpaga gunicorn[14707]: [2024-03-10 18:22:34 +0100] [14707] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:34 marpaga gunicorn[14707]: [2024-03-10 18:22:34 +0100] [14707] [ERROR] Retrying in 1 second.
+mar 10 18:22:35 marpaga gunicorn[14707]: [2024-03-10 18:22:35 +0100] [14707] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:35 marpaga gunicorn[14707]: [2024-03-10 18:22:35 +0100] [14707] [ERROR] Retrying in 1 second.
+mar 10 18:22:36 marpaga gunicorn[14707]: [2024-03-10 18:22:36 +0100] [14707] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:36 marpaga gunicorn[14707]: [2024-03-10 18:22:36 +0100] [14707] [ERROR] Retrying in 1 second.
+mar 10 18:22:37 marpaga gunicorn[14707]: [2024-03-10 18:22:37 +0100] [14707] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:37 marpaga gunicorn[14707]: [2024-03-10 18:22:37 +0100] [14707] [ERROR] Retrying in 1 second.
+mar 10 18:22:38 marpaga gunicorn[14707]: [2024-03-10 18:22:38 +0100] [14707] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:22:38 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:22:38 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:22:38 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 3.
+mar 10 18:22:38 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:38 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:38 marpaga gunicorn[14710]: [2024-03-10 18:22:38 +0100] [14710] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:38 marpaga gunicorn[14710]: [2024-03-10 18:22:38 +0100] [14710] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:38 marpaga gunicorn[14710]: [2024-03-10 18:22:38 +0100] [14710] [ERROR] Retrying in 1 second.
+mar 10 18:22:39 marpaga gunicorn[14710]: [2024-03-10 18:22:39 +0100] [14710] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:39 marpaga gunicorn[14710]: [2024-03-10 18:22:39 +0100] [14710] [ERROR] Retrying in 1 second.
+mar 10 18:22:40 marpaga gunicorn[14710]: [2024-03-10 18:22:40 +0100] [14710] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:40 marpaga gunicorn[14710]: [2024-03-10 18:22:40 +0100] [14710] [ERROR] Retrying in 1 second.
+mar 10 18:22:41 marpaga gunicorn[14710]: [2024-03-10 18:22:41 +0100] [14710] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:41 marpaga gunicorn[14710]: [2024-03-10 18:22:41 +0100] [14710] [ERROR] Retrying in 1 second.
+mar 10 18:22:42 marpaga gunicorn[14710]: [2024-03-10 18:22:42 +0100] [14710] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:42 marpaga gunicorn[14710]: [2024-03-10 18:22:42 +0100] [14710] [ERROR] Retrying in 1 second.
+mar 10 18:22:43 marpaga gunicorn[14710]: [2024-03-10 18:22:43 +0100] [14710] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:22:43 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:22:43 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:22:43 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 4.
+mar 10 18:22:43 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:43 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:43 marpaga gunicorn[14717]: [2024-03-10 18:22:43 +0100] [14717] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:43 marpaga gunicorn[14717]: [2024-03-10 18:22:43 +0100] [14717] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:43 marpaga gunicorn[14717]: [2024-03-10 18:22:43 +0100] [14717] [ERROR] Retrying in 1 second.
+mar 10 18:22:44 marpaga gunicorn[14717]: [2024-03-10 18:22:44 +0100] [14717] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:44 marpaga gunicorn[14717]: [2024-03-10 18:22:44 +0100] [14717] [ERROR] Retrying in 1 second.
+mar 10 18:22:45 marpaga gunicorn[14717]: [2024-03-10 18:22:45 +0100] [14717] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:45 marpaga gunicorn[14717]: [2024-03-10 18:22:45 +0100] [14717] [ERROR] Retrying in 1 second.
+mar 10 18:22:46 marpaga gunicorn[14717]: [2024-03-10 18:22:46 +0100] [14717] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:46 marpaga gunicorn[14717]: [2024-03-10 18:22:46 +0100] [14717] [ERROR] Retrying in 1 second.
+mar 10 18:22:47 marpaga gunicorn[14717]: [2024-03-10 18:22:47 +0100] [14717] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:47 marpaga gunicorn[14717]: [2024-03-10 18:22:47 +0100] [14717] [ERROR] Retrying in 1 second.
+mar 10 18:22:48 marpaga gunicorn[14717]: [2024-03-10 18:22:48 +0100] [14717] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:22:48 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:22:48 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:22:49 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 5.
+mar 10 18:22:49 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:49 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:49 marpaga gunicorn[14730]: [2024-03-10 18:22:49 +0100] [14730] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:49 marpaga gunicorn[14730]: [2024-03-10 18:22:49 +0100] [14730] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:49 marpaga gunicorn[14730]: [2024-03-10 18:22:49 +0100] [14730] [ERROR] Retrying in 1 second.
+mar 10 18:22:50 marpaga gunicorn[14730]: [2024-03-10 18:22:50 +0100] [14730] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:50 marpaga gunicorn[14730]: [2024-03-10 18:22:50 +0100] [14730] [ERROR] Retrying in 1 second.
+mar 10 18:22:51 marpaga gunicorn[14730]: [2024-03-10 18:22:51 +0100] [14730] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:51 marpaga gunicorn[14730]: [2024-03-10 18:22:51 +0100] [14730] [ERROR] Retrying in 1 second.
+mar 10 18:22:52 marpaga gunicorn[14730]: [2024-03-10 18:22:52 +0100] [14730] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:52 marpaga gunicorn[14730]: [2024-03-10 18:22:52 +0100] [14730] [ERROR] Retrying in 1 second.
+mar 10 18:22:53 marpaga gunicorn[14730]: [2024-03-10 18:22:53 +0100] [14730] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:53 marpaga gunicorn[14730]: [2024-03-10 18:22:53 +0100] [14730] [ERROR] Retrying in 1 second.
+mar 10 18:22:54 marpaga gunicorn[14730]: [2024-03-10 18:22:54 +0100] [14730] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:22:54 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:22:54 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:22:54 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 6.
+mar 10 18:22:54 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:54 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:54 marpaga gunicorn[14745]: [2024-03-10 18:22:54 +0100] [14745] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:54 marpaga gunicorn[14745]: [2024-03-10 18:22:54 +0100] [14745] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:54 marpaga gunicorn[14745]: [2024-03-10 18:22:54 +0100] [14745] [ERROR] Retrying in 1 second.
+mar 10 18:22:55 marpaga gunicorn[14745]: [2024-03-10 18:22:55 +0100] [14745] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:55 marpaga gunicorn[14745]: [2024-03-10 18:22:55 +0100] [14745] [ERROR] Retrying in 1 second.
+mar 10 18:22:56 marpaga gunicorn[14745]: [2024-03-10 18:22:56 +0100] [14745] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:56 marpaga gunicorn[14745]: [2024-03-10 18:22:56 +0100] [14745] [ERROR] Retrying in 1 second.
+mar 10 18:22:57 marpaga gunicorn[14745]: [2024-03-10 18:22:57 +0100] [14745] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:57 marpaga gunicorn[14745]: [2024-03-10 18:22:57 +0100] [14745] [ERROR] Retrying in 1 second.
+mar 10 18:22:58 marpaga gunicorn[14745]: [2024-03-10 18:22:58 +0100] [14745] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:58 marpaga gunicorn[14745]: [2024-03-10 18:22:58 +0100] [14745] [ERROR] Retrying in 1 second.
+mar 10 18:22:59 marpaga gunicorn[14745]: [2024-03-10 18:22:59 +0100] [14745] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:22:59 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:22:59 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:22:59 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 7.
+mar 10 18:22:59 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:59 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:22:59 marpaga gunicorn[14746]: [2024-03-10 18:22:59 +0100] [14746] [INFO] Starting gunicorn 21.2.0
+mar 10 18:22:59 marpaga gunicorn[14746]: [2024-03-10 18:22:59 +0100] [14746] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:22:59 marpaga gunicorn[14746]: [2024-03-10 18:22:59 +0100] [14746] [ERROR] Retrying in 1 second.
+mar 10 18:23:00 marpaga gunicorn[14746]: [2024-03-10 18:23:00 +0100] [14746] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:00 marpaga gunicorn[14746]: [2024-03-10 18:23:00 +0100] [14746] [ERROR] Retrying in 1 second.
+mar 10 18:23:01 marpaga gunicorn[14746]: [2024-03-10 18:23:01 +0100] [14746] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:01 marpaga gunicorn[14746]: [2024-03-10 18:23:01 +0100] [14746] [ERROR] Retrying in 1 second.
+mar 10 18:23:02 marpaga gunicorn[14746]: [2024-03-10 18:23:02 +0100] [14746] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:02 marpaga gunicorn[14746]: [2024-03-10 18:23:02 +0100] [14746] [ERROR] Retrying in 1 second.
+mar 10 18:23:03 marpaga gunicorn[14746]: [2024-03-10 18:23:03 +0100] [14746] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:03 marpaga gunicorn[14746]: [2024-03-10 18:23:03 +0100] [14746] [ERROR] Retrying in 1 second.
+mar 10 18:23:04 marpaga gunicorn[14746]: [2024-03-10 18:23:04 +0100] [14746] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:04 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:04 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:04 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 8.
+mar 10 18:23:04 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:04 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:04 marpaga gunicorn[14748]: [2024-03-10 18:23:04 +0100] [14748] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:04 marpaga gunicorn[14748]: [2024-03-10 18:23:04 +0100] [14748] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:04 marpaga gunicorn[14748]: [2024-03-10 18:23:04 +0100] [14748] [ERROR] Retrying in 1 second.
+mar 10 18:23:05 marpaga gunicorn[14748]: [2024-03-10 18:23:05 +0100] [14748] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:05 marpaga gunicorn[14748]: [2024-03-10 18:23:05 +0100] [14748] [ERROR] Retrying in 1 second.
+mar 10 18:23:06 marpaga gunicorn[14748]: [2024-03-10 18:23:06 +0100] [14748] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:06 marpaga gunicorn[14748]: [2024-03-10 18:23:06 +0100] [14748] [ERROR] Retrying in 1 second.
+mar 10 18:23:07 marpaga gunicorn[14748]: [2024-03-10 18:23:07 +0100] [14748] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:07 marpaga gunicorn[14748]: [2024-03-10 18:23:07 +0100] [14748] [ERROR] Retrying in 1 second.
+mar 10 18:23:08 marpaga gunicorn[14748]: [2024-03-10 18:23:08 +0100] [14748] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:08 marpaga gunicorn[14748]: [2024-03-10 18:23:08 +0100] [14748] [ERROR] Retrying in 1 second.
+mar 10 18:23:09 marpaga gunicorn[14748]: [2024-03-10 18:23:09 +0100] [14748] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:09 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:09 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:10 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 9.
+mar 10 18:23:10 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:10 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:10 marpaga gunicorn[14750]: [2024-03-10 18:23:10 +0100] [14750] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:10 marpaga gunicorn[14750]: [2024-03-10 18:23:10 +0100] [14750] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:10 marpaga gunicorn[14750]: [2024-03-10 18:23:10 +0100] [14750] [ERROR] Retrying in 1 second.
+mar 10 18:23:11 marpaga gunicorn[14750]: [2024-03-10 18:23:11 +0100] [14750] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:11 marpaga gunicorn[14750]: [2024-03-10 18:23:11 +0100] [14750] [ERROR] Retrying in 1 second.
+mar 10 18:23:12 marpaga gunicorn[14750]: [2024-03-10 18:23:12 +0100] [14750] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:12 marpaga gunicorn[14750]: [2024-03-10 18:23:12 +0100] [14750] [ERROR] Retrying in 1 second.
+mar 10 18:23:13 marpaga gunicorn[14750]: [2024-03-10 18:23:13 +0100] [14750] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:13 marpaga gunicorn[14750]: [2024-03-10 18:23:13 +0100] [14750] [ERROR] Retrying in 1 second.
+mar 10 18:23:14 marpaga gunicorn[14750]: [2024-03-10 18:23:14 +0100] [14750] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:14 marpaga gunicorn[14750]: [2024-03-10 18:23:14 +0100] [14750] [ERROR] Retrying in 1 second.
+mar 10 18:23:15 marpaga gunicorn[14750]: [2024-03-10 18:23:15 +0100] [14750] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:15 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:15 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:15 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 10.
+mar 10 18:23:15 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:15 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:15 marpaga gunicorn[14754]: [2024-03-10 18:23:15 +0100] [14754] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:15 marpaga gunicorn[14754]: [2024-03-10 18:23:15 +0100] [14754] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:15 marpaga gunicorn[14754]: [2024-03-10 18:23:15 +0100] [14754] [ERROR] Retrying in 1 second.
+mar 10 18:23:16 marpaga gunicorn[14754]: [2024-03-10 18:23:16 +0100] [14754] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:16 marpaga gunicorn[14754]: [2024-03-10 18:23:16 +0100] [14754] [ERROR] Retrying in 1 second.
+mar 10 18:23:17 marpaga gunicorn[14754]: [2024-03-10 18:23:17 +0100] [14754] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:17 marpaga gunicorn[14754]: [2024-03-10 18:23:17 +0100] [14754] [ERROR] Retrying in 1 second.
+mar 10 18:23:18 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 10 18:23:18 marpaga gunicorn[14754]: [2024-03-10 18:23:18 +0100] [14754] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:18 marpaga gunicorn[14754]: [2024-03-10 18:23:18 +0100] [14754] [ERROR] Retrying in 1 second.
+mar 10 18:23:19 marpaga gunicorn[14754]: [2024-03-10 18:23:19 +0100] [14754] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:19 marpaga gunicorn[14754]: [2024-03-10 18:23:19 +0100] [14754] [ERROR] Retrying in 1 second.
+mar 10 18:23:20 marpaga gunicorn[14754]: [2024-03-10 18:23:20 +0100] [14754] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:20 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:20 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:20 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:29 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:29 marpaga gunicorn[14974]: [2024-03-10 18:23:29 +0100] [14974] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:29 marpaga gunicorn[14974]: [2024-03-10 18:23:29 +0100] [14974] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:29 marpaga gunicorn[14974]: [2024-03-10 18:23:29 +0100] [14974] [ERROR] Retrying in 1 second.
+mar 10 18:23:30 marpaga gunicorn[14974]: [2024-03-10 18:23:30 +0100] [14974] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:30 marpaga gunicorn[14974]: [2024-03-10 18:23:30 +0100] [14974] [ERROR] Retrying in 1 second.
+mar 10 18:23:31 marpaga gunicorn[14974]: [2024-03-10 18:23:31 +0100] [14974] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:31 marpaga gunicorn[14974]: [2024-03-10 18:23:31 +0100] [14974] [ERROR] Retrying in 1 second.
+mar 10 18:23:32 marpaga gunicorn[14974]: [2024-03-10 18:23:32 +0100] [14974] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:32 marpaga gunicorn[14974]: [2024-03-10 18:23:32 +0100] [14974] [ERROR] Retrying in 1 second.
+mar 10 18:23:33 marpaga gunicorn[14974]: [2024-03-10 18:23:33 +0100] [14974] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:33 marpaga gunicorn[14974]: [2024-03-10 18:23:33 +0100] [14974] [ERROR] Retrying in 1 second.
+mar 10 18:23:34 marpaga gunicorn[14974]: [2024-03-10 18:23:34 +0100] [14974] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:34 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:34 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:34 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 1.
+mar 10 18:23:34 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:34 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:34 marpaga gunicorn[15115]: [2024-03-10 18:23:34 +0100] [15115] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:34 marpaga gunicorn[15115]: [2024-03-10 18:23:34 +0100] [15115] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:34 marpaga gunicorn[15115]: [2024-03-10 18:23:34 +0100] [15115] [ERROR] Retrying in 1 second.
+mar 10 18:23:35 marpaga gunicorn[15115]: [2024-03-10 18:23:35 +0100] [15115] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:35 marpaga gunicorn[15115]: [2024-03-10 18:23:35 +0100] [15115] [ERROR] Retrying in 1 second.
+mar 10 18:23:36 marpaga gunicorn[15115]: [2024-03-10 18:23:36 +0100] [15115] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:36 marpaga gunicorn[15115]: [2024-03-10 18:23:36 +0100] [15115] [ERROR] Retrying in 1 second.
+mar 10 18:23:37 marpaga gunicorn[15115]: [2024-03-10 18:23:37 +0100] [15115] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:37 marpaga gunicorn[15115]: [2024-03-10 18:23:37 +0100] [15115] [ERROR] Retrying in 1 second.
+mar 10 18:23:38 marpaga gunicorn[15115]: [2024-03-10 18:23:38 +0100] [15115] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:38 marpaga gunicorn[15115]: [2024-03-10 18:23:38 +0100] [15115] [ERROR] Retrying in 1 second.
+mar 10 18:23:39 marpaga gunicorn[15115]: [2024-03-10 18:23:39 +0100] [15115] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:39 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:39 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:40 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 2.
+mar 10 18:23:40 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:40 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:40 marpaga gunicorn[15117]: [2024-03-10 18:23:40 +0100] [15117] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:40 marpaga gunicorn[15117]: [2024-03-10 18:23:40 +0100] [15117] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:40 marpaga gunicorn[15117]: [2024-03-10 18:23:40 +0100] [15117] [ERROR] Retrying in 1 second.
+mar 10 18:23:41 marpaga gunicorn[15117]: [2024-03-10 18:23:41 +0100] [15117] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:41 marpaga gunicorn[15117]: [2024-03-10 18:23:41 +0100] [15117] [ERROR] Retrying in 1 second.
+mar 10 18:23:42 marpaga gunicorn[15117]: [2024-03-10 18:23:42 +0100] [15117] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:42 marpaga gunicorn[15117]: [2024-03-10 18:23:42 +0100] [15117] [ERROR] Retrying in 1 second.
+mar 10 18:23:43 marpaga gunicorn[15117]: [2024-03-10 18:23:43 +0100] [15117] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:43 marpaga gunicorn[15117]: [2024-03-10 18:23:43 +0100] [15117] [ERROR] Retrying in 1 second.
+mar 10 18:23:44 marpaga gunicorn[15117]: [2024-03-10 18:23:44 +0100] [15117] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:44 marpaga gunicorn[15117]: [2024-03-10 18:23:44 +0100] [15117] [ERROR] Retrying in 1 second.
+mar 10 18:23:45 marpaga gunicorn[15117]: [2024-03-10 18:23:45 +0100] [15117] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:45 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:45 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:45 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 3.
+mar 10 18:23:45 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:45 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:45 marpaga gunicorn[15119]: [2024-03-10 18:23:45 +0100] [15119] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:45 marpaga gunicorn[15119]: [2024-03-10 18:23:45 +0100] [15119] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:45 marpaga gunicorn[15119]: [2024-03-10 18:23:45 +0100] [15119] [ERROR] Retrying in 1 second.
+mar 10 18:23:46 marpaga gunicorn[15119]: [2024-03-10 18:23:46 +0100] [15119] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:46 marpaga gunicorn[15119]: [2024-03-10 18:23:46 +0100] [15119] [ERROR] Retrying in 1 second.
+mar 10 18:23:47 marpaga gunicorn[15119]: [2024-03-10 18:23:47 +0100] [15119] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:47 marpaga gunicorn[15119]: [2024-03-10 18:23:47 +0100] [15119] [ERROR] Retrying in 1 second.
+mar 10 18:23:48 marpaga gunicorn[15119]: [2024-03-10 18:23:48 +0100] [15119] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:48 marpaga gunicorn[15119]: [2024-03-10 18:23:48 +0100] [15119] [ERROR] Retrying in 1 second.
+mar 10 18:23:49 marpaga gunicorn[15119]: [2024-03-10 18:23:49 +0100] [15119] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:49 marpaga gunicorn[15119]: [2024-03-10 18:23:49 +0100] [15119] [ERROR] Retrying in 1 second.
+mar 10 18:23:50 marpaga gunicorn[15119]: [2024-03-10 18:23:50 +0100] [15119] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:50 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:50 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:50 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 4.
+mar 10 18:23:50 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:50 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:50 marpaga gunicorn[15120]: [2024-03-10 18:23:50 +0100] [15120] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:50 marpaga gunicorn[15120]: [2024-03-10 18:23:50 +0100] [15120] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:50 marpaga gunicorn[15120]: [2024-03-10 18:23:50 +0100] [15120] [ERROR] Retrying in 1 second.
+mar 10 18:23:51 marpaga gunicorn[15120]: [2024-03-10 18:23:51 +0100] [15120] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:51 marpaga gunicorn[15120]: [2024-03-10 18:23:51 +0100] [15120] [ERROR] Retrying in 1 second.
+mar 10 18:23:52 marpaga gunicorn[15120]: [2024-03-10 18:23:52 +0100] [15120] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:52 marpaga gunicorn[15120]: [2024-03-10 18:23:52 +0100] [15120] [ERROR] Retrying in 1 second.
+mar 10 18:23:53 marpaga gunicorn[15120]: [2024-03-10 18:23:53 +0100] [15120] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:53 marpaga gunicorn[15120]: [2024-03-10 18:23:53 +0100] [15120] [ERROR] Retrying in 1 second.
+mar 10 18:23:54 marpaga gunicorn[15120]: [2024-03-10 18:23:54 +0100] [15120] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:54 marpaga gunicorn[15120]: [2024-03-10 18:23:54 +0100] [15120] [ERROR] Retrying in 1 second.
+mar 10 18:23:55 marpaga gunicorn[15120]: [2024-03-10 18:23:55 +0100] [15120] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:23:55 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:23:55 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:23:55 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 5.
+mar 10 18:23:55 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:55 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:23:55 marpaga gunicorn[15121]: [2024-03-10 18:23:55 +0100] [15121] [INFO] Starting gunicorn 21.2.0
+mar 10 18:23:55 marpaga gunicorn[15121]: [2024-03-10 18:23:55 +0100] [15121] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:55 marpaga gunicorn[15121]: [2024-03-10 18:23:55 +0100] [15121] [ERROR] Retrying in 1 second.
+mar 10 18:23:56 marpaga gunicorn[15121]: [2024-03-10 18:23:56 +0100] [15121] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:56 marpaga gunicorn[15121]: [2024-03-10 18:23:56 +0100] [15121] [ERROR] Retrying in 1 second.
+mar 10 18:23:57 marpaga gunicorn[15121]: [2024-03-10 18:23:57 +0100] [15121] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:57 marpaga gunicorn[15121]: [2024-03-10 18:23:57 +0100] [15121] [ERROR] Retrying in 1 second.
+mar 10 18:23:58 marpaga gunicorn[15121]: [2024-03-10 18:23:58 +0100] [15121] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:58 marpaga gunicorn[15121]: [2024-03-10 18:23:58 +0100] [15121] [ERROR] Retrying in 1 second.
+mar 10 18:23:59 marpaga gunicorn[15121]: [2024-03-10 18:23:59 +0100] [15121] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:23:59 marpaga gunicorn[15121]: [2024-03-10 18:23:59 +0100] [15121] [ERROR] Retrying in 1 second.
+mar 10 18:24:00 marpaga gunicorn[15121]: [2024-03-10 18:24:00 +0100] [15121] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:00 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:00 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:01 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 6.
+mar 10 18:24:01 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:01 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:01 marpaga gunicorn[15122]: [2024-03-10 18:24:01 +0100] [15122] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:01 marpaga gunicorn[15122]: [2024-03-10 18:24:01 +0100] [15122] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:01 marpaga gunicorn[15122]: [2024-03-10 18:24:01 +0100] [15122] [ERROR] Retrying in 1 second.
+mar 10 18:24:02 marpaga gunicorn[15122]: [2024-03-10 18:24:02 +0100] [15122] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:02 marpaga gunicorn[15122]: [2024-03-10 18:24:02 +0100] [15122] [ERROR] Retrying in 1 second.
+mar 10 18:24:03 marpaga gunicorn[15122]: [2024-03-10 18:24:03 +0100] [15122] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:03 marpaga gunicorn[15122]: [2024-03-10 18:24:03 +0100] [15122] [ERROR] Retrying in 1 second.
+mar 10 18:24:04 marpaga gunicorn[15122]: [2024-03-10 18:24:04 +0100] [15122] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:04 marpaga gunicorn[15122]: [2024-03-10 18:24:04 +0100] [15122] [ERROR] Retrying in 1 second.
+mar 10 18:24:05 marpaga gunicorn[15122]: [2024-03-10 18:24:05 +0100] [15122] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:05 marpaga gunicorn[15122]: [2024-03-10 18:24:05 +0100] [15122] [ERROR] Retrying in 1 second.
+mar 10 18:24:06 marpaga gunicorn[15122]: [2024-03-10 18:24:06 +0100] [15122] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:06 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:06 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:06 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 7.
+mar 10 18:24:06 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:06 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:06 marpaga gunicorn[15131]: [2024-03-10 18:24:06 +0100] [15131] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:06 marpaga gunicorn[15131]: [2024-03-10 18:24:06 +0100] [15131] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:06 marpaga gunicorn[15131]: [2024-03-10 18:24:06 +0100] [15131] [ERROR] Retrying in 1 second.
+mar 10 18:24:07 marpaga gunicorn[15131]: [2024-03-10 18:24:07 +0100] [15131] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:07 marpaga gunicorn[15131]: [2024-03-10 18:24:07 +0100] [15131] [ERROR] Retrying in 1 second.
+mar 10 18:24:08 marpaga gunicorn[15131]: [2024-03-10 18:24:08 +0100] [15131] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:08 marpaga gunicorn[15131]: [2024-03-10 18:24:08 +0100] [15131] [ERROR] Retrying in 1 second.
+mar 10 18:24:09 marpaga gunicorn[15131]: [2024-03-10 18:24:09 +0100] [15131] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:09 marpaga gunicorn[15131]: [2024-03-10 18:24:09 +0100] [15131] [ERROR] Retrying in 1 second.
+mar 10 18:24:10 marpaga gunicorn[15131]: [2024-03-10 18:24:10 +0100] [15131] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:10 marpaga gunicorn[15131]: [2024-03-10 18:24:10 +0100] [15131] [ERROR] Retrying in 1 second.
+mar 10 18:24:11 marpaga gunicorn[15131]: [2024-03-10 18:24:11 +0100] [15131] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:11 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:11 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:11 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 8.
+mar 10 18:24:11 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:11 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:11 marpaga gunicorn[15139]: [2024-03-10 18:24:11 +0100] [15139] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:11 marpaga gunicorn[15139]: [2024-03-10 18:24:11 +0100] [15139] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:11 marpaga gunicorn[15139]: [2024-03-10 18:24:11 +0100] [15139] [ERROR] Retrying in 1 second.
+mar 10 18:24:12 marpaga gunicorn[15139]: [2024-03-10 18:24:12 +0100] [15139] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:12 marpaga gunicorn[15139]: [2024-03-10 18:24:12 +0100] [15139] [ERROR] Retrying in 1 second.
+mar 10 18:24:13 marpaga gunicorn[15139]: [2024-03-10 18:24:13 +0100] [15139] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:13 marpaga gunicorn[15139]: [2024-03-10 18:24:13 +0100] [15139] [ERROR] Retrying in 1 second.
+mar 10 18:24:14 marpaga gunicorn[15139]: [2024-03-10 18:24:14 +0100] [15139] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:14 marpaga gunicorn[15139]: [2024-03-10 18:24:14 +0100] [15139] [ERROR] Retrying in 1 second.
+mar 10 18:24:15 marpaga gunicorn[15139]: [2024-03-10 18:24:15 +0100] [15139] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:15 marpaga gunicorn[15139]: [2024-03-10 18:24:15 +0100] [15139] [ERROR] Retrying in 1 second.
+mar 10 18:24:16 marpaga gunicorn[15139]: [2024-03-10 18:24:16 +0100] [15139] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:16 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:16 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:16 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 9.
+mar 10 18:24:16 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:16 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:16 marpaga gunicorn[15140]: [2024-03-10 18:24:16 +0100] [15140] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:16 marpaga gunicorn[15140]: [2024-03-10 18:24:16 +0100] [15140] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:16 marpaga gunicorn[15140]: [2024-03-10 18:24:16 +0100] [15140] [ERROR] Retrying in 1 second.
+mar 10 18:24:17 marpaga gunicorn[15140]: [2024-03-10 18:24:17 +0100] [15140] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:17 marpaga gunicorn[15140]: [2024-03-10 18:24:17 +0100] [15140] [ERROR] Retrying in 1 second.
+mar 10 18:24:18 marpaga gunicorn[15140]: [2024-03-10 18:24:18 +0100] [15140] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:18 marpaga gunicorn[15140]: [2024-03-10 18:24:18 +0100] [15140] [ERROR] Retrying in 1 second.
+mar 10 18:24:19 marpaga gunicorn[15140]: [2024-03-10 18:24:19 +0100] [15140] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:19 marpaga gunicorn[15140]: [2024-03-10 18:24:19 +0100] [15140] [ERROR] Retrying in 1 second.
+mar 10 18:24:20 marpaga gunicorn[15140]: [2024-03-10 18:24:20 +0100] [15140] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:20 marpaga gunicorn[15140]: [2024-03-10 18:24:20 +0100] [15140] [ERROR] Retrying in 1 second.
+mar 10 18:24:21 marpaga gunicorn[15140]: [2024-03-10 18:24:21 +0100] [15140] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:21 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:21 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:22 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 10.
+mar 10 18:24:22 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:22 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:22 marpaga gunicorn[15141]: [2024-03-10 18:24:22 +0100] [15141] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:22 marpaga gunicorn[15141]: [2024-03-10 18:24:22 +0100] [15141] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:22 marpaga gunicorn[15141]: [2024-03-10 18:24:22 +0100] [15141] [ERROR] Retrying in 1 second.
+mar 10 18:24:23 marpaga gunicorn[15141]: [2024-03-10 18:24:23 +0100] [15141] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:23 marpaga gunicorn[15141]: [2024-03-10 18:24:23 +0100] [15141] [ERROR] Retrying in 1 second.
+mar 10 18:24:24 marpaga gunicorn[15141]: [2024-03-10 18:24:24 +0100] [15141] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:24 marpaga gunicorn[15141]: [2024-03-10 18:24:24 +0100] [15141] [ERROR] Retrying in 1 second.
+mar 10 18:24:25 marpaga gunicorn[15141]: [2024-03-10 18:24:25 +0100] [15141] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:25 marpaga gunicorn[15141]: [2024-03-10 18:24:25 +0100] [15141] [ERROR] Retrying in 1 second.
+mar 10 18:24:26 marpaga gunicorn[15141]: [2024-03-10 18:24:26 +0100] [15141] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:26 marpaga gunicorn[15141]: [2024-03-10 18:24:26 +0100] [15141] [ERROR] Retrying in 1 second.
+mar 10 18:24:27 marpaga gunicorn[15141]: [2024-03-10 18:24:27 +0100] [15141] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:27 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:27 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:27 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 11.
+mar 10 18:24:27 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:27 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:27 marpaga gunicorn[15149]: [2024-03-10 18:24:27 +0100] [15149] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:27 marpaga gunicorn[15149]: [2024-03-10 18:24:27 +0100] [15149] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:27 marpaga gunicorn[15149]: [2024-03-10 18:24:27 +0100] [15149] [ERROR] Retrying in 1 second.
+mar 10 18:24:28 marpaga gunicorn[15149]: [2024-03-10 18:24:28 +0100] [15149] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:28 marpaga gunicorn[15149]: [2024-03-10 18:24:28 +0100] [15149] [ERROR] Retrying in 1 second.
+mar 10 18:24:29 marpaga gunicorn[15149]: [2024-03-10 18:24:29 +0100] [15149] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:29 marpaga gunicorn[15149]: [2024-03-10 18:24:29 +0100] [15149] [ERROR] Retrying in 1 second.
+mar 10 18:24:30 marpaga gunicorn[15149]: [2024-03-10 18:24:30 +0100] [15149] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:30 marpaga gunicorn[15149]: [2024-03-10 18:24:30 +0100] [15149] [ERROR] Retrying in 1 second.
+mar 10 18:24:31 marpaga gunicorn[15149]: [2024-03-10 18:24:31 +0100] [15149] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:31 marpaga gunicorn[15149]: [2024-03-10 18:24:31 +0100] [15149] [ERROR] Retrying in 1 second.
+mar 10 18:24:32 marpaga gunicorn[15149]: [2024-03-10 18:24:32 +0100] [15149] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:32 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:32 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:32 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 12.
+mar 10 18:24:32 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:32 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:32 marpaga gunicorn[15155]: [2024-03-10 18:24:32 +0100] [15155] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:32 marpaga gunicorn[15155]: [2024-03-10 18:24:32 +0100] [15155] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:32 marpaga gunicorn[15155]: [2024-03-10 18:24:32 +0100] [15155] [ERROR] Retrying in 1 second.
+mar 10 18:24:33 marpaga gunicorn[15155]: [2024-03-10 18:24:33 +0100] [15155] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:33 marpaga gunicorn[15155]: [2024-03-10 18:24:33 +0100] [15155] [ERROR] Retrying in 1 second.
+mar 10 18:24:34 marpaga gunicorn[15155]: [2024-03-10 18:24:34 +0100] [15155] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:34 marpaga gunicorn[15155]: [2024-03-10 18:24:34 +0100] [15155] [ERROR] Retrying in 1 second.
+mar 10 18:24:35 marpaga gunicorn[15155]: [2024-03-10 18:24:35 +0100] [15155] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:35 marpaga gunicorn[15155]: [2024-03-10 18:24:35 +0100] [15155] [ERROR] Retrying in 1 second.
+mar 10 18:24:36 marpaga gunicorn[15155]: [2024-03-10 18:24:36 +0100] [15155] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:36 marpaga gunicorn[15155]: [2024-03-10 18:24:36 +0100] [15155] [ERROR] Retrying in 1 second.
+mar 10 18:24:37 marpaga gunicorn[15155]: [2024-03-10 18:24:37 +0100] [15155] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:37 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:37 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:37 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 13.
+mar 10 18:24:37 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:37 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:37 marpaga gunicorn[15156]: [2024-03-10 18:24:37 +0100] [15156] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:37 marpaga gunicorn[15156]: [2024-03-10 18:24:37 +0100] [15156] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:37 marpaga gunicorn[15156]: [2024-03-10 18:24:37 +0100] [15156] [ERROR] Retrying in 1 second.
+mar 10 18:24:38 marpaga gunicorn[15156]: [2024-03-10 18:24:38 +0100] [15156] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:38 marpaga gunicorn[15156]: [2024-03-10 18:24:38 +0100] [15156] [ERROR] Retrying in 1 second.
+mar 10 18:24:39 marpaga gunicorn[15156]: [2024-03-10 18:24:39 +0100] [15156] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:39 marpaga gunicorn[15156]: [2024-03-10 18:24:39 +0100] [15156] [ERROR] Retrying in 1 second.
+mar 10 18:24:40 marpaga gunicorn[15156]: [2024-03-10 18:24:40 +0100] [15156] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:40 marpaga gunicorn[15156]: [2024-03-10 18:24:40 +0100] [15156] [ERROR] Retrying in 1 second.
+mar 10 18:24:41 marpaga gunicorn[15156]: [2024-03-10 18:24:41 +0100] [15156] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:41 marpaga gunicorn[15156]: [2024-03-10 18:24:41 +0100] [15156] [ERROR] Retrying in 1 second.
+mar 10 18:24:42 marpaga gunicorn[15156]: [2024-03-10 18:24:42 +0100] [15156] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:42 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:42 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:43 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 14.
+mar 10 18:24:43 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:43 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:24:43 marpaga gunicorn[15157]: [2024-03-10 18:24:43 +0100] [15157] [INFO] Starting gunicorn 21.2.0
+mar 10 18:24:43 marpaga gunicorn[15157]: [2024-03-10 18:24:43 +0100] [15157] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:43 marpaga gunicorn[15157]: [2024-03-10 18:24:43 +0100] [15157] [ERROR] Retrying in 1 second.
+mar 10 18:24:44 marpaga gunicorn[15157]: [2024-03-10 18:24:44 +0100] [15157] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:44 marpaga gunicorn[15157]: [2024-03-10 18:24:44 +0100] [15157] [ERROR] Retrying in 1 second.
+mar 10 18:24:45 marpaga gunicorn[15157]: [2024-03-10 18:24:45 +0100] [15157] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:45 marpaga gunicorn[15157]: [2024-03-10 18:24:45 +0100] [15157] [ERROR] Retrying in 1 second.
+mar 10 18:24:46 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 10 18:24:46 marpaga gunicorn[15157]: [2024-03-10 18:24:46 +0100] [15157] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:46 marpaga gunicorn[15157]: [2024-03-10 18:24:46 +0100] [15157] [ERROR] Retrying in 1 second.
+mar 10 18:24:47 marpaga gunicorn[15157]: [2024-03-10 18:24:47 +0100] [15157] [ERROR] Connection in use: ('127.0.0.1', 8000)
+mar 10 18:24:47 marpaga gunicorn[15157]: [2024-03-10 18:24:47 +0100] [15157] [ERROR] Retrying in 1 second.
+mar 10 18:24:48 marpaga gunicorn[15157]: [2024-03-10 18:24:48 +0100] [15157] [ERROR] Can't connect to ('127.0.0.1', 8000)
+mar 10 18:24:48 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+mar 10 18:24:48 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+mar 10 18:24:48 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:25:02 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:25:02 marpaga gunicorn[15375]: [2024-03-10 18:25:02 +0100] [15375] [INFO] Starting gunicorn 21.2.0
+mar 10 18:25:02 marpaga gunicorn[15375]: [2024-03-10 18:25:02 +0100] [15375] [INFO] Listening at: http://127.0.0.1:8000 (15375)
+mar 10 18:25:02 marpaga gunicorn[15375]: [2024-03-10 18:25:02 +0100] [15375] [INFO] Using worker: sync
+mar 10 18:25:02 marpaga gunicorn[15400]: [2024-03-10 18:25:02 +0100] [15400] [INFO] Booting worker with pid: 15400
+mar 10 18:25:02 marpaga gunicorn[15403]: [2024-03-10 18:25:02 +0100] [15403] [INFO] Booting worker with pid: 15403
+mar 10 18:25:02 marpaga gunicorn[15404]: [2024-03-10 18:25:02 +0100] [15404] [INFO] Booting worker with pid: 15404
+mar 10 18:25:02 marpaga gunicorn[15407]: [2024-03-10 18:25:02 +0100] [15407] [INFO] Booting worker with pid: 15407
+mar 10 18:25:46 marpaga sudo[15629]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add ana
+mar 10 18:25:46 marpaga sudo[15629]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:25:46 marpaga sudo[15629]: pam_unix(sudo:session): session closed for user root
+mar 10 18:26:46 marpaga sudo[15860]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del ana
+mar 10 18:26:46 marpaga sudo[15860]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:26:46 marpaga sudo[15860]: pam_unix(sudo:session): session closed for user root
+mar 10 18:29:19 marpaga sudo[16075]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add juanjo
+mar 10 18:29:19 marpaga sudo[16075]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:29:20 marpaga sudo[16075]: pam_unix(sudo:session): session closed for user root
+mar 10 18:30:20 marpaga sudo[16241]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del juanjo
+mar 10 18:30:20 marpaga sudo[16241]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:30:20 marpaga sudo[16241]: pam_unix(sudo:session): session closed for user root
+mar 10 18:30:56 marpaga gunicorn[15407]: [2024-03-10 18:30:56 +0100] [15407] [INFO] Worker exiting (pid: 15407)
+mar 10 18:30:56 marpaga gunicorn[15403]: [2024-03-10 18:30:56 +0100] [15403] [INFO] Worker exiting (pid: 15403)
+mar 10 18:30:56 marpaga gunicorn[15403]: Eliminando usuario inactivo
+mar 10 18:30:56 marpaga gunicorn[15403]: Eliminando usuario inactivo
+mar 10 18:30:56 marpaga gunicorn[15400]: [2024-03-10 18:30:56 +0100] [15400] [INFO] Worker exiting (pid: 15400)
+mar 10 18:30:56 marpaga gunicorn[15404]: [2024-03-10 18:30:56 +0100] [15404] [INFO] Worker exiting (pid: 15404)
+mar 10 18:30:56 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 10 18:30:56 marpaga gunicorn[15375]: [2024-03-10 18:30:56 +0100] [15375] [INFO] Handling signal: term
+mar 10 18:30:56 marpaga gunicorn[15375]: [2024-03-10 18:30:56 +0100] [15375] [ERROR] Worker (pid:15400) was sent SIGTERM!
+mar 10 18:30:56 marpaga gunicorn[15375]: [2024-03-10 18:30:56 +0100] [15375] [ERROR] Worker (pid:15407) was sent SIGTERM!
+mar 10 18:30:56 marpaga gunicorn[15375]: [2024-03-10 18:30:56 +0100] [15375] [ERROR] Worker (pid:15403) was sent SIGTERM!
+mar 10 18:30:56 marpaga gunicorn[15375]: [2024-03-10 18:30:56 +0100] [15375] [ERROR] Worker (pid:15404) was sent SIGTERM!
+mar 10 18:30:56 marpaga gunicorn[15375]: [2024-03-10 18:30:56 +0100] [15375] [INFO] Shutting down: Master
+mar 10 18:30:56 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 10 18:30:56 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:30:56 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 3.189s CPU time.
+mar 10 18:47:32 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:47:32 marpaga gunicorn[18815]: [2024-03-10 18:47:32 +0100] [18815] [INFO] Starting gunicorn 21.2.0
+mar 10 18:47:32 marpaga gunicorn[18815]: [2024-03-10 18:47:32 +0100] [18815] [INFO] Listening at: http://127.0.0.1:8000 (18815)
+mar 10 18:47:32 marpaga gunicorn[18815]: [2024-03-10 18:47:32 +0100] [18815] [INFO] Using worker: sync
+mar 10 18:47:32 marpaga gunicorn[18838]: [2024-03-10 18:47:32 +0100] [18838] [INFO] Booting worker with pid: 18838
+mar 10 18:47:33 marpaga gunicorn[18843]: [2024-03-10 18:47:33 +0100] [18843] [INFO] Booting worker with pid: 18843
+mar 10 18:47:33 marpaga gunicorn[18844]: [2024-03-10 18:47:33 +0100] [18844] [INFO] Booting worker with pid: 18844
+mar 10 18:47:33 marpaga gunicorn[18847]: [2024-03-10 18:47:33 +0100] [18847] [INFO] Booting worker with pid: 18847
+mar 10 18:48:19 marpaga sudo[19091]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del juanjo
+mar 10 18:48:19 marpaga sudo[19091]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:48:19 marpaga sudo[19091]: pam_unix(sudo:session): session closed for user root
+mar 10 18:48:56 marpaga sudo[19284]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add juanjo
+mar 10 18:48:56 marpaga sudo[19284]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:48:57 marpaga sudo[19284]: pam_unix(sudo:session): session closed for user root
+mar 10 18:51:49 marpaga gunicorn[19484]: 41d0fe5e764b03b5fd96ecad444f5382b18332e379214be0ca5c55be9413ca16
+mar 10 18:51:49 marpaga sudo[19666]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add juanjo 172.17.0.2
+mar 10 18:51:49 marpaga sudo[19666]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:51:49 marpaga gunicorn[19667]: El usuario no existe
+mar 10 18:51:49 marpaga sudo[19666]: pam_unix(sudo:session): session closed for user root
+mar 10 18:53:23 marpaga gunicorn[19868]: docker: Error response from daemon: Conflict. The container name "/juanjo" is already in use by container "41d0fe5e764b03b5fd96ecad444f5382b18332e379214be0ca5c55be9413ca16". You have to remove (or rename) that container to be able to reuse that name.
+mar 10 18:53:23 marpaga gunicorn[19868]: See 'docker run --help'.
+mar 10 18:53:25 marpaga gunicorn[19877]: docker: Error response from daemon: Conflict. The container name "/juanjo" is already in use by container "41d0fe5e764b03b5fd96ecad444f5382b18332e379214be0ca5c55be9413ca16". You have to remove (or rename) that container to be able to reuse that name.
+mar 10 18:53:25 marpaga gunicorn[19877]: See 'docker run --help'.
+mar 10 18:53:47 marpaga gunicorn[19891]: Creating network "backend-juanjo" with driver "bridge"
+mar 10 18:53:47 marpaga gunicorn[19891]: Creating network "frontend-juanjo" with driver "bridge"
+mar 10 18:53:47 marpaga gunicorn[19891]: Creating proyecto_juanjo_mysql_1 ...
+mar 10 18:53:47 marpaga gunicorn[19891]: Creating proyecto_juanjo_mysql_1 ... done
+mar 10 18:53:47 marpaga gunicorn[19891]: Creating proyecto_juanjo_php_1   ...
+mar 10 18:53:47 marpaga gunicorn[19891]: Creating proyecto_juanjo_php_1   ... done
+mar 10 18:53:47 marpaga gunicorn[19891]: Creating proyecto_juanjo_nginx_1 ...
+mar 10 18:53:48 marpaga gunicorn[19891]: Creating proyecto_juanjo_nginx_1 ... done
+mar 10 18:53:48 marpaga sudo[20374]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add juanjo 172.18.0.4
+mar 10 18:53:48 marpaga sudo[20374]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:53:48 marpaga sudo[20374]: pam_unix(sudo:session): session closed for user root
+mar 10 18:53:52 marpaga gunicorn[20440]: Stopping proyecto_juanjo_nginx_1 ...
+mar 10 18:53:52 marpaga gunicorn[20440]: Stopping proyecto_juanjo_php_1   ...
+mar 10 18:53:52 marpaga gunicorn[20440]: Stopping proyecto_juanjo_mysql_1 ...
+mar 10 18:53:52 marpaga gunicorn[20440]: Stopping proyecto_juanjo_nginx_1 ... done
+mar 10 18:53:52 marpaga gunicorn[20440]: Stopping proyecto_juanjo_php_1   ... done
+mar 10 18:54:02 marpaga gunicorn[20440]: Stopping proyecto_juanjo_mysql_1 ... done
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing proyecto_juanjo_nginx_1 ...
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing proyecto_juanjo_php_1   ...
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing proyecto_juanjo_mysql_1 ...
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing proyecto_juanjo_nginx_1 ... done
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing proyecto_juanjo_mysql_1 ... done
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing proyecto_juanjo_php_1   ... done
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing network backend-juanjo
+mar 10 18:54:03 marpaga gunicorn[20440]: Removing network frontend-juanjo
+mar 10 18:54:03 marpaga sudo[20666]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.18.0.4
+mar 10 18:54:03 marpaga sudo[20666]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:54:03 marpaga sudo[20670]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 10 18:54:03 marpaga sudo[20670]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 10 18:54:03 marpaga sudo[20670]: pam_unix(sudo:session): session closed for user root
+mar 10 18:54:03 marpaga sudo[20666]: pam_unix(sudo:session): session closed for user root
+mar 10 18:54:30 marpaga gunicorn[20797]: fb77a5fb98e8482079db0c6e0785f8db12f9ca75c2c1863dc6a99fbfb7439551
+mar 10 18:54:30 marpaga sudo[20979]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add juanjo 172.17.0.2
+mar 10 18:54:30 marpaga sudo[20979]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:54:30 marpaga sudo[20979]: pam_unix(sudo:session): session closed for user root
+mar 10 18:54:33 marpaga gunicorn[20992]: juanjo
+mar 10 18:54:33 marpaga sudo[21044]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+mar 10 18:54:33 marpaga sudo[21044]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:54:33 marpaga sudo[21048]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 10 18:54:33 marpaga sudo[21048]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 10 18:54:33 marpaga sudo[21048]: pam_unix(sudo:session): session closed for user root
+mar 10 18:54:33 marpaga sudo[21044]: pam_unix(sudo:session): session closed for user root
+mar 10 18:54:50 marpaga gunicorn[21051]: 0459c8e5599244de25359b7510b80ddfe795e768bac87041f1852f36f16c63a8
+mar 10 18:54:50 marpaga sudo[21233]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add juanjo 172.17.0.2
+mar 10 18:54:50 marpaga sudo[21233]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:54:50 marpaga sudo[21233]: pam_unix(sudo:session): session closed for user root
+mar 10 18:55:56 marpaga gunicorn[21258]: juanjo
+mar 10 18:55:56 marpaga sudo[21300]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+mar 10 18:55:56 marpaga sudo[21300]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:55:56 marpaga sudo[21304]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 10 18:55:56 marpaga sudo[21304]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 10 18:55:56 marpaga sudo[21304]: pam_unix(sudo:session): session closed for user root
+mar 10 18:55:56 marpaga sudo[21300]: pam_unix(sudo:session): session closed for user root
+mar 10 18:56:02 marpaga gunicorn[21308]: 7b4dca39e33c90abf9f332b6cafc456ed44344a0fc802bbe120b8577725778f0
+mar 10 18:56:02 marpaga sudo[21489]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add juanjo 172.17.0.2
+mar 10 18:56:02 marpaga sudo[21489]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:56:02 marpaga sudo[21489]: pam_unix(sudo:session): session closed for user root
+mar 10 18:56:09 marpaga gunicorn[21503]: juanjo
+mar 10 18:56:09 marpaga sudo[21538]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+mar 10 18:56:09 marpaga sudo[21538]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:56:09 marpaga sudo[21542]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 10 18:56:09 marpaga sudo[21542]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 10 18:56:09 marpaga sudo[21542]: pam_unix(sudo:session): session closed for user root
+mar 10 18:56:09 marpaga sudo[21538]: pam_unix(sudo:session): session closed for user root
+mar 10 18:56:13 marpaga gunicorn[21545]: Creating network "backend-juanjo" with driver "bridge"
+mar 10 18:56:13 marpaga gunicorn[21545]: Creating network "frontend-juanjo" with driver "bridge"
+mar 10 18:56:13 marpaga gunicorn[21545]: Creating proyecto_juanjo_mysql_1 ...
+mar 10 18:56:13 marpaga gunicorn[21545]: Creating proyecto_juanjo_mysql_1 ... done
+mar 10 18:56:13 marpaga gunicorn[21545]: Creating proyecto_juanjo_php_1   ...
+mar 10 18:56:14 marpaga gunicorn[21545]: Creating proyecto_juanjo_php_1   ... done
+mar 10 18:56:14 marpaga gunicorn[21545]: Creating proyecto_juanjo_nginx_1 ...
+mar 10 18:56:15 marpaga gunicorn[21545]: Creating proyecto_juanjo_nginx_1 ... done
+mar 10 18:56:15 marpaga sudo[22042]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add juanjo 172.20.0.4
+mar 10 18:56:15 marpaga sudo[22042]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 10 18:56:15 marpaga sudo[22042]: pam_unix(sudo:session): session closed for user root
+mar 10 18:57:36 marpaga gunicorn[18815]: [2024-03-10 18:57:36 +0100] [18815] [INFO] Handling signal: term
+mar 10 18:57:36 marpaga gunicorn[18843]: [2024-03-10 18:57:36 +0100] [18843] [INFO] Worker exiting (pid: 18843)
+mar 10 18:57:36 marpaga gunicorn[18838]: [2024-03-10 18:57:36 +0100] [18838] [INFO] Worker exiting (pid: 18838)
+mar 10 18:57:36 marpaga gunicorn[18843]: Levantando la máquina
+mar 10 18:57:36 marpaga gunicorn[18843]: La dirección IP de la máquina es: 172.17.0.2
+mar 10 18:57:36 marpaga gunicorn[18843]: Levantando la máquina
+mar 10 18:57:36 marpaga gunicorn[18843]: La dirección IP de la máquina es: 172.17.0.2
+mar 10 18:57:36 marpaga gunicorn[18838]: True
+mar 10 18:57:36 marpaga gunicorn[18838]: Levantando la máquina
+mar 10 18:57:36 marpaga gunicorn[18838]: Error al levantar la máquina: Command 'docker run --name juanjo -d --rm docker-lab' returned non-zero exit status 125.
+mar 10 18:57:36 marpaga gunicorn[18838]: Levantando la máquina
+mar 10 18:57:36 marpaga gunicorn[18838]: Error al levantar la máquina: Command 'docker run --name juanjo -d --rm docker-lab' returned non-zero exit status 125.
+mar 10 18:57:36 marpaga gunicorn[18844]: [2024-03-10 18:57:36 +0100] [18844] [INFO] Worker exiting (pid: 18844)
+mar 10 18:57:36 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 10 18:57:36 marpaga gunicorn[18847]: [2024-03-10 18:57:36 +0100] [18847] [INFO] Worker exiting (pid: 18847)
+mar 10 18:57:36 marpaga gunicorn[18844]: Levantando la máquina
+mar 10 18:57:36 marpaga gunicorn[18844]: Error al obtener la dirección IP: Command 'sudo ./iptables.sh add juanjo 172.17.0.2' returned non-zero exit status 1.
+mar 10 18:57:36 marpaga gunicorn[18844]: Levantando la máquina
+mar 10 18:57:36 marpaga gunicorn[18844]: La dirección IP de la máquina es: 172.17.0.2
+mar 10 18:57:36 marpaga gunicorn[18815]: [2024-03-10 18:57:36 +0100] [18815] [ERROR] Worker (pid:18843) was sent SIGTERM!
+mar 10 18:57:36 marpaga gunicorn[18815]: [2024-03-10 18:57:36 +0100] [18815] [ERROR] Worker (pid:18838) was sent SIGTERM!
+mar 10 18:57:36 marpaga gunicorn[18815]: --- Logging error ---
+mar 10 18:57:36 marpaga gunicorn[18815]: [2024-03-10 18:57:36 +0100] [18815] [ERROR] Worker (pid:18847) was sent SIGTERM!
+mar 10 18:57:36 marpaga gunicorn[18815]: Traceback (most recent call last):
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 224, in run
+mar 10 18:57:36 marpaga gunicorn[18815]:     handler()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 257, in handle_term
+mar 10 18:57:36 marpaga gunicorn[18815]:     raise StopIteration
+mar 10 18:57:36 marpaga gunicorn[18815]: StopIteration
+mar 10 18:57:36 marpaga gunicorn[18815]: During handling of the above exception, another exception occurred:
+mar 10 18:57:36 marpaga gunicorn[18815]: Traceback (most recent call last):
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1103, in emit
+mar 10 18:57:36 marpaga gunicorn[18815]:     stream.write(msg + self.terminator)
+mar 10 18:57:36 marpaga gunicorn[18815]: RuntimeError: reentrant call inside <_io.BufferedWriter name='<stderr>'>
+mar 10 18:57:36 marpaga gunicorn[18815]: During handling of the above exception, another exception occurred:
+mar 10 18:57:36 marpaga gunicorn[18815]: Traceback (most recent call last):
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1103, in emit
+mar 10 18:57:36 marpaga gunicorn[18815]:     stream.write(msg + self.terminator)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.reap_workers()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 554, in reap_workers
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.log.error(msg)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/glogging.py", line 272, in error
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.error_log.error(msg, *args, **kwargs)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1506, in error
+mar 10 18:57:36 marpaga gunicorn[18815]:     self._log(ERROR, msg, args, **kwargs)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1624, in _log
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.handle(record)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1634, in handle
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.callHandlers(record)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1696, in callHandlers
+mar 10 18:57:36 marpaga gunicorn[18815]:     hdlr.handle(record)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 968, in handle
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.emit(record)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1108, in emit
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.handleError(record)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/usr/lib/python3.10/logging/__init__.py", line 1021, in handleError
+mar 10 18:57:36 marpaga gunicorn[18815]:     sys.stderr.write('--- Logging error ---\n')
+mar 10 18:57:36 marpaga gunicorn[18815]: RuntimeError: reentrant call inside <_io.BufferedWriter name='<stderr>'>
+mar 10 18:57:36 marpaga gunicorn[18815]: Call stack:
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/bin/gunicorn", line 8, in <module>
+mar 10 18:57:36 marpaga gunicorn[18815]:     sys.exit(run())
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 67, in run
+mar 10 18:57:36 marpaga gunicorn[18815]:     WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/app/base.py", line 236, in run
+mar 10 18:57:36 marpaga gunicorn[18815]:     super().run()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/app/base.py", line 72, in run
+mar 10 18:57:36 marpaga gunicorn[18815]:     Arbiter(self).run()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 227, in run
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.halt()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 342, in halt
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.stop()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 396, in stop
+mar 10 18:57:36 marpaga gunicorn[18815]:     time.sleep(0.1)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.reap_workers()
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 554, in reap_workers
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.log.error(msg)
+mar 10 18:57:36 marpaga gunicorn[18815]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/glogging.py", line 272, in error
+mar 10 18:57:36 marpaga gunicorn[18815]:     self.error_log.error(msg, *args, **kwargs)
+mar 10 18:57:36 marpaga gunicorn[18815]: Message: 'Worker (pid:18838) was sent SIGTERM!'
+mar 10 18:57:36 marpaga gunicorn[18815]: Arguments: ()
+mar 10 18:58:06 marpaga gunicorn[18815]: [2024-03-10 18:58:06 +0100] [18815] [INFO] Shutting down: Master
+mar 10 18:58:06 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 10 18:58:06 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 10 18:58:06 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 3.588s CPU time.
+-- Boot c2e2c5eb9dd24d3193f20f0247b401c7 --
+mar 21 18:11:06 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 21 18:11:06 marpaga gunicorn[15899]: [2024-03-21 18:11:06 +0100] [15899] [INFO] Starting gunicorn 21.2.0
+mar 21 18:11:06 marpaga gunicorn[15899]: [2024-03-21 18:11:06 +0100] [15899] [INFO] Listening at: http://127.0.0.1:8000 (15899)
+mar 21 18:11:06 marpaga gunicorn[15899]: [2024-03-21 18:11:06 +0100] [15899] [INFO] Using worker: sync
+mar 21 18:11:06 marpaga gunicorn[15901]: [2024-03-21 18:11:06 +0100] [15901] [INFO] Booting worker with pid: 15901
+mar 21 18:11:06 marpaga gunicorn[15927]: [2024-03-21 18:11:06 +0100] [15927] [INFO] Booting worker with pid: 15927
+mar 21 18:11:06 marpaga gunicorn[15928]: [2024-03-21 18:11:06 +0100] [15928] [INFO] Booting worker with pid: 15928
+mar 21 18:11:07 marpaga gunicorn[15929]: [2024-03-21 18:11:07 +0100] [15929] [INFO] Booting worker with pid: 15929
+mar 21 18:12:35 marpaga gunicorn[15899]: [2024-03-21 18:12:35 +0100] [15899] [CRITICAL] WORKER TIMEOUT (pid:15901)
+mar 21 18:12:35 marpaga gunicorn[15901]: [2024-03-21 18:12:35 +0100] [15901] [INFO] Worker exiting (pid: 15901)
+mar 21 18:12:35 marpaga gunicorn[15899]: [2024-03-21 18:12:35 +0100] [15899] [ERROR] Worker (pid:15901) exited with code 1
+mar 21 18:12:35 marpaga gunicorn[15899]: [2024-03-21 18:12:35 +0100] [15899] [ERROR] Worker (pid:15901) exited with code 1.
+mar 21 18:12:35 marpaga gunicorn[16250]: [2024-03-21 18:12:35 +0100] [16250] [INFO] Booting worker with pid: 16250
+mar 21 18:12:45 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 21 18:12:45 marpaga gunicorn[15927]: [2024-03-21 18:12:45 +0100] [15927] [INFO] Worker exiting (pid: 15927)
+mar 21 18:12:45 marpaga gunicorn[15899]: [2024-03-21 18:12:45 +0100] [15899] [INFO] Handling signal: term
+mar 21 18:12:45 marpaga gunicorn[16250]: [2024-03-21 18:12:45 +0100] [16250] [INFO] Worker exiting (pid: 16250)
+mar 21 18:12:52 marpaga gunicorn[15928]: [2024-03-21 18:12:52 +0100] [15928] [INFO] Worker exiting (pid: 15928)
+mar 21 18:13:16 marpaga gunicorn[15899]: [2024-03-21 18:13:16 +0100] [15899] [INFO] Shutting down: Master
+mar 21 18:13:16 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 21 18:13:16 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 21 18:16:10 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 21 18:16:11 marpaga gunicorn[17047]: [2024-03-21 18:16:11 +0100] [17047] [INFO] Starting gunicorn 21.2.0
+mar 21 18:16:11 marpaga gunicorn[17047]: [2024-03-21 18:16:11 +0100] [17047] [INFO] Listening at: http://127.0.0.1:8000 (17047)
+mar 21 18:16:11 marpaga gunicorn[17047]: [2024-03-21 18:16:11 +0100] [17047] [INFO] Using worker: sync
+mar 21 18:16:11 marpaga gunicorn[17074]: [2024-03-21 18:16:11 +0100] [17074] [INFO] Booting worker with pid: 17074
+mar 21 18:16:11 marpaga gunicorn[17075]: [2024-03-21 18:16:11 +0100] [17075] [INFO] Booting worker with pid: 17075
+mar 21 18:16:11 marpaga gunicorn[17079]: [2024-03-21 18:16:11 +0100] [17079] [INFO] Booting worker with pid: 17079
+mar 21 18:16:11 marpaga gunicorn[17090]: [2024-03-21 18:16:11 +0100] [17090] [INFO] Booting worker with pid: 17090
+mar 21 18:19:40 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 21 18:19:40 marpaga gunicorn[17074]: [2024-03-21 18:19:40 +0100] [17074] [INFO] Worker exiting (pid: 17074)
+mar 21 18:19:40 marpaga gunicorn[17075]: [2024-03-21 18:19:40 +0100] [17075] [INFO] Worker exiting (pid: 17075)
+mar 21 18:19:40 marpaga gunicorn[17047]: [2024-03-21 18:19:40 +0100] [17047] [INFO] Handling signal: term
+mar 21 18:19:40 marpaga gunicorn[17079]: [2024-03-21 18:19:40 +0100] [17079] [INFO] Worker exiting (pid: 17079)
+mar 21 18:19:40 marpaga gunicorn[17090]: [2024-03-21 18:19:40 +0100] [17090] [INFO] Worker exiting (pid: 17090)
+mar 21 18:19:40 marpaga gunicorn[17047]: [2024-03-21 18:19:40 +0100] [17047] [ERROR] Worker (pid:17074) was sent SIGTERM!
+mar 21 18:19:40 marpaga gunicorn[17047]: [2024-03-21 18:19:40 +0100] [17047] [ERROR] Worker (pid:17075) was sent SIGTERM!
+mar 21 18:19:40 marpaga gunicorn[17047]: [2024-03-21 18:19:40 +0100] [17047] [INFO] Shutting down: Master
+mar 21 18:19:40 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 21 18:19:40 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 21 18:19:40 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 21 18:19:40 marpaga gunicorn[17224]: [2024-03-21 18:19:40 +0100] [17224] [INFO] Starting gunicorn 21.2.0
+mar 21 18:19:40 marpaga gunicorn[17224]: [2024-03-21 18:19:40 +0100] [17224] [INFO] Listening at: http://127.0.0.1:8000 (17224)
+mar 21 18:19:40 marpaga gunicorn[17224]: [2024-03-21 18:19:40 +0100] [17224] [INFO] Using worker: sync
+mar 21 18:19:40 marpaga gunicorn[17233]: [2024-03-21 18:19:40 +0100] [17233] [INFO] Booting worker with pid: 17233
+mar 21 18:19:40 marpaga gunicorn[17237]: [2024-03-21 18:19:40 +0100] [17237] [INFO] Booting worker with pid: 17237
+mar 21 18:19:40 marpaga gunicorn[17238]: [2024-03-21 18:19:40 +0100] [17238] [INFO] Booting worker with pid: 17238
+mar 21 18:19:40 marpaga gunicorn[17239]: [2024-03-21 18:19:40 +0100] [17239] [INFO] Booting worker with pid: 17239
+mar 21 18:20:12 marpaga gunicorn[17224]: [2024-03-21 18:20:12 +0100] [17224] [INFO] Handling signal: term
+mar 21 18:20:12 marpaga gunicorn[17237]: [2024-03-21 18:20:12 +0100] [17237] [INFO] Worker exiting (pid: 17237)
+mar 21 18:20:12 marpaga gunicorn[17233]: [2024-03-21 18:20:12 +0100] [17233] [INFO] Worker exiting (pid: 17233)
+mar 21 18:20:12 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 21 18:20:12 marpaga gunicorn[17238]: [2024-03-21 18:20:12 +0100] [17238] [INFO] Worker exiting (pid: 17238)
+mar 21 18:20:12 marpaga gunicorn[17224]: [2024-03-21 18:20:12 +0100] [17224] [ERROR] Worker (pid:17233) was sent SIGTERM!
+mar 21 18:20:12 marpaga gunicorn[17239]: [2024-03-21 18:20:12 +0100] [17239] [INFO] Worker exiting (pid: 17239)
+mar 21 18:20:12 marpaga gunicorn[17224]: [2024-03-21 18:20:12 +0100] [17224] [ERROR] Worker (pid:17237) was sent SIGTERM!
+mar 21 18:20:12 marpaga gunicorn[17224]: [2024-03-21 18:20:12 +0100] [17224] [ERROR] Worker (pid:17238) was sent SIGTERM!
+mar 21 18:20:12 marpaga gunicorn[17224]: [2024-03-21 18:20:12 +0100] [17224] [INFO] Shutting down: Master
+mar 21 18:20:12 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 21 18:20:12 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+-- Boot 553635bbc0db46c5a810db58dd254e10 --
+mar 29 18:53:51 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 29 18:53:51 marpaga gunicorn[4784]: [2024-03-29 18:53:51 +0100] [4784] [INFO] Starting gunicorn 21.2.0
+mar 29 18:53:51 marpaga gunicorn[4784]: [2024-03-29 18:53:51 +0100] [4784] [INFO] Listening at: http://127.0.0.1:8000 (4784)
+mar 29 18:53:51 marpaga gunicorn[4784]: [2024-03-29 18:53:51 +0100] [4784] [INFO] Using worker: sync
+mar 29 18:53:51 marpaga gunicorn[4786]: [2024-03-29 18:53:51 +0100] [4786] [INFO] Booting worker with pid: 4786
+mar 29 18:53:51 marpaga gunicorn[4812]: [2024-03-29 18:53:51 +0100] [4812] [INFO] Booting worker with pid: 4812
+mar 29 18:53:51 marpaga gunicorn[4815]: [2024-03-29 18:53:51 +0100] [4815] [INFO] Booting worker with pid: 4815
+mar 29 18:53:51 marpaga gunicorn[4817]: [2024-03-29 18:53:51 +0100] [4817] [INFO] Booting worker with pid: 4817
+mar 29 18:59:49 marpaga sudo[5277]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add ana
+mar 29 18:59:49 marpaga sudo[5277]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 29 18:59:49 marpaga sudo[5277]: pam_unix(sudo:session): session closed for user root
+mar 29 19:08:22 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 29 19:08:22 marpaga gunicorn[4786]: [2024-03-29 19:08:22 +0100] [4786] [INFO] Worker exiting (pid: 4786)
+mar 29 19:08:22 marpaga gunicorn[4784]: [2024-03-29 19:08:22 +0100] [4784] [INFO] Handling signal: term
+mar 29 19:08:22 marpaga gunicorn[4817]: [2024-03-29 19:08:22 +0100] [4817] [INFO] Worker exiting (pid: 4817)
+mar 29 19:08:22 marpaga gunicorn[4817]: True
+mar 29 19:08:22 marpaga gunicorn[4812]: [2024-03-29 19:08:22 +0100] [4812] [INFO] Worker exiting (pid: 4812)
+mar 29 19:08:22 marpaga gunicorn[4815]: [2024-03-29 19:08:22 +0100] [4815] [INFO] Worker exiting (pid: 4815)
+mar 29 19:08:22 marpaga gunicorn[4784]: [2024-03-29 19:08:22 +0100] [4784] [INFO] Shutting down: Master
+mar 29 19:08:22 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 29 19:08:22 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 29 19:08:22 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 2.947s CPU time.
+mar 29 19:08:23 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 29 19:08:23 marpaga gunicorn[6363]: [2024-03-29 19:08:23 +0100] [6363] [INFO] Starting gunicorn 21.2.0
+mar 29 19:08:23 marpaga gunicorn[6363]: [2024-03-29 19:08:23 +0100] [6363] [INFO] Listening at: http://127.0.0.1:8000 (6363)
+mar 29 19:08:23 marpaga gunicorn[6363]: [2024-03-29 19:08:23 +0100] [6363] [INFO] Using worker: sync
+mar 29 19:08:23 marpaga gunicorn[6389]: [2024-03-29 19:08:23 +0100] [6389] [INFO] Booting worker with pid: 6389
+mar 29 19:08:23 marpaga gunicorn[6391]: [2024-03-29 19:08:23 +0100] [6391] [INFO] Booting worker with pid: 6391
+mar 29 19:08:23 marpaga gunicorn[6392]: [2024-03-29 19:08:23 +0100] [6392] [INFO] Booting worker with pid: 6392
+mar 29 19:08:23 marpaga gunicorn[6393]: [2024-03-29 19:08:23 +0100] [6393] [INFO] Booting worker with pid: 6393
+mar 29 19:12:58 marpaga gunicorn[10231]: Creating network "backend-ana" with driver "bridge"
+mar 29 19:12:58 marpaga gunicorn[10231]: Creating network "frontend-ana" with driver "bridge"
+mar 29 19:12:58 marpaga gunicorn[10231]: Creating proyecto_ana_mysql_1 ...
+mar 29 19:12:58 marpaga gunicorn[10231]: Creating proyecto_ana_mysql_1 ... done
+mar 29 19:12:58 marpaga gunicorn[10231]: Creating proyecto_ana_php_1   ...
+mar 29 19:12:59 marpaga gunicorn[10231]: Creating proyecto_ana_php_1   ... done
+mar 29 19:12:59 marpaga gunicorn[10231]: Creating proyecto_ana_nginx_1 ...
+mar 29 19:12:59 marpaga gunicorn[10231]: Creating proyecto_ana_nginx_1 ... done
+mar 29 19:12:59 marpaga sudo[10732]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add ana 172.18.0.4
+mar 29 19:12:59 marpaga sudo[10732]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 29 19:12:59 marpaga gunicorn[10733]: El usuario no existe
+mar 29 19:12:59 marpaga sudo[10732]: pam_unix(sudo:session): session closed for user root
+mar 29 19:13:00 marpaga gunicorn[10737]: Stopping proyecto_ana_nginx_1 ...
+mar 29 19:13:00 marpaga gunicorn[10737]: Stopping proyecto_ana_php_1   ...
+mar 29 19:13:00 marpaga gunicorn[10737]: Stopping proyecto_ana_mysql_1 ...
+mar 29 19:13:00 marpaga gunicorn[10737]: Stopping proyecto_ana_nginx_1 ... done
+mar 29 19:13:00 marpaga gunicorn[10737]: Stopping proyecto_ana_php_1   ... done
+mar 29 19:13:11 marpaga gunicorn[10737]: Stopping proyecto_ana_mysql_1 ... done
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing proyecto_ana_nginx_1 ...
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing proyecto_ana_php_1   ...
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing proyecto_ana_mysql_1 ...
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing proyecto_ana_php_1   ... done
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing proyecto_ana_nginx_1 ... done
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing proyecto_ana_mysql_1 ... done
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing network backend-ana
+mar 29 19:13:11 marpaga gunicorn[10737]: Removing network frontend-ana
+mar 29 19:13:11 marpaga sudo[10970]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.18.0.4
+mar 29 19:13:11 marpaga sudo[10970]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 29 19:13:11 marpaga sudo[10974]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 29 19:13:11 marpaga sudo[10974]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 29 19:13:11 marpaga sudo[10974]: pam_unix(sudo:session): session closed for user root
+mar 29 19:13:11 marpaga sudo[10970]: pam_unix(sudo:session): session closed for user root
+mar 29 19:24:08 marpaga gunicorn[10992]: Creating network "backend-ana" with driver "bridge"
+mar 29 19:24:08 marpaga gunicorn[10992]: Creating network "frontend-ana" with driver "bridge"
+mar 29 19:24:08 marpaga gunicorn[10992]: Creating proyecto_ana_mysql_1 ...
+mar 29 19:24:08 marpaga gunicorn[10992]: Creating proyecto_ana_mysql_1 ... done
+mar 29 19:24:08 marpaga gunicorn[10992]: Creating proyecto_ana_php_1   ...
+mar 29 19:24:08 marpaga gunicorn[10992]: Creating proyecto_ana_php_1   ... done
+mar 29 19:24:08 marpaga gunicorn[10992]: Creating proyecto_ana_nginx_1 ...
+mar 29 19:24:09 marpaga gunicorn[10992]: Creating proyecto_ana_nginx_1 ... done
+mar 29 19:24:09 marpaga sudo[11491]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add ana 172.22.0.4
+mar 29 19:24:09 marpaga sudo[11491]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 29 19:24:09 marpaga gunicorn[11492]: El usuario no existe
+mar 29 19:24:09 marpaga sudo[11491]: pam_unix(sudo:session): session closed for user root
+mar 29 19:24:09 marpaga gunicorn[11496]: Stopping proyecto_ana_nginx_1 ...
+mar 29 19:24:09 marpaga gunicorn[11496]: Stopping proyecto_ana_php_1   ...
+mar 29 19:24:09 marpaga gunicorn[11496]: Stopping proyecto_ana_mysql_1 ...
+mar 29 19:24:09 marpaga gunicorn[11496]: Stopping proyecto_ana_nginx_1 ... done
+mar 29 19:24:09 marpaga gunicorn[11496]: Stopping proyecto_ana_php_1   ... done
+mar 29 19:24:20 marpaga gunicorn[11496]: Stopping proyecto_ana_mysql_1 ... done
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing proyecto_ana_nginx_1 ...
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing proyecto_ana_php_1   ...
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing proyecto_ana_mysql_1 ...
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing proyecto_ana_nginx_1 ... done
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing proyecto_ana_php_1   ... done
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing proyecto_ana_mysql_1 ... done
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing network backend-ana
+mar 29 19:24:20 marpaga gunicorn[11496]: Removing network frontend-ana
+mar 29 19:24:20 marpaga sudo[11716]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.22.0.4
+mar 29 19:24:20 marpaga sudo[11716]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+mar 29 19:24:20 marpaga sudo[11720]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+mar 29 19:24:20 marpaga sudo[11720]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+mar 29 19:24:20 marpaga sudo[11720]: pam_unix(sudo:session): session closed for user root
+mar 29 19:24:20 marpaga sudo[11716]: pam_unix(sudo:session): session closed for user root
+mar 29 19:52:39 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+mar 29 19:52:39 marpaga gunicorn[6391]: [2024-03-29 19:52:39 +0100] [6391] [INFO] Worker exiting (pid: 6391)
+mar 29 19:52:39 marpaga gunicorn[6389]: [2024-03-29 19:52:39 +0100] [6389] [INFO] Worker exiting (pid: 6389)
+mar 29 19:52:39 marpaga gunicorn[6389]: Error al segmentar la red: Command 'sudo ./iptables.sh add ana 172.18.0.4' returned non-zero exit status 1.
+mar 29 19:52:39 marpaga gunicorn[6393]: [2024-03-29 19:52:39 +0100] [6393] [INFO] Worker exiting (pid: 6393)
+mar 29 19:52:39 marpaga gunicorn[6393]: Error al segmentar la red: Command 'sudo ./iptables.sh add ana 172.22.0.4' returned non-zero exit status 1.
+mar 29 19:52:39 marpaga gunicorn[6363]: [2024-03-29 19:52:39 +0100] [6363] [INFO] Handling signal: term
+mar 29 19:52:39 marpaga gunicorn[6363]: [2024-03-29 19:52:39 +0100] [6363] [ERROR] Worker (pid:6393) was sent SIGTERM!
+mar 29 19:52:39 marpaga gunicorn[6392]: [2024-03-29 19:52:39 +0100] [6392] [INFO] Worker exiting (pid: 6392)
+mar 29 19:52:39 marpaga gunicorn[6363]: [2024-03-29 19:52:39 +0100] [6363] [ERROR] Worker (pid:6391) was sent SIGTERM!
+mar 29 19:52:39 marpaga gunicorn[6363]: [2024-03-29 19:52:39 +0100] [6363] [ERROR] Worker (pid:6389) was sent SIGTERM!
+mar 29 19:52:39 marpaga gunicorn[6363]: [2024-03-29 19:52:39 +0100] [6363] [INFO] Shutting down: Master
+mar 29 19:52:39 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+mar 29 19:52:39 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+mar 29 19:52:39 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 2.894s CPU time.
+-- Boot 292454e879f041d4a1652ae090d21fc4 --
+abr 04 18:20:13 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+abr 04 18:20:13 marpaga gunicorn[5364]: [2024-04-04 18:20:13 +0200] [5364] [INFO] Starting gunicorn 21.2.0
+abr 04 18:20:13 marpaga gunicorn[5364]: [2024-04-04 18:20:13 +0200] [5364] [INFO] Listening at: http://127.0.0.1:8000 (5364)
+abr 04 18:20:13 marpaga gunicorn[5364]: [2024-04-04 18:20:13 +0200] [5364] [INFO] Using worker: sync
+abr 04 18:20:13 marpaga gunicorn[5376]: [2024-04-04 18:20:13 +0200] [5376] [INFO] Booting worker with pid: 5376
+abr 04 18:20:13 marpaga gunicorn[5392]: [2024-04-04 18:20:13 +0200] [5392] [INFO] Booting worker with pid: 5392
+abr 04 18:20:13 marpaga gunicorn[5393]: [2024-04-04 18:20:13 +0200] [5393] [INFO] Booting worker with pid: 5393
+abr 04 18:20:13 marpaga gunicorn[5397]: [2024-04-04 18:20:13 +0200] [5397] [INFO] Booting worker with pid: 5397
+abr 04 18:37:22 marpaga gunicorn[5364]: [2024-04-04 18:37:22 +0200] [5364] [INFO] Handling signal: term
+abr 04 18:37:22 marpaga gunicorn[5393]: [2024-04-04 18:37:22 +0200] [5393] [INFO] Worker exiting (pid: 5393)
+abr 04 18:37:22 marpaga gunicorn[5376]: [2024-04-04 18:37:22 +0200] [5376] [INFO] Worker exiting (pid: 5376)
+abr 04 18:37:22 marpaga gunicorn[5392]: [2024-04-04 18:37:22 +0200] [5392] [INFO] Worker exiting (pid: 5392)
+abr 04 18:37:22 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+abr 04 18:37:22 marpaga gunicorn[5397]: [2024-04-04 18:37:22 +0200] [5397] [INFO] Worker exiting (pid: 5397)
+abr 04 18:37:22 marpaga gunicorn[5364]: [2024-04-04 18:37:22 +0200] [5364] [ERROR] Worker (pid:5376) was sent SIGTERM!
+abr 04 18:37:22 marpaga gunicorn[5364]: [2024-04-04 18:37:22 +0200] [5364] [ERROR] Worker (pid:5392) was sent SIGTERM!
+abr 04 18:37:22 marpaga gunicorn[5364]: [2024-04-04 18:37:22 +0200] [5364] [ERROR] Worker (pid:5393) was sent SIGTERM!
+abr 04 18:37:22 marpaga gunicorn[5364]: --- Logging error ---
+abr 04 18:37:22 marpaga gunicorn[5364]: Traceback (most recent call last):
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 224, in run
+abr 04 18:37:22 marpaga gunicorn[5364]:     handler()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 257, in handle_term
+abr 04 18:37:22 marpaga gunicorn[5364]:     raise StopIteration
+abr 04 18:37:22 marpaga gunicorn[5364]: StopIteration
+abr 04 18:37:22 marpaga gunicorn[5364]: During handling of the above exception, another exception occurred:
+abr 04 18:37:22 marpaga gunicorn[5364]: Traceback (most recent call last):
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1103, in emit
+abr 04 18:37:22 marpaga gunicorn[5364]:     stream.write(msg + self.terminator)
+abr 04 18:37:22 marpaga gunicorn[5364]: RuntimeError: reentrant call inside <_io.BufferedWriter name='<stderr>'>
+abr 04 18:37:22 marpaga gunicorn[5364]: During handling of the above exception, another exception occurred:
+abr 04 18:37:22 marpaga gunicorn[5364]: Traceback (most recent call last):
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1103, in emit
+abr 04 18:37:22 marpaga gunicorn[5364]:     stream.write(msg + self.terminator)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.reap_workers()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 554, in reap_workers
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.log.error(msg)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/glogging.py", line 272, in error
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.error_log.error(msg, *args, **kwargs)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1506, in error
+abr 04 18:37:22 marpaga gunicorn[5364]:     self._log(ERROR, msg, args, **kwargs)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1624, in _log
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.handle(record)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1634, in handle
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.callHandlers(record)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1696, in callHandlers
+abr 04 18:37:22 marpaga gunicorn[5364]:     hdlr.handle(record)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 968, in handle
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.emit(record)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1108, in emit
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.handleError(record)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/usr/lib/python3.10/logging/__init__.py", line 1021, in handleError
+abr 04 18:37:22 marpaga gunicorn[5364]:     sys.stderr.write('--- Logging error ---\n')
+abr 04 18:37:22 marpaga gunicorn[5364]: RuntimeError: reentrant call inside <_io.BufferedWriter name='<stderr>'>
+abr 04 18:37:22 marpaga gunicorn[5364]: Call stack:
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/bin/gunicorn", line 8, in <module>
+abr 04 18:37:22 marpaga gunicorn[5364]:     sys.exit(run())
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 67, in run
+abr 04 18:37:22 marpaga gunicorn[5364]:     WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/app/base.py", line 236, in run
+abr 04 18:37:22 marpaga gunicorn[5364]:     super().run()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/app/base.py", line 72, in run
+abr 04 18:37:22 marpaga gunicorn[5364]:     Arbiter(self).run()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 227, in run
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.halt()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 342, in halt
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.stop()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 396, in stop
+abr 04 18:37:22 marpaga gunicorn[5364]:     time.sleep(0.1)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.reap_workers()
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/arbiter.py", line 554, in reap_workers
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.log.error(msg)
+abr 04 18:37:22 marpaga gunicorn[5364]:   File "/var/www/html/env/lib/python3.10/site-packages/gunicorn/glogging.py", line 272, in error
+abr 04 18:37:22 marpaga gunicorn[5364]:     self.error_log.error(msg, *args, **kwargs)
+abr 04 18:37:22 marpaga gunicorn[5364]: Message: 'Worker (pid:5393) was sent SIGTERM!'
+abr 04 18:37:22 marpaga gunicorn[5364]: Arguments: ()
+abr 04 18:37:52 marpaga gunicorn[5364]: [2024-04-04 18:37:52 +0200] [5364] [INFO] Shutting down: Master
+abr 04 18:37:52 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+abr 04 18:37:52 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+abr 04 18:37:52 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 1.725s CPU time.
+-- Boot 7c0371b7d3034c5697f90e137e615158 --
+may 08 20:06:44 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+may 08 20:06:44 marpaga gunicorn[5192]: [2024-05-08 20:06:44 +0200] [5192] [INFO] Starting gunicorn 21.2.0
+may 08 20:06:44 marpaga gunicorn[5192]: [2024-05-08 20:06:44 +0200] [5192] [INFO] Listening at: http://127.0.0.1:8000 (5192)
+may 08 20:06:44 marpaga gunicorn[5192]: [2024-05-08 20:06:44 +0200] [5192] [INFO] Using worker: sync
+may 08 20:06:44 marpaga gunicorn[5217]: [2024-05-08 20:06:44 +0200] [5217] [INFO] Booting worker with pid: 5217
+may 08 20:06:44 marpaga gunicorn[5220]: [2024-05-08 20:06:44 +0200] [5220] [INFO] Booting worker with pid: 5220
+may 08 20:06:44 marpaga gunicorn[5223]: [2024-05-08 20:06:44 +0200] [5223] [INFO] Booting worker with pid: 5223
+may 08 20:06:44 marpaga gunicorn[5225]: [2024-05-08 20:06:44 +0200] [5225] [INFO] Booting worker with pid: 5225
+may 08 20:07:42 marpaga gunicorn[5192]: [2024-05-08 20:07:42 +0200] [5192] [INFO] Handling signal: term
+may 08 20:07:42 marpaga gunicorn[5220]: [2024-05-08 20:07:42 +0200] [5220] [INFO] Worker exiting (pid: 5220)
+may 08 20:07:42 marpaga gunicorn[5225]: [2024-05-08 20:07:42 +0200] [5225] [INFO] Worker exiting (pid: 5225)
+may 08 20:07:42 marpaga gunicorn[5217]: [2024-05-08 20:07:42 +0200] [5217] [INFO] Worker exiting (pid: 5217)
+may 08 20:07:42 marpaga gunicorn[5223]: [2024-05-08 20:07:42 +0200] [5223] [INFO] Worker exiting (pid: 5223)
+may 08 20:07:42 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+may 08 20:07:42 marpaga gunicorn[5192]: [2024-05-08 20:07:42 +0200] [5192] [ERROR] Worker (pid:5223) was sent SIGTERM!
+may 08 20:07:42 marpaga gunicorn[5192]: [2024-05-08 20:07:42 +0200] [5192] [ERROR] Worker (pid:5225) was sent SIGTERM!
+may 08 20:07:42 marpaga gunicorn[5192]: [2024-05-08 20:07:42 +0200] [5192] [ERROR] Worker (pid:5220) was sent SIGTERM!
+may 08 20:07:42 marpaga gunicorn[5192]: [2024-05-08 20:07:42 +0200] [5192] [ERROR] Worker (pid:5217) was sent SIGTERM!
+may 08 20:07:42 marpaga gunicorn[5192]: [2024-05-08 20:07:42 +0200] [5192] [INFO] Shutting down: Master
+may 08 20:07:42 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+may 08 20:07:42 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+may 08 20:07:42 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 1.068s CPU time.
+-- Boot b9b358f3d1214388b81fbb4d4f966961 --
+jun 21 12:15:57 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 21 12:15:58 marpaga gunicorn[4586]: [2024-06-21 12:15:58 +0200] [4586] [INFO] Starting gunicorn 21.2.0
+jun 21 12:15:58 marpaga gunicorn[4586]: [2024-06-21 12:15:58 +0200] [4586] [INFO] Listening at: http://127.0.0.1:8000 (4586)
+jun 21 12:15:58 marpaga gunicorn[4586]: [2024-06-21 12:15:58 +0200] [4586] [INFO] Using worker: sync
+jun 21 12:15:58 marpaga gunicorn[4611]: [2024-06-21 12:15:58 +0200] [4611] [INFO] Booting worker with pid: 4611
+jun 21 12:15:58 marpaga gunicorn[4614]: [2024-06-21 12:15:58 +0200] [4614] [INFO] Booting worker with pid: 4614
+jun 21 12:15:58 marpaga gunicorn[4615]: [2024-06-21 12:15:58 +0200] [4615] [INFO] Booting worker with pid: 4615
+jun 21 12:15:58 marpaga gunicorn[4616]: [2024-06-21 12:15:58 +0200] [4616] [INFO] Booting worker with pid: 4616
+jun 21 12:16:30 marpaga gunicorn[4586]: [2024-06-21 12:16:30 +0200] [4586] [INFO] Handling signal: term
+jun 21 12:16:30 marpaga gunicorn[4614]: [2024-06-21 12:16:30 +0200] [4614] [INFO] Worker exiting (pid: 4614)
+jun 21 12:16:30 marpaga gunicorn[4611]: [2024-06-21 12:16:30 +0200] [4611] [INFO] Worker exiting (pid: 4611)
+jun 21 12:16:30 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+jun 21 12:16:30 marpaga gunicorn[4586]: [2024-06-21 12:16:30 +0200] [4586] [ERROR] Worker (pid:4611) was sent SIGTERM!
+jun 21 12:16:30 marpaga gunicorn[4615]: [2024-06-21 12:16:30 +0200] [4615] [INFO] Worker exiting (pid: 4615)
+jun 21 12:16:30 marpaga gunicorn[4616]: [2024-06-21 12:16:30 +0200] [4616] [INFO] Worker exiting (pid: 4616)
+jun 21 12:16:30 marpaga gunicorn[4586]: [2024-06-21 12:16:30 +0200] [4586] [ERROR] Worker (pid:4614) was sent SIGTERM!
+jun 21 12:16:30 marpaga gunicorn[4586]: [2024-06-21 12:16:30 +0200] [4586] [INFO] Shutting down: Master
+jun 21 12:16:30 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+jun 21 12:16:30 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 21 12:18:31 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 21 12:18:31 marpaga gunicorn[5239]: [2024-06-21 12:18:31 +0200] [5239] [INFO] Starting gunicorn 22.0.0
+jun 21 12:18:31 marpaga gunicorn[5239]: [2024-06-21 12:18:31 +0200] [5239] [INFO] Listening at: http://127.0.0.1:8000 (5239)
+jun 21 12:18:31 marpaga gunicorn[5239]: [2024-06-21 12:18:31 +0200] [5239] [INFO] Using worker: sync
+jun 21 12:18:31 marpaga gunicorn[5268]: [2024-06-21 12:18:31 +0200] [5268] [INFO] Booting worker with pid: 5268
+jun 21 12:18:31 marpaga gunicorn[5269]: [2024-06-21 12:18:31 +0200] [5269] [INFO] Booting worker with pid: 5269
+jun 21 12:18:31 marpaga gunicorn[5270]: [2024-06-21 12:18:31 +0200] [5270] [INFO] Booting worker with pid: 5270
+jun 21 12:18:31 marpaga gunicorn[5285]: [2024-06-21 12:18:31 +0200] [5285] [INFO] Booting worker with pid: 5285
+jun 21 12:28:02 marpaga gunicorn[5269]: [2024-06-21 12:28:02 +0200] [5269] [INFO] Worker exiting (pid: 5269)
+jun 21 12:28:02 marpaga gunicorn[5239]: [2024-06-21 12:28:02 +0200] [5239] [INFO] Handling signal: term
+jun 21 12:28:02 marpaga gunicorn[5285]: [2024-06-21 12:28:02 +0200] [5285] [INFO] Worker exiting (pid: 5285)
+jun 21 12:28:02 marpaga gunicorn[5268]: [2024-06-21 12:28:02 +0200] [5268] [INFO] Worker exiting (pid: 5268)
+jun 21 12:28:02 marpaga gunicorn[5270]: [2024-06-21 12:28:02 +0200] [5270] [INFO] Worker exiting (pid: 5270)
+jun 21 12:28:02 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+jun 21 12:28:02 marpaga gunicorn[5239]: [2024-06-21 12:28:02 +0200] [5239] [ERROR] Worker (pid:5285) was sent SIGTERM!
+jun 21 12:28:02 marpaga gunicorn[5239]: [2024-06-21 12:28:02 +0200] [5239] [ERROR] Worker (pid:5270) was sent SIGTERM!
+jun 21 12:28:02 marpaga gunicorn[5239]: [2024-06-21 12:28:02 +0200] [5239] [INFO] Shutting down: Master
+jun 21 12:28:02 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+jun 21 12:28:02 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 21 12:28:02 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 1.078s CPU time.
+jun 21 12:32:12 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 21 12:32:12 marpaga gunicorn[7161]: [2024-06-21 12:32:12 +0200] [7161] [INFO] Starting gunicorn 22.0.0
+jun 21 12:32:12 marpaga gunicorn[7161]: [2024-06-21 12:32:12 +0200] [7161] [INFO] Listening at: http://127.0.0.1:8000 (7161)
+jun 21 12:32:12 marpaga gunicorn[7161]: [2024-06-21 12:32:12 +0200] [7161] [INFO] Using worker: sync
+jun 21 12:32:12 marpaga gunicorn[7188]: [2024-06-21 12:32:12 +0200] [7188] [INFO] Booting worker with pid: 7188
+jun 21 12:32:12 marpaga gunicorn[7189]: [2024-06-21 12:32:12 +0200] [7189] [INFO] Booting worker with pid: 7189
+jun 21 12:32:12 marpaga gunicorn[7192]: [2024-06-21 12:32:12 +0200] [7192] [INFO] Booting worker with pid: 7192
+jun 21 12:32:12 marpaga gunicorn[7193]: [2024-06-21 12:32:12 +0200] [7193] [INFO] Booting worker with pid: 7193
+jun 21 12:32:21 marpaga gunicorn[7188]: [2024-06-21 12:32:21 +0200] [7188] [INFO] Worker exiting (pid: 7188)
+jun 21 12:32:21 marpaga gunicorn[7189]: [2024-06-21 12:32:21 +0200] [7189] [INFO] Worker exiting (pid: 7189)
+jun 21 12:32:21 marpaga gunicorn[7161]: [2024-06-21 12:32:21 +0200] [7161] [INFO] Handling signal: term
+jun 21 12:32:21 marpaga gunicorn[7192]: [2024-06-21 12:32:21 +0200] [7192] [INFO] Worker exiting (pid: 7192)
+jun 21 12:32:21 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+jun 21 12:32:21 marpaga gunicorn[7193]: [2024-06-21 12:32:21 +0200] [7193] [INFO] Worker exiting (pid: 7193)
+jun 21 12:32:21 marpaga gunicorn[7161]: [2024-06-21 12:32:21 +0200] [7161] [ERROR] Worker (pid:7188) was sent SIGTERM!
+jun 21 12:32:21 marpaga gunicorn[7161]: [2024-06-21 12:32:21 +0200] [7161] [ERROR] Worker (pid:7192) was sent SIGTERM!
+jun 21 12:32:21 marpaga gunicorn[7161]: [2024-06-21 12:32:21 +0200] [7161] [ERROR] Worker (pid:7189) was sent SIGTERM!
+jun 21 12:32:21 marpaga gunicorn[7161]: [2024-06-21 12:32:21 +0200] [7161] [INFO] Shutting down: Master
+jun 21 12:32:21 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+jun 21 12:32:21 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+-- Boot 7c4ea9d81ef74b9ab72f3dd800a8050d --
+jun 22 15:38:12 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:12 marpaga systemd[28298]: marpaga_gunicorn.service: Failed to locate executable /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:12 marpaga systemd[28298]: marpaga_gunicorn.service: Failed at step EXEC spawning /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=203/EXEC
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 1.
+jun 22 15:38:12 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:12 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:12 marpaga systemd[28327]: marpaga_gunicorn.service: Failed to locate executable /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:12 marpaga systemd[28327]: marpaga_gunicorn.service: Failed at step EXEC spawning /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=203/EXEC
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 2.
+jun 22 15:38:12 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:12 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:12 marpaga systemd[28330]: marpaga_gunicorn.service: Failed to locate executable /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:12 marpaga systemd[28330]: marpaga_gunicorn.service: Failed at step EXEC spawning /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=203/EXEC
+jun 22 15:38:12 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 3.
+jun 22 15:38:13 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:13 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:13 marpaga systemd[28344]: marpaga_gunicorn.service: Failed to locate executable /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:13 marpaga systemd[28344]: marpaga_gunicorn.service: Failed at step EXEC spawning /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=203/EXEC
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 4.
+jun 22 15:38:13 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:13 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:13 marpaga systemd[28358]: marpaga_gunicorn.service: Failed to locate executable /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:13 marpaga systemd[28358]: marpaga_gunicorn.service: Failed at step EXEC spawning /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=203/EXEC
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 5.
+jun 22 15:38:13 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:13 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:13 marpaga systemd[28388]: marpaga_gunicorn.service: Failed to locate executable /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:13 marpaga systemd[28388]: marpaga_gunicorn.service: Failed at step EXEC spawning /var/www/html/env/bin/gunicorn: No such file or directory
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Main process exited, code=exited, status=203/EXEC
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Scheduled restart job, restart counter is at 6.
+jun 22 15:38:13 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Start request repeated too quickly.
+jun 22 15:38:13 marpaga systemd[1]: marpaga_gunicorn.service: Failed with result 'exit-code'.
+jun 22 15:38:13 marpaga systemd[1]: Failed to start Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:41:50 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 15:41:50 marpaga gunicorn[29051]: [2024-06-22 15:41:50 +0200] [29051] [INFO] Starting gunicorn 22.0.0
+jun 22 15:41:50 marpaga gunicorn[29051]: [2024-06-22 15:41:50 +0200] [29051] [INFO] Listening at: http://127.0.0.1:8000 (29051)
+jun 22 15:41:50 marpaga gunicorn[29051]: [2024-06-22 15:41:50 +0200] [29051] [INFO] Using worker: sync
+jun 22 15:41:50 marpaga gunicorn[29053]: [2024-06-22 15:41:50 +0200] [29053] [INFO] Booting worker with pid: 29053
+jun 22 15:41:50 marpaga gunicorn[29077]: [2024-06-22 15:41:50 +0200] [29077] [INFO] Booting worker with pid: 29077
+jun 22 15:41:50 marpaga gunicorn[29080]: [2024-06-22 15:41:50 +0200] [29080] [INFO] Booting worker with pid: 29080
+jun 22 15:41:50 marpaga gunicorn[29081]: [2024-06-22 15:41:50 +0200] [29081] [INFO] Booting worker with pid: 29081
+jun 22 15:45:26 marpaga sudo[29393]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del marco
+jun 22 15:45:26 marpaga sudo[29393]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 15:45:26 marpaga sudo[29393]: pam_unix(sudo:session): session closed for user root
+jun 22 15:45:26 marpaga sudo[29565]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del prueba
+jun 22 15:45:26 marpaga sudo[29565]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 15:45:26 marpaga sudo[29565]: pam_unix(sudo:session): session closed for user root
+jun 22 15:45:26 marpaga sudo[29737]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh del juanjo
+jun 22 15:45:26 marpaga sudo[29737]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 15:45:26 marpaga sudo[29737]: pam_unix(sudo:session): session closed for user root
+jun 22 15:48:01 marpaga sudo[29928]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh add marco
+jun 22 15:48:01 marpaga sudo[29928]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 15:48:01 marpaga sudo[29928]: pam_unix(sudo:session): session closed for user root
+jun 22 15:58:41 marpaga sudo[30085]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 15:58:41 marpaga sudo[30085]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 15:58:41 marpaga sudo[30085]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:08 marpaga sudo[30172]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:00:08 marpaga sudo[30172]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:08 marpaga sudo[30172]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:08 marpaga gunicorn[30178]: 94f0cc8053ae356ac3d95f44e415e220e8e82fc06b04cc9d8539038ef6ec1d18
+jun 22 16:00:08 marpaga sudo[30266]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:00:08 marpaga sudo[30266]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:08 marpaga gunicorn[30267]: La IP<usuario> introducida no es correcta
+jun 22 16:00:08 marpaga sudo[30266]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:09 marpaga gunicorn[30274]: marco
+jun 22 16:00:09 marpaga sudo[30318]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:00:09 marpaga sudo[30318]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:09 marpaga sudo[30322]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:00:09 marpaga sudo[30322]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:00:09 marpaga sudo[30322]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:09 marpaga sudo[30318]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:13 marpaga sudo[30327]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:00:13 marpaga sudo[30327]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:13 marpaga sudo[30327]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:13 marpaga gunicorn[30333]: 9b34d204446c8a0db1ff9eed99357ca770b2695735c2be26611409790ac49097
+jun 22 16:00:13 marpaga sudo[30416]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:00:13 marpaga sudo[30416]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:13 marpaga gunicorn[30417]: La IP<usuario> introducida no es correcta
+jun 22 16:00:13 marpaga sudo[30416]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:13 marpaga gunicorn[30424]: marco
+jun 22 16:00:13 marpaga sudo[30463]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:00:13 marpaga sudo[30463]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:14 marpaga sudo[30467]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:00:14 marpaga sudo[30467]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:00:14 marpaga sudo[30467]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:14 marpaga sudo[30463]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:24 marpaga sudo[30471]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:00:24 marpaga sudo[30471]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:24 marpaga sudo[30471]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:24 marpaga gunicorn[30477]: 265214c9ec886eb7f4c6d4832a8ba77b8f09d8be4f91f4f3af3e452cd48c5edf
+jun 22 16:00:24 marpaga sudo[30562]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:00:24 marpaga sudo[30562]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:25 marpaga gunicorn[30563]: La IP<usuario> introducida no es correcta
+jun 22 16:00:25 marpaga sudo[30562]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:25 marpaga gunicorn[30570]: marco
+jun 22 16:00:25 marpaga sudo[30621]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:00:25 marpaga sudo[30621]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:25 marpaga sudo[30625]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:00:25 marpaga sudo[30625]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:00:25 marpaga sudo[30625]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:25 marpaga sudo[30621]: pam_unix(sudo:session): session closed for user root
+jun 22 16:00:31 marpaga sudo[30628]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:00:31 marpaga sudo[30628]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:00:31 marpaga sudo[30628]: pam_unix(sudo:session): session closed for user root
+jun 22 16:02:44 marpaga sudo[30670]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:02:44 marpaga sudo[30670]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:02:44 marpaga sudo[30670]: pam_unix(sudo:session): session closed for user root
+jun 22 16:04:01 marpaga sudo[30714]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:04:01 marpaga sudo[30714]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:04:02 marpaga sudo[30714]: pam_unix(sudo:session): session closed for user root
+jun 22 16:04:02 marpaga gunicorn[30720]: f4661fd8f51fb95b8652201618a98ec4b428b361f8ccefc5934eb825bd37544b
+jun 22 16:04:02 marpaga sudo[30804]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:04:02 marpaga sudo[30804]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:04:02 marpaga gunicorn[30805]: La IP<usuario> introducida no es correcta
+jun 22 16:04:02 marpaga sudo[30804]: pam_unix(sudo:session): session closed for user root
+jun 22 16:04:02 marpaga gunicorn[30813]: marco
+jun 22 16:04:02 marpaga sudo[30865]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:04:02 marpaga sudo[30865]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:04:02 marpaga sudo[30869]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:04:02 marpaga sudo[30869]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:04:02 marpaga sudo[30869]: pam_unix(sudo:session): session closed for user root
+jun 22 16:04:02 marpaga sudo[30865]: pam_unix(sudo:session): session closed for user root
+jun 22 16:15:05 marpaga gunicorn[29077]: [2024-06-22 16:15:05 +0200] [29077] [INFO] Worker exiting (pid: 29077)
+jun 22 16:15:05 marpaga gunicorn[29080]: [2024-06-22 16:15:05 +0200] [29080] [INFO] Worker exiting (pid: 29080)
+jun 22 16:15:05 marpaga systemd[1]: Stopping Levanta el servidor de Marpaga una vez se inicie el ordenador...
+jun 22 16:15:05 marpaga gunicorn[29051]: [2024-06-22 16:15:05 +0200] [29051] [INFO] Handling signal: term
+jun 22 16:15:05 marpaga gunicorn[29077]: Llega aqui con el usuario:  marco
+jun 22 16:15:05 marpaga gunicorn[29077]: Error al obtener la dirección IP: Command 'sudo ./iptables.sh add marco 172.17.0.2' returned non-zero exit status 1.
+jun 22 16:15:05 marpaga gunicorn[29080]: Llega aqui con el usuario:  marco
+jun 22 16:15:05 marpaga gunicorn[29080]: Error al obtener la dirección IP: Command 'sudo ./iptables.sh add marco 172.17.0.2' returned non-zero exit status 1.
+jun 22 16:15:05 marpaga gunicorn[29081]: [2024-06-22 16:15:05 +0200] [29081] [INFO] Worker exiting (pid: 29081)
+jun 22 16:15:05 marpaga gunicorn[29081]: Llega aqui con el usuario:  marco
+jun 22 16:15:05 marpaga gunicorn[29081]: Error al comprobar si el usuario está conectado: Command 'sudo ./createUserVPN.sh check marco' returned non-zero exit status 1.
+jun 22 16:15:05 marpaga gunicorn[29081]: Llega aqui con el usuario:  marco
+jun 22 16:15:05 marpaga gunicorn[29081]: Error al obtener la dirección IP: Command 'sudo ./iptables.sh add marco 172.17.0.2' returned non-zero exit status 1.
+jun 22 16:15:05 marpaga gunicorn[29081]: Llega aqui con el usuario:  marco
+jun 22 16:15:05 marpaga gunicorn[29081]: Error al comprobar si el usuario está conectado: Command 'sudo ./createUserVPN.sh check marco' returned non-zero exit status 1.
+jun 22 16:15:05 marpaga gunicorn[29053]: [2024-06-22 16:15:05 +0200] [29053] [INFO] Worker exiting (pid: 29053)
+jun 22 16:15:05 marpaga gunicorn[29053]: True
+jun 22 16:15:05 marpaga gunicorn[29053]: Llega aqui con el usuario:  marco
+jun 22 16:15:05 marpaga gunicorn[29053]: Error al comprobar si el usuario está conectado: Command 'sudo ./createUserVPN.sh check marco' returned non-zero exit status 1.
+jun 22 16:15:05 marpaga gunicorn[29053]: Llega aqui con el usuario:  marco
+jun 22 16:15:05 marpaga gunicorn[29053]: Error al obtener la dirección IP: Command 'sudo ./iptables.sh add marco 172.17.0.2' returned non-zero exit status 1.
+jun 22 16:15:05 marpaga gunicorn[29051]: [2024-06-22 16:15:05 +0200] [29051] [ERROR] Worker (pid:29081) was sent SIGTERM!
+jun 22 16:15:06 marpaga gunicorn[29051]: [2024-06-22 16:15:06 +0200] [29051] [INFO] Shutting down: Master
+jun 22 16:15:06 marpaga systemd[1]: marpaga_gunicorn.service: Deactivated successfully.
+jun 22 16:15:06 marpaga systemd[1]: Stopped Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 16:15:06 marpaga systemd[1]: marpaga_gunicorn.service: Consumed 4.163s CPU time.
+jun 22 16:15:28 marpaga systemd[1]: Started Levanta el servidor de Marpaga una vez se inicie el ordenador.
+jun 22 16:16:02 marpaga sudo[31553]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:16:02 marpaga sudo[31553]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:16:02 marpaga sudo[31553]: pam_unix(sudo:session): session closed for user root
+jun 22 16:16:03 marpaga gunicorn[31559]: 39475698e79ffd0e3afbb5fa6538d15b57d4510faf461099ba6cd74d179771da
+jun 22 16:16:03 marpaga sudo[31641]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:16:03 marpaga sudo[31641]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:16:03 marpaga gunicorn[31642]: La IP<usuario> introducida no es correcta
+jun 22 16:16:03 marpaga sudo[31641]: pam_unix(sudo:session): session closed for user root
+jun 22 16:16:03 marpaga gunicorn[31649]: marco
+jun 22 16:16:03 marpaga sudo[31707]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:16:03 marpaga sudo[31707]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:16:03 marpaga sudo[31711]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:16:03 marpaga sudo[31711]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:16:03 marpaga sudo[31711]: pam_unix(sudo:session): session closed for user root
+jun 22 16:16:03 marpaga sudo[31707]: pam_unix(sudo:session): session closed for user root
+jun 22 16:17:56 marpaga sudo[31849]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:17:56 marpaga sudo[31849]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:17:56 marpaga sudo[31849]: pam_unix(sudo:session): session closed for user root
+jun 22 16:17:56 marpaga gunicorn[31855]: a2c312d6acb4ade2f280912e334cb595027bd4a64f4e2d11b00b652b486e9076
+jun 22 16:17:56 marpaga sudo[31941]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:17:56 marpaga sudo[31941]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:17:56 marpaga gunicorn[31942]: La IP<usuario> introducida no es correcta
+jun 22 16:17:56 marpaga sudo[31941]: pam_unix(sudo:session): session closed for user root
+jun 22 16:17:56 marpaga gunicorn[31949]: marco
+jun 22 16:17:56 marpaga sudo[32003]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:17:56 marpaga sudo[32003]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:17:56 marpaga sudo[32007]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:17:56 marpaga sudo[32007]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:17:56 marpaga sudo[32007]: pam_unix(sudo:session): session closed for user root
+jun 22 16:17:56 marpaga sudo[32003]: pam_unix(sudo:session): session closed for user root
+jun 22 16:18:36 marpaga gunicorn[32020]: c8e19e8db1254815778e387d05dc2032423838d5c230ffabecfd32dd05bc52c6
+jun 22 16:18:37 marpaga sudo[32104]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:18:37 marpaga sudo[32104]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:18:37 marpaga gunicorn[32105]: La IP<usuario> introducida no es correcta
+jun 22 16:18:37 marpaga sudo[32104]: pam_unix(sudo:session): session closed for user root
+jun 22 16:18:37 marpaga gunicorn[32112]: marco
+jun 22 16:18:37 marpaga sudo[32179]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:18:37 marpaga sudo[32179]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:18:37 marpaga sudo[32183]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:18:37 marpaga sudo[32183]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:18:37 marpaga sudo[32183]: pam_unix(sudo:session): session closed for user root
+jun 22 16:18:37 marpaga sudo[32179]: pam_unix(sudo:session): session closed for user root
+jun 22 16:27:17 marpaga sudo[32282]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./createUserVPN.sh check marco
+jun 22 16:27:17 marpaga sudo[32282]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:27:17 marpaga sudo[32282]: pam_unix(sudo:session): session closed for user root
+jun 22 16:27:18 marpaga gunicorn[32288]: b30c0ca959002d6aee59dd42a993a74309f2d2d111d839a5ee819b47aa52ed55
+jun 22 16:27:18 marpaga sudo[32377]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh add marco 172.17.0.2
+jun 22 16:27:18 marpaga sudo[32377]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:27:18 marpaga gunicorn[32378]: La IP<usuario> introducida no es correcta
+jun 22 16:27:18 marpaga sudo[32377]: pam_unix(sudo:session): session closed for user root
+jun 22 16:27:18 marpaga gunicorn[32385]: marco
+jun 22 16:27:18 marpaga sudo[32424]:    marco : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=./iptables.sh del 172.17.0.2
+jun 22 16:27:18 marpaga sudo[32424]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+jun 22 16:27:18 marpaga sudo[32428]:     root : PWD=/var/www/html/marpaga_tfg ; USER=root ; COMMAND=/usr/sbin/iptables-restore
+jun 22 16:27:18 marpaga sudo[32428]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)
+jun 22 16:27:18 marpaga sudo[32428]: pam_unix(sudo:session): session closed for user root
+jun 22 16:27:18 marpaga sudo[32424]: pam_unix(sudo:session): session closed for user root

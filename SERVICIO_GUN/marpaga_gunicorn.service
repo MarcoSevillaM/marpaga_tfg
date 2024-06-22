@@ -6,7 +6,7 @@ After=network.target
 User=marco
 Group=marco
 WorkingDirectory=/var/www/html/marpaga_tfg
-ExecStart=/var/www/html/env/bin/gunicorn wsgi -w 4
+ExecStart=/var/www/html/env/bin/gunicorn wsgi -w 4 --access-logfile /tmp/access.log --error-logfile /tmp/error.log
 Restart=always
 
 [Install]

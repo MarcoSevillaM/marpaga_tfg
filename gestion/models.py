@@ -46,6 +46,7 @@ La base de datos inicialmente estará formada por:
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+import datetime
 
 # # La base de datos contendrá unos usuarios denominados "jugadores" con su perfil propio
 class Jugador(models.Model):
@@ -95,7 +96,7 @@ class Jugador(models.Model):
     def obtener_puntuacion(self):
         return PuntuacionJugador.objects.filter(jugador=self).aggregate(Sum('puntuacion'))['puntuacion__sum'] or 0
 
-class MaquinaVulnerable(models.Model):
+class MaquinaVulnerable(models.Model):  
     """
     Clase que representa una máquina vulnerable
 
@@ -168,6 +169,9 @@ class MaquinaDocker(MaquinaVulnerable):
                     zip_ref.extractall(temp_folder)
                     nombres_archivos = zip_ref.namelist()
                     nombre_carpeta = nombres_archivos[0]
+                    # Cambio el nombre de la carpeta y quito los respacios por '_'
+                    nombre_carpeta_new = nombre_carpeta.replace(' ', '_')
+                    self.nombre=self.nombre.replace(' ', '_')
                     os.rename(f"{temp_folder}{nombre_carpeta}", f"{temp_folder}{self.nombre}")
                     Validar_carpeta_docker_compose(self)
 
@@ -182,7 +186,7 @@ class MaquinaDocker(MaquinaVulnerable):
             except subprocess.CalledProcessError as e:
                 # Ocurrió un error, mostrar un mensaje de error si hay una solicitud disponible
                 print(f"Error al crear la imagen: {e}, se elimina la máquina de la base de datos")
-                raise ValidationError('Formato introducido incorrecto')
+                raise ValidationError(f'Error al importar la imagen {e}')
 
     def levantar_maquina_docker(self, relacion):
         """
@@ -195,28 +199,12 @@ class MaquinaDocker(MaquinaVulnerable):
         Returns:
             bool: True si la máquina se ha levantado correctamente, False en caso contrario
         """
-        ruta_dockerfile = f'maquinas_docker/{self.nombre}/Dockerfile'
         comando = f"docker run --name {relacion.jugador.usuario.username} -d --rm {self.nombre.lower()}"
         try:
             subprocess.run(comando, shell=True, check=True)
-            # Introduzco un archivo flag.txt en el contenedor recien levantado
-            with open('flag.txt', 'w') as archivo:
-                archivo.write(relacion.maquina_vulnerable.bandera_usuario_inicial)
-            with open('flag2.txt', 'w') as archivo:
-                archivo.write(relacion.maquina_vulnerable.bandera_usuario_root)
-            comando = f"docker cp flag.txt {relacion.jugador.usuario.username}:/var/www/html/flag.txt"
-            subprocess.run(comando, shell=True, check=True)
         except subprocess.CalledProcessError as e:
             print(f"Error al levantar la máquina: {e}")
-            return False
-        try:
-            comando = f"docker cp flag2.txt {relacion.jugador.usuario.username}:/etc/flag2.txt"
-            subprocess.run(comando, shell=True, check=True)
-            # Elimino el archivo flag.txt
-            os.remove('flag.txt')
-            os.remove('flag2.txt')
-        except subprocess.CalledProcessError as e:
-            print(f"Error al copiar el archivo: {e}")
+            self.detener_maquina_docker(relacion)
             return False
         try:
             # Obtengo la ip
@@ -325,6 +313,7 @@ class MaquinaDockerCompose(MaquinaVulnerable):
                 segmentar_red=f"sudo ./iptables.sh add {relacion.jugador.usuario.username.lower()} {direccion_ip}" # Ejecuto este script y si el codigo de estado es distinto de 0 entonces no se ha podido añadir la regla
                 try:
                     salida = subprocess.run(segmentar_red, shell=True, check=True)
+                    print(f"Maquina limitada al usuario {relacion.jugador.usuario.username} con la dirección IP {direccion_ip}")
                 except subprocess.CalledProcessError as e:
                     # Creo un hilo para detener la maquina
                     mi_hilo = threading.Thread(target=self.detener_maquina_docker_compose, args=(relacion,))
@@ -411,7 +400,10 @@ class MaquinaJugador(models.Model):
             self (MaquinaJugador): El objeto de la clase MaquinaJugador
             tiempo (int): El tiempo que ha estado activa la máquina
         """
-        self.tiempo_activa = tiempo + self.tiempo_activa
+        if self.tiempo_activa is None:
+            self.tiempo_activa = tiempo
+        else:
+            self.tiempo_activa = tiempo + self.tiempo_activa
         self.save()
 
     def obtener_tiempo_total_activa(self):
@@ -421,9 +413,28 @@ class MaquinaJugador(models.Model):
         Returns:
             int: Tiempo total que ha estado activa la máquina
         """
-        if self.tiempo_activa is None:
+        if self.tiempo_activa is None or self.tiempo_activa == 0:
             return 0
-        return tiempo_activa.total_seconds()
+
+        seconds = self.tiempo_activa
+        # Convertimos los segundos en horas, minutos y segundos
+        td = datetime.timedelta(seconds=seconds)
+        total_seconds = td.total_seconds()
+        hours = total_seconds // 3600
+        remainder = total_seconds % 3600
+        minutes = remainder // 60
+        seconds = remainder % 60
+
+        # Construimos la cadena de tiempo legible
+        result = []
+        if hours > 0:
+            result.append(f"{int(hours)} {'hora' if hours == 1 else 'horas'}")
+        if minutes > 0:
+            result.append(f"{int(minutes)} {'minuto' if minutes == 1 else 'minutos'}")
+        if seconds > 0:
+            result.append(f"{int(seconds)} {'segundo' if seconds == 1 else 'segundos'}")
+
+        return ", ".join(result)
 
     # Método para convertir el tiempo en un formato legible de horas, minutos y segundos
     @property
@@ -516,7 +527,7 @@ class PuntuacionJugador(models.Model):
         estado = "flag 2" if self.bandera else "flag 1"
         return f"{self.jugador.usuario.username} ha obtenido la {estado} de la maquina {self.maquina_vulnerable.nombre}"
     class Meta:
-        verbose_name_plural = "Banderas de los jugadores"
+        verbose_name_plural = "Banderas de los jugadores (puntuaciones)"
 
 # Tabla para guardar las valoraciones de las banderas de las maquinas
 class ValoracionJugador(models.Model):
