@@ -9,7 +9,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
   });
+  
+  // Agrega un evento de clic a cada botón de eliminación
+  const aux = document.getElementById('statusModal');
+  if (aux){
+    var myModal = new bootstrap.Modal();
+    // Mostrar el modal
+    myModal.show();
+  }
 });
+
 function mostrarIndicadorDeCarga(formId) {
   // Obtener el formulario y el botón
   var form = document.getElementById(formId);
@@ -39,15 +48,43 @@ function desactivarBotones() {
 
 // Filtrar el nivel de dificultad de las maquinas
 function filterTable(level) {
-  var rows = document.querySelectorAll('tbody tr');
-  //Mostrar una alerta
-  alert('Filtrando por nivel: ' + level);
-  rows.forEach(function(row) {
-    var difficulty = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-    if (level === 'all' || difficulty === level) {
-      row.style.display = '';
+  var buttons = document.querySelectorAll('.dropdown-menu button');
+  buttons.forEach(function(button) {
+    var buttonText = quitarAcentos(button.textContent.trim().toLowerCase()); 
+    if (buttonText === level) {
+      console.log('Match!');
+      button.classList.remove('btn-outline-primary');
+      button.classList.add('btn-primary');
     } else {
-      row.style.display = 'none';
+      button.classList.remove('btn-primary');
+      button.classList.add('btn-outline-primary');
+    }
+  });
+
+
+  var rows = document.querySelectorAll('tbody tr');
+  rows.forEach(function(row) {
+    // Verificar si hay al menos 3 celdas antes de acceder a textContent
+    var cells = row.querySelectorAll('td');
+    if (cells.length >= 3) {
+      var difficulty = cells[1].textContent.toLowerCase();
+      if (level === 'all' || difficulty === level) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
     }
   });
 }
+
+function quitarAcentos(texto) {
+  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+  //Modifico el contenido del boton
+const data = document.currentScript.dataset;
+var pruebaBoton = data.hola;
+var boton = document.getElementById("prueba");
+console.log(pruebaBoton);
+boton.innerText = "Probando fuera:" + pruebaBoton;
+console.log(boton);
