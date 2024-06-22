@@ -6,11 +6,11 @@ RUTA="/home/marco/Escritorio/TFG/marpaga_tfg"
 function addRule(){
 
     # Conservo la base de datos del servidor
-    cp /var/www/html/marpaga_tfg/db.sqlite3 /tmp/db.sqlite3 > /dev/null 2>&1 && echo "[+] Base de datos copiada"
+    #cp /var/www/html/marpaga_tfg/db.sqlite3 /tmp/db.sqlite3 > /dev/null 2>&1 && echo "[+] Base de datos copiada"
     # Si se ha hecho produccióntfg del se ha guardado en /tml/db.sqlite3
     # Se copia todo el proyecto a /var/www/html/ y quedará la ruta /var/www/html/marpaga_tfg
     mkdir -p /var/www/html/marpaga_tfg && cp -r $RUTA /var/www/html/ && chown -R www-data:www-data /var/www/html/marpaga_tfg && echo "[+] Proyecto copiado"
-    cp /tmp/db.sqlite3 /var/www/html/marpaga_tfg/db.sqlite3 && chown www-data:marco /var/www/html/marpaga_tfg/db.sqlite3 && echo "[+] Base de datos restaurada"
+    cp /home/marco/db.sqlite3.seguridad.cp /var/www/html/marpaga_tfg/db.sqlite3 && chown www-data:www-data /var/www/html/marpaga_tfg/db.sqlite3 && echo "[+] Base de datos restaurada"
 
     # Creo un entorno virtual, lo activo e instalo las dependencias
     cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron && python3 /var/www/html/marpaga_tfg/manage.py makemigrations && python3 /var/www/html/marpaga_tfg/manage.py migrate && echo "[+] Entorno virtual creado e instaladas las dependencias"
@@ -72,7 +72,7 @@ then
     fi
 
     echo "[+] Eliminando el servicio"
-    cp /var/www/html/marpaga_tfg/db.sqlite3 /tmp/db.sqlite3 > /dev/null 2>&1 && echo "[+] Base de datos copiada"
+    cp /var/www/html/marpaga_tfg/db.sqlite3 /home/marco/db.sqlite3.seguridad.cp > /dev/null 2>&1 && echo "[+] Base de datos copiada"
     systemctl disable marpaga_gunicorn.service && systemctl stop marpaga_gunicorn.service && rm /etc/systemd/system/marpaga_gunicorn.service
     rm /etc/nginx/sites-enabled/marpaga_nginx && rm /etc/nginx/sites-available/marpaga_nginx && systemctl restart nginx && apt-get remove nginx -y
     rm -r /var/www/html/marpaga_tfg && rm -r /var/www/html/env
