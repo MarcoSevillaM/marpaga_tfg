@@ -11,9 +11,10 @@ function addRule(){
     # Se copia todo el proyecto a /var/www/html/ y quedará la ruta /var/www/html/marpaga_tfg
     mkdir -p /var/www/html/marpaga_tfg && cp -r $RUTA /var/www/html/ && chown -R www-data:www-data /var/www/html/marpaga_tfg && echo "[+] Proyecto copiado"
     cp /home/marco/db.sqlite3.seguridad.cp /var/www/html/marpaga_tfg/db.sqlite3 && chown www-data:www-data /var/www/html/marpaga_tfg/db.sqlite3 && echo "[+] Base de datos restaurada"
-
+    cp -rT /home/marco/media.seguridad.cp /var/www/html/marpaga_tfg/media && chown -R www-data:www-data /var/www/html/marpaga_tfg/media && echo "[+] Imagenes restauradas"
     # Creo un entorno virtual, lo activo e instalo las dependencias
-    cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron && python3 /var/www/html/marpaga_tfg/manage.py makemigrations && python3 /var/www/html/marpaga_tfg/manage.py migrate && echo "[+] Entorno virtual creado e instaladas las dependencias"
+    #cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron && python3 /var/www/html/marpaga_tfg/manage.py makemigrations && python3 /var/www/html/marpaga_tfg/manage.py migrate && echo "[+] Entorno virtual creado e instaladas las dependencias"
+    cd /var/www/html/ && python3 -m venv env && chown -R www-data:www-data /var/www/html/env && source env/bin/activate && cd marpaga_tfg && pip install -r requirements.txt && pip install gunicorn && pip install django_cron && echo "[+] Entorno virtual creado e instaladas las dependencias"
     
     # Cambio la variable DEBUG a False
     sed -i 's/DEBUG = True/DEBUG = False/' /var/www/html/marpaga_tfg/marpaga/settings.py && echo "[+] DEBUG cambiado a False"
@@ -73,6 +74,8 @@ then
 
     echo "[+] Eliminando el servicio"
     cp /var/www/html/marpaga_tfg/db.sqlite3 /home/marco/db.sqlite3.seguridad.cp > /dev/null 2>&1 && echo "[+] Base de datos copiada"
+    # Se copia también la carpeta media para conservar las imágenes de los jugadores
+    cp -rT /var/www/html/marpaga_tfg/media /home/marco/media.seguridad.cp > /dev/null 2>&1 && echo "[+] Imagenes copiadas"
     systemctl disable marpaga_gunicorn.service && systemctl stop marpaga_gunicorn.service && rm /etc/systemd/system/marpaga_gunicorn.service
     rm /etc/nginx/sites-enabled/marpaga_nginx && rm /etc/nginx/sites-available/marpaga_nginx && systemctl restart nginx && apt-get remove nginx -y
     rm -r /var/www/html/marpaga_tfg && rm -r /var/www/html/env
