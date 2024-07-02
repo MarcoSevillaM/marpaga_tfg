@@ -75,7 +75,7 @@ then
     echo "[+] Eliminando el servicio"
     cp /var/www/html/marpaga_tfg/db.sqlite3 /home/marco/db.sqlite3.seguridad.cp > /dev/null 2>&1 && echo "[+] Base de datos copiada"
     # Se copia también la carpeta media para conservar las imágenes de los jugadores
-    cp -rT /var/www/html/marpaga_tfg/media /home/marco/media.seguridad.cp > /dev/null 2>&1 && echo "[+] Imagenes copiadas"
+    cp -rT /var/www/html/marpaga_tfg/media /home/marco/media.seguridad.cp > /dev/null 2>&1 && echo "[+] Imagenes copiadas" 
     systemctl disable marpaga_gunicorn.service && systemctl stop marpaga_gunicorn.service && rm /etc/systemd/system/marpaga_gunicorn.service
     rm /etc/nginx/sites-enabled/marpaga_nginx && rm /etc/nginx/sites-available/marpaga_nginx && systemctl restart nginx && apt-get remove nginx -y
     rm -r /var/www/html/marpaga_tfg && rm -r /var/www/html/env
